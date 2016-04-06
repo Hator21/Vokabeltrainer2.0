@@ -14,7 +14,7 @@ public class Check {
 		if (eingabe.equals(loesung)) {
 			System.out.println("Richtig :)");
 		} else if (!eingabe.equals(loesung)) {
-			System.out.println("Leider Falsch :(, richtig wäre " + loesung + " gewasdesen.");
+			System.out.println("Leider Falsch :(, richtig wäre " + loesung + " gewesen.");
 		}
 	}
 }
