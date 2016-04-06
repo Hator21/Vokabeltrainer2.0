@@ -27,6 +27,7 @@ public class ImagePanel extends JPanel implements MouseListener {
 		buttons.add(new PanelButton(1235, -19, 35, 40, "X", "button0", 1.5));
 		buttons.add(new PanelButton(1200, -19, 35, 40, "O", "button1", 1.5));
 		buttons.add(new PanelButton(1165, -19, 35, 40, "_", "button2", 1.7));
+		// buttons
 	}
 
 	@Override
