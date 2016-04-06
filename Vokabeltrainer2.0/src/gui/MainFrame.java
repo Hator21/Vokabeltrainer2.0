@@ -1,40 +1,14 @@
-package Trainer;
+package gui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 public class MainFrame extends JFrame {
 
-	public class ImagePanel extends JPanel {
-
-		private BufferedImage	image;
-
-		public ImagePanel() {
-			try {
-				image = ImageIO.read(new File("res/Hauptmenuleer.png"));
-			} catch (IOException ex) {
-				// handle exception...
-			}
-		}
-
-		@Override
-		protected void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			g.drawImage(image, 0, 0, null); // see javadoc for more info on the parameters
-		}
-
-	}
-
-	private ImagePanel	contentPane;
+	private ImagePanel contentPane;
 
 	/**
 	 * Launch the application.

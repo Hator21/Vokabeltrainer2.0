@@ -1,11 +1,11 @@
-package Trainer;
+package gui;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 
 public class PanelButton {
 
-	private int		x	= 0, y = 0;
+	private int		x		= 0, y = 0;
 	private int		width	= 0, height = 0;
 	private String	text;
 	private String	cmd;
@@ -98,3 +98,38 @@ public class PanelButton {
 
 	/**
 	 * @param text
+	 *            the text to set
+	 */
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public boolean isInMe(int x, int y) {
+		return ((x > this.x) && x <= (this.x + this.width)) && ((y > this.y) && y <= (this.y + this.height));
+	}
+
+	public String getCmd() {
+		return this.cmd;
+	}
+
+	/**
+	 * @param cmd
+	 *            the cmd to set
+	 */
+	public void setCmd(String cmd) {
+		this.cmd = cmd;
+	}
+
+	@Override
+	public String toString() {
+		return "[X|" + this.getX() + "][Y|" + this.getY() + "][W|" + this.getWidth() + "][H|" + this.getHeight() + "][T|" + this.getText() + "][C|" + this.getCmd() + "]";
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+}
