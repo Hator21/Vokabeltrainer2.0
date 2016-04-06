@@ -1,7 +1,8 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
+import java.awt.Font;
+import java.awt.Graphics;
 
 public class PanelButton {
 
@@ -10,23 +11,28 @@ public class PanelButton {
 	private String	text;
 	private String	cmd;
 	private Color	color;
+	private double	factor;
 
-	public PanelButton(int x, int y, int width, int height, String text, String cmd) {
+	public PanelButton(int x, int y, int width, int height, String text, String cmd, double factor) {
 		this.setX(x);
 		this.setY(y);
 		this.setWidth(width);
 		this.setHeight(height);
 		this.setText(text);
 		this.setCmd(cmd);
-		this.setColor(color);
+		this.factor = factor;
 	}
 
-	public void draw(Graphics2D g) {
-		g.setColor(Color.BLACK);
+	public void draw(Graphics g) {
+		g.setFont(new Font("Diavlo", Font.BOLD, 17));
+		Color color = new Color(1, 0, 0, 127);
+		Color color2 = new Color(1, 0, 0, 0);
+		g.setColor(color);
 		g.drawRect(x, y, width, height);
+		g.setColor(color2);
 		g.fillRect(x + 1, y + 1, width - 1, height - 1);
 		g.setColor(Color.BLACK);
-		g.drawString(this.getText(), this.x + (int) ((this.getWidth() / 2) - (g.getFontMetrics().getStringBounds(this.getText(), g).getWidth() / 2)), this.y + (int) ((this.getHeight() / 2) + (g.getFontMetrics().getStringBounds(this.getText(), g).getHeight() / 2)));
+		g.drawString(this.getText(), this.x + (int) ((this.getWidth() / 2) - (g.getFontMetrics().getStringBounds(this.getText(), g).getWidth() / 2)), this.y + (int) ((this.getHeight() / factor) + (g.getFontMetrics().getStringBounds(this.getText(), g).getHeight() / 2)));
 	}
 
 	/**
