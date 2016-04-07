@@ -23,9 +23,9 @@ public class Run {
 		try{
 		bear.getdata(englisch);
 		}catch(IOException e){			//lesen
-			return;
+			e.printStackTrace();
 		}catch(WriteException e){
-			return;
+			e.printStackTrace();
 		}
 	
 		
@@ -41,9 +41,9 @@ public class Run {
 		try{
 			bear.write(englisch);
 		}catch(WriteException e){		//schreiben
-			return;
+			e.printStackTrace();
 		}catch(IOException e){
-			return;
+			e.printStackTrace();
 		}
 
 	

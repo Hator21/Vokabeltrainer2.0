@@ -13,13 +13,13 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class ImagePanel extends JPanel implements MouseListener {
+public class MainMenuPanel extends JPanel implements MouseListener {
 
 	private MainFrame				frame;
 	private BufferedImage			image;
 	private ArrayList<PanelButton>	buttons	= new ArrayList<PanelButton>();
 
-	public ImagePanel(MainFrame frame) {
+	public MainMenuPanel(MainFrame frame) {
 		this.frame = frame;
 		try {
 			image = ImageIO.read(new File("img/Hauptmenuleer.png"));
