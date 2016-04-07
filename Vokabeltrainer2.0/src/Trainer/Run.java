@@ -14,15 +14,14 @@ public class Run {
 	public static void main(String[] args){
 		String eingabe;
 		
-		Lesen lesen=new Lesen();
-		Schreiben schreib=new Schreiben(); 
+		Bearbeiten bear=new Bearbeiten();
 		Check check =new Check();
 		ArrayList<Vokabeln>	englisch	= new ArrayList<Vokabeln>();
 		InputStreamReader isr = new InputStreamReader(System.in);
 		BufferedReader br = new BufferedReader(isr);
 		
 		try{
-		lesen.getdata(englisch);
+		bear.getdata(englisch);
 		}catch(IOException e){			//lesen
 			return;
 		}catch(WriteException e){
@@ -40,7 +39,7 @@ public class Run {
 		
 		}
 		try{
-			schreib.write(englisch);
+			bear.write(englisch);
 		}catch(WriteException e){		//schreiben
 			return;
 		}catch(IOException e){
