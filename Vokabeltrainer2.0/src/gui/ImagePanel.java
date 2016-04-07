@@ -32,11 +32,12 @@ public class ImagePanel extends JPanel implements MouseListener {
 		buttons.add(new PanelButton(0, 110, 250, 45, "Vokabeltest", "button5", 2.5, 20));
 		buttons.add(new PanelButton(0, 155, 250, 45, "Suchspiel", "button6", 2.5, 20));
 		buttons.add(new PanelButton(0, 200, 250, 45, "Buchstabieren", "button7", 2.5, 20));
-		buttons.add(new PanelButton(0, 21, 250,45, "Sprache Verwalten", "button8", 2.5, 30));
-		buttons.add(new PanelButton(0, 65, 250, 45, "Einstellungen", "button9", 2.5, 20));
-		buttons.add(new PanelButton(0, 110, 250, 45, "Statistiken", "button10", 2.5, 20));
-		buttons.add(new PanelButton(0, 155, 250, 45, "Hilfe", "button11", 2.5, 20));
-		buttons.add(new PanelButton(0, 200, 250, 45, "Info", "button12", 2.5, 20));
+		buttons.add(new PanelButton(0, 247, 250, 45, "Sprache Verwalten", "button8", 2.5, 20));
+		buttons.add(new PanelButton(0, 292, 250, 45, "Einstellungen", "button9", 2.5, 20));
+		buttons.add(new PanelButton(0, 337, 250, 45, "Statistiken", "button10", 2.5, 20));
+		buttons.add(new PanelButton(0, 382, 250, 45, "Hilfe", "button11", 2.5, 20));
+		buttons.add(new PanelButton(0, 427, 250, 45, "Info", "button12", 2.5, 20));
+		buttons.add(new PanelButton(0, 660, 250, 60, "Beenden", "button13", 2.5, 30));
 		// buttons
 	}
 
