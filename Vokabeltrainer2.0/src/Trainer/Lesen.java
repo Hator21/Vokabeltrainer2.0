@@ -15,7 +15,7 @@ public class Lesen {
 		Workbook workbook;
 		int z = 0;
 		try {
-			workbook = Workbook.getWorkbook(new File("Vokabeln.xls"));
+			workbook = Workbook.getWorkbook(new File("data/Vokabeln.xls"));
 			Sheet sheet = workbook.getSheet(0);
 			for (int r = 0; r < sheet.getRows(); r++) {
 				while (z <=1) {

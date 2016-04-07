@@ -12,8 +12,9 @@ public class PanelButton {
 	private String	cmd;
 	private Color	color;
 	private double	factor;
+	private int fontsize;
 
-	public PanelButton(int x, int y, int width, int height, String text, String cmd, double factor) {
+	public PanelButton(int x, int y, int width, int height, String text, String cmd, double factor, int fontsize) {
 		this.setX(x);
 		this.setY(y);
 		this.setWidth(width);
@@ -21,11 +22,12 @@ public class PanelButton {
 		this.setText(text);
 		this.setCmd(cmd);
 		this.factor = factor;
+		this.fontsize = fontsize;
 	}
 
 	public void draw(Graphics g) {
-		g.setFont(new Font("Diavlo", Font.BOLD, 17));
-		Color color = new Color(1, 0, 0, 127);
+		g.setFont(new Font("Diavlo", Font.BOLD, fontsize));
+		Color color = new Color(1, 0, 0, 0);
 		Color color2 = new Color(1, 0, 0, 0);
 		g.setColor(color);
 		g.drawRect(x, y, width, height);

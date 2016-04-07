@@ -16,7 +16,7 @@ public class Schreiben {
 	public void write(ArrayList<Vokabeln> daten) throws IOException, WriteException {
 		int z = 0;
 		try {
-			WritableWorkbook workbook = Workbook.createWorkbook(new File("Vokabeln.xls"));
+			WritableWorkbook workbook = Workbook.createWorkbook(new File("data/Vokabeln.xls"));
 			WritableSheet sheet = workbook.createSheet("Englisch", 0);
 			Iterator<Vokabeln> it = daten.iterator();
 			while (it.hasNext()) {

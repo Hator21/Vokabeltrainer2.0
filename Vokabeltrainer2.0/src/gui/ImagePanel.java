@@ -24,9 +24,19 @@ public class ImagePanel extends JPanel implements MouseListener {
 		try {
 			image = ImageIO.read(new File("img/Hauptmenuleer.png"));
 		} catch (IOException ex) {}
-		buttons.add(new PanelButton(1235, -19, 35, 40, "X", "button0", 1.5));
-		buttons.add(new PanelButton(1200, -19, 35, 40, "O", "button1", 1.5));
-		buttons.add(new PanelButton(1165, -19, 35, 40, "_", "button2", 1.7));
+		buttons.add(new PanelButton(1235, -19, 35, 40, "X", "button0", 1.5, 17));
+		buttons.add(new PanelButton(1200, -19, 35, 40, "O", "button1", 1.5, 17));
+		buttons.add(new PanelButton(1165, -19, 35, 40, "_", "button2", 1.7, 17));
+		buttons.add(new PanelButton(0, 21, 250,44, "Lernen", "button3", 2.5, 30));
+		buttons.add(new PanelButton(0, 65, 250, 45, "Lektionen", "button4", 2.5, 20));
+		buttons.add(new PanelButton(0, 110, 250, 45, "Vokabeltest", "button5", 2.5, 20));
+		buttons.add(new PanelButton(0, 155, 250, 45, "Suchspiel", "button6", 2.5, 20));
+		buttons.add(new PanelButton(0, 200, 250, 45, "Buchstabieren", "button7", 2.5, 20));
+		buttons.add(new PanelButton(0, 21, 250,45, "Sprache Verwalten", "button8", 2.5, 30));
+		buttons.add(new PanelButton(0, 65, 250, 45, "Einstellungen", "button9", 2.5, 20));
+		buttons.add(new PanelButton(0, 110, 250, 45, "Statistiken", "button10", 2.5, 20));
+		buttons.add(new PanelButton(0, 155, 250, 45, "Hilfe", "button11", 2.5, 20));
+		buttons.add(new PanelButton(0, 200, 250, 45, "Info", "button12", 2.5, 20));
 		// buttons
 	}
 
