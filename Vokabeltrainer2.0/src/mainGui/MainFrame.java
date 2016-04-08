@@ -1,4 +1,4 @@
-package gui;
+package mainGui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -6,14 +6,17 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
-import javax.swing.border.EmptyBorder;
+import javax.swing.border.Border;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame implements ActionListener {
 
-	private ImagePanel		contentPane;
+	private MainmenuPanel	contentPane;
+	private LectionPanel	lectionPanel;
 	public static MainFrame	instance;
+	private Border			border;
 
 	/**
 	 * Launch the application.
@@ -42,15 +45,15 @@ public class MainFrame extends JFrame implements ActionListener {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1280, 720);
-		contentPane = new ImagePanel(this);
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
+		border = BorderFactory.createRaisedBevelBorder();
+		lectionPanel = new LectionPanel(this);
+		lectionPanel.setBorder(border);
+		lectionPanel.setLayout(new BorderLayout(0, 0));
+		setContentPane(lectionPanel);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
