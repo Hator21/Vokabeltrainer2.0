@@ -27,7 +27,7 @@ public class Button {
 
 	public void draw(Graphics g) {
 		g.setFont(new Font("Comic Sans MS", Font.PLAIN, fontsize));
-		Color color = new Color(1, 0, 0, 0);
+		Color color = new Color(255, 0, 0, 0);
 		Color color2 = new Color(1, 0, 0, 0);
 		g.setColor(color);
 		g.drawRect(x, y, width, height);

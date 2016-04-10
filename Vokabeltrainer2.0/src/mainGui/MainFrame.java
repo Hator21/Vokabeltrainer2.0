@@ -46,10 +46,10 @@ public class MainFrame extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1280, 720);
 		border = BorderFactory.createRaisedBevelBorder();
-		lectionPanel = new LectionPanel(this);
-		lectionPanel.setBorder(border);
-		lectionPanel.setLayout(new BorderLayout(0, 0));
-		setContentPane(lectionPanel);
+		contentPane = new MainmenuPanel(this);
+		contentPane.setBorder(border);
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
 	}
 
 	@Override

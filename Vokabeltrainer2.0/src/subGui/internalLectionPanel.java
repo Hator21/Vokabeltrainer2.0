@@ -48,7 +48,7 @@ public class internalLectionPanel extends JPanel implements MouseListener {
 			units.get(i).setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 			this.add(units.get(i));
 		}
-		combobox = new JComboBox();
+		combobox = new JComboBox<Object>();
 		combobox.setBounds(80, 50, 200, 40);
 		combobox.setOpaque(false);
 		combobox.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
