@@ -1,10 +1,10 @@
-package gui;
+package mainGui;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
-public class PanelButton {
+public class Button {
 
 	private int		x		= 0, y = 0;
 	private int		width	= 0, height = 0;
@@ -12,9 +12,9 @@ public class PanelButton {
 	private String	cmd;
 	private Color	color;
 	private double	factor;
-	private int fontsize;
+	private int		fontsize;
 
-	public PanelButton(int x, int y, int width, int height, String text, String cmd, double factor, int fontsize) {
+	public Button(int x, int y, int width, int height, String text, String cmd, double factor, int fontsize) {
 		this.setX(x);
 		this.setY(y);
 		this.setWidth(width);
@@ -26,8 +26,8 @@ public class PanelButton {
 	}
 
 	public void draw(Graphics g) {
-		g.setFont(new Font("Diavlo", Font.BOLD, fontsize));
-		Color color = new Color(1, 0, 0, 0);
+		g.setFont(new Font("Comic Sans MS", Font.PLAIN, fontsize));
+		Color color = new Color(255, 0, 0, 255);
 		Color color2 = new Color(1, 0, 0, 0);
 		g.setColor(color);
 		g.drawRect(x, y, width, height);
