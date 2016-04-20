@@ -1,5 +1,6 @@
 package mainGui;
 
+import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -17,7 +18,6 @@ public class TitleBar extends JPanel {
 	private ArrayList<TransperantButton>	buttons	= new ArrayList<TransperantButton>();
 
 	public TitleBar(final MainFrame frame) {
-
 		this.frame = frame;
 		this.setLayout(null);
 		this.setBounds(0, 0, 1280, 21);
@@ -57,9 +57,10 @@ public class TitleBar extends JPanel {
 
 	@Override
 	public void paintComponent(Graphics g) {
-		//		g.setColor(new Color(0, 0, 0, 0));
-		//		g.drawRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
-		//		g.fillRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+		super.paintComponent(g);
+		g.setColor(new Color(0, 0, 0, 0));
+		g.drawRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+		g.fillRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
 		/*
 		 * for (TransperantButton b : this.buttons) {
 		 * b.render(g);
