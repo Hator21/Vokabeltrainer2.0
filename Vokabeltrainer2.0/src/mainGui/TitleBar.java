@@ -45,16 +45,17 @@ public class TitleBar extends JPanel {
 			}
 		});
 
-		TransperantButton x = new TransperantButton("X", 1235, 0, 35, 21, 17, 3);
+		TransperantButton x = new TransperantButton("X", 1235, -19, 35, 40, 17, 8);
 		this.add(x);
-		buttons.add(x);
+		
 		x.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				System.exit(1);
 			}
 		});
+		buttons.add(x);
 
-		TransperantButton minimize = new TransperantButton("_", 1200, 0, 35, 21, 17, 1);
+		TransperantButton minimize = new TransperantButton("_", 1200, -19, 35, 40, 17, 5);
 		this.add(minimize);
 		buttons.add(minimize);
 		minimize.addActionListener(new ActionListener() {

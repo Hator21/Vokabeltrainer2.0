@@ -11,6 +11,7 @@ public abstract class CustomButton extends JButton {
 	public CustomButton() {
 		this.setBorderPainted(false);
 		this.setContentAreaFilled(false);
+
 	}
 
 	@Override

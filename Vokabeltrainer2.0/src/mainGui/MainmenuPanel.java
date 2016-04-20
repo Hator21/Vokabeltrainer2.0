@@ -24,7 +24,6 @@ public class MainmenuPanel extends JPanel {
 			image = ImageIO.read(new File("img/Hauptmenu2.png"));
 		} catch (IOException ex) {}
 		buttons.add(new TransperantButton("X", 1235, -19, 35, 40, 17, 8));
-		buttons.add(new TransperantButton("O", 1200, -19, 35, 40, 17, 8));
 		buttons.add(new TransperantButton("_", 1165, -19, 35, 40, 17, 5));
 		buttons.add(new TransperantButton("Lernen", 0, 21, 250, 44, 30, 0));
 		buttons.add(new TransperantButton("Lektionen", 0, 65, 250, 45, 20, 0));
