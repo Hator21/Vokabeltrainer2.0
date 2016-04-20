@@ -3,7 +3,6 @@ package mainGui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class TransperantButton extends CustomButton {
@@ -12,16 +11,17 @@ public class TransperantButton extends CustomButton {
 	private int		width	= 0, height = 0;
 	// private String text;
 	private Color	color;
-	private double	factor;
+	private int		factor;
 	private int		fontsize;
 
-	public TransperantButton(String text, int x, int y, int width, int height, int fontsize) {
+	public TransperantButton(String text, int x, int y, int width, int height, int fontsize, int factor) {
 		this.setXCoord(x);
 		this.setYCoord(y);
 		this.setWidthX(width);
 		this.setHeightY(height);
 		this.setText(text);
-		this.fontsize = fontsize;
+		this.setFontsize(fontsize);
+		this.setFactor(factor);
 		this.setBounds(x, y, width, height);
 	}
 
@@ -34,8 +34,8 @@ public class TransperantButton extends CustomButton {
 		g.setColor(color2);
 		g.fillRect(x + 1, y + 1, width - 1, height - 1);
 		g.setColor(Color.BLACK);
-		g.drawString(this.getText(), this.x + (width / 2) - (int) (g.getFontMetrics().getStringBounds(this.getText(), g).getWidth() / 2), this.y + height * 3 / 4);
-		if (this.getText() == "Lektionen ")
+		g.drawString(this.getText(), this.x + (width / 2) - (int) (g.getFontMetrics().getStringBounds(this.getText(), g).getWidth() / 2), this.y + height * 3 / 4 + factor);
+		if (this.getText() == "Lektionen")
 			System.out.println("RENDER: " + this.getText() + " - X: " + this.getX() + " - Y: " + this.getY() + " - Width: " + this.getWidth() + " - Height: " + this.getHeight());
 	}
 
@@ -87,9 +87,12 @@ public class TransperantButton extends CustomButton {
 		this.fontsize = fontsize;
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		System.out.println("nöööööööööööö");
-
+	protected int getFactor() {
+		return factor;
 	}
+
+	protected void setFactor(int factor) {
+		this.factor = factor;
+	}
+
 }

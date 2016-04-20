@@ -23,20 +23,20 @@ public class MainmenuPanel extends JPanel {
 		try {
 			image = ImageIO.read(new File("img/Hauptmenu2.png"));
 		} catch (IOException ex) {}
-		buttons.add(new TransperantButton("X", 1235, -19, 35, 40, 17));
-		buttons.add(new TransperantButton("O", 1200, -19, 35, 40, 17));
-		buttons.add(new TransperantButton("_", 1165, -19, 35, 40, 17));
-		buttons.add(new TransperantButton("Lernen", 0, 21, 250, 44, 30));
-		buttons.add(new TransperantButton("Lektionen", 0, 65, 250, 45, 20));
-		buttons.add(new TransperantButton("Vokabeltest", 0, 110, 250, 45, 20));
-		buttons.add(new TransperantButton("Suchspiel", 0, 155, 250, 45, 20));
-		buttons.add(new TransperantButton("Buchstabieren", 0, 200, 250, 45, 20));
-		buttons.add(new TransperantButton("Sprache Verwalten", 0, 250, 250, 45, 20));
-		buttons.add(new TransperantButton("Einstellungen", 0, 295, 250, 45, 20));
-		buttons.add(new TransperantButton("Statistiken", 0, 340, 250, 45, 20));
-		buttons.add(new TransperantButton("Hilfe", 0, 385, 250, 45, 20));
-		buttons.add(new TransperantButton("Info", 0, 430, 250, 45, 20));
-		buttons.add(new TransperantButton("Beenden", 0, 660, 250, 60, 30));
+		buttons.add(new TransperantButton("X", 1235, -19, 35, 40, 17, 8));
+		buttons.add(new TransperantButton("O", 1200, -19, 35, 40, 17, 8));
+		buttons.add(new TransperantButton("_", 1165, -19, 35, 40, 17, 5));
+		buttons.add(new TransperantButton("Lernen", 0, 21, 250, 44, 30, 0));
+		buttons.add(new TransperantButton("Lektionen", 0, 65, 250, 45, 20, 0));
+		buttons.add(new TransperantButton("Vokabeltest", 0, 110, 250, 45, 20, 0));
+		buttons.add(new TransperantButton("Suchspiel", 0, 155, 250, 45, 20, 0));
+		buttons.add(new TransperantButton("Buchstabieren", 0, 200, 250, 45, 20, 0));
+		buttons.add(new TransperantButton("Sprache Verwalten", 0, 250, 250, 45, 20, 0));
+		buttons.add(new TransperantButton("Einstellungen", 0, 295, 250, 45, 20, 0));
+		buttons.add(new TransperantButton("Statistiken", 0, 340, 250, 45, 20, 0));
+		buttons.add(new TransperantButton("Hilfe", 0, 385, 250, 45, 20, 0));
+		buttons.add(new TransperantButton("Info", 0, 430, 250, 45, 20, 0));
+		buttons.add(new TransperantButton("Beenden", 0, 660, 250, 60, 30, 0));
 		// buttons
 	}
 

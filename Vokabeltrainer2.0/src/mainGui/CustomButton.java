@@ -1,11 +1,10 @@
 package mainGui;
 
 import java.awt.Graphics;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-public abstract class CustomButton extends JButton implements ActionListener {
+public abstract class CustomButton extends JButton {
 
 	private static final long serialVersionUID = 1L;
 

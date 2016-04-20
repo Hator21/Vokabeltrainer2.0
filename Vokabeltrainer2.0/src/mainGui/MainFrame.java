@@ -2,17 +2,16 @@ package mainGui;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.border.Border;
 
 @SuppressWarnings("serial")
-public class MainFrame extends JFrame implements ActionListener {
+public class MainFrame extends JFrame {
 
 	private MainmenuPanel	contentPane;
+	private TitleBar		titlebar;
 	private LectionPanel	lectionPanel;
 	public static MainFrame	instance;
 	private Border			border;
@@ -45,15 +44,11 @@ public class MainFrame extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1280, 720);
 		border = BorderFactory.createRaisedBevelBorder();
+		titlebar = new TitleBar(this);
 		lectionPanel = new LectionPanel(this);
 		lectionPanel.setBorder(border);
 		lectionPanel.setLayout(null);
 		setContentPane(lectionPanel);
+		lectionPanel.add(titlebar);
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-
-	}
-
 }

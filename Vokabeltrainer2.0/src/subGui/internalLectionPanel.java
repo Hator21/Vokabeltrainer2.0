@@ -37,7 +37,7 @@ public class internalLectionPanel extends JPanel {
 			image = ImageIO.read(new File("img/internalLection.png"));
 		} catch (IOException ex) {}
 		this.setBounds(251, 66, 1028, 653);
-		buttons.add(new TransperantButton("Lernen", 105, 550, 150, 40, 30));
+		buttons.add(new TransperantButton("Lernen", 105, 550, 150, 40, 30, 0));
 		for (int i = 0; i < 11; i++) {
 			units.add(new JCheckBox("Lektion " + (i + 1)));
 			units.get(i).setBounds(120, 40 * i + 100, 200, 40);
