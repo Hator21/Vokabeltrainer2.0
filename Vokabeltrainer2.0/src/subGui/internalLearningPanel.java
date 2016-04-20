@@ -14,26 +14,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import mainGui.LectionPanel;
-import mainGui.MainFrame;
+import NewGui.MainFrame;
 import mainGui.TransperantButton;
 
 @SuppressWarnings("serial")
 public class internalLearningPanel extends JPanel {
 
 	private MainFrame						frame;
-	private LectionPanel					lPanel;
 	private BufferedImage					image;
 	private int								n			= 0;
 	private ArrayList<TransperantButton>	buttons		= new ArrayList<TransperantButton>();
 	private ArrayList<JTextField>			units		= new ArrayList<JTextField>();
 	private ArrayList<JLabel>				labels		= new ArrayList<JLabel>();
-	private String							sprache1	= "Deutsch",
-													sprache2 = "Englisch", vokabel = "vokabel";
+	private String							sprache1	= "Deutsch", sprache2 = "Englisch", vokabel = "vokabel";
 
-	public internalLearningPanel(MainFrame frame, LectionPanel lPanel) {
+	public internalLearningPanel(MainFrame frame) {
 		this.frame = frame;
-		this.lPanel = lPanel;
 		this.setLayout(null);
 		try {
 			this.image = ImageIO.read(new File("img/internalLection.png"));

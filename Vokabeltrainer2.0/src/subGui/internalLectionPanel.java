@@ -14,8 +14,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
-import mainGui.LectionPanel;
-import mainGui.MainFrame;
+import NewGui.LectionPanel;
+import NewGui.MainFrame;
 import mainGui.TransperantButton;
 
 @SuppressWarnings("serial")

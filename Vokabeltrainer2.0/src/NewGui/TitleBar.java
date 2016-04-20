@@ -1,4 +1,4 @@
-package mainGui;
+package NewGui;
 
 import java.awt.Color;
 import java.awt.Frame;
@@ -7,20 +7,32 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+
+import mainGui.TransperantButton;
 
 @SuppressWarnings("serial")
 public class TitleBar extends JPanel {
 	private Point							initialClick;
 	private MainFrame						frame;
+	private BufferedImage					image;
+	private Color							c;
 	private ArrayList<TransperantButton>	buttons	= new ArrayList<TransperantButton>();
 
 	public TitleBar(final MainFrame frame) {
 		this.frame = frame;
 		this.setLayout(null);
-		this.setBounds(0, 0, 1280, 21);
+		this.setBounds(1, 1, 1278, 30);
+		c = new Color(0, 0, 0, 15);
+		try {
+			this.image = ImageIO.read(new File("img/titlebar.png"));
+		} catch (IOException ex) {}
 		this.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -44,12 +56,12 @@ public class TitleBar extends JPanel {
 			}
 		});
 
-		TransperantButton.createButton("X", 1235, 0, 35, 21, 17, 8, (e -> {
+		TransperantButton.createButton("X", 1248, 0, 30, 30, 17, 8, (e -> {
 			System.out.println("FUCK TITLE BAR");
 			System.exit(1);
 		}), this);
 
-		TransperantButton.createButton("_", 1200, 0, 35, 21, 17, 5, (e -> {
+		TransperantButton.createButton("_", 1218, 0, 30, 30, 17, 5, (e -> {
 			System.out.println("FUCK TITLE BAR 2");
 			frame.setState(Frame.ICONIFIED);
 		}), this);
@@ -58,13 +70,6 @@ public class TitleBar extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(new Color(0, 0, 0, 0));
-		g.drawRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
-		g.fillRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
-		/*
-		 * for (TransperantButton b : this.buttons) {
-		 * b.render(g);
-		 * }
-		 */
+		g.drawImage(this.image, 0, 0, null);
 	}
 }
