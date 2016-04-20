@@ -39,9 +39,9 @@ public class internalLearningPanel extends JPanel {
 			image = ImageIO.read(new File("img/internalLection.png"));
 		} catch (IOException ex) {}
 		this.setBounds(251, 66, 1028, 653);
-		TransperantButton b = new TransperantButton("Überprüfen", 120, 320, 200, 40, 30);
-		buttons.add(b);
-		b.addActionListener(new ActionListener() {
+		buttons.add(new TransperantButton("Überprüfen", 120, 320, 200, 40, 30));
+		this.add(buttons.get(0));
+		buttons.get(0).addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				System.out.println("Überprüfen!");
 			}

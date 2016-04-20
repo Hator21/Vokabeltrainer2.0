@@ -1,6 +1,5 @@
 package mainGui;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -48,7 +47,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		border = BorderFactory.createRaisedBevelBorder();
 		lectionPanel = new LectionPanel(this);
 		lectionPanel.setBorder(border);
-		lectionPanel.setLayout(new BorderLayout(0, 0));
+		lectionPanel.setLayout(null);
 		setContentPane(lectionPanel);
 	}
 
