@@ -20,17 +20,15 @@ public class MainFrame extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainFrame frame = new MainFrame();
-					final Dimension d = frame.getToolkit().getScreenSize();
-					frame.setLocation((int) ((d.getWidth() - frame.getWidth()) / 2), (int) ((d.getHeight() - frame.getHeight()) / 2));
-					frame.setUndecorated(true);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		EventQueue.invokeLater(() -> {
+			try {
+				MainFrame frame = new MainFrame();
+				final Dimension d = frame.getToolkit().getScreenSize();
+				frame.setLocation((int) ((d.getWidth() - frame.getWidth()) / 2), (int) ((d.getHeight() - frame.getHeight()) / 2));
+				frame.setUndecorated(true);
+				frame.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		});
 	}
@@ -40,15 +38,15 @@ public class MainFrame extends JFrame {
 	 */
 	public MainFrame() {
 		instance = this;
-		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1280, 720);
-		border = BorderFactory.createRaisedBevelBorder();
-		titlebar = new TitleBar(this);
-		lectionPanel = new LectionPanel(this);
-		lectionPanel.setBorder(border);
-		lectionPanel.setLayout(null);
-		setContentPane(lectionPanel);
-		lectionPanel.add(titlebar);
+		this.setResizable(false);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setBounds(100, 100, 1280, 720);
+		this.border = BorderFactory.createRaisedBevelBorder();
+		this.titlebar = new TitleBar(this);
+		this.lectionPanel = new LectionPanel(this);
+		//lectionPanel.setBorder(border);
+		this.lectionPanel.setLayout(null);
+		this.setContentPane(this.lectionPanel);
+		this.getContentPane().add(this.titlebar);
 	}
 }

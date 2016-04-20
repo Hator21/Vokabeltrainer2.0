@@ -1,10 +1,8 @@
 package mainGui;
 
-import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -21,23 +19,24 @@ public class TitleBar extends JPanel {
 	public TitleBar(final MainFrame frame) {
 
 		this.frame = frame;
+		this.setLayout(null);
 		this.setBounds(0, 0, 1280, 21);
-		addMouseListener(new MouseAdapter() {
+		this.addMouseListener(new MouseAdapter() {
+			@Override
 			public void mousePressed(MouseEvent e) {
-				initialClick = e.getPoint();
-				getComponentAt(initialClick);
+				TitleBar.this.initialClick = e.getPoint();
 			}
 		});
 
-		addMouseMotionListener(new MouseMotionAdapter() {
+		this.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
 
 				int thisX = frame.getLocation().x;
 				int thisY = frame.getLocation().y;
 
-				int xMoved = (thisX + e.getX()) - (thisX + initialClick.x);
-				int yMoved = (thisY + e.getY()) - (thisY + initialClick.y);
+				int xMoved = (thisX + e.getX()) - (thisX + TitleBar.this.initialClick.x);
+				int yMoved = (thisY + e.getY()) - (thisY + TitleBar.this.initialClick.y);
 
 				int X = thisX + xMoved;
 				int Y = thisY + yMoved;
@@ -45,35 +44,26 @@ public class TitleBar extends JPanel {
 			}
 		});
 
-		TransperantButton x = new TransperantButton("X", 1235, -19, 35, 40, 17, 8);
-		this.add(x);
-		
-		x.addActionListener(new ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent e) {
-				System.exit(1);
-			}
-		});
-		buttons.add(x);
+		TransperantButton.createButton("X", 1235, 0, 35, 21, 17, 8, (e -> {
+			System.out.println("FUCK TITLE BAR");
+			System.exit(1);
+		}), this);
 
-		TransperantButton minimize = new TransperantButton("_", 1200, -19, 35, 40, 17, 5);
-		this.add(minimize);
-		buttons.add(minimize);
-		minimize.addActionListener(new ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent e) {
-				frame.setState(Frame.ICONIFIED);
-			}
-		});
-
-		for (TransperantButton b : buttons)
-			System.out.println(b.getText() + b.getBounds());
+		TransperantButton.createButton("_", 1200, 0, 35, 21, 17, 5, (e -> {
+			System.out.println("FUCK TITLE BAR 2");
+			frame.setState(Frame.ICONIFIED);
+		}), this);
 	}
 
 	@Override
 	public void paintComponent(Graphics g) {
-		g.setColor(new Color(0, 0, 0, 0));
-		g.drawRect(getX(), getY(), getWidth(), getHeight());
-		g.fillRect(getX(), getY(), getWidth(), getHeight());
-		for (TransperantButton b : buttons)
-			b.render(g);
+		//		g.setColor(new Color(0, 0, 0, 0));
+		//		g.drawRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+		//		g.fillRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+		/*
+		 * for (TransperantButton b : this.buttons) {
+		 * b.render(g);
+		 * }
+		 */
 	}
 }

@@ -21,7 +21,7 @@ public abstract class CustomButton extends JButton {
 
 	@Override
 	public void paintComponents(Graphics g) {
-		this.render(g);
+		//this.render(g);
 	}
 
 	public abstract void render(Graphics g);
