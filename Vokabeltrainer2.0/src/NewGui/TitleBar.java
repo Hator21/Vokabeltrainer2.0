@@ -3,7 +3,9 @@ package NewGui;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -15,15 +17,13 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import mainGui.TransperantButton;
-
 @SuppressWarnings("serial")
 public class TitleBar extends JPanel {
 	private Point							initialClick;
 	private MainFrame						frame;
-	private BufferedImage					image;
+	private BufferedImage					image, icon;
 	private Color							c;
-	private ArrayList<TransperantButton>	buttons	= new ArrayList<TransperantButton>();
+	private ArrayList<TransparentButton>	buttons	= new ArrayList<TransparentButton>();
 
 	public TitleBar(final MainFrame frame) {
 		this.frame = frame;
@@ -32,6 +32,9 @@ public class TitleBar extends JPanel {
 		c = new Color(0, 0, 0, 15);
 		try {
 			this.image = ImageIO.read(new File("img/titlebar.png"));
+		} catch (IOException ex) {}
+		try {
+			this.icon = ImageIO.read(new File("img/icon2.png"));
 		} catch (IOException ex) {}
 		this.addMouseListener(new MouseAdapter() {
 			@Override
@@ -56,20 +59,27 @@ public class TitleBar extends JPanel {
 			}
 		});
 
-		TransperantButton.createButton("X", 1248, 0, 30, 30, 17, 8, (e -> {
+		TransparentLabel.createLabel("Vokabeltrainer 2.0", 50, 0, 200, 30, 20, this);
+
+		TransparentButton.createButton("X", 1248, 0, 30, 30, 17, 8, (e -> {
 			System.out.println("FUCK TITLE BAR");
 			System.exit(1);
 		}), this);
 
-		TransperantButton.createButton("_", 1218, 0, 30, 30, 17, 5, (e -> {
+		TransparentButton.createButton("_", 1218, 0, 30, 30, 17, 5, (e -> {
 			System.out.println("FUCK TITLE BAR 2");
 			frame.setState(Frame.ICONIFIED);
 		}), this);
 	}
 
 	@Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
+	public void paintComponent(Graphics g_) {
+		super.paintComponent(g_);
+		Graphics2D g = (Graphics2D) g_;
+		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g.drawImage(this.image, 0, 0, null);
+		g.drawImage(this.icon, 10, 1, 28, 28, null);
 	}
 }

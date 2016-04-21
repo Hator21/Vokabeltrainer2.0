@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 
 import NewGui.LectionPanel;
 import NewGui.MainFrame;
-import mainGui.TransperantButton;
+import NewGui.TransparentButton;
 
 @SuppressWarnings("serial")
 public class internalLectionPanel extends JPanel {
@@ -25,7 +25,7 @@ public class internalLectionPanel extends JPanel {
 	private LectionPanel					lPanel;
 	private BufferedImage					image;
 	private int								n		= 0;
-	private ArrayList<TransperantButton>	buttons	= new ArrayList<TransperantButton>();
+	private ArrayList<TransparentButton>	buttons	= new ArrayList<TransparentButton>();
 	private ArrayList<JCheckBox>			units	= new ArrayList<JCheckBox>();
 	private JComboBox						combobox;
 
@@ -37,7 +37,7 @@ public class internalLectionPanel extends JPanel {
 			image = ImageIO.read(new File("img/internalLection.png"));
 		} catch (IOException ex) {}
 		this.setBounds(251, 66, 1028, 653);
-		buttons.add(new TransperantButton("Lernen", 105, 550, 150, 40, 30, 0));
+		buttons.add(new TransparentButton("Lernen", 105, 550, 150, 40, 30, 0));
 		for (int i = 0; i < 11; i++) {
 			units.add(new JCheckBox("Lektion " + (i + 1)));
 			units.get(i).setBounds(120, 40 * i + 100, 200, 40);
@@ -59,7 +59,7 @@ public class internalLectionPanel extends JPanel {
 		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g.drawImage(image, 0, 0, null);
-		for (TransperantButton p : buttons)
+		for (TransparentButton p : buttons)
 			p.render(g);
 	}
 }

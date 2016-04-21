@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import mainGui.TransperantButton;
 import subGui.internalLearningPanel;
 
 public class LectionPanel extends JPanel {
@@ -19,7 +18,7 @@ public class LectionPanel extends JPanel {
 	private MainFrame						frame;
 	private internalLearningPanel			iLP;
 	private BufferedImage					image;
-	private ArrayList<TransperantButton>	buttons	= new ArrayList<TransperantButton>();
+	private ArrayList<TransparentButton>	buttons	= new ArrayList<TransparentButton>();
 
 	public LectionPanel(MainFrame frame) {
 		this.frame = frame;
@@ -29,47 +28,47 @@ public class LectionPanel extends JPanel {
 			this.image = ImageIO.read(new File("img/Lektionenleer2.png"));
 		} catch (IOException ex) {}
 
-		TransperantButton.createButton("Lektionen", 0, 65, 250, 45, 20, 0, (e -> {
+		TransparentButton.createButton("Lektionen", 0, 65, 250, 45, 20, 0, (e -> {
 			System.exit(1);
 		}), this);
 
-		TransperantButton.createButton("Lernen", 0, 21, 250, 44, 30, 0, (e -> {
+		TransparentButton.createButton("Lernen", 0, 21, 250, 44, 30, 0, (e -> {
 			System.out.println("FUCK ME");
 		}), this);
 
-		TransperantButton.createButton("Vokabeltest", 0, 110, 250, 45, 20, 0, (e -> {
+		TransparentButton.createButton("Vokabeltest", 0, 110, 250, 45, 20, 0, (e -> {
 			System.out.println("FUCK ME");
 		}), this);
 
-		TransperantButton.createButton("Suchspiel", 0, 155, 250, 45, 20, 0, (e -> {
+		TransparentButton.createButton("Suchspiel", 0, 155, 250, 45, 20, 0, (e -> {
 			System.out.println("FUCK ME");
 		}), this);
 
-		TransperantButton.createButton("Buchstabieren", 0, 200, 250, 45, 20, 0, (e -> {
+		TransparentButton.createButton("Buchstabieren", 0, 200, 250, 45, 20, 0, (e -> {
 			System.out.println("FUCK ME");
 		}), this);
 
-		TransperantButton.createButton("Sprache Verwalten", 0, 250, 250, 45, 20, 0, (e -> {
+		TransparentButton.createButton("Sprache Verwalten", 0, 250, 250, 45, 20, 0, (e -> {
 			System.out.println("FUCK ME");
 		}), this);
 
-		TransperantButton.createButton("Einstellungen", 0, 295, 250, 45, 20, 0, (e -> {
+		TransparentButton.createButton("Einstellungen", 0, 295, 250, 45, 20, 0, (e -> {
 			System.out.println("FUCK ME");
 		}), this);
 
-		TransperantButton.createButton("Statistiken", 0, 340, 250, 45, 20, 0, (e -> {
+		TransparentButton.createButton("Statistiken", 0, 340, 250, 45, 20, 0, (e -> {
 			System.out.println("FUCK ME");
 		}), this);
 
-		TransperantButton.createButton("Hilfe", 0, 385, 250, 45, 20, 0, (e -> {
+		TransparentButton.createButton("Hilfe", 0, 385, 250, 45, 20, 0, (e -> {
 			System.out.println("FUCK ME");
 		}), this);
 
-		TransperantButton.createButton("Info", 0, 430, 250, 45, 20, 0, (e -> {
+		TransparentButton.createButton("Info", 0, 430, 250, 45, 20, 0, (e -> {
 			System.out.println("FUCK ME");
 		}), this);
 
-		TransperantButton.createButton("Beenden", 0, 660, 250, 60, 30, 0, (e -> {
+		TransparentButton.createButton("Beenden", 0, 660, 250, 60, 30, 0, (e -> {
 			System.out.println("FUCK ME");
 		}), this);
 

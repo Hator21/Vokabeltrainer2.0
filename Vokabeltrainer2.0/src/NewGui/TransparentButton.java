@@ -1,15 +1,17 @@
-package mainGui;
+package NewGui;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.RenderingHints;
 import java.awt.event.ActionListener;
 
 import javax.swing.JComponent;
 
 @SuppressWarnings("serial")
-public class TransperantButton extends CustomButton {
+public class TransparentButton extends CustomButton {
 
 	// private String text;
 	private int			factor;
@@ -22,7 +24,7 @@ public class TransperantButton extends CustomButton {
 	static final Color	color	= new Color(255, 0, 0, 0);
 	static final Color	color2	= new Color(0, 0, 0, 0);
 
-	public TransperantButton(String text, int x, int y, int width, int height, int fontsize, int factor) {
+	public TransparentButton(String text, int x, int y, int width, int height, int fontsize, int factor) {
 		this.setText(text);
 		this.setFontsize(fontsize);
 		this.setFactor(factor);
@@ -36,7 +38,11 @@ public class TransperantButton extends CustomButton {
 	}
 
 	@Override
-	public void render(Graphics g) {
+	public void render(Graphics g_) {
+		Graphics2D g = (Graphics2D) g_;
+		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g.setFont(this.f);
 
 		g.setColor(color);
@@ -50,11 +56,10 @@ public class TransperantButton extends CustomButton {
 
 		g.setColor(Color.BLACK);
 		g.drawString(this.getText(), x, y);
-		// System.out.println("RENDER: " + this.getText() + " - X: " + this.getX() + " - Y: " + this.getY() + " - Width: " + this.getWidth() + " - Height: " + this.getHeight());
 	}
 
 	public static void createButton(String text, int x, int y, int width, int height, int fontsize, int factor, ActionListener listener, JComponent parent) {
-		TransperantButton button = new TransperantButton(text, x, y, width, height, fontsize, factor);
+		TransparentButton button = new TransparentButton(text, x, y, width, height, fontsize, factor);
 		button.addActionListener(listener);
 		System.out.println(parent.getClass().getName());
 		parent.add(button);

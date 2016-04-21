@@ -1,4 +1,4 @@
-package mainGui;
+package NewGui;
 
 import java.awt.Graphics;
 

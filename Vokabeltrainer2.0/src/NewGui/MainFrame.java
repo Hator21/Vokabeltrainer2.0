@@ -9,18 +9,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-import mainGui.MainmenuPanel;
-
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
 
-	private MainmenuPanel	mainmenuPanel;
-	private TitleBar		titlebar;
-	private LectionPanel	lectionPanel;
-	private JPanel			contentPane;
-	private MenuPanel		menuPanel;
-	public static MainFrame	instance;
-	private Border			border;
+	private TitleBar			titlebar;
+	private JPanel				contentPane;
+	private MenuPanel			menuPanel;
+	private HeadingBar			headingbar;
+	private static MainFrame	instance;
+	private Border				border;
 
 	/**
 	 * Launch the application.
@@ -50,13 +47,15 @@ public class MainFrame extends JFrame {
 		contentPane = new JPanel();
 		titlebar = new TitleBar(this);
 		menuPanel = new MenuPanel(this);
+		headingbar = new HeadingBar(this);
 		this.setContentPane(contentPane);
 		this.border = BorderFactory.createLineBorder(Color.black);
 		contentPane.setBorder(border);
 		this.getContentPane().setLayout(null);
 		this.getContentPane().add(titlebar);
 		this.getContentPane().add(menuPanel);
-		this.getContentPane().setBackground(Color.BLACK);
+		this.getContentPane().add(headingbar);
+		this.getContentPane().setBackground(Color.RED);
 
 	}
 }

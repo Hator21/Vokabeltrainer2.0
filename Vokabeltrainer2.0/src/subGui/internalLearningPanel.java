@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import NewGui.MainFrame;
-import mainGui.TransperantButton;
+import NewGui.TransparentButton;
 
 @SuppressWarnings("serial")
 public class internalLearningPanel extends JPanel {
@@ -23,7 +23,7 @@ public class internalLearningPanel extends JPanel {
 	private MainFrame						frame;
 	private BufferedImage					image;
 	private int								n			= 0;
-	private ArrayList<TransperantButton>	buttons		= new ArrayList<TransperantButton>();
+	private ArrayList<TransparentButton>	buttons		= new ArrayList<TransparentButton>();
 	private ArrayList<JTextField>			units		= new ArrayList<JTextField>();
 	private ArrayList<JLabel>				labels		= new ArrayList<JLabel>();
 	private String							sprache1	= "Deutsch", sprache2 = "Englisch", vokabel = "vokabel";
@@ -35,7 +35,7 @@ public class internalLearningPanel extends JPanel {
 			this.image = ImageIO.read(new File("img/internalLection.png"));
 		} catch (IOException ex) {}
 		this.setBounds(251, 66, 1028, 653);
-		TransperantButton.createButton("Überprüfen", 120, 320, 200, 40, 30, 0, (e -> {
+		TransparentButton.createButton("Überprüfen", 120, 320, 200, 40, 30, 0, (e -> {
 			System.out.println("ICHB BIN KACKE");
 		}), this);
 		this.labels.add(new JLabel(this.sprache1));
@@ -85,11 +85,11 @@ public class internalLearningPanel extends JPanel {
 		 */
 	}
 
-	protected ArrayList<TransperantButton> getButtons() {
+	protected ArrayList<TransparentButton> getButtons() {
 		return this.buttons;
 	}
 
-	protected void setButtons(ArrayList<TransperantButton> buttons) {
+	protected void setButtons(ArrayList<TransparentButton> buttons) {
 		this.buttons = buttons;
 	}
 
