@@ -42,7 +42,7 @@ public class MenuPanel extends JPanel {
 		}), this);
 
 		TransparentButton.createButton("Buchstabieren", 0, 180, 250, 45, 20, 0, (e -> {
-			System.out.println("FUCK ME");
+			System.out.println("FUCK Masd");
 		}), this);
 
 		TransparentButton.createButton("Sprache Verwalten", 0, 229, 250, 45, 20, 0, (e -> {
