@@ -20,7 +20,7 @@ public class MenuPanel extends JPanel {
 
 	public MenuPanel(MainFrame frame) {
 		this.frame = frame;
-		c = new Color(255, 0, 0, 255);
+		this.c = new Color(0, 0, 0, 0);
 		this.setLayout(null);
 		this.setBounds(1, 32, 250, 687);
 		try {
@@ -28,47 +28,45 @@ public class MenuPanel extends JPanel {
 		} catch (IOException ex) {}
 
 		TransperantButton.createButton("Lektionen", 0, 45, 250, 45, 20, 0, (e -> {
-			System.exit(1);
+			System.out.println("Lektionen");
 		}), this);
 
-		TransperantButton.createButton("Lernen", 0, 0, 250, 44, 30, 0, (e -> {
-			System.out.println("FUCK ME");
-		}), this);
+		TransperantButton.createButton("Lernen", 0, 0, 250, 44, 30, 0, null, this);
 
 		TransperantButton.createButton("Vokabeltest", 0, 90, 250, 45, 20, 0, (e -> {
-			System.out.println("FUCK ME");
+			System.out.println("Vokabeltest");
 		}), this);
 
 		TransperantButton.createButton("Suchspiel", 0, 135, 250, 45, 20, 0, (e -> {
-			System.out.println("FUCK ME");
+			System.out.println("Suchspiel");
 		}), this);
 
 		TransperantButton.createButton("Buchstabieren", 0, 180, 250, 45, 20, 0, (e -> {
-			System.out.println("FUCK ME");
+			System.out.println("Buchstabieren");
 		}), this);
 
 		TransperantButton.createButton("Sprache Verwalten", 0, 229, 250, 45, 20, 0, (e -> {
-			System.out.println("FUCK ME");
+			System.out.println("Spracheverwalten");
 		}), this);
 
 		TransperantButton.createButton("Einstellungen", 0, 274, 250, 45, 20, 0, (e -> {
-			System.out.println("FUCK ME");
+			System.out.println("Einstellungen");
 		}), this);
 
 		TransperantButton.createButton("Statistiken", 0, 319, 250, 45, 20, 0, (e -> {
-			System.out.println("FUCK ME");
+			System.out.println("Statistiken");
 		}), this);
 
 		TransperantButton.createButton("Hilfe", 0, 364, 250, 45, 20, 0, (e -> {
-			System.out.println("FUCK ME");
+			System.out.println("Hilfe");
 		}), this);
 
 		TransperantButton.createButton("Info", 0, 409, 250, 45, 20, 0, (e -> {
-			System.out.println("FUCK ME");
+			System.out.println("Info");
 		}), this);
 
 		TransperantButton.createButton("Beenden", 0, 627, 250, 60, 30, 0, (e -> {
-			System.out.println("FUCK ME");
+			System.exit(1);
 		}), this);
 	}
 

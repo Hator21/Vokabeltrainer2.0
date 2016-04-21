@@ -29,7 +29,7 @@ public class TitleBar extends JPanel {
 		this.frame = frame;
 		this.setLayout(null);
 		this.setBounds(1, 1, 1278, 30);
-		c = new Color(0, 0, 0, 15);
+		this.c = new Color(0, 0, 0, 15);
 		try {
 			this.image = ImageIO.read(new File("img/titlebar.png"));
 		} catch (IOException ex) {}
@@ -57,12 +57,10 @@ public class TitleBar extends JPanel {
 		});
 
 		TransperantButton.createButton("X", 1248, 0, 30, 30, 17, 8, (e -> {
-			System.out.println("FUCK TITLE BAR");
 			System.exit(1);
 		}), this);
 
 		TransperantButton.createButton("_", 1218, 0, 30, 30, 17, 5, (e -> {
-			System.out.println("FUCK TITLE BAR 2");
 			frame.setState(Frame.ICONIFIED);
 		}), this);
 	}

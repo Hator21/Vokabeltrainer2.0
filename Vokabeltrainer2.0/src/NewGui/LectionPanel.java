@@ -6,7 +6,6 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -16,10 +15,9 @@ import subGui.internalLearningPanel;
 
 public class LectionPanel extends JPanel {
 
-	private MainFrame						frame;
-	private internalLearningPanel			iLP;
-	private BufferedImage					image;
-	private ArrayList<TransperantButton>	buttons	= new ArrayList<TransperantButton>();
+	private MainFrame				frame;
+	private internalLearningPanel	iLP;
+	private BufferedImage			image;
 
 	public LectionPanel(MainFrame frame) {
 		this.frame = frame;
@@ -85,7 +83,6 @@ public class LectionPanel extends JPanel {
 		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g.drawImage(this.image, 0, 0, null);
 
-		// this.paintChildren(g_);
 	}
 
 }
