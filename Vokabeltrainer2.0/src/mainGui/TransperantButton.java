@@ -56,7 +56,7 @@ public class TransperantButton extends CustomButton {
 	public static void createButton(String text, int x, int y, int width, int height, int fontsize, int factor, ActionListener listener, JComponent parent) {
 		TransperantButton button = new TransperantButton(text, x, y, width, height, fontsize, factor);
 		button.addActionListener(listener);
-		System.out.println(parent.getClass().getName());
+		//System.out.println(parent.getClass().getName());
 		parent.add(button);
 	}
 
