@@ -44,18 +44,31 @@ public class MainFrame extends JFrame {
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBounds(100, 100, 1280, 720);
+<<<<<<< HEAD
 		contentPane = new JPanel();
 		titlebar = new TitleBar(this);
 		menuPanel = new MenuPanel(this);
 		headingbar = new HeadingBar(this);
 		this.setContentPane(contentPane);
+=======
+		this.contentPane = new JPanel();
+		this.titlebar = new TitleBar(this);
+		this.menuPanel = new MenuPanel(this);
+		this.setContentPane(this.contentPane);
+>>>>>>> branch 'master' of https://github.com/Hator21/Vokabeltrainer2.0.git
 		this.border = BorderFactory.createLineBorder(Color.black);
-		contentPane.setBorder(border);
+		this.contentPane.setBorder(this.border);
 		this.getContentPane().setLayout(null);
+<<<<<<< HEAD
 		this.getContentPane().add(titlebar);
 		this.getContentPane().add(menuPanel);
 		this.getContentPane().add(headingbar);
 		this.getContentPane().setBackground(Color.RED);
+=======
+		this.getContentPane().add(this.titlebar);
+		this.getContentPane().add(this.menuPanel);
+		this.getContentPane().setBackground(Color.BLACK);
+>>>>>>> branch 'master' of https://github.com/Hator21/Vokabeltrainer2.0.git
 
 	}
 }

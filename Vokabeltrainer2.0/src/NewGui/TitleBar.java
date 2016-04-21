@@ -29,7 +29,7 @@ public class TitleBar extends JPanel {
 		this.frame = frame;
 		this.setLayout(null);
 		this.setBounds(1, 1, 1278, 30);
-		c = new Color(0, 0, 0, 15);
+		this.c = new Color(0, 0, 0, 15);
 		try {
 			this.image = ImageIO.read(new File("img/titlebar.png"));
 		} catch (IOException ex) {}
@@ -59,15 +59,23 @@ public class TitleBar extends JPanel {
 			}
 		});
 
+<<<<<<< HEAD
 		TransparentLabel.createLabel("Vokabeltrainer 2.0", 50, 0, 200, 30, 20, this);
 
 		TransparentButton.createButton("X", 1248, 0, 30, 30, 17, 8, (e -> {
 			System.out.println("FUCK TITLE BAR");
+=======
+		TransperantButton.createButton("X", 1248, 0, 30, 30, 17, 8, (e -> {
+>>>>>>> branch 'master' of https://github.com/Hator21/Vokabeltrainer2.0.git
 			System.exit(1);
 		}), this);
 
+<<<<<<< HEAD
 		TransparentButton.createButton("_", 1218, 0, 30, 30, 17, 5, (e -> {
 			System.out.println("FUCK TITLE BAR 2");
+=======
+		TransperantButton.createButton("_", 1218, 0, 30, 30, 17, 5, (e -> {
+>>>>>>> branch 'master' of https://github.com/Hator21/Vokabeltrainer2.0.git
 			frame.setState(Frame.ICONIFIED);
 		}), this);
 	}
