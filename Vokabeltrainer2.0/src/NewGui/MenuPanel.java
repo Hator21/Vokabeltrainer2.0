@@ -30,7 +30,7 @@ public class MenuPanel extends JPanel {
 		}), this);
 
 		TransparentButton.createButton("Lernen", 0, 0, 250, 44, 30, 0, (e -> {
-			System.out.println("FUCK ME");
+			System.out.println("FUCK MEasdasd");
 		}), this);
 
 		TransparentButton.createButton("Vokabeltest", 0, 90, 250, 45, 20, 0, (e -> {
