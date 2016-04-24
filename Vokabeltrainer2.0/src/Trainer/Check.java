@@ -3,13 +3,28 @@ package Trainer;
 import java.util.ArrayList;
 
 public class Check {
+	public static String vok(String vokabel, ArrayList<Vokabeln> list) {
 
-	public void check(String eingabe, int rnd, int rnd2, ArrayList<Vokabeln> list) {
-		String loesung = "";
+		int rnd = (int) ((Math.random()) * list.size());
+		int rnd2 = (int) ((Math.random()) * 2);
+
 		if (rnd2 == 0) {
-			loesung = list.get(rnd).getinland();
+			vokabel = list.get(rnd).getausland();
 		} else if (rnd2 == 1) {
-			loesung = list.get(rnd).getausland();
+			vokabel = list.get(rnd).getinland();
+		}
+		return vokabel;
+
+	}
+
+	public static void check(String eingabe, ArrayList<Vokabeln> list, String vokabel) {
+		String loesung = "";
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getinland().equals(vokabel)) {
+				loesung = list.get(i).getinland();
+			} else if (list.get(i).getausland().equals(vokabel)) {
+				loesung = list.get(i).getausland();
+			}
 		}
 		if (eingabe.equals(loesung)) {
 			System.out.println("Richtig :)");

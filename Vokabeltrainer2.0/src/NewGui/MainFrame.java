@@ -46,21 +46,21 @@ public class MainFrame extends JFrame {
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBounds(100, 100, 1280, 720);
-		contentPane = new JPanel();
-		titlebar = new TitleBar(this);
-		menuPanel = new MenuPanel(this);
-		headingbar = new HeadingBar(this);
-		mainMenuImage = new MainMenuImage(this);
-		iLearningPanel = new internalLearningPanel(this);
-		this.setContentPane(contentPane);
+		this.contentPane = new JPanel();
+		this.titlebar = new TitleBar(this);
+		this.menuPanel = new MenuPanel(this);
+		this.headingbar = new HeadingBar(this);
+		this.mainMenuImage = new MainMenuImage(this);
+		this.iLearningPanel = new internalLearningPanel(this);
+		this.setContentPane(this.contentPane);
 		this.border = BorderFactory.createLineBorder(Color.black);
-		contentPane.setBorder(border);
+		this.contentPane.setBorder(this.border);
 		this.getContentPane().setLayout(null);
-		this.getContentPane().add(titlebar);
-		this.getContentPane().add(menuPanel);
-		this.getContentPane().add(headingbar);
+		this.getContentPane().add(this.titlebar);
+		this.getContentPane().add(this.menuPanel);
+		this.getContentPane().add(this.headingbar);
 		// this.getContentPane().add(mainMenuImage);
-		this.getContentPane().add(iLearningPanel);
+		this.getContentPane().add(this.iLearningPanel);
 		this.getContentPane().setBackground(Color.RED);
 
 	}

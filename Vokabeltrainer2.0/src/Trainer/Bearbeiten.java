@@ -34,14 +34,16 @@ public class Bearbeiten {
 
 					if (cell.getType() == CellType.LABEL) {
 						LabelCell lc = (LabelCell) cell;
-						if (z == 0)
-							in = lc.getString();
-						if (z == 1)
-							aus = lc.getString();
+						if (z == 0) {
+							this.in = lc.getString();
+						}
+						if (z == 1) {
+							this.aus = lc.getString();
+						}
 					}
 					z++;
 				}
-				vokabeln.add(new Vokabeln(in, aus));
+				vokabeln.add(new Vokabeln(this.in, this.aus));
 				z = 0;
 			}
 			workbook.close();
@@ -75,24 +77,25 @@ public class Bearbeiten {
 			System.out.println("Mach Excel zu!");
 		}
 	}
-	public void Hinzufügen(ArrayList<Vokabeln> vokabeln){
+
+	public void Hinzufügen(ArrayList<Vokabeln> vokabeln) {
 		InputStreamReader isr = new InputStreamReader(System.in);
 		BufferedReader br = new BufferedReader(isr);
-		String inland="";
-		String ausland="";
-		
+		String inland = "";
+		String ausland = "";
+
 		System.out.println("Geben sie das Deutschewort ein.");
-		try{
+		try {
 			inland = br.readLine();
-		}catch(IOException e){
+		} catch (IOException e) {
 			return;
 		}
 		System.out.println("Geben sie das Fremdsprachenwort ein.");
-		try{
+		try {
 			ausland = br.readLine();
-		}catch(IOException e){
+		} catch (IOException e) {
 			return;
 		}
-		vokabeln.add(new Vokabeln(ausland,inland));
+		vokabeln.add(new Vokabeln(ausland, inland));
 	}
 }

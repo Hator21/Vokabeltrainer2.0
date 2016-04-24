@@ -15,27 +15,44 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import Components.TransparentButton;
+import Trainer.Bearbeiten;
+import Trainer.Vokabeln;
+import jxl.write.WriteException;
 
 @SuppressWarnings("serial")
 public class internalLearningPanel extends JPanel {
 
 	private MainFrame						frame;
 	private BufferedImage					image;
-	private int								n			= 0;
+	private int								n			= 0,
+													count = 10;
 	private ArrayList<TransparentButton>	buttons		= new ArrayList<TransparentButton>();
 	private ArrayList<JTextField>			units		= new ArrayList<JTextField>();
 	private ArrayList<JLabel>				labels		= new ArrayList<JLabel>();
-	private String							sprache1	= "Deutsch", sprache2 = "Englisch", vokabel = "vokabel";
+	ArrayList<Vokabeln>						englisch	= new ArrayList<Vokabeln>();
+	private String							sprache1	= "Deutsch",
+													sprache2 = "Englisch", vokabel = "vokabel";
+	Bearbeiten								bear		= new Bearbeiten();
 
 	public internalLearningPanel(MainFrame frame) {
+		try {
+			this.bear.getdata(this.englisch);
+		} catch (IOException e) { //lesen der Vokabeln
+			e.printStackTrace();
+		} catch (WriteException e) {
+			e.printStackTrace();
+		}
+
 		this.frame = frame;
 		this.setLayout(null);
 		this.setBounds(251, 75, 1028, 644);
 		try {
 			this.image = ImageIO.read(new File("img/internalLection.png"));
 		} catch (IOException ex) {}
+		this.vokabel = Trainer.Check.vok(this.vokabel, this.englisch);
+
 		TransparentButton.createButton("Überprüfen", 120, 320, 200, 40, 30, 0, (e -> {
-			System.out.println("ICHB BIN KACKE");
+			Trainer.Check.check(this.units.get(1).getText(), this.englisch, this.vokabel);
 		}), this);
 		this.labels.add(new JLabel(this.sprache1));
 		this.labels.get(0).setBounds(20, 200, 100, 40);

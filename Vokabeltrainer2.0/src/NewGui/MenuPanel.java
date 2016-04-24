@@ -5,8 +5,10 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -17,12 +19,16 @@ public class MenuPanel extends JPanel {
 	private MainFrame		frame;
 	private BufferedImage	image;
 	private Color			c;
+	InputStreamReader		isr	= new InputStreamReader(System.in);
+	BufferedReader			br	= new BufferedReader(this.isr);
 
 	public MenuPanel(MainFrame frame) {
+
 		this.frame = frame;
-		c = new Color(255, 0, 0, 255);
+		this.c = new Color(255, 0, 0, 255);
 		this.setLayout(null);
 		this.setBounds(1, 31, 250, 688);
+
 		try {
 			this.image = ImageIO.read(new File("img/menu.png"));
 		} catch (IOException ex) {}
@@ -68,7 +74,8 @@ public class MenuPanel extends JPanel {
 		}), this);
 
 		TransparentButton.createButton("Beenden", 0, 627, 250, 60, 30, 0, (e -> {
-			System.out.println("FUCK ME");
+
+			System.exit(1);
 		}), this);
 	}
 
