@@ -11,6 +11,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import Components.TransparentButton;
+
 public class MenuPanel extends JPanel {
 	private MainFrame		frame;
 	private BufferedImage	image;

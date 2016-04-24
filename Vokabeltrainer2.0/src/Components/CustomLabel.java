@@ -1,4 +1,4 @@
-package NewGui;
+package Components;
 
 import javax.swing.Icon;
 import javax.swing.JLabel;

@@ -10,22 +10,18 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import Components.TransparentLabel;
-
-@SuppressWarnings("serial")
-public class HeadingBar extends JPanel {
+public class MainMenuImage extends JPanel {
 
 	private MainFrame		frame;
 	private BufferedImage	image;
 
-	public HeadingBar(MainFrame frame) {
+	public MainMenuImage(MainFrame frame) {
 		this.frame = frame;
 		this.setLayout(null);
-		this.setBounds(251, 31, 1028, 44);
+		this.setBounds(251, 75, 1028, 644);
 		try {
-			this.image = ImageIO.read(new File("img/HeadingBar.png"));
+			this.image = ImageIO.read(new File("img/Hintergrund.png"));
 		} catch (IOException ex) {}
-		TransparentLabel.createLabel("Hauptmenü", 0, 0, 250, 45, 30, this);
 	}
 
 	@Override
@@ -37,4 +33,5 @@ public class HeadingBar extends JPanel {
 		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g.drawImage(this.image, 0, 0, null);
 	}
+
 }

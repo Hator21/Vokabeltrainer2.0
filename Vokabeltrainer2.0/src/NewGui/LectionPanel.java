@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import subGui.internalLearningPanel;
+import Components.TransparentButton;
 
 public class LectionPanel extends JPanel {
 

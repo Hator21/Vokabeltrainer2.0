@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import Components.TransparentButton;
+import Components.TransparentLabel;
+
 @SuppressWarnings("serial")
 public class TitleBar extends JPanel {
 	private Point							initialClick;

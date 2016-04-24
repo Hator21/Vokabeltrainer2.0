@@ -1,4 +1,4 @@
-package subGui;
+package NewGui;
 
 import java.awt.Font;
 import java.awt.Graphics;
@@ -14,8 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import NewGui.MainFrame;
-import NewGui.TransparentButton;
+import Components.TransparentButton;
 
 @SuppressWarnings("serial")
 public class internalLearningPanel extends JPanel {
@@ -31,10 +30,10 @@ public class internalLearningPanel extends JPanel {
 	public internalLearningPanel(MainFrame frame) {
 		this.frame = frame;
 		this.setLayout(null);
+		this.setBounds(251, 75, 1028, 644);
 		try {
 			this.image = ImageIO.read(new File("img/internalLection.png"));
 		} catch (IOException ex) {}
-		this.setBounds(251, 66, 1028, 653);
 		TransparentButton.createButton("Überprüfen", 120, 320, 200, 40, 30, 0, (e -> {
 			System.out.println("ICHB BIN KACKE");
 		}), this);
@@ -59,7 +58,6 @@ public class internalLearningPanel extends JPanel {
 			this.add(this.units.get(i));
 			this.labels.get(i).setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 			this.add(this.labels.get(i));
-
 		}
 		this.units.get(0).setEditable(false);
 		this.add(this.labels.get(2));
@@ -79,10 +77,6 @@ public class internalLearningPanel extends JPanel {
 		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g.drawImage(this.image, 0, 0, null);
-		/*
-		 * for (TransperantButton p : buttons)
-		 * p.render(g);
-		 */
 	}
 
 	protected ArrayList<TransparentButton> getButtons() {

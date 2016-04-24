@@ -12,12 +12,14 @@ import javax.swing.border.Border;
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
 
-	private TitleBar			titlebar;
-	private JPanel				contentPane;
-	private MenuPanel			menuPanel;
-	private HeadingBar			headingbar;
-	private static MainFrame	instance;
-	private Border				border;
+	private TitleBar				titlebar;
+	private JPanel					contentPane;
+	private MenuPanel				menuPanel;
+	private HeadingBar				headingbar;
+	private MainMenuImage			mainMenuImage;
+	private internalLearningPanel	iLearningPanel;
+	private static MainFrame		instance;
+	private Border					border;
 
 	/**
 	 * Launch the application.
@@ -48,6 +50,8 @@ public class MainFrame extends JFrame {
 		titlebar = new TitleBar(this);
 		menuPanel = new MenuPanel(this);
 		headingbar = new HeadingBar(this);
+		mainMenuImage = new MainMenuImage(this);
+		iLearningPanel = new internalLearningPanel(this);
 		this.setContentPane(contentPane);
 		this.border = BorderFactory.createLineBorder(Color.black);
 		contentPane.setBorder(border);
@@ -55,6 +59,8 @@ public class MainFrame extends JFrame {
 		this.getContentPane().add(titlebar);
 		this.getContentPane().add(menuPanel);
 		this.getContentPane().add(headingbar);
+		// this.getContentPane().add(mainMenuImage);
+		this.getContentPane().add(iLearningPanel);
 		this.getContentPane().setBackground(Color.RED);
 
 	}

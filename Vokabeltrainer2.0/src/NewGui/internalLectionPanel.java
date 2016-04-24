@@ -1,4 +1,4 @@
-package subGui;
+package NewGui;
 
 import java.awt.Font;
 import java.awt.Graphics;
@@ -14,9 +14,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
-import NewGui.LectionPanel;
-import NewGui.MainFrame;
-import NewGui.TransparentButton;
+import Components.TransparentButton;
 
 @SuppressWarnings("serial")
 public class internalLectionPanel extends JPanel {
