@@ -15,8 +15,9 @@ import Components.TransparentLabel;
 @SuppressWarnings("serial")
 public class HeadingBar extends JPanel {
 
-	private MainFrame		frame;
-	private BufferedImage	image;
+	private MainFrame			frame;
+	private BufferedImage		image;
+	private TransparentLabel	mainmenu;
 
 	public HeadingBar(MainFrame frame) {
 		this.frame = frame;
@@ -25,7 +26,7 @@ public class HeadingBar extends JPanel {
 		try {
 			this.image = ImageIO.read(new File("img/HeadingBar.png"));
 		} catch (IOException ex) {}
-		TransparentLabel.createLabel("Hauptmenü", 0, 0, 250, 45, 30, this);
+		mainmenu = TransparentLabel.createLabel("Hauptmenü", 0, 0, 250, 45, 30, this);
 	}
 
 	@Override
@@ -37,4 +38,13 @@ public class HeadingBar extends JPanel {
 		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g.drawImage(this.image, 0, 0, null);
 	}
+
+	public TransparentLabel getMainmenu() {
+		return mainmenu;
+	}
+
+	public void setMainmenu(TransparentLabel mainmenu) {
+		this.mainmenu = mainmenu;
+	}
+
 }

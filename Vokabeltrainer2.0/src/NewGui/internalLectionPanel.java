@@ -19,35 +19,33 @@ import Components.TransparentButton;
 @SuppressWarnings("serial")
 public class internalLectionPanel extends JPanel {
 
-	private MainFrame						frame;
-	private LectionPanel					lPanel;
-	private BufferedImage					image;
-	private int								n		= 0;
-	private ArrayList<TransparentButton>	buttons	= new ArrayList<TransparentButton>();
-	private ArrayList<JCheckBox>			units	= new ArrayList<JCheckBox>();
-	private JComboBox						combobox;
+	private MainFrame				frame;
+	private BufferedImage			image;
+	private int						n				= 11;
+	private ArrayList<JCheckBox>	units			= new ArrayList<JCheckBox>();
+	private JComboBox<String>		combobox;
+	private String					comboBoxListe[]	= {
+			"Englisch", "Französisch"
+	};
 
-	public internalLectionPanel(MainFrame frame, LectionPanel lPanel) {
+	public internalLectionPanel(MainFrame frame) {
+
 		this.frame = frame;
-		this.lPanel = lPanel;
 		this.setLayout(null);
+		this.setBounds(251, 75, 1028, 644);
+
 		try {
 			image = ImageIO.read(new File("img/internalLection.png"));
 		} catch (IOException ex) {}
-		this.setBounds(251, 66, 1028, 653);
-		buttons.add(new TransparentButton("Lernen", 105, 550, 150, 40, 30, 0));
-		for (int i = 0; i < 11; i++) {
-			units.add(new JCheckBox("Lektion " + (i + 1)));
-			units.get(i).setBounds(120, 40 * i + 100, 200, 40);
-			units.get(i).setOpaque(false);
-			units.get(i).setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-			this.add(units.get(i));
-		}
-		combobox = new JComboBox<Object>();
-		combobox.setBounds(80, 50, 200, 40);
-		combobox.setOpaque(false);
-		combobox.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		this.add(combobox);
+
+		TransparentButton.createButton("Lernen", 105, 550, 150, 40, 30, 0, (e -> {
+			frame.getiLectionPanel().setVisible(false);
+			frame.getiLearningPanel().setVisible(true);
+			frame.getHeadingbar().getMainmenu().setText("Lernen");
+		}), this);
+
+		createCheckboxes(n);
+		createComboBox(comboBoxListe);
 	}
 
 	@Override
@@ -57,7 +55,23 @@ public class internalLectionPanel extends JPanel {
 		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g.drawImage(image, 0, 0, null);
-		for (TransparentButton p : buttons)
-			p.render(g);
+	}
+
+	public void createCheckboxes(int n) {
+		for (int i = 0; i < n; i++) {
+			units.add(new JCheckBox("Lektion " + (i + 1)));
+			units.get(i).setBounds(120, 40 * i + 100, 200, 40);
+			units.get(i).setOpaque(false);
+			units.get(i).setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+			this.add(units.get(i));
+		}
+	}
+
+	public void createComboBox(String[] list) {
+		combobox = new JComboBox<String>(list);
+		combobox.setBounds(80, 50, 200, 40);
+		combobox.setOpaque(false);
+		combobox.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		this.add(combobox);
 	}
 }

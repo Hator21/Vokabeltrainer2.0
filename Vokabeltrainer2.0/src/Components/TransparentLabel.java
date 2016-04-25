@@ -9,7 +9,6 @@ import java.awt.RenderingHints;
 
 import javax.swing.JComponent;
 
-
 public class TransparentLabel extends CustomLabel {
 
 	private int			fontsize;
@@ -53,10 +52,10 @@ public class TransparentLabel extends CustomLabel {
 		g.drawString(this.getText(), x, y);
 	}
 
-	public static void createLabel(String text, int x, int y, int width, int height, int fontsize, JComponent parent) {
+	public static TransparentLabel createLabel(String text, int x, int y, int width, int height, int fontsize, JComponent parent) {
 		TransparentLabel label = new TransparentLabel(text, x, y, width, height, fontsize);
-		// System.out.println(parent.getClass().getName());
 		parent.add(label);
+		return label;
 	}
 
 	@Override

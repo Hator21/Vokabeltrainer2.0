@@ -22,6 +22,7 @@ public class MainFrame extends JFrame {
 	private HeadingBar				headingbar;
 	private MainMenuImage			mainMenuImage;
 	private internalLearningPanel	iLearningPanel;
+	private internalLectionPanel	iLectionPanel;
 	private static MainFrame		instance;
 	private Border					border;
 
@@ -54,12 +55,18 @@ public class MainFrame extends JFrame {
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBounds(100, 100, 1280, 720);
+
+		this.setBear(new Bearbeiten(this));
+		this.setCheck(new Check(this));
+		this.setRun(new Run(this, getCheck()));
+
 		this.contentPane = new JPanel();
 		this.titlebar = new TitleBar(this);
 		this.menuPanel = new MenuPanel(this);
 		this.headingbar = new HeadingBar(this);
 		this.mainMenuImage = new MainMenuImage(this);
 		this.iLearningPanel = new internalLearningPanel(this);
+		this.iLectionPanel = new internalLectionPanel(this);
 		this.setContentPane(this.contentPane);
 		this.border = BorderFactory.createLineBorder(Color.black);
 		this.contentPane.setBorder(this.border);
@@ -67,14 +74,12 @@ public class MainFrame extends JFrame {
 		this.getContentPane().add(this.titlebar);
 		this.getContentPane().add(this.menuPanel);
 		this.getContentPane().add(this.headingbar);
-		// this.getContentPane().add(mainMenuImage);
+		this.getContentPane().add(mainMenuImage);
+		this.iLearningPanel.setVisible(false);
 		this.getContentPane().add(this.iLearningPanel);
+		this.iLectionPanel.setVisible(false);
+		this.getContentPane().add(this.iLectionPanel);
 		this.getContentPane().setBackground(Color.RED);
-
-		this.setBear(new Bearbeiten(this));
-		this.setCheck(new Check(this));
-		this.setRun(new Run(this, getCheck()));
-
 	}
 
 	public Bearbeiten getBear() {
@@ -99,6 +104,38 @@ public class MainFrame extends JFrame {
 
 	public void setRun(Run run) {
 		this.run = run;
+	}
+
+	public MainMenuImage getMainMenuImage() {
+		return mainMenuImage;
+	}
+
+	public void setMainMenuImage(MainMenuImage mainMenuImage) {
+		this.mainMenuImage = mainMenuImage;
+	}
+
+	public internalLearningPanel getiLearningPanel() {
+		return iLearningPanel;
+	}
+
+	public void setiLearningPanel(internalLearningPanel iLearningPanel) {
+		this.iLearningPanel = iLearningPanel;
+	}
+
+	public HeadingBar getHeadingbar() {
+		return headingbar;
+	}
+
+	public void setHeadingbar(HeadingBar headingbar) {
+		this.headingbar = headingbar;
+	}
+
+	public internalLectionPanel getiLectionPanel() {
+		return iLectionPanel;
+	}
+
+	public void setiLectionPanel(internalLectionPanel iLectionPanel) {
+		this.iLectionPanel = iLectionPanel;
 	}
 
 }

@@ -34,7 +34,9 @@ public class MenuPanel extends JPanel {
 		} catch (IOException ex) {}
 
 		TransparentButton.createButton("Lektionen", 0, 45, 250, 45, 20, 0, (e -> {
-			System.exit(1);
+			frame.getiLectionPanel().setVisible(true);
+			frame.getMainMenuImage().setVisible(false);
+			frame.getHeadingbar().getMainmenu().setText("Lektion auswählen");
 		}), this);
 
 		TransparentButton.createButton("Lernen", 0, 0, 250, 44, 30, 0, (e -> {

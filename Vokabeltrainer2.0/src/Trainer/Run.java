@@ -52,13 +52,13 @@ public class Run {
 			e.printStackTrace();
 		}
 
-		System.out.println("Geben sie die Übersetzung von " + vokabel + " ein");
-		try {
-			eingabe = br.readLine();
-		} catch (IOException e) {
-			return;
-		}
-		frame.getCheck().check(eingabe, englisch, vokabel);
+		// System.out.println("Geben sie die Übersetzung von " + vokabel + " ein");
+		// try {
+		// eingabe = br.readLine();
+		// } catch (IOException e) {
+		// return;
+		// }
+		// frame.getCheck().check(eingabe, englisch, vokabel);
 
 	}
 
