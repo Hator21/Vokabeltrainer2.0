@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import NewGui.MainFrame;
 import jxl.Cell;
 import jxl.CellType;
 import jxl.LabelCell;
@@ -20,7 +21,12 @@ import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 
 public class Bearbeiten {
-	private String aus, in;
+	private String		aus, in;
+	private MainFrame	frame;
+
+	public Bearbeiten(MainFrame frame) {
+		this.frame = frame;
+	}
 
 	public void getdata(ArrayList<Vokabeln> vokabeln) throws IOException, WriteException {
 		Workbook workbook;

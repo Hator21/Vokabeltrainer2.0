@@ -5,21 +5,30 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import NewGui.MainFrame;
 import jxl.write.WriteException;
 
 public class Run {
-	public static void main(String[] args) {
+
+	private MainFrame	frame;
+	private Check		check;
+
+	public Run(MainFrame frame, Check check) {
+		this.frame = frame;
+		this.check = check;
+		running();
+	}
+
+	public void running() {
 		String eingabe;
 
-		Bearbeiten bear = new Bearbeiten();
-		Check check = new Check();
 		ArrayList<Vokabeln> englisch = new ArrayList<Vokabeln>();
 		InputStreamReader isr = new InputStreamReader(System.in);
 		BufferedReader br = new BufferedReader(isr);
 
 		try {
-			bear.getdata(englisch);
-		} catch (IOException e) { //lesen
+			frame.getBear().getdata(englisch);
+		} catch (IOException e) { // lesen
 			e.printStackTrace();
 		} catch (WriteException e) {
 			e.printStackTrace();
@@ -36,8 +45,8 @@ public class Run {
 
 		}
 		try {
-			bear.write(englisch);
-		} catch (WriteException e) { //schreiben
+			frame.getBear().write(englisch);
+		} catch (WriteException e) { // schreiben
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -49,7 +58,7 @@ public class Run {
 		} catch (IOException e) {
 			return;
 		}
-		check.check(eingabe, englisch, vokabel);
+		frame.getCheck().check(eingabe, englisch, vokabel);
 
 	}
 

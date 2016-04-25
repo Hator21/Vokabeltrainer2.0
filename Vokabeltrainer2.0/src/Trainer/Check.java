@@ -2,7 +2,16 @@ package Trainer;
 
 import java.util.ArrayList;
 
+import NewGui.MainFrame;
+
 public class Check {
+
+	private MainFrame frame;
+
+	public Check(MainFrame mainFrame) {
+		this.frame = frame;
+	}
+
 	public static String vok(String vokabel, ArrayList<Vokabeln> list) {
 
 		int rnd = (int) ((Math.random()) * list.size());

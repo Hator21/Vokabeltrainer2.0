@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import Components.TransparentButton;
-import Trainer.Bearbeiten;
 import Trainer.Vokabeln;
 import jxl.write.WriteException;
 
@@ -24,20 +23,17 @@ public class internalLearningPanel extends JPanel {
 
 	private MainFrame						frame;
 	private BufferedImage					image;
-	private int								n			= 0,
-													count = 10;
+	private int								n			= 0, count = 10;
 	private ArrayList<TransparentButton>	buttons		= new ArrayList<TransparentButton>();
 	private ArrayList<JTextField>			units		= new ArrayList<JTextField>();
 	private ArrayList<JLabel>				labels		= new ArrayList<JLabel>();
 	ArrayList<Vokabeln>						englisch	= new ArrayList<Vokabeln>();
-	private String							sprache1	= "Deutsch",
-													sprache2 = "Englisch", vokabel = "vokabel";
-	Bearbeiten								bear		= new Bearbeiten();
+	private String							sprache1	= "Deutsch", sprache2 = "Englisch", vokabel = "vokabel";
 
 	public internalLearningPanel(MainFrame frame) {
 		try {
-			this.bear.getdata(this.englisch);
-		} catch (IOException e) { //lesen der Vokabeln
+			frame.getBear().getdata(this.englisch);
+		} catch (IOException e) { // lesen der Vokabeln
 			e.printStackTrace();
 		} catch (WriteException e) {
 			e.printStackTrace();

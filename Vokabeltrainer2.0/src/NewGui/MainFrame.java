@@ -9,6 +9,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+import Trainer.Bearbeiten;
+import Trainer.Check;
+import Trainer.Run;
+
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
 
@@ -20,6 +24,10 @@ public class MainFrame extends JFrame {
 	private internalLearningPanel	iLearningPanel;
 	private static MainFrame		instance;
 	private Border					border;
+
+	private Bearbeiten				bear;
+	private Check					check;
+	private Run						run;
 
 	/**
 	 * Launch the application.
@@ -63,5 +71,34 @@ public class MainFrame extends JFrame {
 		this.getContentPane().add(this.iLearningPanel);
 		this.getContentPane().setBackground(Color.RED);
 
+		this.setBear(new Bearbeiten(this));
+		this.setCheck(new Check(this));
+		this.setRun(new Run(this, getCheck()));
+
 	}
+
+	public Bearbeiten getBear() {
+		return bear;
+	}
+
+	public void setBear(Bearbeiten bear) {
+		this.bear = bear;
+	}
+
+	public Check getCheck() {
+		return check;
+	}
+
+	public void setCheck(Check check) {
+		this.check = check;
+	}
+
+	public Run getRun() {
+		return run;
+	}
+
+	public void setRun(Run run) {
+		this.run = run;
+	}
+
 }
