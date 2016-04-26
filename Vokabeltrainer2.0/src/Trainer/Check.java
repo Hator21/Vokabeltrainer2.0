@@ -6,13 +6,13 @@ import NewGui.MainFrame;
 
 public class Check {
 
-	private static MainFrame frame;
+	private MainFrame frame;
 
-	public Check(MainFrame mainFrame) {
-		this.frame = this.frame;
+	public Check(MainFrame frame) {
+		this.frame = frame;
 	}
 
-	public static String vok(String vokabel, ArrayList<Vokabeln> list) {
+	public String vok(String vokabel, ArrayList<Vokabeln> list) {
 
 		int rnd = (int) ((Math.random()) * list.size());
 		int rnd2 = (int) ((Math.random()) * 2);
@@ -26,9 +26,9 @@ public class Check {
 
 	}
 
-	public static void check(String eingabe, ArrayList<Vokabeln> list, String vokabel) {
+	public void check(String eingabe, ArrayList<Vokabeln> list, String vokabel) {
 		String loesung = "";
-		//frame.getiLearningPanel().setCounts(frame.getiLearningPanel().getCounts() - 1);
+		frame.getiLearningPanel().setCounts(frame.getiLearningPanel().getCounts() - 1);
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getinland().equals(vokabel)) {
 				loesung = list.get(i).getinland();
@@ -39,7 +39,7 @@ public class Check {
 		if (eingabe.equals(loesung)) {
 			System.out.println("Richtig :)");
 		} else if (!eingabe.equals(loesung)) {
-			//frame.iLearningPanel.setRight(frame.iLearningPanel.getRight() - 1);
+			frame.getiLearningPanel().setRight(frame.getiLearningPanel().getRight() - 1);
 			System.out.println("Falsch :(");
 		}
 	}
