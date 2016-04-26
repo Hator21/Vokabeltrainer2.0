@@ -58,7 +58,7 @@ public class MainFrame extends JFrame {
 
 		this.setBear(new Bearbeiten(this));
 		this.setCheck(new Check(this));
-		this.setRun(new Run(this, getCheck()));
+		this.setRun(new Run(this, this.getCheck()));
 
 		this.contentPane = new JPanel();
 		this.titlebar = new TitleBar(this);
@@ -74,7 +74,7 @@ public class MainFrame extends JFrame {
 		this.getContentPane().add(this.titlebar);
 		this.getContentPane().add(this.menuPanel);
 		this.getContentPane().add(this.headingbar);
-		this.getContentPane().add(mainMenuImage);
+		this.getContentPane().add(this.mainMenuImage);
 		this.iLearningPanel.setVisible(false);
 		this.getContentPane().add(this.iLearningPanel);
 		this.iLectionPanel.setVisible(false);
@@ -83,7 +83,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public Bearbeiten getBear() {
-		return bear;
+		return this.bear;
 	}
 
 	public void setBear(Bearbeiten bear) {
@@ -91,7 +91,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public Check getCheck() {
-		return check;
+		return this.check;
 	}
 
 	public void setCheck(Check check) {
@@ -99,7 +99,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public Run getRun() {
-		return run;
+		return this.run;
 	}
 
 	public void setRun(Run run) {
@@ -107,7 +107,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public MainMenuImage getMainMenuImage() {
-		return mainMenuImage;
+		return this.mainMenuImage;
 	}
 
 	public void setMainMenuImage(MainMenuImage mainMenuImage) {
@@ -115,7 +115,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public internalLearningPanel getiLearningPanel() {
-		return iLearningPanel;
+		return this.iLearningPanel;
 	}
 
 	public void setiLearningPanel(internalLearningPanel iLearningPanel) {
@@ -123,7 +123,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public HeadingBar getHeadingbar() {
-		return headingbar;
+		return this.headingbar;
 	}
 
 	public void setHeadingbar(HeadingBar headingbar) {
@@ -131,7 +131,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public internalLectionPanel getiLectionPanel() {
-		return iLectionPanel;
+		return this.iLectionPanel;
 	}
 
 	public void setiLectionPanel(internalLectionPanel iLectionPanel) {

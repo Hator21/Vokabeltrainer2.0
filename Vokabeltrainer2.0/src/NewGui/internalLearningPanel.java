@@ -23,12 +23,16 @@ public class internalLearningPanel extends JPanel {
 
 	private MainFrame						frame;
 	private BufferedImage					image;
-	private int								n			= 0, count = 10;
+	private int								n			= 0,
+													count = 10;
 	private ArrayList<TransparentButton>	buttons		= new ArrayList<TransparentButton>();
 	private ArrayList<JTextField>			units		= new ArrayList<JTextField>();
 	private ArrayList<JLabel>				labels		= new ArrayList<JLabel>();
 	ArrayList<Vokabeln>						englisch	= new ArrayList<Vokabeln>();
-	private String							sprache1	= "Deutsch", sprache2 = "Englisch", vokabel = "vokabel";
+	private String							sprache1	= "Deutsch",
+													sprache2 = "Englisch", vokabel = "vokabel";
+	private String							test		= "Überprüfen";
+	private int								right, counts = 10;
 
 	public internalLearningPanel(MainFrame frame) {
 		try {
@@ -47,8 +51,19 @@ public class internalLearningPanel extends JPanel {
 		} catch (IOException ex) {}
 		this.vokabel = Trainer.Check.vok(this.vokabel, this.englisch);
 
-		TransparentButton.createButton("Überprüfen", 120, 320, 200, 40, 30, 0, (e -> {
-			Trainer.Check.check(this.units.get(1).getText(), this.englisch, this.vokabel);
+		TransparentButton.createButton(this.test, 120, 320, 200, 40, 30, 0, (e -> {
+			if (this.test.equals("Ende")) {
+
+			} else {
+				System.out.println(this.getCounts());
+				Trainer.Check.check(this.units.get(1).getText(), this.englisch, this.vokabel);
+				this.units.get(0).setText(this.vokabel = Trainer.Check.vok(this.vokabel, this.englisch));
+				this.units.get(1).setText("");
+				System.out.println(this.counts);
+				if (this.counts == 0) {
+					this.test = "Ende";
+				}
+			}
 		}), this);
 		this.labels.add(new JLabel(this.sprache1));
 		this.labels.get(0).setBounds(20, 200, 100, 40);
@@ -140,4 +155,19 @@ public class internalLearningPanel extends JPanel {
 		this.vokabel = vokabel;
 	}
 
+	public void setCounts(int counts) {
+		this.counts = counts;
+	}
+
+	public int getCounts() {
+		return this.counts;
+	}
+
+	public void setRight(int right) {
+		this.right = right;
+	}
+
+	public int getRight() {
+		return this.right;
+	}
 }
