@@ -12,40 +12,46 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 
 import Components.TransparentButton;
+import Components.TransparentLabel;
 
-@SuppressWarnings("serial")
-public class internalLectionPanel extends JPanel {
+public class VocabelPrePanel extends JPanel {
 
 	private MainFrame				frame;
 	private BufferedImage			image;
 	private int						n				= 11;
 	private ArrayList<JCheckBox>	units			= new ArrayList<JCheckBox>();
 	private JComboBox<String>		combobox;
+	private JSlider					timer;
 	private String					comboBoxListe[]	= {
 			"Englisch", "Französisch"
 	};
 
-	public internalLectionPanel(MainFrame frame) {
+	public VocabelPrePanel(MainFrame frame) {
 
 		this.frame = frame;
 		this.setLayout(null);
 		this.setBounds(251, 75, 1028, 644);
 
 		try {
-			image = ImageIO.read(new File("img/internalLection.png"));
+			image = ImageIO.read(new File("img/Hintergrund-weiß.png"));
 		} catch (IOException ex) {}
 
-		TransparentButton.createButton("Lernen", 105, 550, 150, 40, 30, 0, (e -> {
+		TransparentButton.createButton("Prüfen", 105, 550, 150, 40, 30, 0, (e -> {
+			frame.getVocabelPrePanel().setVisible(false);
 			frame.getiLectionPanel().setVisible(false);
 			frame.getiLearningPanel().setVisible(true);
-			frame.getHeadingbar().getHeadingLabelL().setText("Lernen");
+			frame.getHeadingbar().getHeadingLabelL().setText("Vokabeltest");
+			frame.getHeadingbar().getHeadingLabelR().setText("");
 		}), this);
 
 		createCheckboxes(n);
 		createComboBox(comboBoxListe);
+		createSettings();
 	}
 
 	@Override
@@ -74,4 +80,34 @@ public class internalLectionPanel extends JPanel {
 		combobox.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		this.add(combobox);
 	}
+	public void createSettings(){
+		JSlider timeSlider = new JSlider();
+		timeSlider.setBounds(600, 300, 250, 40);
+		timeSlider.setOpaque(false);
+		timeSlider.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		this.add(timeSlider);
+				
+		TransparentLabel.createLabel("Zeit", 600, 250, 250, 40, 20, this);
+		
+		JSlider coundSlider = new JSlider();
+		coundSlider.setBounds(600, 200, 250, 40);
+		coundSlider.setOpaque(false);
+		coundSlider.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		this.add(coundSlider);
+		
+		TransparentLabel.createLabel("Anzahl Vokabeln", 600, 150, 250, 40, 20, this);
+		
+		JCheckBox deengCheckBox = new JCheckBox("Deutsch-Englisch");
+		deengCheckBox.setOpaque(false);
+		deengCheckBox.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		deengCheckBox.setBounds(550, 100, 200, 40);
+		this.add(deengCheckBox);
+		
+		JCheckBox engdeCheckBox = new JCheckBox("Englisch-Deutsch");
+		engdeCheckBox.setOpaque(false);
+		engdeCheckBox.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		engdeCheckBox.setBounds(750, 100, 200, 40);
+		this.add(engdeCheckBox);
+	}
+	
 }
