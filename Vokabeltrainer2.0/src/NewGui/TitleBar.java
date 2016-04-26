@@ -62,7 +62,12 @@ public class TitleBar extends JPanel {
 			}
 		});
 
-		TransparentLabel.createLabel("Vokabeltrainer 2.0", 50, 0, 200, 30, 20, this);
+		TransparentButton.createButton("Vokabeltrainer 2.0", 50, 0, 200, 30, 20, 0, (e -> {
+			frame.getiLearningPanel().setVisible(false);
+			frame.getiLectionPanel().setVisible(false);
+			frame.getVocabelPrePanel().setVisible(false);
+			frame.getMainMenuImage().setVisible(true);
+		}), this);
 
 		TransparentButton.createButton("X", 1248, 0, 30, 30, 17, 8, (e -> {
 			System.out.println("FUCK TITLE BAR");

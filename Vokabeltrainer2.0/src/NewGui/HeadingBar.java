@@ -17,7 +17,7 @@ public class HeadingBar extends JPanel {
 
 	private MainFrame			frame;
 	private BufferedImage		image;
-	private TransparentLabel	mainmenu;
+	private TransparentLabel	headingLabelL, headingLabelR;
 
 	public HeadingBar(MainFrame frame) {
 		this.frame = frame;
@@ -26,7 +26,8 @@ public class HeadingBar extends JPanel {
 		try {
 			this.image = ImageIO.read(new File("img/HeadingBar.png"));
 		} catch (IOException ex) {}
-		mainmenu = TransparentLabel.createLabel("Hauptmenü", 0, 0, 250, 45, 30, this);
+		headingLabelL = TransparentLabel.createLabel("Hauptmenü", 0, 0, 250, 44, 30, this);
+		headingLabelR = TransparentLabel.createLabel("", 514, 0, 250, 44, 30, this);
 	}
 
 	@Override
@@ -39,12 +40,20 @@ public class HeadingBar extends JPanel {
 		g.drawImage(this.image, 0, 0, null);
 	}
 
-	public TransparentLabel getMainmenu() {
-		return mainmenu;
+	public TransparentLabel getHeadingLabelL() {
+		return headingLabelL;
 	}
 
-	public void setMainmenu(TransparentLabel mainmenu) {
-		this.mainmenu = mainmenu;
+	public void setHeadingPanelL(TransparentLabel headingLabelL) {
+		this.headingLabelL = headingLabelL;
+	}
+	
+	public TransparentLabel getHeadingLabelR() {
+		return headingLabelR;
+	}
+
+	public void setHeadingPanelR(TransparentLabel headingLabelR) {
+		this.headingLabelR = headingLabelR;
 	}
 
 }

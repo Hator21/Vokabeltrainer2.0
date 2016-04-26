@@ -1,6 +1,5 @@
 package NewGui;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -15,36 +14,43 @@ import javax.swing.JPanel;
 
 import Components.TransparentButton;
 
+@SuppressWarnings("serial")
 public class MenuPanel extends JPanel {
-	private MainFrame		frame;
-	private BufferedImage	image;
-	private Color			c;
-	InputStreamReader		isr	= new InputStreamReader(System.in);
-	BufferedReader			br	= new BufferedReader(this.isr);
+	private MainFrame frame;
+	private BufferedImage image;
+	InputStreamReader isr = new InputStreamReader(System.in);
+	BufferedReader br = new BufferedReader(this.isr);
 
 	public MenuPanel(MainFrame frame) {
 
 		this.frame = frame;
-		this.c = new Color(255, 0, 0, 255);
 		this.setLayout(null);
 		this.setBounds(1, 31, 250, 688);
 
 		try {
 			this.image = ImageIO.read(new File("img/menu.png"));
-		} catch (IOException ex) {}
+		} catch (IOException ex) {
+		}
 
 		TransparentButton.createButton("Lektionen", 0, 45, 250, 45, 20, 0, (e -> {
 			frame.getiLectionPanel().setVisible(true);
 			frame.getMainMenuImage().setVisible(false);
-			frame.getHeadingbar().getMainmenu().setText("Lektion auswählen");
+			frame.getiLearningPanel().setVisible(false);
+			frame.getVocabelPrePanel().setVisible(false);
+			frame.getHeadingbar().getHeadingLabelL().setText("Lektion auswählen");
 		}), this);
 
 		TransparentButton.createButton("Lernen", 0, 0, 250, 44, 30, 0, (e -> {
-			System.out.println("FUCK ME");
+			
 		}), this);
 
 		TransparentButton.createButton("Vokabeltest", 0, 90, 250, 45, 20, 0, (e -> {
-			System.out.println("FUCK ME");
+			frame.getVocabelPrePanel().setVisible(true);
+			frame.getiLectionPanel().setVisible(false);
+			frame.getMainMenuImage().setVisible(false);
+			frame.getiLearningPanel().setVisible(false);
+			frame.getHeadingbar().getHeadingLabelL().setText("Lektion auswählen");
+			frame.getHeadingbar().getHeadingLabelR().setText("Einstellungen");
 		}), this);
 
 		TransparentButton.createButton("Suchspiel", 0, 135, 250, 45, 20, 0, (e -> {

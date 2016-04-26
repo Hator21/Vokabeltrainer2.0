@@ -23,6 +23,7 @@ public class MainFrame extends JFrame {
 	private MainMenuImage			mainMenuImage;
 	private internalLearningPanel	iLearningPanel;
 	private internalLectionPanel	iLectionPanel;
+	private VocabelPrePanel			vocabelPrePanel;
 	private static MainFrame		instance;
 	private Border					border;
 
@@ -67,6 +68,7 @@ public class MainFrame extends JFrame {
 		this.mainMenuImage = new MainMenuImage(this);
 		this.iLearningPanel = new internalLearningPanel(this);
 		this.iLectionPanel = new internalLectionPanel(this);
+		this.vocabelPrePanel = new VocabelPrePanel(this);
 		this.setContentPane(this.contentPane);
 		this.border = BorderFactory.createLineBorder(Color.black);
 		this.contentPane.setBorder(this.border);
@@ -79,6 +81,8 @@ public class MainFrame extends JFrame {
 		this.getContentPane().add(this.iLearningPanel);
 		this.iLectionPanel.setVisible(false);
 		this.getContentPane().add(this.iLectionPanel);
+		this.vocabelPrePanel.setVisible(false);
+		this.getContentPane().add(this.vocabelPrePanel);
 		this.getContentPane().setBackground(Color.RED);
 	}
 
@@ -138,4 +142,11 @@ public class MainFrame extends JFrame {
 		this.iLectionPanel = iLectionPanel;
 	}
 
+	public VocabelPrePanel getVocabelPrePanel() {
+		return vocabelPrePanel;
+	}
+
+	public void setVocabelPrePanel(VocabelPrePanel vocabelPrePanel) {
+		this.vocabelPrePanel = vocabelPrePanel;
+	}
 }

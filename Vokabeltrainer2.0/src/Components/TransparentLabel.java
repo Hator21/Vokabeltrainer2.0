@@ -15,7 +15,7 @@ public class TransparentLabel extends CustomLabel {
 	private Point		bounds;
 	private Point		position;
 	private Font		f;
-	static final Color	color	= new Color(0, 0, 255, 0);
+	static final Color	color	= new Color(0, 0, 255, 255);
 	static final Color	color2	= new Color(0, 0, 0, 0);
 
 	public TransparentLabel(String text, int x, int y, int width, int height, int fontsize) {
