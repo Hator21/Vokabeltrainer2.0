@@ -58,11 +58,12 @@ public class TransparentButton extends CustomButton {
 		g.drawString(this.getText(), x, y);
 	}
 
-	public static void createButton(String text, int x, int y, int width, int height, int fontsize, int factor, ActionListener listener, JComponent parent) {
+	public static TransparentButton createButton(String text, int x, int y, int width, int height, int fontsize, int factor, ActionListener listener, JComponent parent) {
 		TransparentButton button = new TransparentButton(text, x, y, width, height, fontsize, factor);
 		button.addActionListener(listener);
 		System.out.println(parent.getClass().getName());
 		parent.add(button);
+		return button;
 	}
 
 	@Override

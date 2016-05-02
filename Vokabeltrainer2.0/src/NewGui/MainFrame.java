@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+import Components.TimerLabel;
 import Trainer.Bearbeiten;
 import Trainer.Check;
 import Trainer.Run;
@@ -37,8 +38,10 @@ public class MainFrame extends JFrame {
 	private Bearbeiten				bear;
 	private Check					check;
 	private Run						run;
-	
-	private ArrayList<JPanel> panelList = new ArrayList<JPanel>();
+
+	private TimerLabel				timer;
+
+	private ArrayList<JPanel>		panelList	= new ArrayList<JPanel>();
 
 	/**
 	 * Launch the application.
@@ -258,5 +261,5 @@ public class MainFrame extends JFrame {
 	public void setPanelList(ArrayList<JPanel> panelList) {
 		this.panelList = panelList;
 	}
-	
+
 }
