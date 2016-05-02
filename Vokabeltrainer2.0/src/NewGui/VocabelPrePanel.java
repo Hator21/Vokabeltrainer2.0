@@ -49,7 +49,7 @@ public class VocabelPrePanel extends JPanel {
 			frame.getiLearningPanel().setVisible(true);
 			frame.getHeadingbar().getHeadingLabelL().setText("Vokabeltest");
 			frame.getHeadingbar().getHeadingLabelR().setText("");
-			frame.getTimer().startTimer();
+			// frame.getTimer().startTimer();
 		}), this);
 
 		createCheckboxes(n);
