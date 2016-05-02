@@ -11,20 +11,18 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class MainMenuImage extends JPanel {
-
+public class SpellingPanel extends JPanel {
 	private MainFrame		frame;
 	private BufferedImage	image;
-
-	public MainMenuImage(MainFrame frame) {
+	
+	public SpellingPanel(MainFrame frame){
 		this.frame = frame;
 		this.setLayout(null);
 		this.setBounds(251, 75, 1028, 644);
 		try {
-			this.image = ImageIO.read(new File("img/Hintergrund.png"));
+			this.image = ImageIO.read(new File("img/Hintergrund-weiﬂ.png"));
 		} catch (IOException ex) {}
 	}
-
 	@Override
 	public void paintComponent(Graphics g_) {
 		super.paintComponent(g_);
@@ -34,5 +32,4 @@ public class MainMenuImage extends JPanel {
 		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g.drawImage(this.image, 0, 0, null);
 	}
-
 }

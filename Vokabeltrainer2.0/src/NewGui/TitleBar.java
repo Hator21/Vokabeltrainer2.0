@@ -63,10 +63,10 @@ public class TitleBar extends JPanel {
 		});
 
 		TransparentButton.createButton("Vokabeltrainer 2.0", 50, 0, 200, 30, 20, 0, (e -> {
-			frame.getiLearningPanel().setVisible(false);
-			frame.getiLectionPanel().setVisible(false);
-			frame.getVocabelPrePanel().setVisible(false);
-			frame.getMainMenuImage().setVisible(true);
+			for(JPanel p : frame.getPanelList()){
+				p.setVisible(false);
+			}
+			frame.getPanelList().get(0).setVisible(true);
 		}), this);
 
 		TransparentButton.createButton("X", 1248, 0, 30, 30, 17, 8, (e -> {

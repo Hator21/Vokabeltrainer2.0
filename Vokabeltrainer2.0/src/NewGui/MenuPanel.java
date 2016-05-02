@@ -33,10 +33,10 @@ public class MenuPanel extends JPanel {
 		}
 
 		TransparentButton.createButton("Lektionen", 0, 45, 250, 45, 20, 0, (e -> {
-			frame.getiLectionPanel().setVisible(true);
-			frame.getMainMenuImage().setVisible(false);
-			frame.getiLearningPanel().setVisible(false);
-			frame.getVocabelPrePanel().setVisible(false);
+			for(JPanel p : frame.getPanelList()){
+				p.setVisible(false);
+			}
+			frame.getPanelList().get(0).setVisible(true);
 			frame.getHeadingbar().getHeadingLabelL().setText("Lektion auswählen");
 		}), this);
 
