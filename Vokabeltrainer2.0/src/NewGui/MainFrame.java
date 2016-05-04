@@ -78,6 +78,11 @@ public class MainFrame extends JFrame {
 		this.setCheck(new Check(this));
 		this.setRun(new Run(this, this.getCheck()));
 		this.setTimer(new TimerLabel(this, 15, 0));
+		try {
+			this.getBear().getdata(getVokabeln());
+		} catch (IOException | WriteException e) {
+			e.printStackTrace();
+		}
 
 		this.contentPane = new JPanel();
 		this.titlebar = new TitleBar(this);
@@ -134,12 +139,6 @@ public class MainFrame extends JFrame {
 		this.infoPanel.setVisible(false);
 		this.getContentPane().add(this.infoPanel);
 		this.getContentPane().setBackground(Color.RED);
-
-		try {
-			this.getBear().getdata(getVokabeln());
-		} catch (IOException | WriteException e) {
-			e.printStackTrace();
-		}
 	}
 
 	public Bearbeiten getBear() {
