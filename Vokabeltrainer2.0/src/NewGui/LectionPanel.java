@@ -6,22 +6,21 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import Components.TransparentButton;
 
+@SuppressWarnings("serial")
 public class LectionPanel extends JPanel {
 
-	private MainFrame						frame;
-	private internalLearningPanel			iLP;
-	private BufferedImage					image;
-	private ArrayList<TransparentButton>	buttons	= new ArrayList<TransparentButton>();
+	private MainFrame				frame;
+	private internalLearningPanel	iLP;
+	private BufferedImage			image;
 
 	public LectionPanel(MainFrame frame) {
-		this.frame = frame;
+		this.setFrame(frame);
 		this.iLP = new internalLearningPanel(frame);
 		this.setBounds(2, 22, 1276, 686);
 		try {
@@ -85,6 +84,14 @@ public class LectionPanel extends JPanel {
 		g.drawImage(this.image, 0, 0, null);
 
 		// this.paintChildren(g_);
+	}
+
+	public MainFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(MainFrame frame) {
+		this.frame = frame;
 	}
 
 }

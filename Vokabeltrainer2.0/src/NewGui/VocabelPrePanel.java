@@ -20,14 +20,16 @@ import javax.swing.event.ChangeListener;
 import Components.TransparentButton;
 import Components.TransparentLabel;
 
+@SuppressWarnings("serial")
 public class VocabelPrePanel extends JPanel {
 
 	private MainFrame				frame;
 	private BufferedImage			image;
 	private int						n				= 11;
 	private ArrayList<JCheckBox>	units			= new ArrayList<JCheckBox>();
+	private JCheckBox				deengCheckBox, engdeCheckBox;
 	private JComboBox<String>		combobox;
-	private JSlider					timer;
+	private JSlider					timeSlider, coundSlider;
 	private TransparentButton		test;
 	private String					comboBoxListe[]	= {
 			"Englisch", "Französisch"
@@ -43,27 +45,23 @@ public class VocabelPrePanel extends JPanel {
 			image = ImageIO.read(new File("img/Hintergrund-weiß.png"));
 		} catch (IOException ex) {}
 
-		test = TransparentButton.createButton("Prüfen", 600, 450, 250, 40, 30, 0, (e -> {
-			frame.getVocabelPrePanel().setVisible(false);
-			frame.getiLectionPanel().setVisible(false);
-			frame.getiLearningPanel().setVisible(true);
-			frame.getHeadingbar().getHeadingLabelL().setText("Vokabeltest");
-			frame.getHeadingbar().getHeadingLabelR().setText("");
-			// frame.getTimer().startTimer();
-		}), this);
-
+		createButton();
 		createCheckboxes(n);
 		createComboBox(comboBoxListe);
 		createSettings();
+
 	}
 
-	@Override
-	protected void paintComponent(Graphics g_) {
-		Graphics2D g = (Graphics2D) g_;
-		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-		g.drawImage(image, 0, 0, null);
+	public void createButton() {
+		test = TransparentButton.createButton("Prüfen", 600, 450, 250, 40, 30, 0, (e -> {
+			for (JPanel p : frame.getPanelList())
+				p.setVisible(false);
+			frame.getPanelList().get(4).setVisible(true);
+			frame.getTimer().stopTimer();
+			frame.getHeadingbar().getHeadingLabelL().setText("Vokabeltest");
+			frame.getHeadingbar().getHeadingLabelR().setText("");
+			frame.getTimer().setTimer(timeSlider.getValue(), 0);
+		}), this);
 	}
 
 	public void createCheckboxes(int n) {
@@ -85,7 +83,7 @@ public class VocabelPrePanel extends JPanel {
 	}
 
 	public void createSettings() {
-		JSlider timeSlider = new JSlider(0, 60, 15);
+		timeSlider = new JSlider(0, 60, 15);
 		timeSlider.setBounds(600, 360, 250, 55);
 		timeSlider.setPaintTicks(true);
 		timeSlider.setPaintLabels(true);
@@ -101,9 +99,7 @@ public class VocabelPrePanel extends JPanel {
 		timeSlider.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		this.add(timeSlider);
 
-		TransparentLabel.createLabel("Zeit (min)", 600, 310, 250, 40, 20, this);
-
-		JSlider coundSlider = new JSlider(0, 50, 30);
+		coundSlider = new JSlider(0, 50, 30);
 		coundSlider.setBounds(600, 220, 250, 55);
 		coundSlider.setPaintTicks(true);
 		coundSlider.setPaintLabels(true);
@@ -121,13 +117,15 @@ public class VocabelPrePanel extends JPanel {
 
 		TransparentLabel.createLabel("Anzahl Vokabeln", 600, 170, 250, 40, 20, this);
 
-		JCheckBox deengCheckBox = new JCheckBox("Deutsch-Englisch");
+		TransparentLabel.createLabel("Zeit (min)", 600, 310, 250, 40, 20, this);
+
+		deengCheckBox = new JCheckBox("Deutsch-Englisch");
 		deengCheckBox.setOpaque(false);
 		deengCheckBox.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		deengCheckBox.setBounds(550, 100, 200, 40);
 		this.add(deengCheckBox);
 
-		JCheckBox engdeCheckBox = new JCheckBox("Englisch-Deutsch");
+		engdeCheckBox = new JCheckBox("Englisch-Deutsch");
 		engdeCheckBox.setOpaque(false);
 		engdeCheckBox.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		engdeCheckBox.setBounds(750, 100, 200, 40);
@@ -140,6 +138,19 @@ public class VocabelPrePanel extends JPanel {
 
 	public void setTest(TransparentButton test) {
 		this.test = test;
+	}
+
+	protected JSlider getTimeSlider() {
+		return timeSlider;
+	}
+
+	@Override
+	protected void paintComponent(Graphics g_) {
+		Graphics2D g = (Graphics2D) g_;
+		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+		g.drawImage(image, 0, 0, null);
 	}
 
 }

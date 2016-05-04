@@ -20,7 +20,7 @@ public class HeadingBar extends JPanel {
 	private TransparentLabel	headingLabelL, headingLabelR;
 
 	public HeadingBar(MainFrame frame) {
-		this.frame = frame;
+		this.setFrame(frame);
 		this.setLayout(null);
 		this.setBounds(251, 31, 1028, 44);
 		try {
@@ -54,6 +54,14 @@ public class HeadingBar extends JPanel {
 
 	public void setHeadingPanelR(TransparentLabel headingLabelR) {
 		this.headingLabelR = headingLabelR;
+	}
+
+	public MainFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(MainFrame frame) {
+		this.frame = frame;
 	}
 
 }

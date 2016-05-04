@@ -25,7 +25,7 @@ public class Bearbeiten {
 	private MainFrame	frame;
 
 	public Bearbeiten(MainFrame frame) {
-		this.frame = frame;
+		this.setFrame(frame);
 	}
 
 	public void getdata(ArrayList<Vokabeln> vokabeln) throws IOException, WriteException {
@@ -103,5 +103,13 @@ public class Bearbeiten {
 			return;
 		}
 		vokabeln.add(new Vokabeln(ausland, inland));
+	}
+
+	public MainFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(MainFrame frame) {
+		this.frame = frame;
 	}
 }

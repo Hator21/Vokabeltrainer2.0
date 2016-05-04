@@ -30,7 +30,7 @@ public class internalLectionPanel extends JPanel {
 
 	public internalLectionPanel(MainFrame frame) {
 
-		this.frame = frame;
+		this.setFrame(frame);
 		this.setLayout(null);
 		this.setBounds(251, 75, 1028, 644);
 
@@ -73,5 +73,13 @@ public class internalLectionPanel extends JPanel {
 		combobox.setOpaque(false);
 		combobox.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		this.add(combobox);
+	}
+
+	public MainFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(MainFrame frame) {
+		this.frame = frame;
 	}
 }

@@ -15,55 +15,36 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import Components.TransparentButton;
-import Trainer.Vokabeln;
-import jxl.write.WriteException;
 
 @SuppressWarnings("serial")
 public class internalLearningPanel extends JPanel {
 
-	private MainFrame						frame;
-	private BufferedImage					image;
-	private int								n			= 0, count = 10;
-	private ArrayList<TransparentButton>	buttons		= new ArrayList<TransparentButton>();
-	private ArrayList<JTextField>			units		= new ArrayList<JTextField>();
-	private ArrayList<JLabel>				labels		= new ArrayList<JLabel>();
-	ArrayList<Vokabeln>						englisch	= new ArrayList<Vokabeln>();
-	private String							sprache1	= "Deutsch", sprache2 = "Englisch", vokabel = "vokabel";
-	private String							test		= "Überprüfen";
-	private int								right, counts = 10;
+	private MainFrame				frame;
+	private BufferedImage			image;
+	private ArrayList<JTextField>	units		= new ArrayList<JTextField>();
+	private ArrayList<JLabel>		labels		= new ArrayList<JLabel>();
+	private String					sprache1	= "Deutsch", sprache2 = "Englisch", vokabel = "vokabel";
+	private String					test		= "Überprüfen";
+	private TransparentButton		check;
+	private int						right, counts = 10;
 
 	public internalLearningPanel(MainFrame frame) {
-		try {
-			frame.getBear().getdata(this.englisch);
-		} catch (IOException e) { // lesen der Vokabeln
-			e.printStackTrace();
-		} catch (WriteException e) {
-			e.printStackTrace();
-		}
 
-		this.frame = frame;
+		this.setFrame(frame);
 		this.setLayout(null);
 		this.setBounds(251, 75, 1028, 644);
 		try {
 			this.image = ImageIO.read(new File("img/internalLection.png"));
 		} catch (IOException ex) {}
-		this.vokabel = frame.getCheck().vok(this.vokabel, this.englisch);
+		this.vokabel = frame.getCheck().vok(this.vokabel, frame.getVokabeln());
 
-		TransparentButton.createButton(this.test, 120, 320, 200, 40, 30, 0, (e -> {
-			if (this.test.equals("Ende")) {
-
-			} else {
-				System.out.println(this.getCounts());
-				frame.getCheck().check(this.units.get(1).getText(), this.englisch, this.vokabel);
-				this.units.get(0).setText(this.vokabel = frame.getCheck().vok(this.vokabel, this.englisch));
-				this.units.get(1).setText("");
-				System.out.println(this.counts);
-				if (this.counts == 0) {
-					System.out.println("Ende");
-					this.test = "Ende";
-				}
-			}
+		check = TransparentButton.createButton(this.test, 120, 320, 200, 40, 30, 0, (e -> {
+			frame.getCheck().check(this.units.get(1).getText(), frame.getVokabeln(), this.vokabel);
+			this.units.get(0).setText(this.vokabel = frame.getCheck().vok(this.vokabel, frame.getVokabeln()));
+			this.units.get(1).setText("");
+			System.out.println(this.counts);
 		}), this);
+
 		this.labels.add(new JLabel(this.sprache1));
 		this.labels.get(0).setBounds(20, 200, 100, 40);
 		this.labels.add(new JLabel(this.sprache2));
@@ -104,14 +85,6 @@ public class internalLearningPanel extends JPanel {
 		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g.drawImage(this.image, 0, 0, null);
-	}
-
-	protected ArrayList<TransparentButton> getButtons() {
-		return this.buttons;
-	}
-
-	protected void setButtons(ArrayList<TransparentButton> buttons) {
-		this.buttons = buttons;
 	}
 
 	protected ArrayList<JTextField> getUnits() {
@@ -169,4 +142,21 @@ public class internalLearningPanel extends JPanel {
 	public int getRight() {
 		return this.right;
 	}
+
+	protected TransparentButton getCheck() {
+		return check;
+	}
+
+	protected void setCheck(TransparentButton check) {
+		this.check = check;
+	}
+
+	public MainFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(MainFrame frame) {
+		this.frame = frame;
+	}
+
 }

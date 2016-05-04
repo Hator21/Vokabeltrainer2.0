@@ -12,12 +12,11 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class MainMenuImage extends JPanel {
-
 	private MainFrame		frame;
 	private BufferedImage	image;
 
 	public MainMenuImage(MainFrame frame) {
-		this.frame = frame;
+		this.setFrame(frame);
 		this.setLayout(null);
 		this.setBounds(251, 75, 1028, 644);
 		try {
@@ -33,6 +32,14 @@ public class MainMenuImage extends JPanel {
 		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g.drawImage(this.image, 0, 0, null);
+	}
+
+	public MainFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(MainFrame frame) {
+		this.frame = frame;
 	}
 
 }

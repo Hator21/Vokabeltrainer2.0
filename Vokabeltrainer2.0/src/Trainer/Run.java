@@ -15,7 +15,7 @@ public class Run {
 
 	public Run(MainFrame frame, Check check) {
 		this.frame = frame;
-		this.check = check;
+		this.setCheck(check);
 		running();
 	}
 
@@ -60,6 +60,14 @@ public class Run {
 		// }
 		// frame.getCheck().check(eingabe, englisch, vokabel);
 
+	}
+
+	public Check getCheck() {
+		return check;
+	}
+
+	public void setCheck(Check check) {
+		this.check = check;
 	}
 
 }

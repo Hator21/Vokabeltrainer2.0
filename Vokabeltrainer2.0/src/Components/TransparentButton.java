@@ -21,7 +21,7 @@ public class TransparentButton extends CustomButton {
 	private Point		position;
 	private Font		f;
 
-	static final Color	color	= new Color(255, 0, 0, 0);
+	static final Color	color	= new Color(255, 0, 0, 255);
 	static final Color	color2	= new Color(0, 0, 0, 0);
 
 	public TransparentButton(String text, int x, int y, int width, int height, int fontsize, int factor) {

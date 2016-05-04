@@ -9,6 +9,7 @@ import java.awt.RenderingHints;
 
 import javax.swing.JComponent;
 
+@SuppressWarnings("serial")
 public class TransparentLabel extends CustomLabel {
 
 	private int			fontsize;

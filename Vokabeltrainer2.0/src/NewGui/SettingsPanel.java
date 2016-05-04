@@ -11,11 +11,11 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class SpellingPanel extends JPanel {
+public class SettingsPanel extends JPanel {
 	private MainFrame		frame;
 	private BufferedImage	image;
-	
-	public SpellingPanel(MainFrame frame){
+
+	public SettingsPanel(MainFrame frame) {
 		this.setFrame(frame);
 		this.setLayout(null);
 		this.setBounds(251, 75, 1028, 644);
@@ -23,6 +23,7 @@ public class SpellingPanel extends JPanel {
 			this.image = ImageIO.read(new File("img/Hintergrund-weiﬂ.png"));
 		} catch (IOException ex) {}
 	}
+
 	@Override
 	public void paintComponent(Graphics g_) {
 		super.paintComponent(g_);
@@ -32,9 +33,11 @@ public class SpellingPanel extends JPanel {
 		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g.drawImage(this.image, 0, 0, null);
 	}
+
 	public MainFrame getFrame() {
 		return frame;
 	}
+
 	public void setFrame(MainFrame frame) {
 		this.frame = frame;
 	}

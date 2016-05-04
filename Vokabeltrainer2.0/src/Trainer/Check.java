@@ -9,7 +9,7 @@ public class Check {
 	private MainFrame frame;
 
 	public Check(MainFrame frame) {
-		this.frame = frame;
+		this.setFrame(frame);
 	}
 
 	public String vok(String vokabel, ArrayList<Vokabeln> list) {
@@ -28,7 +28,6 @@ public class Check {
 
 	public void check(String eingabe, ArrayList<Vokabeln> list, String vokabel) {
 		String loesung = "";
-		frame.getiLearningPanel().setCounts(frame.getiLearningPanel().getCounts() - 1);
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getinland().equals(vokabel)) {
 				loesung = list.get(i).getinland();
@@ -39,8 +38,15 @@ public class Check {
 		if (eingabe.equals(loesung)) {
 			System.out.println("Richtig :)");
 		} else if (!eingabe.equals(loesung)) {
-			frame.getiLearningPanel().setRight(frame.getiLearningPanel().getRight() - 1);
 			System.out.println("Falsch :(");
 		}
+	}
+
+	public MainFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(MainFrame frame) {
+		this.frame = frame;
 	}
 }

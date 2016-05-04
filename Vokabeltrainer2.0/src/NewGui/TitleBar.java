@@ -1,6 +1,5 @@
 package NewGui;
 
-import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -12,27 +11,23 @@ import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import Components.TransparentButton;
-import Components.TransparentLabel;
 
 @SuppressWarnings("serial")
 public class TitleBar extends JPanel {
-	private Point							initialClick;
-	private MainFrame						frame;
-	private BufferedImage					image, icon;
-	private Color							c;
-	private ArrayList<TransparentButton>	buttons	= new ArrayList<TransparentButton>();
+	private MainFrame			frame;
+	private BufferedImage		image, icon;
+	private Point				initialClick;
+	private TransparentButton	close, minimize, mainmenu;
 
 	public TitleBar(final MainFrame frame) {
-		this.frame = frame;
+		this.setFrame(frame);
 		this.setLayout(null);
 		this.setBounds(1, 1, 1278, 30);
-		c = new Color(0, 0, 0, 15);
 		try {
 			this.image = ImageIO.read(new File("img/titlebar.png"));
 		} catch (IOException ex) {}
@@ -62,22 +57,22 @@ public class TitleBar extends JPanel {
 			}
 		});
 
-		TransparentButton.createButton("Vokabeltrainer 2.0", 50, 0, 200, 30, 20, 0, (e -> {
-			for(JPanel p : frame.getPanelList()){
+		setMainmenu(TransparentButton.createButton("Vokabeltrainer 2.0", 50, 0, 200, 30, 20, 0, (e -> {
+			for (JPanel p : frame.getPanelList()) {
 				p.setVisible(false);
 			}
 			frame.getPanelList().get(0).setVisible(true);
-		}), this);
+		}), this));
 
-		TransparentButton.createButton("X", 1248, 0, 30, 30, 17, 8, (e -> {
+		setClose(TransparentButton.createButton("X", 1248, 0, 30, 30, 17, 8, (e -> {
 			System.out.println("FUCK TITLE BAR");
 			System.exit(1);
-		}), this);
+		}), this));
 
-		TransparentButton.createButton("_", 1218, 0, 30, 30, 17, 5, (e -> {
+		setMinimize(TransparentButton.createButton("_", 1218, 0, 30, 30, 17, 5, (e -> {
 			System.out.println("FUCK TITLE BAR 2");
 			frame.setState(Frame.ICONIFIED);
-		}), this);
+		}), this));
 	}
 
 	@Override
@@ -89,5 +84,37 @@ public class TitleBar extends JPanel {
 		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g.drawImage(this.image, 0, 0, null);
 		g.drawImage(this.icon, 10, 1, 28, 28, null);
+	}
+
+	public MainFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(MainFrame frame) {
+		this.frame = frame;
+	}
+
+	public TransparentButton getClose() {
+		return close;
+	}
+
+	public void setClose(TransparentButton close) {
+		this.close = close;
+	}
+
+	public TransparentButton getMinimize() {
+		return minimize;
+	}
+
+	public void setMinimize(TransparentButton minimize) {
+		this.minimize = minimize;
+	}
+
+	public TransparentButton getMainmenu() {
+		return mainmenu;
+	}
+
+	public void setMainmenu(TransparentButton mainmenu) {
+		this.mainmenu = mainmenu;
 	}
 }

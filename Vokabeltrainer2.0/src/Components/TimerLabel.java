@@ -13,11 +13,12 @@ public class TimerLabel {
 	private static int		counterValue;
 	private static Timer	timer;
 	private static int		min, sec;
+	private boolean			stopper;
 
 	public TimerLabel(MainFrame frame, int starttimeMin, int starttimeSec) {
 		this.frame = frame;
 
-		this.counterValue = starttimeMin * 60 + starttimeSec;
+		counterValue = starttimeMin * 60 + starttimeSec;
 
 	}
 
@@ -28,7 +29,7 @@ public class TimerLabel {
 
 				printTimer(counterValue);
 
-				if (TimerLabel.counterValue == 0) {
+				if (TimerLabel.counterValue == 0 || stopper == true) {
 					System.out.println("Counterdown ausgelaufen!");
 
 					TimerLabel.timer.stop();
@@ -52,6 +53,27 @@ public class TimerLabel {
 			s = String.valueOf(min) + ":0" + String.valueOf(sec);
 		else
 			s = String.valueOf(min) + ":" + String.valueOf(sec);
-		frame.getHeadingbar().getHeadingLabelR().setText(String.valueOf(s));
+		frame.getVocabeltestPanel().getTimerLabel().setText("Übrige Zeit: " + String.valueOf(s));
 	}
+
+	public void stopTimer() {
+		setStopper(true);
+	}
+
+	public void setTimer(int starttimeMin, int starttimeSec) {
+		counterValue = starttimeMin * 60 + starttimeSec;
+	}
+
+	public boolean isStopper() {
+		return stopper;
+	}
+
+	public void setStopper(boolean stopper) {
+		this.stopper = stopper;
+	}
+
+	public static int getCounterValue() {
+		return counterValue;
+	}
+
 }

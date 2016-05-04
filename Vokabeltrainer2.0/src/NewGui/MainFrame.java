@@ -3,6 +3,7 @@ package NewGui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -14,6 +15,8 @@ import Components.TimerLabel;
 import Trainer.Bearbeiten;
 import Trainer.Check;
 import Trainer.Run;
+import Trainer.Vokabeln;
+import jxl.write.WriteException;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
@@ -26,6 +29,7 @@ public class MainFrame extends JFrame {
 	private internalLearningPanel	iLearningPanel;
 	private internalLectionPanel	iLectionPanel;
 	private VocabelPrePanel			vocabelPrePanel;
+	private VocabeltestPanel		vocabeltestPanel;
 	private SearchingPanel			searchingPanel;
 	private SpellingPanel			spellingPanel;
 	private EditSPanel				editSPanel;
@@ -42,6 +46,7 @@ public class MainFrame extends JFrame {
 	private TimerLabel				timer;
 
 	private ArrayList<JPanel>		panelList	= new ArrayList<JPanel>();
+	private ArrayList<Vokabeln>		vokabeln	= new ArrayList<Vokabeln>();
 
 	/**
 	 * Launch the application.
@@ -64,7 +69,7 @@ public class MainFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainFrame() {
-		instance = this;
+		setInstance(this);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBounds(100, 100, 1280, 720);
@@ -72,6 +77,7 @@ public class MainFrame extends JFrame {
 		this.setBear(new Bearbeiten(this));
 		this.setCheck(new Check(this));
 		this.setRun(new Run(this, this.getCheck()));
+		this.setTimer(new TimerLabel(this, 15, 0));
 
 		this.contentPane = new JPanel();
 		this.titlebar = new TitleBar(this);
@@ -79,12 +85,14 @@ public class MainFrame extends JFrame {
 		this.headingbar = new HeadingBar(this);
 		this.mainMenuImage = new MainMenuImage(this);
 		panelList.add(mainMenuImage);
-		this.iLearningPanel = new internalLearningPanel(this);
-		panelList.add(iLearningPanel);
 		this.iLectionPanel = new internalLectionPanel(this);
 		panelList.add(iLectionPanel);
+		this.iLearningPanel = new internalLearningPanel(this);
+		panelList.add(iLearningPanel);
 		this.vocabelPrePanel = new VocabelPrePanel(this);
 		panelList.add(vocabelPrePanel);
+		this.vocabeltestPanel = new VocabeltestPanel(this);
+		panelList.add(vocabeltestPanel);
 		this.searchingPanel = new SearchingPanel(this);
 		panelList.add(searchingPanel);
 		this.spellingPanel = new SpellingPanel(this);
@@ -111,6 +119,8 @@ public class MainFrame extends JFrame {
 		this.getContentPane().add(this.iLectionPanel);
 		this.vocabelPrePanel.setVisible(false);
 		this.getContentPane().add(this.vocabelPrePanel);
+		this.vocabeltestPanel.setVisible(false);
+		this.getContentPane().add(this.vocabeltestPanel);
 		this.searchingPanel.setVisible(false);
 		this.getContentPane().add(this.searchingPanel);
 		this.spellingPanel.setVisible(false);
@@ -124,6 +134,12 @@ public class MainFrame extends JFrame {
 		this.infoPanel.setVisible(false);
 		this.getContentPane().add(this.infoPanel);
 		this.getContentPane().setBackground(Color.RED);
+
+		try {
+			this.getBear().getdata(getVokabeln());
+		} catch (IOException | WriteException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Bearbeiten getBear() {
@@ -260,6 +276,38 @@ public class MainFrame extends JFrame {
 
 	public void setPanelList(ArrayList<JPanel> panelList) {
 		this.panelList = panelList;
+	}
+
+	protected TimerLabel getTimer() {
+		return timer;
+	}
+
+	protected void setTimer(TimerLabel timer) {
+		this.timer = timer;
+	}
+
+	public VocabeltestPanel getVocabeltestPanel() {
+		return vocabeltestPanel;
+	}
+
+	public void setVocabeltestPanel(VocabeltestPanel vocabeltestPanel) {
+		this.vocabeltestPanel = vocabeltestPanel;
+	}
+
+	public static MainFrame getInstance() {
+		return instance;
+	}
+
+	public static void setInstance(MainFrame instance) {
+		MainFrame.instance = instance;
+	}
+
+	public ArrayList<Vokabeln> getVokabeln() {
+		return vokabeln;
+	}
+
+	public void setVokabeln(ArrayList<Vokabeln> vokabeln) {
+		this.vokabeln = vokabeln;
 	}
 
 }
