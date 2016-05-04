@@ -53,6 +53,7 @@ public class VocabeltestPanel extends JPanel {
 		start = TransparentButton.createButton("start", 120, 140, 200, 40, 30, 0, (e -> {
 			frame.getTimer().startTimer();
 			start.setEnabled(false);
+			counts = 10;
 			speech2Text.setEditable(true);
 			next.setEnabled(true);
 		}), this);

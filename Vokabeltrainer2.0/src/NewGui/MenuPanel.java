@@ -45,7 +45,7 @@ public class MenuPanel extends JPanel {
 			frame.getHeadingbar().getHeadingLabelL().setText("Lektion auswählen");
 		}), this));
 
-		setVocabeltest(TransparentButton.createButton("Vokabeltest", 0, 90, 250, 45, 20, 0, (e -> {
+		setVocabeltest(TransparentButton.createButton("Vokabeltest", 0, 90, 250, 45, 20, 0, 10, (e -> {
 			frame.getVocabelPrePanel().setVisible(true);
 			frame.getiLectionPanel().setVisible(false);
 			frame.getMainMenuImage().setVisible(false);
@@ -55,7 +55,10 @@ public class MenuPanel extends JPanel {
 		}), this));
 
 		setSearching(TransparentButton.createButton("Suchspiel", 0, 135, 250, 45, 20, 0, (e -> {
-			System.out.println("FUCK ME");
+			for (JPanel p : frame.getPanelList()) {
+				p.setVisible(false);
+			}
+			frame.getPanelList().get(5).setVisible(true);
 		}), this));
 
 		setSpelling(TransparentButton.createButton("Buchstabieren", 0, 180, 250, 45, 20, 0, (e -> {

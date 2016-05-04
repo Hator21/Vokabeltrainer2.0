@@ -7,7 +7,6 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
@@ -15,18 +14,19 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import Components.TransparentButton;
+import Components.TransparentLabel;
 
 @SuppressWarnings("serial")
 public class internalLearningPanel extends JPanel {
 
-	private MainFrame				frame;
-	private BufferedImage			image;
-	private ArrayList<JTextField>	units		= new ArrayList<JTextField>();
-	private ArrayList<JLabel>		labels		= new ArrayList<JLabel>();
-	private String					sprache1	= "Deutsch", sprache2 = "Englisch", vokabel = "vokabel";
-	private String					test		= "Überprüfen";
-	private TransparentButton		check;
-	private int						right, counts = 10;
+	private MainFrame			frame;
+	private BufferedImage		image;
+	private JTextField			speech1Text, speech2Text;
+	private JLabel				speech1Label, speech2Label, correct, countRight, countWrong, average;
+	private String				sprache1	= "Deutsch", sprache2 = "Englisch", vokabel = "vokabel";
+	private String				test		= "Überprüfen";
+	private TransparentButton	check;
+	private int					right, counts = 10;
 
 	public internalLearningPanel(MainFrame frame) {
 
@@ -39,43 +39,31 @@ public class internalLearningPanel extends JPanel {
 		this.vokabel = frame.getCheck().vok(this.vokabel, frame.getVokabeln());
 
 		check = TransparentButton.createButton(this.test, 120, 320, 200, 40, 30, 0, (e -> {
-			frame.getCheck().check(this.units.get(1).getText(), frame.getVokabeln(), this.vokabel);
-			this.units.get(0).setText(this.vokabel = frame.getCheck().vok(this.vokabel, frame.getVokabeln()));
-			this.units.get(1).setText("");
-			System.out.println(this.counts);
+			frame.getCheck().check(speech2Text.getText(), frame.getVokabeln(), this.vokabel);
+			speech1Text.setText(this.vokabel = frame.getCheck().vok(this.vokabel, frame.getVokabeln()));
+			speech2Text.setText("");
 		}), this);
 
-		this.labels.add(new JLabel(this.sprache1));
-		this.labels.get(0).setBounds(20, 200, 100, 40);
-		this.labels.add(new JLabel(this.sprache2));
-		this.labels.get(1).setBounds(20, 260, 100, 40);
-		this.labels.add(new JLabel("Richtig"));
-		this.labels.get(2).setBounds(330, 260, 50, 40);
-		this.labels.add(new JLabel("richtige.."));
-		this.labels.get(3).setBounds(50, 550, 100, 40);
-		this.labels.add(new JLabel("falsche.."));
-		this.labels.get(4).setBounds(170, 550, 100, 40);
-		this.labels.add(new JLabel("durchschnitt.."));
-		this.labels.get(5).setBounds(290, 550, 150, 40);
-		this.units.add(new JTextField(this.vokabel));
-		this.units.add(new JTextField(""));
-		for (int i = 0; i < 2; i++) {
-			this.units.get(i).setBounds(120, (60 * i) + 200, 200, 40);
-			this.units.get(i).setOpaque(true);
-			this.units.get(i).setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-			this.add(this.units.get(i));
-			this.labels.get(i).setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-			this.add(this.labels.get(i));
-		}
-		this.units.get(0).setEditable(false);
-		this.add(this.labels.get(2));
-		this.labels.get(2).setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
-		this.add(this.labels.get(3));
-		this.labels.get(3).setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		this.add(this.labels.get(4));
-		this.labels.get(4).setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		this.add(this.labels.get(5));
-		this.labels.get(5).setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		setSpeech1Label(TransparentLabel.createLabel("Deutsch", 20, 200, 100, 40, 20, this));
+		setSpeech2Label(TransparentLabel.createLabel("Englisch", 20, 260, 100, 40, 20, this));
+		setCorrect(TransparentLabel.createLabel("Richtig", 320, 260, 70, 40, 20, this));
+		setCountRight(TransparentLabel.createLabel("Richtige..", 50, 550, 100, 40, 20, this));
+		setCountWrong(TransparentLabel.createLabel("Falsche..", 170, 550, 100, 40, 20, this));
+		setAverage(TransparentLabel.createLabel("Durchschnitt..", 290, 550, 150, 40, 20, this));
+
+		speech1Text = new JTextField(this.vokabel);
+		speech1Text.setBounds(120, 200, 200, 40);
+		speech1Text.setOpaque(true);
+		speech1Text.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		speech1Text.setEditable(false);
+		this.add(speech1Text);
+
+		speech2Text = new JTextField("");
+		speech2Text.setBounds(120, 260, 200, 40);
+		speech2Text.setOpaque(true);
+		speech2Text.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		speech2Text.setEditable(true);
+		this.add(speech2Text);
 	}
 
 	@Override
@@ -85,22 +73,6 @@ public class internalLearningPanel extends JPanel {
 		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g.drawImage(this.image, 0, 0, null);
-	}
-
-	protected ArrayList<JTextField> getUnits() {
-		return this.units;
-	}
-
-	protected void setUnits(ArrayList<JTextField> units) {
-		this.units = units;
-	}
-
-	protected ArrayList<JLabel> getLabels() {
-		return this.labels;
-	}
-
-	protected void setLabels(ArrayList<JLabel> labels) {
-		this.labels = labels;
 	}
 
 	protected String getSprache1() {
@@ -157,6 +129,54 @@ public class internalLearningPanel extends JPanel {
 
 	public void setFrame(MainFrame frame) {
 		this.frame = frame;
+	}
+
+	public JLabel getSpeech2Label() {
+		return speech2Label;
+	}
+
+	public void setSpeech2Label(JLabel speech2Label) {
+		this.speech2Label = speech2Label;
+	}
+
+	public JLabel getSpeech1Label() {
+		return speech1Label;
+	}
+
+	public void setSpeech1Label(JLabel speech1Label) {
+		this.speech1Label = speech1Label;
+	}
+
+	public JLabel getCorrect() {
+		return correct;
+	}
+
+	public void setCorrect(JLabel correct) {
+		this.correct = correct;
+	}
+
+	public JLabel getCountRight() {
+		return countRight;
+	}
+
+	public void setCountRight(JLabel countRight) {
+		this.countRight = countRight;
+	}
+
+	public JLabel getCountWrong() {
+		return countWrong;
+	}
+
+	public void setCountWrong(JLabel countWrong) {
+		this.countWrong = countWrong;
+	}
+
+	public JLabel getAverage() {
+		return average;
+	}
+
+	public void setAverage(JLabel average) {
+		this.average = average;
 	}
 
 }

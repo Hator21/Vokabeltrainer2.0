@@ -57,7 +57,6 @@ public class VocabelPrePanel extends JPanel {
 			for (JPanel p : frame.getPanelList())
 				p.setVisible(false);
 			frame.getPanelList().get(4).setVisible(true);
-			frame.getTimer().stopTimer();
 			frame.getHeadingbar().getHeadingLabelL().setText("Vokabeltest");
 			frame.getHeadingbar().getHeadingLabelR().setText("");
 			frame.getTimer().setTimer(timeSlider.getValue(), 0);
