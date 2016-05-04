@@ -36,7 +36,7 @@ public class SearchingPanel extends JPanel {
 		} catch (IOException ex) {}
 		createButtons();
 		setNextcorrect(TransparentButton.createButton("Prüfen", 828, 600, 200, 44, 20, 0, (e -> {
-			System.out.println("Du Hurensohn!!!!111elf");
+			System.out.println("Du Hurensohn!!!!1111elf");
 		}), this));
 
 		setVokabel(TransparentLabel.createLabel("Suche: vokabel", 0, 600, 200, 44, 20, this));
