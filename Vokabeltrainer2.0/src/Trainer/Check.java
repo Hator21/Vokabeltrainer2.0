@@ -12,27 +12,29 @@ public class Check {
 		this.setFrame(frame);
 	}
 
-	public String vok(String vokabel, ArrayList<Vokabeln> list) {
+	public String vok(String vokabel, ArrayList<Vokabel> list) {
 
 		int rnd = (int) ((Math.random()) * list.size());
 		int rnd2 = (int) ((Math.random()) * 2);
 
 		if (rnd2 == 0) {
-			vokabel = list.get(rnd).getausland();
+			vokabel = list.get(rnd).getVocabTranslation();
+			System.out.println(vokabel);
 		} else if (rnd2 == 1) {
-			vokabel = list.get(rnd).getinland();
+			vokabel = list.get(rnd).getVocabOrigin();
+			System.out.println(vokabel);
 		}
 		return vokabel;
 
 	}
 
-	public void check(String eingabe, ArrayList<Vokabeln> list, String vokabel) {
+	public void check(String eingabe, ArrayList<Vokabel> list, String vokabel) {
 		String loesung = "";
 		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getinland().equals(vokabel)) {
-				loesung = list.get(i).getinland();
-			} else if (list.get(i).getausland().equals(vokabel)) {
-				loesung = list.get(i).getausland();
+			if (list.get(i).getVocabOrigin().equals(vokabel)) {
+				loesung = list.get(i).getVocabTranslation();
+			} else if (list.get(i).getVocabTranslation().equals(vokabel)) {
+				loesung = list.get(i).getVocabOrigin();
 			}
 		}
 		if (eingabe.equals(loesung)) {
@@ -43,7 +45,7 @@ public class Check {
 	}
 
 	public MainFrame getFrame() {
-		return frame;
+		return this.frame;
 	}
 
 	public void setFrame(MainFrame frame) {
