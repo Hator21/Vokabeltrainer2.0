@@ -1,12 +1,10 @@
 package Trainer;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import NewGui.MainFrame;
-import jxl.write.WriteException;
 
 public class Run {
 
@@ -16,39 +14,39 @@ public class Run {
 	public Run(MainFrame frame, Check check) {
 		this.frame = frame;
 		this.setCheck(check);
-		running();
+		this.running();
 	}
 
 	public void running() {
 		String eingabe;
 
-		ArrayList<Vokabeln> englisch = new ArrayList<Vokabeln>();
+		ArrayList<Vokabel> englisch = new ArrayList<Vokabel>();
 		InputStreamReader isr = new InputStreamReader(System.in);
 		BufferedReader br = new BufferedReader(isr);
 
 		try {
-			frame.getBear().getdata(englisch);
-		} catch (IOException e) { // lesen
-			e.printStackTrace();
-		} catch (WriteException e) {
+			englisch = this.frame.getBear().getdata();
+		} catch (Exception e) { // lesen
 			e.printStackTrace();
 		}
+
+		englisch.forEach((v) -> System.out.println(v));
 
 		int rnd = (int) ((Math.random()) * englisch.size());
 		int rnd2 = (int) ((Math.random()) * 2);
 
 		String vokabel = "lol";
 		if (rnd2 == 0) {
-			vokabel = englisch.get(rnd).getausland();
+			vokabel = englisch.get(rnd).getVocabTranslation();
+			System.out.println(vokabel);
 		} else if (rnd2 == 1) {
-			vokabel = englisch.get(rnd).getinland();
+			vokabel = englisch.get(rnd).getVocabOrigin();
+			System.out.println(vokabel);
 
 		}
 		try {
-			frame.getBear().write(englisch);
-		} catch (WriteException e) { // schreiben
-			e.printStackTrace();
-		} catch (IOException e) {
+			this.frame.getBear().write(englisch);
+		} catch (Exception e) { // schreiben
 			e.printStackTrace();
 		}
 
@@ -63,7 +61,7 @@ public class Run {
 	}
 
 	public Check getCheck() {
-		return check;
+		return this.check;
 	}
 
 	public void setCheck(Check check) {

@@ -3,7 +3,6 @@ package NewGui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -17,8 +16,7 @@ import Components.TransparentLabel;
 import Trainer.Bearbeiten;
 import Trainer.Check;
 import Trainer.Run;
-import Trainer.Vokabeln;
-import jxl.write.WriteException;
+import Trainer.Vokabel;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
@@ -50,10 +48,10 @@ public class MainFrame extends JFrame {
 
 	private TimerLabel						timer;
 
-	private ArrayList<JPanel>				panelList	= new ArrayList<JPanel>();
-	private ArrayList<Vokabeln>				vokabeln	= new ArrayList<Vokabeln>();
 	private ArrayList<TransparentButton>	buttons		= new ArrayList<TransparentButton>();
 	private ArrayList<TransparentLabel>		labels		= new ArrayList<TransparentLabel>();
+	private ArrayList<JPanel>				panelList	= new ArrayList<JPanel>();
+	private ArrayList<Vokabel>				vokabeln	= new ArrayList<Vokabel>();
 
 	/**
 	 * Launch the application.
@@ -83,11 +81,11 @@ public class MainFrame extends JFrame {
 
 		this.setBear(new Bearbeiten(this));
 		this.setCheck(new Check(this));
-		this.setRun(new Run(this, this.getCheck()));
+		// this.setRun(new Run(this, this.getCheck()));
 		this.setTimer(new TimerLabel(this, 15, 0));
 		try {
-			this.getBear().getdata(getVokabeln());
-		} catch (IOException | WriteException e) {
+			this.setVokabeln(this.getBear().getdata());
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
@@ -96,33 +94,33 @@ public class MainFrame extends JFrame {
 		this.menuPanel = new MenuPanel(this);
 		this.headingbar = new HeadingBar(this);
 		this.mainMenuImage = new MainMenuImage(this);
-		panelList.add(mainMenuImage);
+		this.panelList.add(this.mainMenuImage);
 		this.learningPrePanel = new LearningPrePanel(this);
-		panelList.add(learningPrePanel);
+		this.panelList.add(this.learningPrePanel);
 		this.learningPanel = new LearningPanel(this);
-		panelList.add(learningPanel);
+		this.panelList.add(this.learningPanel);
 		this.vocabelPrePanel = new VocabelPrePanel(this);
-		panelList.add(vocabelPrePanel);
+		this.panelList.add(this.vocabelPrePanel);
 		this.vocabeltestPanel = new VocabeltestPanel(this);
-		panelList.add(vocabeltestPanel);
+		this.panelList.add(this.vocabeltestPanel);
 		this.searchingPrePanel = new SearchingPrePanel(this);
 		panelList.add(searchingPrePanel);
 		this.searchingPanel = new SearchingPanel(this);
-		panelList.add(searchingPanel);
+		this.panelList.add(this.searchingPanel);
 		this.spellingPrePanel = new SpellingPrePanel(this);
 		panelList.add(spellingPrePanel);
 		this.spellingPanel = new SpellingPanel(this);
-		panelList.add(spellingPanel);
+		this.panelList.add(this.spellingPanel);
 		this.editSPanel = new EditSPanel(this);
-		panelList.add(editSPanel);
+		this.panelList.add(this.editSPanel);
 		this.settingsPanel = new SettingsPanel(this);
 		panelList.add(settingsPanel);
 		this.statisticsPanel = new StatisticsPanel(this);
-		panelList.add(statisticsPanel);
+		this.panelList.add(this.statisticsPanel);
 		this.helpPanel = new HelpPanel(this);
-		panelList.add(helpPanel);
+		this.panelList.add(this.helpPanel);
 		this.infoPanel = new InfoPanel(this);
-		panelList.add(infoPanel);
+		this.panelList.add(this.infoPanel);
 		this.setContentPane(this.contentPane);
 		this.border = BorderFactory.createLineBorder(Color.black);
 		this.contentPane.setBorder(this.border);
@@ -217,7 +215,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public VocabelPrePanel getVocabelPrePanel() {
-		return vocabelPrePanel;
+		return this.vocabelPrePanel;
 	}
 
 	public void setVocabelPrePanel(VocabelPrePanel vocabelPrePanel) {
@@ -225,7 +223,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public SearchingPanel getSearchingPanel() {
-		return searchingPanel;
+		return this.searchingPanel;
 	}
 
 	public void setSearchingPanel(SearchingPanel searchingPanel) {
@@ -233,7 +231,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public SpellingPanel getSpellingPanel() {
-		return spellingPanel;
+		return this.spellingPanel;
 	}
 
 	public void setSpellingPanel(SpellingPanel spellingPanel) {
@@ -241,7 +239,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public EditSPanel getEditSPanel() {
-		return editSPanel;
+		return this.editSPanel;
 	}
 
 	public void setEditSPanel(EditSPanel editSPanel) {
@@ -249,7 +247,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public StatisticsPanel getStatisticsPanel() {
-		return statisticsPanel;
+		return this.statisticsPanel;
 	}
 
 	public void setStatisticsPanel(StatisticsPanel statisticsPanel) {
@@ -257,7 +255,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public HelpPanel getHelpPanel() {
-		return helpPanel;
+		return this.helpPanel;
 	}
 
 	public void setHelpPanel(HelpPanel helpPanel) {
@@ -265,7 +263,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public TitleBar getTitlebar() {
-		return titlebar;
+		return this.titlebar;
 	}
 
 	public void setTitlebar(TitleBar titlebar) {
@@ -273,7 +271,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public MenuPanel getMenuPanel() {
-		return menuPanel;
+		return this.menuPanel;
 	}
 
 	public void setMenuPanel(MenuPanel menuPanel) {
@@ -281,7 +279,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public InfoPanel getInfoPanel() {
-		return infoPanel;
+		return this.infoPanel;
 	}
 
 	public void setInfoPanel(InfoPanel infoPanel) {
@@ -289,7 +287,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public ArrayList<JPanel> getPanelList() {
-		return panelList;
+		return this.panelList;
 	}
 
 	public void setPanelList(ArrayList<JPanel> panelList) {
@@ -297,7 +295,7 @@ public class MainFrame extends JFrame {
 	}
 
 	protected TimerLabel getTimer() {
-		return timer;
+		return this.timer;
 	}
 
 	protected void setTimer(TimerLabel timer) {
@@ -305,7 +303,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public VocabeltestPanel getVocabeltestPanel() {
-		return vocabeltestPanel;
+		return this.vocabeltestPanel;
 	}
 
 	public void setVocabeltestPanel(VocabeltestPanel vocabeltestPanel) {
@@ -320,11 +318,11 @@ public class MainFrame extends JFrame {
 		MainFrame.instance = instance;
 	}
 
-	public ArrayList<Vokabeln> getVokabeln() {
+	public ArrayList<Vokabel> getVokabeln() {
 		return vokabeln;
 	}
 
-	public void setVokabeln(ArrayList<Vokabeln> vokabeln) {
+	public void setVokabeln(ArrayList<Vokabel> vokabeln) {
 		this.vokabeln = vokabeln;
 	}
 

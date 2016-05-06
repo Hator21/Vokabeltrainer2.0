@@ -38,7 +38,7 @@ public class LearningPanel extends JPanel {
 		this.vokabel = frame.getCheck().vok(this.vokabel, frame.getVokabeln());
 
 		setCheck(TransparentButton.createButton(this.test, 120, 320, 200, 40, 30, 0, (e -> {
-			frame.getCheck().check(speech2Text.getText(), frame.getVokabeln(), this.vokabel);
+			frame.getCheck().check(speech2Text.getText(), frame.getVokabeln(), this.vokabel, this.right);
 			speech1Text.setText(this.vokabel = frame.getCheck().vok(this.vokabel, frame.getVokabeln()));
 			speech2Text.setText("");
 		}), this));

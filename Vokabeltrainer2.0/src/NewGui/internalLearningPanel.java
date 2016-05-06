@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -16,17 +17,18 @@ import Components.TransparentButton;
 import Components.TransparentLabel;
 
 @SuppressWarnings("serial")
-public class VocabeltestPanel extends JPanel {
+public class internalLearningPanel extends JPanel {
 
 	private MainFrame			frame;
 	private BufferedImage		image;
 	private JTextField			speech1Text, speech2Text;
-	private TransparentLabel	speech1Label, speech2Label, timerLabel;
+	private JLabel				speech1Label, speech2Label, correct, countRight, countWrong, average;
 	private String				sprache1	= "Deutsch", sprache2 = "Englisch", vokabel = "vokabel";
-	private TransparentButton	start, next;
+	private String				test		= "Überprüfen";
+	private TransparentButton	check;
 	private int					right, counts = 10;
 
-	public VocabeltestPanel(MainFrame frame) {
+	public internalLearningPanel(MainFrame frame) {
 
 		this.setFrame(frame);
 		this.setLayout(null);
@@ -36,37 +38,18 @@ public class VocabeltestPanel extends JPanel {
 		} catch (IOException ex) {}
 		this.vokabel = frame.getCheck().vok(this.vokabel, frame.getVokabeln());
 
-		setNext(TransparentButton.createButton("weiter", 120, 320, 200, 40, 30, 0, (e -> {
+		check = TransparentButton.createButton(this.test, 120, 320, 200, 40, 30, 0, (e -> {
 			frame.getCheck().check(speech2Text.getText(), frame.getVokabeln(), this.vokabel,this.right);
 			speech1Text.setText(this.vokabel = frame.getCheck().vok(this.vokabel, frame.getVokabeln()));
 			speech2Text.setText("");
-			setCounts(getCounts() - 1);
-			System.out.println(getCounts());
-			if (getCounts() == 0) {
-				frame.getTimer().stopTimer();
-				speech2Text.setEditable(false);
-				next.setEnabled(false);
-			}
-		}), this));
-		frame.getButtons().add(getNext());
+		}), this);
 
-		setStart(TransparentButton.createButton("start", 120, 140, 200, 40, 30, 0, (e -> {
-			frame.getTimer().startTimer();
-			getStart().setEnabled(false);
-			counts = 10;
-			speech2Text.setEditable(true);
-			getNext().setEnabled(true);
-		}), this));
-
-		frame.getButtons().add(getStart());
-		getStart().setEnabled(true);
-
-		setSpeech1Label(TransparentLabel.createLabel(sprache1, 20, 200, 100, 40, 20, this));
-		frame.getLabels().add(getSpeech1Label());
-		setSpeech2Label(TransparentLabel.createLabel(sprache2, 20, 260, 100, 40, 20, this));
-		frame.getLabels().add(getSpeech2Label());
-		setTimerLabel(TransparentLabel.createLabel("Übrige Zeit: " + String.valueOf(frame.getVocabelPrePanel().getTimeSlider().getValue()) + ":00", 120, 80, 200, 40, 20, this));
-		frame.getLabels().add(getTimerLabel());
+		setSpeech1Label(TransparentLabel.createLabel("Deutsch", 20, 200, 100, 40, 20, this));
+		setSpeech2Label(TransparentLabel.createLabel("Englisch", 20, 260, 100, 40, 20, this));
+		setCorrect(TransparentLabel.createLabel("Richtig", 320, 260, 70, 40, 20, this));
+		setCountRight(TransparentLabel.createLabel("Richtige..", 50, 550, 100, 40, 20, this));
+		setCountWrong(TransparentLabel.createLabel("Falsche..", 170, 550, 100, 40, 20, this));
+		setAverage(TransparentLabel.createLabel("Durchschnitt..", 290, 550, 150, 40, 20, this));
 
 		speech1Text = new JTextField(this.vokabel);
 		speech1Text.setBounds(120, 200, 200, 40);
@@ -79,7 +62,7 @@ public class VocabeltestPanel extends JPanel {
 		speech2Text.setBounds(120, 260, 200, 40);
 		speech2Text.setOpaque(true);
 		speech2Text.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		speech2Text.setEditable(false);
+		speech2Text.setEditable(true);
 		this.add(speech2Text);
 	}
 
@@ -132,36 +115,12 @@ public class VocabeltestPanel extends JPanel {
 		return this.right;
 	}
 
-	public TransparentButton getNext() {
-		return next;
+	protected TransparentButton getCheck() {
+		return check;
 	}
 
-	public void setNext(TransparentButton next) {
-		this.next = next;
-	}
-
-	public TransparentLabel getTimerLabel() {
-		return timerLabel;
-	}
-
-	public void setTimerLabel(TransparentLabel timerLabel) {
-		this.timerLabel = timerLabel;
-	}
-
-	public TransparentLabel getSpeech1Label() {
-		return speech1Label;
-	}
-
-	public void setSpeech1Label(TransparentLabel speech1Label) {
-		this.speech1Label = speech1Label;
-	}
-
-	public TransparentLabel getSpeech2Label() {
-		return speech2Label;
-	}
-
-	public void setSpeech2Label(TransparentLabel speech2Label) {
-		this.speech2Label = speech2Label;
+	protected void setCheck(TransparentButton check) {
+		this.check = check;
 	}
 
 	public MainFrame getFrame() {
@@ -172,12 +131,52 @@ public class VocabeltestPanel extends JPanel {
 		this.frame = frame;
 	}
 
-	protected TransparentButton getStart() {
-		return start;
+	public JLabel getSpeech2Label() {
+		return speech2Label;
 	}
 
-	protected void setStart(TransparentButton start) {
-		this.start = start;
+	public void setSpeech2Label(JLabel speech2Label) {
+		this.speech2Label = speech2Label;
+	}
+
+	public JLabel getSpeech1Label() {
+		return speech1Label;
+	}
+
+	public void setSpeech1Label(JLabel speech1Label) {
+		this.speech1Label = speech1Label;
+	}
+
+	public JLabel getCorrect() {
+		return correct;
+	}
+
+	public void setCorrect(JLabel correct) {
+		this.correct = correct;
+	}
+
+	public JLabel getCountRight() {
+		return countRight;
+	}
+
+	public void setCountRight(JLabel countRight) {
+		this.countRight = countRight;
+	}
+
+	public JLabel getCountWrong() {
+		return countWrong;
+	}
+
+	public void setCountWrong(JLabel countWrong) {
+		this.countWrong = countWrong;
+	}
+
+	public JLabel getAverage() {
+		return average;
+	}
+
+	public void setAverage(JLabel average) {
+		this.average = average;
 	}
 
 }

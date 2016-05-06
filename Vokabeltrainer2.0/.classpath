@@ -4,8 +4,5 @@
 	<classpathentry kind="src" path="img"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="data/jxl.jar"/>
-	<classpathentry kind="lib" path="data/ostermillerutils-1.08.02-javadoc.jar"/>
-	<classpathentry kind="lib" path="data/ostermillerutils-1.08.02-sources.jar"/>
-	<classpathentry kind="lib" path="data/ostermillerutils-1.08.02.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

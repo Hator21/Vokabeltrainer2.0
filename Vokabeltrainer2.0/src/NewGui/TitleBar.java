@@ -66,13 +66,11 @@ public class TitleBar extends JPanel {
 		frame.getButtons().add(getMainmenu());
 
 		setClose(TransparentButton.createButton("X", 1248, 0, 30, 30, 17, 8, (e -> {
-			System.out.println("FUCK TITLE BAR");
-			System.exit(1);
+			frame.getBear().Close();System.exit(1);
 		}), this));
 		frame.getButtons().add(getClose());
 
 		setMinimize(TransparentButton.createButton("_", 1218, 0, 30, 30, 17, 5, (e -> {
-			System.out.println("FUCK TITLE BAR 2");
 			frame.setState(Frame.ICONIFIED);
 		}), this));
 		frame.getButtons().add(getMinimize());
