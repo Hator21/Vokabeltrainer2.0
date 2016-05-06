@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -17,18 +16,18 @@ import Components.TransparentButton;
 import Components.TransparentLabel;
 
 @SuppressWarnings("serial")
-public class internalLearningPanel extends JPanel {
+public class LearningPanel extends JPanel {
 
 	private MainFrame			frame;
 	private BufferedImage		image;
 	private JTextField			speech1Text, speech2Text;
-	private JLabel				speech1Label, speech2Label, correct, countRight, countWrong, average;
+	private TransparentLabel	speech1Label, speech2Label, correct, countRight, countWrong, average;
 	private String				sprache1	= "Deutsch", sprache2 = "Englisch", vokabel = "vokabel";
 	private String				test		= "Überprüfen";
 	private TransparentButton	check;
 	private int					right, counts = 10;
 
-	public internalLearningPanel(MainFrame frame) {
+	public LearningPanel(MainFrame frame) {
 
 		this.setFrame(frame);
 		this.setLayout(null);
@@ -38,11 +37,12 @@ public class internalLearningPanel extends JPanel {
 		} catch (IOException ex) {}
 		this.vokabel = frame.getCheck().vok(this.vokabel, frame.getVokabeln());
 
-		check = TransparentButton.createButton(this.test, 120, 320, 200, 40, 30, 0, (e -> {
+		setCheck(TransparentButton.createButton(this.test, 120, 320, 200, 40, 30, 0, (e -> {
 			frame.getCheck().check(speech2Text.getText(), frame.getVokabeln(), this.vokabel);
 			speech1Text.setText(this.vokabel = frame.getCheck().vok(this.vokabel, frame.getVokabeln()));
 			speech2Text.setText("");
-		}), this);
+		}), this));
+		frame.getButtons().add(getCheck());
 
 		setSpeech1Label(TransparentLabel.createLabel("Deutsch", 20, 200, 100, 40, 20, this));
 		setSpeech2Label(TransparentLabel.createLabel("Englisch", 20, 260, 100, 40, 20, this));
@@ -50,6 +50,12 @@ public class internalLearningPanel extends JPanel {
 		setCountRight(TransparentLabel.createLabel("Richtige..", 50, 550, 100, 40, 20, this));
 		setCountWrong(TransparentLabel.createLabel("Falsche..", 170, 550, 100, 40, 20, this));
 		setAverage(TransparentLabel.createLabel("Durchschnitt..", 290, 550, 150, 40, 20, this));
+		frame.getLabels().add(getSpeech1Label());
+		frame.getLabels().add(getSpeech2Label());
+		frame.getLabels().add(getCorrect());
+		frame.getLabels().add(getCountRight());
+		frame.getLabels().add(getCountWrong());
+		frame.getLabels().add(getAverage());
 
 		speech1Text = new JTextField(this.vokabel);
 		speech1Text.setBounds(120, 200, 200, 40);
@@ -131,51 +137,51 @@ public class internalLearningPanel extends JPanel {
 		this.frame = frame;
 	}
 
-	public JLabel getSpeech2Label() {
+	public TransparentLabel getSpeech2Label() {
 		return speech2Label;
 	}
 
-	public void setSpeech2Label(JLabel speech2Label) {
+	public void setSpeech2Label(TransparentLabel speech2Label) {
 		this.speech2Label = speech2Label;
 	}
 
-	public JLabel getSpeech1Label() {
+	public TransparentLabel getSpeech1Label() {
 		return speech1Label;
 	}
 
-	public void setSpeech1Label(JLabel speech1Label) {
+	public void setSpeech1Label(TransparentLabel speech1Label) {
 		this.speech1Label = speech1Label;
 	}
 
-	public JLabel getCorrect() {
+	public TransparentLabel getCorrect() {
 		return correct;
 	}
 
-	public void setCorrect(JLabel correct) {
+	public void setCorrect(TransparentLabel correct) {
 		this.correct = correct;
 	}
 
-	public JLabel getCountRight() {
+	public TransparentLabel getCountRight() {
 		return countRight;
 	}
 
-	public void setCountRight(JLabel countRight) {
+	public void setCountRight(TransparentLabel countRight) {
 		this.countRight = countRight;
 	}
 
-	public JLabel getCountWrong() {
+	public TransparentLabel getCountWrong() {
 		return countWrong;
 	}
 
-	public void setCountWrong(JLabel countWrong) {
+	public void setCountWrong(TransparentLabel countWrong) {
 		this.countWrong = countWrong;
 	}
 
-	public JLabel getAverage() {
+	public TransparentLabel getAverage() {
 		return average;
 	}
 
-	public void setAverage(JLabel average) {
+	public void setAverage(TransparentLabel average) {
 		this.average = average;
 	}
 

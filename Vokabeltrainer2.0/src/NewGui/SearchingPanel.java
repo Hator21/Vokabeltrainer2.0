@@ -38,19 +38,21 @@ public class SearchingPanel extends JPanel {
 		setNextcorrect(TransparentButton.createButton("Prüfen", 828, 600, 200, 44, 20, 0, (e -> {
 			System.out.println("Du Hurensohn!!!!1111elf");
 		}), this));
+		frame.getButtons().add(getNextcorrect());
 
 		setVokabel(TransparentLabel.createLabel("Suche: vokabel", 0, 600, 200, 44, 20, this));
+		frame.getLabels().add(getVokabel());
 
 	}
 
 	public void createButtons() {
-
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
 				int random = zufallszahl(0, 60) - 30;
 				vocabels.add(TransparentButton.createButton("Vokabel " + i + "-" + j, 205 * i + 4, 115 * j + 4, 200, 115, 20, 0, random, buttonListener, "vokabel_" + i + "_" + j, this));
 			}
 		}
+		frame.getButtons().addAll(vocabels);
 	}
 
 	@Override

@@ -36,6 +36,7 @@ public class MenuPanel extends JPanel {
 		} catch (IOException ex) {}
 
 		setLearn(TransparentLabel.createLabel("Lernen", 0, 0, 250, 44, 30, this));
+		frame.getLabels().add(getLearn());
 
 		setLection(TransparentButton.createButton("Lektionen", 0, 45, 250, 45, 20, 0, (e -> {
 			for (JPanel p : frame.getPanelList()) {
@@ -43,51 +44,94 @@ public class MenuPanel extends JPanel {
 			}
 			frame.getPanelList().get(1).setVisible(true);
 			frame.getHeadingbar().getHeadingLabelL().setText("Lektion auswählen");
+			frame.getHeadingbar().getHeadingLabelR().setText("");
 		}), this));
+		frame.getButtons().add(getLection());
 
-		setVocabeltest(TransparentButton.createButton("Vokabeltest", 0, 90, 250, 45, 20, 0, 10, (e -> {
-			frame.getVocabelPrePanel().setVisible(true);
-			frame.getiLectionPanel().setVisible(false);
-			frame.getMainMenuImage().setVisible(false);
-			frame.getiLearningPanel().setVisible(false);
+		setVocabeltest(TransparentButton.createButton("Vokabeltest", 0, 90, 250, 45, 20, 0, (e -> {
+			for (JPanel p : frame.getPanelList()) {
+				p.setVisible(false);
+			}
+			frame.getPanelList().get(3).setVisible(true);
 			frame.getHeadingbar().getHeadingLabelL().setText("Lektion auswählen");
 			frame.getHeadingbar().getHeadingLabelR().setText("Einstellungen");
 		}), this));
+		frame.getButtons().add(getVocabeltest());
 
 		setSearching(TransparentButton.createButton("Suchspiel", 0, 135, 250, 45, 20, 0, (e -> {
 			for (JPanel p : frame.getPanelList()) {
 				p.setVisible(false);
 			}
 			frame.getPanelList().get(5).setVisible(true);
+			frame.getHeadingbar().getHeadingLabelL().setText("Lektion auswählen");
+			frame.getHeadingbar().getHeadingLabelR().setText("");
 		}), this));
+		frame.getButtons().add(getSearching());
 
 		setSpelling(TransparentButton.createButton("Buchstabieren", 0, 180, 250, 45, 20, 0, (e -> {
-			System.out.println("FUCK ME");
+			for (JPanel p : frame.getPanelList()) {
+				p.setVisible(false);
+			}
+			frame.getPanelList().get(7).setVisible(true);
+			frame.getHeadingbar().getHeadingLabelL().setText("Lektion auswählen");
+			frame.getHeadingbar().getHeadingLabelR().setText("");
 		}), this));
+		frame.getButtons().add(getSpelling());
 
 		setEditS(TransparentButton.createButton("Sprache Verwalten", 0, 229, 250, 45, 20, 0, (e -> {
-			System.out.println("FUCK ME");
+			for (JPanel p : frame.getPanelList()) {
+				p.setVisible(false);
+			}
+			frame.getPanelList().get(9).setVisible(true);
+			frame.getHeadingbar().getHeadingLabelL().setText("Verwalten");
+			frame.getHeadingbar().getHeadingLabelR().setText("");
 		}), this));
+		frame.getButtons().add(getEditS());
 
 		setSettings(TransparentButton.createButton("Einstellungen", 0, 274, 250, 45, 20, 0, (e -> {
-			System.out.println("FUCK ME");
+			for (JPanel p : frame.getPanelList()) {
+				p.setVisible(false);
+			}
+			frame.getPanelList().get(10).setVisible(true);
+			frame.getHeadingbar().getHeadingLabelL().setText("Einstellungen");
+			frame.getHeadingbar().getHeadingLabelR().setText("");
 		}), this));
+		frame.getButtons().add(getSettings());
 
 		setStatistics(TransparentButton.createButton("Statistiken", 0, 319, 250, 45, 20, 0, (e -> {
-			System.out.println("FUCK ME");
+			for (JPanel p : frame.getPanelList()) {
+				p.setVisible(false);
+			}
+			frame.getPanelList().get(11).setVisible(true);
+			frame.getHeadingbar().getHeadingLabelL().setText("Statistiken");
+			frame.getHeadingbar().getHeadingLabelR().setText("");
 		}), this));
+		frame.getButtons().add(getStatistics());
 
 		setHelp(TransparentButton.createButton("Hilfe", 0, 364, 250, 45, 20, 0, (e -> {
-			System.out.println("FUCK ME");
+			for (JPanel p : frame.getPanelList()) {
+				p.setVisible(false);
+			}
+			frame.getPanelList().get(12).setVisible(true);
+			frame.getHeadingbar().getHeadingLabelL().setText("Hilfe");
+			frame.getHeadingbar().getHeadingLabelR().setText("");
 		}), this));
+		frame.getButtons().add(getHelp());
 
 		setInfo(TransparentButton.createButton("Info", 0, 409, 250, 45, 20, 0, (e -> {
-			System.out.println("FUCK ME");
+			for (JPanel p : frame.getPanelList()) {
+				p.setVisible(false);
+			}
+			frame.getPanelList().get(13).setVisible(true);
+			frame.getHeadingbar().getHeadingLabelL().setText("Info");
+			frame.getHeadingbar().getHeadingLabelR().setText("");
 		}), this));
+		frame.getButtons().add(getInfo());
 
 		setExit(TransparentButton.createButton("Beenden", 0, 627, 250, 60, 30, 0, (e -> {
 			System.exit(1);
 		}), this));
+		frame.getButtons().add(getExit());
 	}
 
 	public TransparentButton getLection() {

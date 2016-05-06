@@ -11,10 +11,13 @@ import java.awt.geom.AffineTransform;
 
 import javax.swing.JComponent;
 
+import NewGui.MainFrame;
+
 @SuppressWarnings("serial")
 public class TransparentButton extends CustomButton {
 
 	// private String text;
+	private MainFrame	frame;
 	private int			factor;
 	private int			fontsize;
 	private double		rotation	= 0;
@@ -24,8 +27,8 @@ public class TransparentButton extends CustomButton {
 	private Point		position;
 	private Font		f;
 
-	static final Color	color		= new Color(255, 0, 0, 255);
-	static final Color	color2		= new Color(0, 0, 0, 0);
+	Color				color		= new Color(255, 0, 0, 0);
+	Color				color2		= new Color(0, 0, 0, 0);
 
 	public TransparentButton(String text, int x, int y, int width, int height, int fontsize, int factor) {
 		this.setText(text);
@@ -36,6 +39,20 @@ public class TransparentButton extends CustomButton {
 
 		this.bounds = new Point(width, height);
 		this.position = new Point(0, 0);
+
+		this.setBounds(x, y, width, height);
+	}
+
+	public TransparentButton(String text, int x, int y, int width, int height, int fontsize, int factor, Color c) {
+		this.setText(text);
+		this.setFontsize(fontsize);
+		this.setFactor(factor);
+
+		this.f = new Font("Comic Sans MS", Font.PLAIN, this.fontsize);
+
+		this.bounds = new Point(width, height);
+		this.position = new Point(0, 0);
+		this.color2 = c;
 
 		this.setBounds(x, y, width, height);
 	}
@@ -82,16 +99,16 @@ public class TransparentButton extends CustomButton {
 		g.drawString(this.getText(), x, y);
 	}
 
-	public static TransparentButton createButton(String text, int x, int y, int width, int height, int fontsize, int factor, ActionListener listener, JComponent parent) {
-		TransparentButton button = new TransparentButton(text, x, y, width, height, fontsize, factor);
+	public static TransparentButton createButton(String text, int x, int y, int width, int height, int fontsize, int factor, Color c, ActionListener listener, JComponent parent) {
+		TransparentButton button = new TransparentButton(text, x, y, width, height, fontsize, factor, c);
 		button.addActionListener(listener);
 		System.out.println(parent.getClass().getName());
 		parent.add(button);
 		return button;
 	}
 
-	public static TransparentButton createButton(String text, int x, int y, int width, int height, int fontsize, int factor, double rotation, ActionListener listener, JComponent parent) {
-		TransparentButton button = new TransparentButton(text, x, y, width, height, fontsize, factor, rotation);
+	public static TransparentButton createButton(String text, int x, int y, int width, int height, int fontsize, int factor, ActionListener listener, JComponent parent) {
+		TransparentButton button = new TransparentButton(text, x, y, width, height, fontsize, factor);
 		button.addActionListener(listener);
 		System.out.println(parent.getClass().getName());
 		parent.add(button);
@@ -142,6 +159,16 @@ public class TransparentButton extends CustomButton {
 
 	public void setCorrectX(boolean correctX) {
 		this.correctX = correctX;
+	}
+
+	public void setColor2(Color c) {
+		this.color2 = c;
+		this.repaint();
+	}
+
+	public void setColor(Color c) {
+		this.color = c;
+		this.repaint();
 	}
 
 }

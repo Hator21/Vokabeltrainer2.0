@@ -17,18 +17,19 @@ import javax.swing.JPanel;
 import Components.TransparentButton;
 
 @SuppressWarnings("serial")
-public class internalLectionPanel extends JPanel {
+public class SearchingPrePanel extends JPanel {
 
 	private MainFrame				frame;
 	private BufferedImage			image;
 	private int						n				= 11;
+	private TransparentButton		learning;
 	private ArrayList<JCheckBox>	units			= new ArrayList<JCheckBox>();
 	private JComboBox<String>		combobox;
 	private String					comboBoxListe[]	= {
 			"Englisch", "Französisch"
 	};
 
-	public internalLectionPanel(MainFrame frame) {
+	public SearchingPrePanel(MainFrame frame) {
 
 		this.setFrame(frame);
 		this.setLayout(null);
@@ -38,11 +39,14 @@ public class internalLectionPanel extends JPanel {
 			image = ImageIO.read(new File("img/internalLection.png"));
 		} catch (IOException ex) {}
 
-		TransparentButton.createButton("Lernen", 105, 550, 150, 40, 30, 0, (e -> {
-			frame.getiLectionPanel().setVisible(false);
-			frame.getiLearningPanel().setVisible(true);
-			frame.getHeadingbar().getHeadingLabelL().setText("Lernen");
-		}), this);
+		setLearning(TransparentButton.createButton("Lernen", 105, 550, 150, 40, 30, 0, (e -> {
+			for (JPanel p : frame.getPanelList()) {
+				p.setVisible(false);
+			}
+			frame.getPanelList().get(6).setVisible(true);
+			frame.getHeadingbar().getHeadingLabelL().setText("Suchspiel");
+		}), this));
+		frame.getButtons().add(getLearning());
 
 		createCheckboxes(n);
 		createComboBox(comboBoxListe);
@@ -82,4 +86,13 @@ public class internalLectionPanel extends JPanel {
 	public void setFrame(MainFrame frame) {
 		this.frame = frame;
 	}
+
+	protected TransparentButton getLearning() {
+		return learning;
+	}
+
+	protected void setLearning(TransparentButton learning) {
+		this.learning = learning;
+	}
+
 }

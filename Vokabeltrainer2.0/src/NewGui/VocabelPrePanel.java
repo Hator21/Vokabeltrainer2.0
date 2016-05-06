@@ -31,6 +31,7 @@ public class VocabelPrePanel extends JPanel {
 	private JComboBox<String>		combobox;
 	private JSlider					timeSlider, coundSlider;
 	private TransparentButton		test;
+	private TransparentLabel		countVocs, time;
 	private String					comboBoxListe[]	= {
 			"Englisch", "Französisch"
 	};
@@ -53,14 +54,15 @@ public class VocabelPrePanel extends JPanel {
 	}
 
 	public void createButton() {
-		test = TransparentButton.createButton("Prüfen", 600, 450, 250, 40, 30, 0, (e -> {
+		setTest(TransparentButton.createButton("Prüfen", 600, 450, 250, 40, 30, 0, (e -> {
 			for (JPanel p : frame.getPanelList())
 				p.setVisible(false);
 			frame.getPanelList().get(4).setVisible(true);
 			frame.getHeadingbar().getHeadingLabelL().setText("Vokabeltest");
 			frame.getHeadingbar().getHeadingLabelR().setText("");
 			frame.getTimer().setTimer(timeSlider.getValue(), 0);
-		}), this);
+		}), this));
+		frame.getButtons().add(getTest());
 	}
 
 	public void createCheckboxes(int n) {
@@ -114,9 +116,10 @@ public class VocabelPrePanel extends JPanel {
 		coundSlider.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		this.add(coundSlider);
 
-		TransparentLabel.createLabel("Anzahl Vokabeln", 600, 170, 250, 40, 20, this);
-
-		TransparentLabel.createLabel("Zeit (min)", 600, 310, 250, 40, 20, this);
+		setCountVocs(TransparentLabel.createLabel("Anzahl Vokabeln", 600, 170, 250, 40, 20, this));
+		frame.getLabels().add(getCountVocs());
+		setTime(TransparentLabel.createLabel("Zeit (min)", 600, 310, 250, 40, 20, this));
+		frame.getLabels().add(getTime());
 
 		deengCheckBox = new JCheckBox("Deutsch-Englisch");
 		deengCheckBox.setOpaque(false);
@@ -141,6 +144,22 @@ public class VocabelPrePanel extends JPanel {
 
 	protected JSlider getTimeSlider() {
 		return timeSlider;
+	}
+
+	protected TransparentLabel getCountVocs() {
+		return countVocs;
+	}
+
+	protected void setCountVocs(TransparentLabel countVocs) {
+		this.countVocs = countVocs;
+	}
+
+	protected TransparentLabel getTime() {
+		return time;
+	}
+
+	protected void setTime(TransparentLabel time) {
+		this.time = time;
 	}
 
 	@Override

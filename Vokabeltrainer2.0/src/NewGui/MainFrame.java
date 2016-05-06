@@ -12,6 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import Components.TimerLabel;
+import Components.TransparentButton;
+import Components.TransparentLabel;
 import Trainer.Bearbeiten;
 import Trainer.Check;
 import Trainer.Run;
@@ -21,32 +23,37 @@ import jxl.write.WriteException;
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
 
-	private TitleBar				titlebar;
-	private JPanel					contentPane;
-	private MenuPanel				menuPanel;
-	private HeadingBar				headingbar;
-	private MainMenuImage			mainMenuImage;
-	private internalLearningPanel	iLearningPanel;
-	private internalLectionPanel	iLectionPanel;
-	private VocabelPrePanel			vocabelPrePanel;
-	private VocabeltestPanel		vocabeltestPanel;
-	private SearchingPanel			searchingPanel;
-	private SpellingPanel			spellingPanel;
-	private EditSPanel				editSPanel;
-	private StatisticsPanel			statisticsPanel;
-	private HelpPanel				helpPanel;
-	private InfoPanel				infoPanel;
-	private static MainFrame		instance;
-	private Border					border;
+	private TitleBar						titlebar;
+	private JPanel							contentPane;
+	private MenuPanel						menuPanel;
+	private HeadingBar						headingbar;
+	private MainMenuImage					mainMenuImage;
+	private LearningPanel					learningPanel;
+	private LearningPrePanel				learningPrePanel;
+	private VocabelPrePanel					vocabelPrePanel;
+	private VocabeltestPanel				vocabeltestPanel;
+	private SearchingPrePanel				searchingPrePanel;
+	private SearchingPanel					searchingPanel;
+	private SpellingPrePanel				spellingPrePanel;
+	private SpellingPanel					spellingPanel;
+	private EditSPanel						editSPanel;
+	private SettingsPanel					settingsPanel;
+	private StatisticsPanel					statisticsPanel;
+	private HelpPanel						helpPanel;
+	private InfoPanel						infoPanel;
+	private static MainFrame				instance;
+	private Border							border;
 
-	private Bearbeiten				bear;
-	private Check					check;
-	private Run						run;
+	private Bearbeiten						bear;
+	private Check							check;
+	private Run								run;
 
-	private TimerLabel				timer;
+	private TimerLabel						timer;
 
-	private ArrayList<JPanel>		panelList	= new ArrayList<JPanel>();
-	private ArrayList<Vokabeln>		vokabeln	= new ArrayList<Vokabeln>();
+	private ArrayList<JPanel>				panelList	= new ArrayList<JPanel>();
+	private ArrayList<Vokabeln>				vokabeln	= new ArrayList<Vokabeln>();
+	private ArrayList<TransparentButton>	buttons		= new ArrayList<TransparentButton>();
+	private ArrayList<TransparentLabel>		labels		= new ArrayList<TransparentLabel>();
 
 	/**
 	 * Launch the application.
@@ -90,20 +97,26 @@ public class MainFrame extends JFrame {
 		this.headingbar = new HeadingBar(this);
 		this.mainMenuImage = new MainMenuImage(this);
 		panelList.add(mainMenuImage);
-		this.iLectionPanel = new internalLectionPanel(this);
-		panelList.add(iLectionPanel);
-		this.iLearningPanel = new internalLearningPanel(this);
-		panelList.add(iLearningPanel);
+		this.learningPrePanel = new LearningPrePanel(this);
+		panelList.add(learningPrePanel);
+		this.learningPanel = new LearningPanel(this);
+		panelList.add(learningPanel);
 		this.vocabelPrePanel = new VocabelPrePanel(this);
 		panelList.add(vocabelPrePanel);
 		this.vocabeltestPanel = new VocabeltestPanel(this);
 		panelList.add(vocabeltestPanel);
+		this.searchingPrePanel = new SearchingPrePanel(this);
+		panelList.add(searchingPrePanel);
 		this.searchingPanel = new SearchingPanel(this);
 		panelList.add(searchingPanel);
+		this.spellingPrePanel = new SpellingPrePanel(this);
+		panelList.add(spellingPrePanel);
 		this.spellingPanel = new SpellingPanel(this);
 		panelList.add(spellingPanel);
 		this.editSPanel = new EditSPanel(this);
 		panelList.add(editSPanel);
+		this.settingsPanel = new SettingsPanel(this);
+		panelList.add(settingsPanel);
 		this.statisticsPanel = new StatisticsPanel(this);
 		panelList.add(statisticsPanel);
 		this.helpPanel = new HelpPanel(this);
@@ -118,20 +131,26 @@ public class MainFrame extends JFrame {
 		this.getContentPane().add(this.menuPanel);
 		this.getContentPane().add(this.headingbar);
 		this.getContentPane().add(this.mainMenuImage);
-		this.iLearningPanel.setVisible(false);
-		this.getContentPane().add(this.iLearningPanel);
-		this.iLectionPanel.setVisible(false);
-		this.getContentPane().add(this.iLectionPanel);
+		this.learningPanel.setVisible(false);
+		this.getContentPane().add(this.learningPanel);
+		this.learningPrePanel.setVisible(false);
+		this.getContentPane().add(this.learningPrePanel);
 		this.vocabelPrePanel.setVisible(false);
 		this.getContentPane().add(this.vocabelPrePanel);
 		this.vocabeltestPanel.setVisible(false);
 		this.getContentPane().add(this.vocabeltestPanel);
+		this.searchingPrePanel.setVisible(false);
+		this.getContentPane().add(this.searchingPrePanel);
 		this.searchingPanel.setVisible(false);
 		this.getContentPane().add(this.searchingPanel);
+		this.spellingPrePanel.setVisible(false);
+		this.getContentPane().add(this.spellingPrePanel);
 		this.spellingPanel.setVisible(false);
 		this.getContentPane().add(this.spellingPanel);
 		this.editSPanel.setVisible(false);
 		this.getContentPane().add(this.editSPanel);
+		this.settingsPanel.setVisible(false);
+		this.getContentPane().add(this.settingsPanel);
 		this.statisticsPanel.setVisible(false);
 		this.getContentPane().add(this.statisticsPanel);
 		this.helpPanel.setVisible(false);
@@ -173,12 +192,12 @@ public class MainFrame extends JFrame {
 		this.mainMenuImage = mainMenuImage;
 	}
 
-	public internalLearningPanel getiLearningPanel() {
-		return this.iLearningPanel;
+	public LearningPanel getLearningPanel() {
+		return this.learningPanel;
 	}
 
-	public void setiLearningPanel(internalLearningPanel iLearningPanel) {
-		this.iLearningPanel = iLearningPanel;
+	public void setLearningPanel(LearningPanel iLearningPanel) {
+		this.learningPanel = iLearningPanel;
 	}
 
 	public HeadingBar getHeadingbar() {
@@ -189,12 +208,12 @@ public class MainFrame extends JFrame {
 		this.headingbar = headingbar;
 	}
 
-	public internalLectionPanel getiLectionPanel() {
-		return this.iLectionPanel;
+	public LearningPrePanel getLectionPanel() {
+		return this.learningPrePanel;
 	}
 
-	public void setiLectionPanel(internalLectionPanel iLectionPanel) {
-		this.iLectionPanel = iLectionPanel;
+	public void setLectionPanel(LearningPrePanel iLectionPanel) {
+		this.learningPrePanel = iLectionPanel;
 	}
 
 	public VocabelPrePanel getVocabelPrePanel() {
@@ -307,6 +326,46 @@ public class MainFrame extends JFrame {
 
 	public void setVokabeln(ArrayList<Vokabeln> vokabeln) {
 		this.vokabeln = vokabeln;
+	}
+
+	public SettingsPanel getSettingsPanel() {
+		return settingsPanel;
+	}
+
+	public void setSettingsPanel(SettingsPanel settingsPanel) {
+		this.settingsPanel = settingsPanel;
+	}
+
+	public ArrayList<TransparentButton> getButtons() {
+		return buttons;
+	}
+
+	public void setButtons(ArrayList<TransparentButton> buttons) {
+		this.buttons = buttons;
+	}
+
+	public ArrayList<TransparentLabel> getLabels() {
+		return labels;
+	}
+
+	public void setLabels(ArrayList<TransparentLabel> labels) {
+		this.labels = labels;
+	}
+
+	public SearchingPrePanel getSearchingPrePanel() {
+		return searchingPrePanel;
+	}
+
+	public void setSearchingPrePanel(SearchingPrePanel searchingPrePanel) {
+		this.searchingPrePanel = searchingPrePanel;
+	}
+
+	public SpellingPrePanel getSpellingPrePanel() {
+		return spellingPrePanel;
+	}
+
+	public void setSpellingPrePanel(SpellingPrePanel spellingPrePanel) {
+		this.spellingPrePanel = spellingPrePanel;
 	}
 
 }

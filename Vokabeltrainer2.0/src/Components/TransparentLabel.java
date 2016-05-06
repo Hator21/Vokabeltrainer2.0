@@ -12,12 +12,12 @@ import javax.swing.JComponent;
 @SuppressWarnings("serial")
 public class TransparentLabel extends CustomLabel {
 
-	private int			fontsize;
-	private Point		bounds;
-	private Point		position;
-	private Font		f;
-	static final Color	color	= new Color(0, 0, 255, 255);
-	static final Color	color2	= new Color(0, 0, 0, 0);
+	private int		fontsize;
+	private Point	bounds;
+	private Point	position;
+	private Font	f;
+	Color			color	= new Color(0, 0, 255, 0);
+	Color			color2	= new Color(0, 0, 0, 0);
 
 	public TransparentLabel(String text, int x, int y, int width, int height, int fontsize) {
 		this.setText(text);
@@ -64,11 +64,21 @@ public class TransparentLabel extends CustomLabel {
 		return this.getText();
 	}
 
-	protected int getFontsize() {
+	public int getFontsize() {
 		return this.fontsize;
 	}
 
-	protected void setFontsize(int fontsize) {
+	public void setFontsize(int fontsize) {
 		this.fontsize = fontsize;
 	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+		this.repaint();
+	}
+
 }

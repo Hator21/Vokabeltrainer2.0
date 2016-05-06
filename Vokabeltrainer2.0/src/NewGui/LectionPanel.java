@@ -16,12 +16,12 @@ import Components.TransparentButton;
 public class LectionPanel extends JPanel {
 
 	private MainFrame				frame;
-	private internalLearningPanel	iLP;
+	private LearningPanel	iLP;
 	private BufferedImage			image;
 
 	public LectionPanel(MainFrame frame) {
 		this.setFrame(frame);
-		this.iLP = new internalLearningPanel(frame);
+		this.iLP = new LearningPanel(frame);
 		this.setBounds(2, 22, 1276, 686);
 		try {
 			this.image = ImageIO.read(new File("img/Lektionenleer2.png"));

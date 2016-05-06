@@ -28,6 +28,8 @@ public class HeadingBar extends JPanel {
 		} catch (IOException ex) {}
 		headingLabelL = TransparentLabel.createLabel("Hauptmenü", 0, 0, 250, 44, 30, this);
 		headingLabelR = TransparentLabel.createLabel("", 514, 0, 250, 44, 30, this);
+		frame.getLabels().add(getHeadingLabelL());
+		frame.getLabels().add(getHeadingLabelR());
 	}
 
 	@Override
@@ -47,7 +49,7 @@ public class HeadingBar extends JPanel {
 	public void setHeadingPanelL(TransparentLabel headingLabelL) {
 		this.headingLabelL = headingLabelL;
 	}
-	
+
 	public TransparentLabel getHeadingLabelR() {
 		return headingLabelR;
 	}
