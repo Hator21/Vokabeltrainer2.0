@@ -86,7 +86,7 @@ public class MenuPanel extends JPanel {
 		}), this));
 
 		setExit(TransparentButton.createButton("Beenden", 0, 627, 250, 60, 30, 0, (e -> {
-			System.exit(1);
+			frame.getBear().Close();System.exit(1);
 		}), this));
 	}
 

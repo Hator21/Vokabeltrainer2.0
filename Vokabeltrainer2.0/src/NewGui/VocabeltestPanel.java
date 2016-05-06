@@ -38,7 +38,7 @@ public class VocabeltestPanel extends JPanel {
 		this.vokabel = frame.getCheck().vok(this.vokabel, frame.getVokabeln());
 
 		next = TransparentButton.createButton("weiter", 120, 320, 200, 40, 30, 0, (e -> {
-			frame.getCheck().check(speech2Text.getText(), frame.getVokabeln(), this.vokabel);
+			frame.getCheck().check(speech2Text.getText(), frame.getVokabeln(), this.vokabel,this.right);
 			speech1Text.setText(this.vokabel = frame.getCheck().vok(this.vokabel, frame.getVokabeln()));
 			speech2Text.setText("");
 			setCounts(getCounts() - 1);

@@ -9,18 +9,21 @@ package Trainer;
  */
 public class Vokabel {
 
-	private String	countryOriginCode		= "";
-	private String	countryDistinationCode	= "";
+	private String countryOriginCode = "";
+	private String countryDistinationCode = "";
 
-	private String	vocabOrigin				= "";
-	private String	vocabTranslation		= "";
+	private String vocabOrigin = "";
+	private String vocabTranslation = "";
 
-	private int		lection					= 0;
+	private int lection = 0;
 
-	private int		tested					= 0;
-	private int		correct					= 0;
+	private int tested = 0;
+	private int correct = 0;
 
-	public Vokabel() {}
+	private boolean used = false;
+
+	public Vokabel() {
+	}
 
 	public Vokabel(String original, String translation) {
 		this.setVocabOrigin(original);
@@ -29,7 +32,9 @@ public class Vokabel {
 
 	@Override
 	public String toString() {
-		return "[" + this.countryOriginCode + "]" + "[" + this.countryDistinationCode + "]" + "[" + this.vocabOrigin + "]" + "[" + this.vocabTranslation + "]" + "[" + this.lection + "]" + "[" + this.tested + "]" + "[" + this.correct + "]";
+		return "[" + this.countryOriginCode + "]" + "[" + this.countryDistinationCode + "]" + "[" + this.vocabOrigin
+				+ "]" + "[" + this.vocabTranslation + "]" + "[" + this.lection + "]" + "[" + this.tested + "]" + "["
+				+ this.correct + "]";
 	}
 
 	/**
@@ -136,5 +141,10 @@ public class Vokabel {
 	public void setCorrect(int correct) {
 		this.correct = correct;
 	}
-
+	public boolean getUsed(){
+		return this.used;
+	}
+	public void setUsed(boolean used){
+		this.used=used;
+	}
 }

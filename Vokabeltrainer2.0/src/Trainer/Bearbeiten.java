@@ -51,6 +51,13 @@ public class Bearbeiten {
 		vokabeln.add(new Vokabel(ausland, inland));
 		this.write(vokabeln);
 	}
+	public void Close(){
+		try{
+		this.write(frame.getVokabeln());
+		}catch(Exception e){
+			return;
+		}
+		}
 
 	public MainFrame getFrame() {
 		return this.frame;

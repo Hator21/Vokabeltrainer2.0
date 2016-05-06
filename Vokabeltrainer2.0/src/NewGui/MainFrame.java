@@ -74,7 +74,7 @@ public class MainFrame extends JFrame {
 
 		this.setBear(new Bearbeiten(this));
 		this.setCheck(new Check(this));
-		this.setRun(new Run(this, this.getCheck()));
+		//this.setRun(new Run(this, this.getCheck()));
 		this.setTimer(new TimerLabel(this, 15, 0));
 		try {
 			this.setVokabeln(this.getBear().getdata());
@@ -138,6 +138,8 @@ public class MainFrame extends JFrame {
 		this.getContentPane().add(this.infoPanel);
 		this.getContentPane().setBackground(Color.RED);
 	}
+	
+	
 
 	public Bearbeiten getBear() {
 		return this.bear;
