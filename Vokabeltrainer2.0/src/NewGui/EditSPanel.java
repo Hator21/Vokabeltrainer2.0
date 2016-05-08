@@ -156,7 +156,6 @@ public class EditSPanel extends JPanel {
 		for (int i = 0; i < frame.getVokabeln().size(); i++) {
 			if (((String)(lectionsCB.getSelectedItem())).startsWith("Lektion ")) {
 				int x = Integer.valueOf(((String)(lectionsCB.getSelectedItem())).split(" ")[1]);
-				String
 				if(frame.getVokabeln().get(i).getLection() == x){
 					String originalLanguage = frame.getVokabeln().get(i).get;
 					String name = originalLeagueList.get(i).getName();
