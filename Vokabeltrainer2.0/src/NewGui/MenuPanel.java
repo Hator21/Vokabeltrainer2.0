@@ -6,8 +6,10 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Properties;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -129,7 +131,16 @@ public class MenuPanel extends JPanel {
 		frame.getButtons().add(getInfo());
 
 		setExit(TransparentButton.createButton("Beenden", 0, 627, 250, 60, 30, 0, (e -> {
-			frame.getBear().Close();System.exit(1);
+			frame.getBear().Close();
+
+			Properties properties = new Properties();
+			properties.putAll(frame.getLanguageCombi());
+			try {
+				properties.store(new FileOutputStream("data.properties"), null);
+			} catch (IOException io) {
+				io.printStackTrace();
+			}
+			System.exit(1);
 		}), this));
 		frame.getButtons().add(getExit());
 	}

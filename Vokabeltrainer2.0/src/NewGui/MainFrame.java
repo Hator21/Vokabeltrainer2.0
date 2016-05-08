@@ -3,7 +3,11 @@ package NewGui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Properties;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -48,10 +52,11 @@ public class MainFrame extends JFrame {
 
 	private TimerLabel						timer;
 
-	private ArrayList<TransparentButton>	buttons		= new ArrayList<TransparentButton>();
-	private ArrayList<TransparentLabel>		labels		= new ArrayList<TransparentLabel>();
-	private ArrayList<JPanel>				panelList	= new ArrayList<JPanel>();
-	private ArrayList<Vokabel>				vokabeln	= new ArrayList<Vokabel>();
+	private ArrayList<TransparentButton>	buttons			= new ArrayList<TransparentButton>();
+	private ArrayList<TransparentLabel>		labels			= new ArrayList<TransparentLabel>();
+	private ArrayList<JPanel>				panelList		= new ArrayList<JPanel>();
+	private ArrayList<Vokabel>				vokabeln		= new ArrayList<Vokabel>();
+	private HashMap<String, String>			languageCombi	= new HashMap<String, String>();
 
 	/**
 	 * Launch the application.
@@ -78,6 +83,16 @@ public class MainFrame extends JFrame {
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBounds(100, 100, 1280, 720);
+
+		Properties properties = new Properties();
+		try {
+			properties.load(new FileInputStream("data.properties"));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		for (String key : properties.stringPropertyNames()) {
+			languageCombi.put(key, properties.get(key).toString());
+		}
 
 		this.setBear(new Bearbeiten(this));
 		this.setCheck(new Check(this));
@@ -364,6 +379,14 @@ public class MainFrame extends JFrame {
 
 	public void setSpellingPrePanel(SpellingPrePanel spellingPrePanel) {
 		this.spellingPrePanel = spellingPrePanel;
+	}
+
+	public HashMap<String, String> getLanguageCombi() {
+		return languageCombi;
+	}
+
+	public void setLanguageCombi(HashMap<String, String> languageCombi) {
+		this.languageCombi = languageCombi;
 	}
 
 }

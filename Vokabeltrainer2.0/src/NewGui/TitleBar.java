@@ -10,7 +10,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Properties;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -66,7 +68,17 @@ public class TitleBar extends JPanel {
 		frame.getButtons().add(getMainmenu());
 
 		setClose(TransparentButton.createButton("X", 1248, 0, 30, 30, 17, 8, (e -> {
-			frame.getBear().Close();System.exit(1);
+			frame.getBear().Close();
+
+			Properties properties = new Properties();
+			properties.putAll(frame.getLanguageCombi());
+			try {
+				properties.store(new FileOutputStream("data.properties"), null);
+			} catch (IOException io) {
+				io.printStackTrace();
+			}
+
+			System.exit(1);
 		}), this));
 		frame.getButtons().add(getClose());
 
