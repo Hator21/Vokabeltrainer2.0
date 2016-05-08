@@ -10,25 +10,33 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 
 import Components.TransparentButton;
 import Components.TransparentLabel;
+import Trainer.Language;
 
 @SuppressWarnings("serial")
 public class EditSPanel extends JPanel {
 	private MainFrame			frame;
 	private BufferedImage		image;
 	private JTable				table;
+	DefaultTableModel			tableModel;
+	int							nr			= 1;
 	private TransparentButton	addSpeech, deleteSpeech, addLection, deleteLection, addVocabel, deleteVocabel, editVocabel;
 	private TransparentLabel	selectSpeech, selectLection;
 	JComboBox<String>			lectionsCB, languageCB;
@@ -38,107 +46,110 @@ public class EditSPanel extends JPanel {
 			"Nr.", "Sprache1", "Sprache2", "Gelernt x-mal", "Richtig (%)"
 	};
 
-	private String[][]			vokabeln	= {
-			{
-					"1", "Hallo", "Hello", "2", "50%"
-			}, {
-					"2", "Junge", "Boy/Guy", "1", "100%"
-			}, {
-					"3", "Mädchen", "girl", "3", "33%"
-			}
-
+	private String				prä1;
+	private String				prä2;
+	final JComponent[]			inputs		= new JComponent[] {
+			new JLabel("First"), new JLabel("Last"), new JLabel("Password"), new JLabel("")
 	};
+	private addLanguage			addL;
 
 	public EditSPanel(MainFrame frame) {
 		this.setFrame(frame);
 		this.setLayout(null);
 		this.setBounds(251, 75, 1028, 644);
+		addL = new addLanguage();
+		add2Language();
 		try {
 			this.image = ImageIO.read(new File("img/Hintergrund-weiß.png"));
-
-			vocabelPanel = new JPanel();
-			vocabelPanel.setBorder(new TitledBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null), "Vokabel", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			vocabelPanel.setBounds(688, 11, 330, 190);
-			add(vocabelPanel);
-			vocabelPanel.setLayout(null);
-
-			setAddVocabel(TransparentButton.createButton("Vokabel anlegen", 36, 19, 248, 29, 20, 0, new Color(10, 10, 10, 20), (e -> {
-
-			}), vocabelPanel));
-			setDeleteVocabel(TransparentButton.createButton("Vokabel löschen", 36, 53, 248, 29, 20, 0, new Color(10, 10, 10, 20), (e -> {
-
-			}), vocabelPanel));
-			setEditVocabel(TransparentButton.createButton("Vokabel ändern", 36, 87, 248, 29, 20, 0, new Color(10, 10, 10, 20), (e -> {
-
-			}), vocabelPanel));
-
-			lectionPanel = new JPanel();
-			lectionPanel.setBorder(new TitledBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null), "Lektion", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			lectionPanel.setBounds(348, 11, 330, 190);
-			add(lectionPanel);
-			lectionPanel.setLayout(null);
-
-			setAddLection(TransparentButton.createButton("Lektion anlegen", 36, 19, 248, 29, 20, 0, new Color(10, 10, 10, 20), (e -> {
-
-			}), lectionPanel));
-			setDeleteLection(TransparentButton.createButton("Lektion löschen", 36, 53, 248, 29, 20, 0, new Color(10, 10, 10, 20), (e -> {
-
-			}), lectionPanel));
-
-			lectionsCB = new JComboBox<String>();
-			lectionsCB.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-			lectionsCB.setModel(new DefaultComboBoxModel<String>(new String[] {
-					"Lektion 1", "Lektion 2", "Lektion 3", "Lektion 4", "Lektion 5", "Lektion 6", "Lektion 7", "Lektion 8", "Lektion 9", "Lektion 10", "Lektion 11"
-			}));
-			lectionsCB.setSelectedIndex(0);
-			lectionsCB.setBounds(36, 127, 248, 29);
-			lectionPanel.add(lectionsCB);
-
-			setSelectLection(TransparentLabel.createLabel("Lektion auswählen", 36, 87, 248, 29, 20, lectionPanel));
-
-			speechPanel = new JPanel();
-			speechPanel.setBorder(new TitledBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null), "Sprache", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			speechPanel.setBounds(8, 11, 330, 190);
-			add(speechPanel);
-			speechPanel.setLayout(null);
-
-			setAddSpeech(TransparentButton.createButton("Sprache anlegen", 36, 19, 248, 29, 20, 0, new Color(10, 10, 10, 20), (e -> {
-
-			}), speechPanel));
-			setDeleteSpeech(TransparentButton.createButton("Sprache löschen", 36, 53, 248, 29, 20, 0, new Color(10, 10, 10, 20), (e -> {
-
-			}), speechPanel));
-
-			languageCB = new JComboBox<String>();
-			languageCB.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-			languageCB.setModel(new DefaultComboBoxModel<String>(new String[] {
-					"Deutsch-Englisch", "Deutsch-Französisch"
-			}));
-			languageCB.setSelectedIndex(0);
-			languageCB.setBounds(36, 127, 248, 29);
-			speechPanel.add(languageCB);
-
-			setSelectLection(TransparentLabel.createLabel("Sprache auswählen", 36, 87, 248, 29, 20, speechPanel));
-
-			vocabellistPanel = new JPanel();
-			vocabellistPanel.setLayout(new GridLayout(1, 0));
-			vocabellistPanel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-			vocabellistPanel.setBounds(8, 212, 1010, 421);
-			add(vocabellistPanel);
-
-			table = new JTable(vokabeln, columnNames);
-			table.setPreferredScrollableViewportSize(new Dimension(500, 70));
-			table.setFillsViewportHeight(true);
-			table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-			table.getColumnModel().getColumn(0).setPreferredWidth(39);
-			table.getColumnModel().getColumn(1).setPreferredWidth(370);
-			table.getColumnModel().getColumn(2).setPreferredWidth(370);
-			table.getColumnModel().getColumn(3).setPreferredWidth(111);
-			table.getColumnModel().getColumn(4).setPreferredWidth(111);
-
-			scrollPane = new JScrollPane(table);
-			vocabellistPanel.add(scrollPane);
 		} catch (IOException ex) {}
+
+		vocabelPanel = new JPanel();
+		vocabelPanel.setBorder(new TitledBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null), "Vokabel", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		vocabelPanel.setBounds(688, 11, 330, 190);
+		add(vocabelPanel);
+		vocabelPanel.setLayout(null);
+
+		setAddVocabel(TransparentButton.createButton("Vokabel anlegen", 36, 19, 248, 29, 20, 0, new Color(10, 10, 10, 20), (e -> {
+
+		}), vocabelPanel));
+		setDeleteVocabel(TransparentButton.createButton("Vokabel löschen", 36, 53, 248, 29, 20, 0, new Color(10, 10, 10, 20), (e -> {
+
+		}), vocabelPanel));
+		setEditVocabel(TransparentButton.createButton("Vokabel ändern", 36, 87, 248, 29, 20, 0, new Color(10, 10, 10, 20), (e -> {
+
+		}), vocabelPanel));
+
+		lectionPanel = new JPanel();
+		lectionPanel.setBorder(new TitledBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null), "Lektion", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		lectionPanel.setBounds(348, 11, 330, 190);
+		add(lectionPanel);
+		lectionPanel.setLayout(null);
+
+		setAddLection(TransparentButton.createButton("Lektion anlegen", 36, 19, 248, 29, 20, 0, new Color(10, 10, 10, 20), (e -> {
+
+		}), lectionPanel));
+		setDeleteLection(TransparentButton.createButton("Lektion löschen", 36, 53, 248, 29, 20, 0, new Color(10, 10, 10, 20), (e -> {
+
+		}), lectionPanel));
+
+		lectionsCB = new JComboBox<String>();
+		lectionsCB.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		lectionsCB.setModel(new DefaultComboBoxModel<String>(new String[] {
+				"Lektion 1", "Lektion 2", "Lektion 3", "Lektion 4", "Lektion 5", "Lektion 6", "Lektion 7", "Lektion 8", "Lektion 9", "Lektion 10", "Lektion 11"
+		}));
+		lectionsCB.setSelectedIndex(0);
+		lectionsCB.setBounds(36, 127, 248, 29);
+		lectionPanel.add(lectionsCB);
+
+		setSelectLection(TransparentLabel.createLabel("Lektion auswählen", 36, 87, 248, 29, 20, lectionPanel));
+
+		speechPanel = new JPanel();
+		speechPanel.setBorder(new TitledBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null), "Sprache", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		speechPanel.setBounds(8, 11, 330, 190);
+		add(speechPanel);
+		speechPanel.setLayout(null);
+
+		setAddSpeech(TransparentButton.createButton("Sprache anlegen", 36, 19, 248, 29, 20, 0, new Color(10, 10, 10, 20), (e -> {
+			int s = JOptionPane.showConfirmDialog(null, addL.getInputs(), "Sprache anlegen", JOptionPane.PLAIN_MESSAGE);
+			if (s == JOptionPane.OK_OPTION) {
+				if (!addL.getAddLanguage1TF().getText().equals("") && !addL.getAddLanguage2TF().getText().equals("") && !addL.getAddPräfix1TF().getText().equals("") && !addL.getAddPräfix2TF().getText().equals("")) {
+					frame.getLanguageCombi().put(new Language(addL.getAddPräfix1TF().getText(), addL.getAddLanguage1TF().getText()), new Language(addL.getAddPräfix2TF().getText(), addL.getAddLanguage2TF().getText()));
+					languageCB.setModel(new DefaultComboBoxModel<String>(add2Language()));
+				} else
+					System.out.println("nein");
+			}
+		}), speechPanel));
+		setDeleteSpeech(TransparentButton.createButton("Sprache löschen", 36, 53, 248, 29, 20, 0, new Color(10, 10, 10, 20), (e -> {
+
+		}), speechPanel));
+
+		languageCB = new JComboBox<String>();
+		languageCB.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		languageCB.setSelectedIndex(-1);
+		languageCB.setBounds(36, 127, 248, 29);
+		speechPanel.add(languageCB);
+		languageCB.setModel(new DefaultComboBoxModel<String>(add2Language()));
+
+		setSelectLection(TransparentLabel.createLabel("Sprache auswählen", 36, 87, 248, 29, 20, speechPanel));
+
+		vocabellistPanel = new JPanel();
+		vocabellistPanel.setLayout(new GridLayout(1, 0));
+		vocabellistPanel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		vocabellistPanel.setBounds(8, 212, 1010, 421);
+		add(vocabellistPanel);
+
+		tableModel = new DefaultTableModel(columnNames, (nr - 1));
+		table = new JTable(tableModel);
+		table.setPreferredScrollableViewportSize(new Dimension(500, 70));
+		table.setFillsViewportHeight(true);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table.getColumnModel().getColumn(0).setPreferredWidth(39);
+		table.getColumnModel().getColumn(1).setPreferredWidth(370);
+		table.getColumnModel().getColumn(2).setPreferredWidth(370);
+		table.getColumnModel().getColumn(3).setPreferredWidth(111);
+		table.getColumnModel().getColumn(4).setPreferredWidth(111);
+		scrollPane = new JScrollPane(table);
+		vocabellistPanel.add(scrollPane);
 
 	}
 
@@ -153,27 +164,36 @@ public class EditSPanel extends JPanel {
 	}
 
 	public void loadTable() {
-		for (int i = 0; i < frame.getVokabeln().size(); i++) {
-			if (((String)(lectionsCB.getSelectedItem())).startsWith("Lektion ")) {
-				int x = Integer.valueOf(((String)(lectionsCB.getSelectedItem())).split(" ")[1]);
-				if(frame.getVokabeln().get(i).getLection() == x){
-					String originalLanguage = frame.getVokabeln().get(i).get;
-					String name = originalLeagueList.get(i).getName();
-					int points = originalLeagueList.get(i).getPoinst();
-					int wins = originalLeagueList.get(i).getWins();
-					int defeats = originalLeagueList.get(i).getDefeats();
-					int draws = originalLeagueList.get(i).getDraws();
-					int totalMatches = originalLeagueList.get(i).getTotalMathces();
-					int goalF = originalLeagueList.get(i).getGoalF();
-					int goalA = originalLeagueList.get(i).getGoalA();
-					int tgoalD = originalLeagueList.get(i).getTtgoalD();
+		nr = 1;
+		String language = ((String) (languageCB.getSelectedItem()));
+		String lang1 = language.split("-")[0];
+		String lang2 = language.split("-")[1];
+		for (Language key : frame.getLanguageCombi().keySet()) {
+			if (key.getLanguage().equals(lang1))
+				prä1 = frame.getLanguageCombi().get(key).getPräfix();
+			if (key.getLanguage().equals(lang2))
+				prä2 = frame.getLanguageCombi().get(key).getPräfix();
+		}
+		if (prä1 != null && prä2 != null) {
+			for (int i = 0; i < frame.getVokabeln().size(); i++) {
+				if (frame.getVokabeln().get(i).getCountryOriginCode() == prä1 && frame.getVokabeln().get(i).getCountryDistinationCode() == prä2) {
+					if (((String) (lectionsCB.getSelectedItem())).startsWith("Lektion ")) {
+						int x = Integer.valueOf(((String) (lectionsCB.getSelectedItem())).split(" ")[1]);
+						if (frame.getVokabeln().get(i).getLection() == x) {
 
-			Object[] data = {
-					position, name, points, wins, defeats, draws, totalMatches, goalF, goalA, ttgoalD
-			};
+							String originalLanguage = frame.getVokabeln().get(i).getVocabOrigin();
+							String destinationLanguage = frame.getVokabeln().get(i).getVocabTranslation();
+							int learned = frame.getVokabeln().get(i).getTested();
+							int correct = frame.getVokabeln().get(i).getCorrect() / frame.getVokabeln().get(i).getTested() * 100;
 
-			tableModel.add(data);
-
+							Object[] data = {
+									nr, originalLanguage, destinationLanguage, learned, correct
+							};
+							tableModel.addRow(data);
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -264,4 +284,24 @@ public class EditSPanel extends JPanel {
 	public void setSelectLection(TransparentLabel selectLection) {
 		this.selectLection = selectLection;
 	}
+
+	public String[] add2Language() {
+		ArrayList<String> languageComponents = new ArrayList<String>();
+		boolean b = false;
+		for (Language s : frame.getLanguageCombi().keySet()) {
+			Language t = frame.getLanguageCombi().get(s);
+			if (languageComponents.size() != 0) {
+				for (String st : languageComponents)
+					if ((s.getLanguage() + "-" + t.getLanguage()).equals(st) || (t.getLanguage() + "-" + s.getLanguage()).equals(st))
+						b = true;
+				if (b == false)
+					languageComponents.add(s.getLanguage() + "-" + t.getLanguage());
+				b = false;
+			} else
+				languageComponents.add(s.getLanguage() + "-" + t.getLanguage());
+		}
+
+		return (String[]) languageComponents.toArray(new String[languageComponents.size()]);
+	}
+
 }

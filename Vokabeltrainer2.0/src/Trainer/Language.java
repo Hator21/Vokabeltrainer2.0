@@ -1,11 +1,11 @@
 package Trainer;
 
-import java.util.HashMap;
+import java.io.Serializable;
 
-public class Language {
+@SuppressWarnings("serial")
+public class Language implements Serializable {
 
-	private String							präfix, language;
-	static private HashMap<String, String>	languageCombi	= new HashMap<String, String>();
+	private String präfix, language;
 
 	public Language(String präfix, String language) {
 		this.setPräfix(präfix);
@@ -27,13 +27,4 @@ public class Language {
 	public void setLanguage(String language) {
 		this.language = language;
 	}
-
-	public static HashMap<String, String> getLanguageCombi() {
-		return languageCombi;
-	}
-
-	public static void setLanguageCombi(HashMap<String, String> languageCombi) {
-		Language.languageCombi = languageCombi;
-	}
-
 }

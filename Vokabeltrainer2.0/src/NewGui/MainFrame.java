@@ -5,9 +5,9 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Properties;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -19,6 +19,7 @@ import Components.TransparentButton;
 import Components.TransparentLabel;
 import Trainer.Bearbeiten;
 import Trainer.Check;
+import Trainer.Language;
 import Trainer.Run;
 import Trainer.Vokabel;
 
@@ -56,7 +57,7 @@ public class MainFrame extends JFrame {
 	private ArrayList<TransparentLabel>		labels			= new ArrayList<TransparentLabel>();
 	private ArrayList<JPanel>				panelList		= new ArrayList<JPanel>();
 	private ArrayList<Vokabel>				vokabeln		= new ArrayList<Vokabel>();
-	private HashMap<String, String>			languageCombi	= new HashMap<String, String>();
+	private HashMap<Language, Language>		languageCombi	= new HashMap<Language, Language>();
 
 	/**
 	 * Launch the application.
@@ -84,14 +85,18 @@ public class MainFrame extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBounds(100, 100, 1280, 720);
 
-		Properties properties = new Properties();
+		FileInputStream fis;
 		try {
-			properties.load(new FileInputStream("data.properties"));
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		for (String key : properties.stringPropertyNames()) {
-			languageCombi.put(key, properties.get(key).toString());
+			fis = new FileInputStream("data/data.txt");
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			languageCombi = (HashMap<Language, Language>) ois.readObject();
+			ois.close();
+			for (Language key : getLanguageCombi().keySet()) {
+				System.err.println(key.getLanguage() + " - " + key.getPräfix());
+				System.err.println(getLanguageCombi().get(key).getLanguage() + " - " + getLanguageCombi().get(key).getPräfix());
+			}
+		} catch (IOException | ClassNotFoundException e1) {
+			System.err.println(e1);
 		}
 
 		this.setBear(new Bearbeiten(this));
@@ -381,11 +386,11 @@ public class MainFrame extends JFrame {
 		this.spellingPrePanel = spellingPrePanel;
 	}
 
-	public HashMap<String, String> getLanguageCombi() {
+	public HashMap<Language, Language> getLanguageCombi() {
 		return languageCombi;
 	}
 
-	public void setLanguageCombi(HashMap<String, String> languageCombi) {
+	public void setLanguageCombi(HashMap<Language, Language> languageCombi) {
 		this.languageCombi = languageCombi;
 	}
 

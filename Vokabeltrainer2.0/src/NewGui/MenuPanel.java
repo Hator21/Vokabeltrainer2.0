@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Properties;
+import java.io.ObjectOutputStream;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -132,13 +132,14 @@ public class MenuPanel extends JPanel {
 
 		setExit(TransparentButton.createButton("Beenden", 0, 627, 250, 60, 30, 0, (e -> {
 			frame.getBear().Close();
-
-			Properties properties = new Properties();
-			properties.putAll(frame.getLanguageCombi());
 			try {
-				properties.store(new FileOutputStream("data.properties"), null);
-			} catch (IOException io) {
-				io.printStackTrace();
+				FileOutputStream fos = new FileOutputStream("data/data.txt");
+				ObjectOutputStream oos = new ObjectOutputStream(fos);
+				oos.writeObject(frame.getLanguageCombi());
+				oos.close();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 			System.exit(1);
 		}), this));

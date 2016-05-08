@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Properties;
+import java.io.ObjectOutputStream;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -69,13 +69,14 @@ public class TitleBar extends JPanel {
 
 		setClose(TransparentButton.createButton("X", 1248, 0, 30, 30, 17, 8, (e -> {
 			frame.getBear().Close();
-
-			Properties properties = new Properties();
-			properties.putAll(frame.getLanguageCombi());
 			try {
-				properties.store(new FileOutputStream("data.properties"), null);
-			} catch (IOException io) {
-				io.printStackTrace();
+				FileOutputStream fos = new FileOutputStream("data/data.txt");
+				ObjectOutputStream oos = new ObjectOutputStream(fos);
+				oos.writeObject(frame.getLanguageCombi());
+				oos.close();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 
 			System.exit(1);
