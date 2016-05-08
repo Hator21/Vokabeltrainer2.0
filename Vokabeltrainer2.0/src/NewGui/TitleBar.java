@@ -75,7 +75,6 @@ public class TitleBar extends JPanel {
 				oos.writeObject(frame.getLanguageCombi());
 				oos.close();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 
