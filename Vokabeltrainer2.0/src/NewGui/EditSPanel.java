@@ -48,16 +48,15 @@ public class EditSPanel extends JPanel {
 
 	private String				prä1;
 	private String				prä2;
-	final JComponent[]			inputs		= new JComponent[] {
-			new JLabel("First"), new JLabel("Last"), new JLabel("Password"), new JLabel("")
-	};
 	private addLanguage			addL;
+	private addLection			addLe;
 
 	public EditSPanel(MainFrame frame) {
 		this.setFrame(frame);
 		this.setLayout(null);
 		this.setBounds(251, 75, 1028, 644);
 		addL = new addLanguage();
+		setAddLe(new addLection());
 		add2Language();
 		try {
 			this.image = ImageIO.read(new File("img/Hintergrund-weiß.png"));
@@ -86,7 +85,13 @@ public class EditSPanel extends JPanel {
 		lectionPanel.setLayout(null);
 
 		setAddLection(TransparentButton.createButton("Lektion anlegen", 36, 19, 248, 29, 20, 0, new Color(10, 10, 10, 20), (e -> {
-
+			int s = JOptionPane.showConfirmDialog(null, addLe.getInputs(), "Lektion anlegen", JOptionPane.PLAIN_MESSAGE);
+			if (s == JOptionPane.OK_OPTION) {
+				if (!addLe.getAddLanguage1TF().getText().equals("")) {
+					lectionsCB.setModel(new DefaultComboBoxModel<String>(add2Lection(addLe.getAddLanguage1TF().getText())));
+				} else
+					System.out.println("nein");
+			}
 		}), lectionPanel));
 		setDeleteLection(TransparentButton.createButton("Lektion löschen", 36, 53, 248, 29, 20, 0, new Color(10, 10, 10, 20), (e -> {
 
@@ -302,6 +307,24 @@ public class EditSPanel extends JPanel {
 		}
 
 		return (String[]) languageComponents.toArray(new String[languageComponents.size()]);
+	}
+	public String[] add2Lection(String lection){
+		ArrayList<String> lectionComponents = new ArrayList<String>();
+		boolean b = false;
+		for(int i = 0; i <lectionsCB.getItemCount(); i++)
+			if(lection.equals(lectionsCB.getItemAt(i)))
+				b = true;
+		if(b == false)
+			lectionsCB.addItem(lection);
+		return (String[])(lectionComponents.toArray(new String[lectionComponents.size()]));
+	}
+
+	public addLection getAddLe() {
+		return addLe;
+	}
+
+	public void setAddLe(addLection addLe) {
+		this.addLe = addLe;
 	}
 
 }

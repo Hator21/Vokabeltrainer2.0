@@ -57,6 +57,7 @@ public class VocabelPrePanel extends JPanel {
 		setTest(TransparentButton.createButton("Prüfen", 600, 450, 250, 40, 30, 0, (e -> {
 			for (JPanel p : frame.getPanelList())
 				p.setVisible(false);
+			frame.getVocabeltestPanel().getTimerLabel().setText("Übrige Zeit: " + String.valueOf(this.getTimeSlider().getValue()+ ":00"));
 			frame.getPanelList().get(4).setVisible(true);
 			frame.getHeadingbar().getHeadingLabelL().setText("Vokabeltest");
 			frame.getHeadingbar().getHeadingLabelR().setText("");
