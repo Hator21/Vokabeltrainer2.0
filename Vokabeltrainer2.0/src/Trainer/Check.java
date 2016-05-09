@@ -37,26 +37,32 @@ public class Check {
 			if (rnd2 == 0) {
 				if (list.get(rnd).getUsed() == true) {
 					rnd = this.random(list);
+				} else if (list.get(rnd).getUsed() == false) {
+					vokabel = list.get(rnd).getVocabTranslation();
+					list.get(rnd).setUsed(true);
+					list.get(rnd).setTested(list.get(rnd).getTested() + 1);
 				}
-				vokabel = list.get(rnd).getVocabTranslation();
-				list.get(rnd).setUsed(true);
-				list.get(rnd).setTested(list.get(rnd).getTested() + 1);
 			} else if (rnd2 == 1) {
-				vokabel = list.get(rnd).getVocabOrigin();
-				list.get(rnd).setUsed(true);
-				list.get(rnd).setTested(list.get(rnd).getTested() + 1);
+				if (list.get(rnd).getUsed() == true) {
+					rnd = this.random(list);
+				} else if (list.get(rnd).getUsed() == false) {
+
+					vokabel = list.get(rnd).getVocabOrigin();
+					list.get(rnd).setUsed(true);
+					list.get(rnd).setTested(list.get(rnd).getTested() + 1);
+				}
 			}
-		}
-		if (exist == false) {
-			vokabel = "Fertig";
-		}
-		for (int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i).getUsed());
-			list.get(i).setUsed(false);
-		}
 
+			if (exist == false) {
+				vokabel = "Fertig";
+			}
+			for (int i = 0; i < list.size(); i++) {
+				System.out.println(list.get(i).getUsed());
+				list.get(i).setUsed(false);
+			}
+
+		}
 		return vokabel;
-
 	}
 
 	public void check(String eingabe, ArrayList<Vokabel> list, String vokabel, int right) {
