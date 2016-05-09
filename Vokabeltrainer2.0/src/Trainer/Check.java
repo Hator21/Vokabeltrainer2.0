@@ -12,17 +12,32 @@ public class Check {
 		this.setFrame(frame);
 	}
 
-	public String vok(String vokabel, ArrayList<Vokabel> list) {
+	public int random(ArrayList<Vokabel> list) {
+		int rnd = (int) ((Math.random()) * list.size());
+		return rnd;
+	}
+
+	public int random() {
+		int rnd = (int) ((Math.random()) * 2);
+		return rnd;
+	}
+
+	public String vok(ArrayList<Vokabel> list) {
 		boolean exist = false;
-		for (int i = 0; i < list.size(); i++)
+		String vokabel = "";
+		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getUsed() == false) {
 				exist = true;
 			}
+		}
 		if (exist == true) {
-			int rnd = (int) ((Math.random()) * list.size());
-			int rnd2 = (int) ((Math.random()) * 2);
+			int rnd = this.random(list);
+			int rnd2 = this.random();
 
 			if (rnd2 == 0) {
+				if (list.get(rnd).getUsed() == true) {
+					rnd = this.random(list);
+				}
 				vokabel = list.get(rnd).getVocabTranslation();
 				list.get(rnd).setUsed(true);
 				list.get(rnd).setTested(list.get(rnd).getTested() + 1);
@@ -35,11 +50,16 @@ public class Check {
 		if (exist == false) {
 			vokabel = "Fertig";
 		}
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i).getUsed());
+			list.get(i).setUsed(false);
+		}
+
 		return vokabel;
 
 	}
 
-	public void check(String eingabe, ArrayList<Vokabel> list, String vokabel,int right) {
+	public void check(String eingabe, ArrayList<Vokabel> list, String vokabel, int right) {
 		String loesung = "";
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getVocabOrigin().equals(vokabel)) {
@@ -52,7 +72,7 @@ public class Check {
 			for (int i = 0; i < list.size(); i++) {
 				list.get(i).setCorrect(list.get(i).getCorrect() + 1);
 			}
-			
+
 			System.out.println("Richtig :)");
 		} else if (!eingabe.equals(loesung)) {
 			right--;

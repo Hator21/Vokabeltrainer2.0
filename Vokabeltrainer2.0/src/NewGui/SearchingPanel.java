@@ -34,25 +34,26 @@ public class SearchingPanel extends JPanel {
 		try {
 			this.image = ImageIO.read(new File("img/Hintergrund-weiß.png"));
 		} catch (IOException ex) {}
-		createButtons();
-		setNextcorrect(TransparentButton.createButton("Prüfen", 828, 600, 200, 44, 20, 0, (e -> {
+		this.createButtons();
+		this.setNextcorrect(TransparentButton.createButton("Prüfen", 828, 600, 200, 44, 20, 0, (e -> {
 			System.out.println("Du Hurensohn!!!!1111elf");
 		}), this));
-		frame.getButtons().add(getNextcorrect());
+		frame.getButtons().add(this.getNextcorrect());
 
-		setVokabel(TransparentLabel.createLabel("Suche: vokabel", 0, 600, 200, 44, 20, this));
-		frame.getLabels().add(getVokabel());
+		this.setVokabel(TransparentLabel.createLabel("Suche: vokabel", 0, 600, 200, 44, 20, this));
+		frame.getLabels().add(this.getVokabel());
 
 	}
 
 	public void createButtons() {
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
-				int random = zufallszahl(0, 60) - 30;
-				vocabels.add(TransparentButton.createButton("Vokabel " + i + "-" + j, 205 * i + 4, 115 * j + 4, 200, 115, 20, 0, random, buttonListener, "vokabel_" + i + "_" + j, this));
+				int random = this.zufallszahl(0, 60) - 30;
+				String v = this.frame.getCheck().vok(this.frame.getVokabeln());
+				this.vocabels.add(TransparentButton.createButton(v, (205 * i) + 4, (115 * j) + 4, 200, 115, 20, 0, random, this.buttonListener, "vokabel_" + i + "_" + j, this));
 			}
 		}
-		frame.getButtons().addAll(vocabels);
+		this.frame.getButtons().addAll(this.vocabels);
 	}
 
 	@Override
@@ -66,7 +67,7 @@ public class SearchingPanel extends JPanel {
 	}
 
 	public MainFrame getFrame() {
-		return frame;
+		return this.frame;
 	}
 
 	public void setFrame(MainFrame frame) {
@@ -74,11 +75,11 @@ public class SearchingPanel extends JPanel {
 	}
 
 	public int zufallszahl(int min, int max) {
-		return random.nextInt(max - min + 1) + min;
+		return this.random.nextInt((max - min) + 1) + min;
 	}
 
 	public TransparentButton getNextcorrect() {
-		return nextcorrect;
+		return this.nextcorrect;
 	}
 
 	public void setNextcorrect(TransparentButton nextcorrect) {
@@ -86,7 +87,7 @@ public class SearchingPanel extends JPanel {
 	}
 
 	public TransparentLabel getVokabel() {
-		return vokabel;
+		return this.vokabel;
 	}
 
 	public void setVokabel(TransparentLabel vokabel) {

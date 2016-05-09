@@ -20,7 +20,6 @@ import Components.TransparentLabel;
 import Trainer.Bearbeiten;
 import Trainer.Check;
 import Trainer.Language;
-import Trainer.Run;
 import Trainer.Vokabel;
 
 @SuppressWarnings("serial")
@@ -49,7 +48,6 @@ public class MainFrame extends JFrame {
 
 	private Bearbeiten						bear;
 	private Check							check;
-	private Run								run;
 
 	private TimerLabel						timer;
 
@@ -58,6 +56,7 @@ public class MainFrame extends JFrame {
 	private ArrayList<JPanel>				panelList		= new ArrayList<JPanel>();
 	private ArrayList<Vokabel>				vokabeln		= new ArrayList<Vokabel>();
 	private HashMap<Language, Language>		languageCombi	= new HashMap<Language, Language>();
+	private ArrayList<Integer>				lek				= new ArrayList<Integer>();
 
 	/**
 	 * Launch the application.
@@ -89,11 +88,11 @@ public class MainFrame extends JFrame {
 		try {
 			fis = new FileInputStream("data/data.txt");
 			ObjectInputStream ois = new ObjectInputStream(fis);
-			languageCombi = (HashMap<Language, Language>) ois.readObject();
+			this.languageCombi = (HashMap<Language, Language>) ois.readObject();
 			ois.close();
-			for (Language key : getLanguageCombi().keySet()) {
+			for (Language key : this.getLanguageCombi().keySet()) {
 				System.err.println(key.getLanguage() + " - " + key.getPräfix());
-				System.err.println(getLanguageCombi().get(key).getLanguage() + " - " + getLanguageCombi().get(key).getPräfix());
+				System.err.println(this.getLanguageCombi().get(key).getLanguage() + " - " + this.getLanguageCombi().get(key).getPräfix());
 			}
 		} catch (IOException | ClassNotFoundException e1) {
 			System.err.println(e1);
@@ -124,17 +123,17 @@ public class MainFrame extends JFrame {
 		this.vocabeltestPanel = new VocabeltestPanel(this);
 		this.panelList.add(this.vocabeltestPanel);
 		this.searchingPrePanel = new SearchingPrePanel(this);
-		panelList.add(searchingPrePanel);
+		this.panelList.add(this.searchingPrePanel);
 		this.searchingPanel = new SearchingPanel(this);
 		this.panelList.add(this.searchingPanel);
 		this.spellingPrePanel = new SpellingPrePanel(this);
-		panelList.add(spellingPrePanel);
+		this.panelList.add(this.spellingPrePanel);
 		this.spellingPanel = new SpellingPanel(this);
 		this.panelList.add(this.spellingPanel);
 		this.editSPanel = new EditSPanel(this);
 		this.panelList.add(this.editSPanel);
 		this.settingsPanel = new SettingsPanel(this);
-		panelList.add(settingsPanel);
+		this.panelList.add(this.settingsPanel);
 		this.statisticsPanel = new StatisticsPanel(this);
 		this.panelList.add(this.statisticsPanel);
 		this.helpPanel = new HelpPanel(this);
@@ -192,14 +191,6 @@ public class MainFrame extends JFrame {
 
 	public void setCheck(Check check) {
 		this.check = check;
-	}
-
-	public Run getRun() {
-		return this.run;
-	}
-
-	public void setRun(Run run) {
-		this.run = run;
 	}
 
 	public MainMenuImage getMainMenuImage() {
@@ -314,6 +305,14 @@ public class MainFrame extends JFrame {
 		this.panelList = panelList;
 	}
 
+	public ArrayList<Integer> getLek() {
+		return this.lek;
+	}
+
+	public void setLek(ArrayList<Integer> lek) {
+		this.lek = lek;
+	}
+
 	protected TimerLabel getTimer() {
 		return this.timer;
 	}
@@ -339,7 +338,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public ArrayList<Vokabel> getVokabeln() {
-		return vokabeln;
+		return this.vokabeln;
 	}
 
 	public void setVokabeln(ArrayList<Vokabel> vokabeln) {
@@ -347,7 +346,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public SettingsPanel getSettingsPanel() {
-		return settingsPanel;
+		return this.settingsPanel;
 	}
 
 	public void setSettingsPanel(SettingsPanel settingsPanel) {
@@ -355,7 +354,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public ArrayList<TransparentButton> getButtons() {
-		return buttons;
+		return this.buttons;
 	}
 
 	public void setButtons(ArrayList<TransparentButton> buttons) {
@@ -363,7 +362,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public ArrayList<TransparentLabel> getLabels() {
-		return labels;
+		return this.labels;
 	}
 
 	public void setLabels(ArrayList<TransparentLabel> labels) {
@@ -371,7 +370,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public SearchingPrePanel getSearchingPrePanel() {
-		return searchingPrePanel;
+		return this.searchingPrePanel;
 	}
 
 	public void setSearchingPrePanel(SearchingPrePanel searchingPrePanel) {
@@ -379,7 +378,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public SpellingPrePanel getSpellingPrePanel() {
-		return spellingPrePanel;
+		return this.spellingPrePanel;
 	}
 
 	public void setSpellingPrePanel(SpellingPrePanel spellingPrePanel) {
@@ -387,7 +386,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public HashMap<Language, Language> getLanguageCombi() {
-		return languageCombi;
+		return this.languageCombi;
 	}
 
 	public void setLanguageCombi(HashMap<Language, Language> languageCombi) {
