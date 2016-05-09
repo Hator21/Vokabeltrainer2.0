@@ -15,8 +15,6 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -50,6 +48,7 @@ public class EditSPanel extends JPanel {
 	private String				prä2;
 	private addLanguage			addL;
 	private addLection			addLe;
+	private ArrayList<String>	lections	= new ArrayList<String>();
 
 	public EditSPanel(MainFrame frame) {
 		this.setFrame(frame);
@@ -58,6 +57,8 @@ public class EditSPanel extends JPanel {
 		addL = new addLanguage();
 		setAddLe(new addLection());
 		add2Language();
+		lections.addAll(frame.getBear().getLektionList());
+		lections.sort(null);
 		try {
 			this.image = ImageIO.read(new File("img/Hintergrund-weiß.png"));
 		} catch (IOException ex) {}
@@ -92,6 +93,7 @@ public class EditSPanel extends JPanel {
 				} else
 					System.out.println("nein");
 			}
+			loadTable();
 		}), lectionPanel));
 		setDeleteLection(TransparentButton.createButton("Lektion löschen", 36, 53, 248, 29, 20, 0, new Color(10, 10, 10, 20), (e -> {
 
@@ -99,12 +101,10 @@ public class EditSPanel extends JPanel {
 
 		lectionsCB = new JComboBox<String>();
 		lectionsCB.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		lectionsCB.setModel(new DefaultComboBoxModel<String>(new String[] {
-				"Lektion 1", "Lektion 2", "Lektion 3", "Lektion 4", "Lektion 5", "Lektion 6", "Lektion 7", "Lektion 8", "Lektion 9", "Lektion 10", "Lektion 11"
-		}));
-		lectionsCB.setSelectedIndex(0);
+		lectionsCB.setSelectedIndex(-1);
 		lectionsCB.setBounds(36, 127, 248, 29);
 		lectionPanel.add(lectionsCB);
+		lectionsCB.setModel(new DefaultComboBoxModel<String>(lections.toArray(new String[lections.size()])));
 
 		setSelectLection(TransparentLabel.createLabel("Lektion auswählen", 36, 87, 248, 29, 20, lectionPanel));
 
@@ -123,6 +123,7 @@ public class EditSPanel extends JPanel {
 				} else
 					System.out.println("nein");
 			}
+			loadTable();
 		}), speechPanel));
 		setDeleteSpeech(TransparentButton.createButton("Sprache löschen", 36, 53, 248, 29, 20, 0, new Color(10, 10, 10, 20), (e -> {
 
@@ -143,7 +144,7 @@ public class EditSPanel extends JPanel {
 		vocabellistPanel.setBounds(8, 212, 1010, 421);
 		add(vocabellistPanel);
 
-		tableModel = new DefaultTableModel(columnNames, (nr - 1));
+		tableModel = new DefaultTableModel(columnNames, 0);
 		table = new JTable(tableModel);
 		table.setPreferredScrollableViewportSize(new Dimension(500, 70));
 		table.setFillsViewportHeight(true);
@@ -173,17 +174,24 @@ public class EditSPanel extends JPanel {
 		String language = ((String) (languageCB.getSelectedItem()));
 		String lang1 = language.split("-")[0];
 		String lang2 = language.split("-")[1];
+		System.err.println(language + "-> " + lang1 + " - " + lang2);
 		for (Language key : frame.getLanguageCombi().keySet()) {
+			System.out.println(key.getLanguage() + "-" + key.getPräfix());
 			if (key.getLanguage().equals(lang1))
-				prä1 = frame.getLanguageCombi().get(key).getPräfix();
-			if (key.getLanguage().equals(lang2))
+				prä1 = key.getPräfix();
+			if (frame.getLanguageCombi().get(key).getLanguage().equals(lang2))
 				prä2 = frame.getLanguageCombi().get(key).getPräfix();
 		}
+		System.err.println(prä1 + " - " + prä2);
 		if (prä1 != null && prä2 != null) {
+			System.out.println("1");
 			for (int i = 0; i < frame.getVokabeln().size(); i++) {
-				if (frame.getVokabeln().get(i).getCountryOriginCode() == prä1 && frame.getVokabeln().get(i).getCountryDistinationCode() == prä2) {
+				System.out.print(frame.getVokabeln().get(i).getCountryOriginCode() + " - ");
+				System.out.println(frame.getVokabeln().get(i).getCountryDistinationCode());
+				if (frame.getVokabeln().get(i).getCountryOriginCode().equals(prä1) && frame.getVokabeln().get(i).getCountryDistinationCode().equals(prä2)) {
 					if (((String) (lectionsCB.getSelectedItem())).startsWith("Lektion ")) {
 						int x = Integer.valueOf(((String) (lectionsCB.getSelectedItem())).split(" ")[1]);
+						System.err.println(x);
 						if (frame.getVokabeln().get(i).getLection() == x) {
 
 							String originalLanguage = frame.getVokabeln().get(i).getVocabOrigin();
@@ -194,10 +202,13 @@ public class EditSPanel extends JPanel {
 							Object[] data = {
 									nr, originalLanguage, destinationLanguage, learned, correct
 							};
+							nr++;
 							tableModel.addRow(data);
 						}
-					}
-				}
+					} else
+						System.err.println("nö");
+				} else
+					System.out.println("extra nö");
 			}
 		}
 	}
@@ -308,15 +319,15 @@ public class EditSPanel extends JPanel {
 
 		return (String[]) languageComponents.toArray(new String[languageComponents.size()]);
 	}
-	public String[] add2Lection(String lection){
-		ArrayList<String> lectionComponents = new ArrayList<String>();
+
+	public String[] add2Lection(String lection) {
 		boolean b = false;
-		for(int i = 0; i <lectionsCB.getItemCount(); i++)
-			if(lection.equals(lectionsCB.getItemAt(i)))
+		for (String s : lections)
+			if (lection.equals(s))
 				b = true;
-		if(b == false)
-			lectionsCB.addItem(lection);
-		return (String[])(lectionComponents.toArray(new String[lectionComponents.size()]));
+		if (b == false)
+			lections.add(lection);
+		return (String[]) (lections.toArray(new String[lections.size()]));
 	}
 
 	public addLection getAddLe() {

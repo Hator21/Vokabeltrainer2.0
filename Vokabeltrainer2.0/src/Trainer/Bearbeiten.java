@@ -62,6 +62,17 @@ public class Bearbeiten {
 		return z;
 	}
 
+	public ArrayList<String> getLektionList() {
+		ArrayList<String> liste = new ArrayList<String>();
+		for (int i = 0; i < this.frame.getVokabeln().size(); i++) {
+			if (!liste.contains("Lektion " + frame.getVokabeln().get(i).getLection()))
+				liste.add("Lektion " + frame.getVokabeln().get(i).getLection());
+		}
+		for (String s : liste)
+			System.err.println("Lektion: " + s);
+		return liste;
+	}
+
 	public void Close() {
 		try {
 			this.write(this.frame.getVokabeln());
