@@ -35,11 +35,10 @@ public class LearningPanel extends JPanel {
 		try {
 			this.image = ImageIO.read(new File("img/internalLection.png"));
 		} catch (IOException ex) {}
-		this.vokabel = frame.getCheck().vok(frame.getVokabeln());
 
 		this.setCheck(TransparentButton.createButton(this.test, 120, 320, 200, 40, 30, 0, (e -> {
 			frame.getCheck().check(this.speech2Text.getText(), frame.getVokabeln(), this.vokabel, this.right);
-			this.speech1Text.setText(this.vokabel = frame.getCheck().vok(frame.getVokabeln()));
+			this.speech1Text.setText(frame.getCheck().vok());
 			this.speech2Text.setText("");
 		}), this));
 		frame.getButtons().add(this.getCheck());

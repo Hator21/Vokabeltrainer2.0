@@ -21,7 +21,6 @@ public class LearningPrePanel extends JPanel {
 
 	private MainFrame				frame;
 	private BufferedImage			image;
-	private int						n				= 11;
 	private TransparentButton		learning;
 	private ArrayList<JCheckBox>	units			= new ArrayList<JCheckBox>();
 	private JComboBox<String>		combobox;
@@ -36,20 +35,21 @@ public class LearningPrePanel extends JPanel {
 		this.setBounds(251, 75, 1028, 644);
 
 		try {
-			image = ImageIO.read(new File("img/internalLection.png"));
+			this.image = ImageIO.read(new File("img/internalLection.png"));
 		} catch (IOException ex) {}
 
-		setLearning(TransparentButton.createButton("Lernen", 105, 550, 150, 40, 30, 0, (e -> {
+		this.setLearning(TransparentButton.createButton("Lernen", 105, 550, 150, 40, 30, 0, (e -> {
+			frame.getTestVokabeln().addAll(frame.getCheck().vok(frame.getVokabeln(), 10, frame.getLek()));
 			for (JPanel p : frame.getPanelList()) {
 				p.setVisible(false);
 			}
 			frame.getPanelList().get(2).setVisible(true);
 			frame.getHeadingbar().getHeadingLabelL().setText("Lernen");
 		}), this));
-		frame.getButtons().add(getLearning());
+		frame.getButtons().add(this.getLearning());
 
-		createCheckboxes(n);
-		createComboBox(comboBoxListe);
+		this.createCheckboxes(frame.getBear().getLektion());
+		this.createComboBox(this.comboBoxListe);
 	}
 
 	@Override
@@ -58,29 +58,29 @@ public class LearningPrePanel extends JPanel {
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-		g.drawImage(image, 0, 0, null);
+		g.drawImage(this.image, 0, 0, null);
 	}
 
 	public void createCheckboxes(int n) {
 		for (int i = 0; i < n; i++) {
-			units.add(new JCheckBox("Lektion " + (i + 1)));
-			units.get(i).setBounds(120, 40 * i + 100, 200, 40);
-			units.get(i).setOpaque(false);
-			units.get(i).setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-			this.add(units.get(i));
+			this.units.add(new JCheckBox("Lektion " + (i + 1)));
+			this.units.get(i).setBounds(120, (40 * i) + 100, 200, 40);
+			this.units.get(i).setOpaque(false);
+			this.units.get(i).setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+			this.add(this.units.get(i));
 		}
 	}
 
 	public void createComboBox(String[] list) {
-		combobox = new JComboBox<String>(list);
-		combobox.setBounds(80, 50, 200, 40);
-		combobox.setOpaque(false);
-		combobox.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		this.add(combobox);
+		this.combobox = new JComboBox<String>(list);
+		this.combobox.setBounds(80, 50, 200, 40);
+		this.combobox.setOpaque(false);
+		this.combobox.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		this.add(this.combobox);
 	}
 
 	public MainFrame getFrame() {
-		return frame;
+		return this.frame;
 	}
 
 	public void setFrame(MainFrame frame) {
@@ -88,7 +88,7 @@ public class LearningPrePanel extends JPanel {
 	}
 
 	protected TransparentButton getLearning() {
-		return learning;
+		return this.learning;
 	}
 
 	protected void setLearning(TransparentButton learning) {

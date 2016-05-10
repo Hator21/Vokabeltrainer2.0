@@ -21,7 +21,6 @@ public class SearchingPrePanel extends JPanel {
 
 	private MainFrame				frame;
 	private BufferedImage			image;
-	private int						n				= 11;
 	private TransparentButton		learning;
 	private ArrayList<JCheckBox>	units			= new ArrayList<JCheckBox>();
 	private JComboBox<String>		combobox;
@@ -40,6 +39,7 @@ public class SearchingPrePanel extends JPanel {
 		} catch (IOException ex) {}
 
 		this.setLearning(TransparentButton.createButton("Lernen", 105, 550, 150, 40, 30, 0, (e -> {
+			frame.getTestVokabeln().addAll(frame.getCheck().vok(frame.getVokabeln(), 10, frame.getLek()));
 			for (JPanel p : frame.getPanelList()) {
 				p.setVisible(false);
 			}

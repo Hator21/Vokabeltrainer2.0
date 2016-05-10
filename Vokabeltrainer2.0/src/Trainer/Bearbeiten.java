@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import NewGui.MainFrame;
 
 public class Bearbeiten {
-	private String		aus, in;
 	private MainFrame	frame;
 
 	private static File	vocFile	= new File("data/Vokabeln.csv");
@@ -48,7 +47,6 @@ public class Bearbeiten {
 	//		vokabeln.add(new Vokabel(ausland, inland));
 	//		this.write(vokabeln);
 	//	}
-
 	public int getLektion() {
 		int z = 0;
 		for (int i = 0; i < this.frame.getVokabeln().size(); i++) {
@@ -57,6 +55,11 @@ public class Bearbeiten {
 			}
 		}
 		return z;
+	}
+
+	public void clear(ArrayList<?> list) {
+		list.clear();
+
 	}
 
 	public ArrayList<String> getLektionList() {
