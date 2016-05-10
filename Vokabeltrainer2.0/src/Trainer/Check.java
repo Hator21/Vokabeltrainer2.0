@@ -22,47 +22,91 @@ public class Check {
 		return rnd;
 	}
 
-	public String vok(ArrayList<Vokabel> list) {
-		boolean exist = false;
-		String vokabel = "";
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getUsed() == false) {
-				exist = true;
-			}
-		}
-		if (exist == true) {
-			int rnd = this.random(list);
-			int rnd2 = this.random();
+	public ArrayList<Vokabel> vok(ArrayList<Vokabel> list, int n, ArrayList<Integer> lek) {
+		ArrayList<Vokabel> test = new ArrayList<Vokabel>();
+		ArrayList<Vokabel> lesvok = new ArrayList<Vokabel>();
+		Vokabel vok = new Vokabel();
+		int p = n;
 
-			if (rnd2 == 0) {
-				if (list.get(rnd).getUsed() == true) {
-					rnd = this.random(list);
-				} else if (list.get(rnd).getUsed() == false) {
-					vokabel = list.get(rnd).getVocabTranslation();
-					list.get(rnd).setUsed(true);
-					list.get(rnd).setTested(list.get(rnd).getTested() + 1);
+		for (int i = 0; i < n; i++) {
+			boolean exist = false;
+			for (int y = 0; y < list.size(); y++) {
+				if (list.get(y).getUsed() == false) {
+					exist = true;
+					p--;
 				}
-			} else if (rnd2 == 1) {
+			}
+			if (exist == true) {
+				for (int x = 0; x < list.size(); x++) {
+					for (int k = 0; k < lek.size(); k++) {
+						if (list.get(x).getLection() == lek.get(k)) {
+							lesvok.add(list.get(x));
+
+						}
+					}
+				}
+				int rnd = this.random(list);
+
 				if (list.get(rnd).getUsed() == true) {
 					rnd = this.random(list);
 				} else if (list.get(rnd).getUsed() == false) {
-
-					vokabel = list.get(rnd).getVocabOrigin();
+					vok = list.get(rnd);
+					test.add(vok);
 					list.get(rnd).setUsed(true);
 					list.get(rnd).setTested(list.get(rnd).getTested() + 1);
 				}
 			}
 
 			if (exist == false) {
-				vokabel = "Fertig";
-			}
-			for (int i = 0; i < list.size(); i++) {
-				System.out.println(list.get(i).getUsed());
-				list.get(i).setUsed(false);
+				for (int k = 0; k < p; k++) {
+					vok.setCountryOriginCode("Fertig");
+					vok.setCountryDistinationCode("Fertig");
+					test.add(vok);
+				}
 			}
 
 		}
-		return vokabel;
+		for (int i = 0; i < list.size(); i++) {
+			list.get(i).setUsed(false);
+		}
+
+		return test;
+	}
+
+	public String vok() {
+		boolean exist = false;
+		int rnd = this.random();
+		int rnd2 = this.random(this.frame.getTestVokabeln());
+		String vok = "";
+
+		for (int y = 0; y < this.frame.getTestVokabeln().size(); y++) {
+			if (this.frame.getTestVokabeln().get(y).getUsed() == false) {
+				exist = true;
+			}
+		}
+		if (exist == true) {
+			if (rnd == 0) {
+				if (this.frame.getTestVokabeln().get(rnd2).getUsed() == true) {
+					rnd2 = this.random(this.frame.getTestVokabeln());
+				} else if (this.frame.getTestVokabeln().get(rnd2).getUsed() == false) {
+					vok = this.frame.getTestVokabeln().get(rnd2).getVocabTranslation();
+					this.frame.getTestVokabeln().get(rnd2).setUsed(true);
+				}
+			} else if (rnd == 1) {
+				if (this.frame.getTestVokabeln().get(rnd2).getUsed() == true) {
+					rnd2 = this.random(this.frame.getTestVokabeln());
+				} else if (this.frame.getTestVokabeln().get(rnd2).getUsed() == false) {
+					vok = this.frame.getTestVokabeln().get(rnd2).getVocabTranslation();
+					this.frame.getTestVokabeln().get(rnd2).setUsed(true);
+				}
+
+			}
+		} else if (exist == false) {
+			vok = "Fertig";
+
+		}
+
+		return vok;
 	}
 
 	public void check(String eingabe, ArrayList<Vokabel> list, String vokabel, int right) {

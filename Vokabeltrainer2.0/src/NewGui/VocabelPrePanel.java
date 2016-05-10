@@ -23,7 +23,6 @@ public class VocabelPrePanel extends JPanel {
 
 	private MainFrame				frame;
 	private BufferedImage			image;
-	private int						n				= 11;
 	private ArrayList<JCheckBox>	units			= new ArrayList<JCheckBox>();
 	private JCheckBox				deengCheckBox, engdeCheckBox;
 	private JComboBox<String>		combobox;
@@ -53,6 +52,7 @@ public class VocabelPrePanel extends JPanel {
 
 	public void createButton() {
 		this.setTest(TransparentButton.createButton("Prüfen", 600, 450, 250, 40, 30, 0, (e -> {
+			this.frame.getTestVokabeln().addAll(this.frame.getCheck().vok(this.frame.getVokabeln(), 10, this.frame.getLek()));
 			for (JPanel p : this.frame.getPanelList()) {
 				p.setVisible(false);
 			}

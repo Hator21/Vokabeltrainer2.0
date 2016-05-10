@@ -49,7 +49,7 @@ public class SearchingPanel extends JPanel {
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
 				int random = this.zufallszahl(0, 60) - 30;
-				String v = this.frame.getCheck().vok(this.frame.getVokabeln());
+				String v = this.frame.getCheck().vok();
 				this.vocabels.add(TransparentButton.createButton(v, (205 * i) + 4, (115 * j) + 4, 200, 115, 20, 0, random, this.buttonListener, "vokabel_" + i + "_" + j, this));
 			}
 		}
