@@ -57,6 +57,7 @@ public class MainFrame extends JFrame {
 	private ArrayList<Vokabel>				vokabeln		= new ArrayList<Vokabel>();
 	private HashMap<Language, Language>		languageCombi	= new HashMap<Language, Language>();
 	private ArrayList<Integer>				lek				= new ArrayList<Integer>();
+	private ArrayList<Vokabel>				testvokabeln	= new ArrayList<Vokabel>();
 
 	/**
 	 * Launch the application.
@@ -343,6 +344,14 @@ public class MainFrame extends JFrame {
 
 	public void setVokabeln(ArrayList<Vokabel> vokabeln) {
 		this.vokabeln = vokabeln;
+	}
+
+	public ArrayList<Vokabel> getTestVokabeln() {
+		return this.testvokabeln;
+	}
+
+	public void setTestVokabeln(ArrayList<Vokabel> Testvokabeln) {
+		this.testvokabeln = Testvokabeln;
 	}
 
 	public SettingsPanel getSettingsPanel() {

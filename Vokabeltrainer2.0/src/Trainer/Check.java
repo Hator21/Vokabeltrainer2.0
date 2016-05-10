@@ -1,6 +1,7 @@
 package Trainer;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import NewGui.MainFrame;
 
@@ -22,47 +23,43 @@ public class Check {
 		return rnd;
 	}
 
-	public String vok(ArrayList<Vokabel> list) {
+	public ArrayList<Vokabel> vok(ArrayList<Vokabel> list) {
+		ArrayList<Vokabel> test = new ArrayList<Vokabel>();
+		Vokabel vok = new Vokabel();
 		boolean exist = false;
-		String vokabel = "";
+
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getUsed() == false) {
 				exist = true;
 			}
 		}
-		if (exist == true) {
-			int rnd = this.random(list);
-			int rnd2 = this.random();
+		for (int i = 0; i <= 10; i++) {
+			if (exist == true) {
+				int rnd = this.random(list);
 
-			if (rnd2 == 0) {
 				if (list.get(rnd).getUsed() == true) {
 					rnd = this.random(list);
 				} else if (list.get(rnd).getUsed() == false) {
-					vokabel = list.get(rnd).getVocabTranslation();
-					list.get(rnd).setUsed(true);
-					list.get(rnd).setTested(list.get(rnd).getTested() + 1);
-				}
-			} else if (rnd2 == 1) {
-				if (list.get(rnd).getUsed() == true) {
-					rnd = this.random(list);
-				} else if (list.get(rnd).getUsed() == false) {
-
-					vokabel = list.get(rnd).getVocabOrigin();
+					vok = list.get(rnd);
+					test.addAll((Collection<? extends Vokabel>) vok);
 					list.get(rnd).setUsed(true);
 					list.get(rnd).setTested(list.get(rnd).getTested() + 1);
 				}
 			}
-
-			if (exist == false) {
-				vokabel = "Fertig";
-			}
-			for (int i = 0; i < list.size(); i++) {
-				System.out.println(list.get(i).getUsed());
-				list.get(i).setUsed(false);
-			}
-
 		}
-		return vokabel;
+		if (exist == false) {
+			for (int i = 0; i <= 10; i++) {
+				vok.setCountryOriginCode("Fertig");
+				vok.setCountryDistinationCode("Fertig");
+				test.addAll((Collection<? extends Vokabel>) vok);
+			}
+		}
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i).getUsed());
+			list.get(i).setUsed(false);
+		}
+
+		return test;
 	}
 
 	public void check(String eingabe, ArrayList<Vokabel> list, String vokabel, int right) {

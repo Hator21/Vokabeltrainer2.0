@@ -1,9 +1,6 @@
 package Trainer;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import NewGui.MainFrame;
@@ -30,27 +27,27 @@ public class Bearbeiten {
 		this.writer.save(getMapper(), daten, Vokabel.class, true);
 	}
 
-	public void Hinzufügen(ArrayList<Vokabel> vokabeln) throws Exception {
-		InputStreamReader isr = new InputStreamReader(System.in);
-		BufferedReader br = new BufferedReader(isr);
-		String inland = "";
-		String ausland = "";
-
-		System.out.println("Geben sie das Deutschewort ein.");
-		try {
-			inland = br.readLine();
-		} catch (IOException e) {
-			return;
-		}
-		System.out.println("Geben sie das Fremdsprachenwort ein.");
-		try {
-			ausland = br.readLine();
-		} catch (IOException e) {
-			return;
-		}
-		vokabeln.add(new Vokabel(ausland, inland));
-		this.write(vokabeln);
-	}
+	//	public void Hinzufügen(ArrayList<Vokabel> vokabeln) throws Exception {
+	//		InputStreamReader isr = new InputStreamReader(System.in);
+	//		BufferedReader br = new BufferedReader(isr);
+	//		String inland = "";
+	//		String ausland = "";
+	//
+	//		System.out.println("Geben sie das Deutschewort ein.");
+	//		try {
+	//			inland = br.readLine();
+	//		} catch (IOException e) {
+	//			return;
+	//		}
+	//		System.out.println("Geben sie das Fremdsprachenwort ein.");
+	//		try {
+	//			ausland = br.readLine();
+	//		} catch (IOException e) {
+	//			return;
+	//		}
+	//		vokabeln.add(new Vokabel(ausland, inland));
+	//		this.write(vokabeln);
+	//	}
 
 	public int getLektion() {
 		int z = 0;
@@ -65,11 +62,13 @@ public class Bearbeiten {
 	public ArrayList<String> getLektionList() {
 		ArrayList<String> liste = new ArrayList<String>();
 		for (int i = 0; i < this.frame.getVokabeln().size(); i++) {
-			if (!liste.contains("Lektion " + frame.getVokabeln().get(i).getLection()))
-				liste.add("Lektion " + frame.getVokabeln().get(i).getLection());
+			if (!liste.contains("Lektion " + this.frame.getVokabeln().get(i).getLection())) {
+				liste.add("Lektion " + this.frame.getVokabeln().get(i).getLection());
+			}
 		}
-		for (String s : liste)
+		for (String s : liste) {
 			System.err.println("Lektion: " + s);
+		}
 		return liste;
 	}
 
