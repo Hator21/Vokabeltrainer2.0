@@ -20,15 +20,15 @@ public class TransparentButton extends CustomButton {
 	private MainFrame	frame;
 	private int			factor;
 	private int			fontsize;
-	private double		rotation	= 0;
-	private boolean		correctX	= true;
+	private double		rotation				= 0;
+	private boolean		correctX				= true;
 
 	private Point		bounds;
 	private Point		position;
 	private Font		f;
 
-	Color				color		= new Color(255, 0, 0, 0);
-	Color				color2		= new Color(0, 0, 0, 0);
+	Color				borderColor				= new Color(255, 0, 0, 0);
+	Color				backgroundColorcolor	= new Color(0, 0, 0, 0);
 
 	public TransparentButton(String text, int x, int y, int width, int height, int fontsize, int factor) {
 		this.setText(text);
@@ -52,7 +52,7 @@ public class TransparentButton extends CustomButton {
 
 		this.bounds = new Point(width, height);
 		this.position = new Point(0, 0);
-		this.color2 = c;
+		this.backgroundColorcolor = c;
 
 		this.setBounds(x, y, width, height);
 	}
@@ -80,10 +80,10 @@ public class TransparentButton extends CustomButton {
 		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g.setFont(this.f);
 
-		g.setColor(color);
+		g.setColor(borderColor);
 		g.drawRect(this.position.x, this.position.y, this.bounds.x - 1, this.bounds.y - 1);
 
-		g.setColor(color2);
+		g.setColor(backgroundColorcolor);
 		g.fillRect(this.position.x + 1, this.position.y + 1, this.bounds.x - 2, this.bounds.y - 2);
 
 		int x = (this.position.x + (this.bounds.x / 2)) - (int) (g.getFontMetrics().getStringBounds(this.getText(), g).getWidth() / 2);
@@ -161,13 +161,13 @@ public class TransparentButton extends CustomButton {
 		this.correctX = correctX;
 	}
 
-	public void setColor2(Color c) {
-		this.color2 = c;
+	public void setBackgroundColor(Color c) {
+		this.backgroundColorcolor = c;
 		this.repaint();
 	}
 
-	public void setColor(Color c) {
-		this.color = c;
+	public void setBorderColor(Color c) {
+		this.borderColor = c;
 		this.repaint();
 	}
 

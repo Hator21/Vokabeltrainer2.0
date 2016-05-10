@@ -65,12 +65,12 @@ public class SettingsPanel extends JPanel {
 					for (TransparentLabel t : frame.getLabels())
 						t.setColor(new Color(0, 0, 255, 255));
 					for (TransparentButton t : frame.getButtons())
-						t.setColor(new Color(255, 0, 0, 255));
+						t.setBorderColor(new Color(255, 0, 0, 255));
 				} else {
 					for (TransparentLabel t : frame.getLabels())
 						t.setColor(new Color(0, 0, 255, 0));
 					for (TransparentButton t : frame.getButtons())
-						t.setColor(new Color(255, 0, 0, 0));
+						t.setBorderColor(new Color(255, 0, 0, 0));
 				}
 			}
 		});

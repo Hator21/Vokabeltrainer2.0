@@ -12,8 +12,8 @@ public class Check {
 		this.setFrame(frame);
 	}
 
-	public int random(ArrayList<Vokabel> list) {
-		int rnd = (int) ((Math.random()) * list.size());
+	public int random(int max) {
+		int rnd = (int) ((Math.random()) * max);
 		return rnd;
 	}
 
@@ -22,61 +22,59 @@ public class Check {
 		return rnd;
 	}
 
-	public ArrayList<Vokabel> vok(ArrayList<Vokabel> list, int n, ArrayList<Integer> lek) {
-		ArrayList<Vokabel> test = new ArrayList<Vokabel>();
-		ArrayList<Vokabel> lesvok = new ArrayList<Vokabel>();
-		Vokabel vok = new Vokabel();
-		int p = n;
+	/**
+	 * 
+	 * What this stupid function does:
+	 * Returns @param n random unsed vocs from the pool of available vocs ( @param list ) froml the selected lections ( @param lek )
+	 * 
+	 * @param list
+	 *            - List of all vocabularies
+	 * @param n
+	 *            - number of requested vocabularies
+	 * @param lek
+	 *            - list of selected lections
+	 * @param markUsed
+	 *            - mark the requested voc. as used
+	 * @return list of requested vocs.
+	 */
+	public ArrayList<Vokabel> vok(int n, ArrayList<Integer> lek, boolean markUsed) {
+		ArrayList<Vokabel> list = frame.getVokabeln();
 
-		for (int i = 0; i < n; i++) {
-			boolean exist = false;
-			for (int y = 0; y < list.size(); y++) {
-				if (list.get(y).getUsed() == false) {
-					exist = true;
-					p--;
+		ArrayList<Vokabel> returnList = new ArrayList<>();
+
+		if (n > list.size()) {
+			return list;
+		}
+
+		boolean empty = false;
+		while (!empty) {
+			Vokabel v = list.get(random(list.size()));
+
+			if (returnList.contains(v)) {
+				if (returnList.size() == list.size()) {
+					empty = true;
+				}
+			} else {
+				returnList.add(v);
+
+				if (markUsed) {
+					v.setUsed(true);
+					v.setTested(v.getTested() + 1);
 				}
 			}
-			if (exist == true) {
-				for (int x = 0; x < list.size(); x++) {
-					for (int k = 0; k < lek.size(); k++) {
-						if (list.get(x).getLection() == lek.get(k)) {
-							lesvok.add(list.get(x));
 
-						}
-					}
-				}
-				int rnd = this.random(list);
-
-				if (list.get(rnd).getUsed() == true) {
-					rnd = this.random(list);
-				} else if (list.get(rnd).getUsed() == false) {
-					vok = list.get(rnd);
-					test.add(vok);
-					list.get(rnd).setUsed(true);
-					list.get(rnd).setTested(list.get(rnd).getTested() + 1);
-				}
-			}
-
-			if (exist == false) {
-				for (int k = 0; k < p; k++) {
-					vok.setCountryOriginCode("Fertig");
-					vok.setCountryDistinationCode("Fertig");
-					test.add(vok);
-				}
+			if (returnList.size() >= n) {
+				empty = true;
 			}
 
 		}
-		for (int i = 0; i < list.size(); i++) {
-			list.get(i).setUsed(false);
-		}
-
-		return test;
+		return returnList;
 	}
 
 	public String vok() {
 		boolean exist = false;
 		int rnd = this.random();
-		int rnd2 = this.random(this.frame.getTestVokabeln());
+		int rnd2 = this.random(this.frame.getTestVokabeln().size());
 		String vok = "";
 
 		for (int y = 0; y < this.frame.getTestVokabeln().size(); y++) {
@@ -87,14 +85,14 @@ public class Check {
 		if (exist == true) {
 			if (rnd == 0) {
 				if (this.frame.getTestVokabeln().get(rnd2).getUsed() == true) {
-					rnd2 = this.random(this.frame.getTestVokabeln());
+					rnd2 = this.random(this.frame.getTestVokabeln().size());
 				} else if (this.frame.getTestVokabeln().get(rnd2).getUsed() == false) {
 					vok = this.frame.getTestVokabeln().get(rnd2).getVocabTranslation();
 					this.frame.getTestVokabeln().get(rnd2).setUsed(true);
 				}
 			} else if (rnd == 1) {
 				if (this.frame.getTestVokabeln().get(rnd2).getUsed() == true) {
-					rnd2 = this.random(this.frame.getTestVokabeln());
+					rnd2 = this.random(this.frame.getTestVokabeln().size());
 				} else if (this.frame.getTestVokabeln().get(rnd2).getUsed() == false) {
 					vok = this.frame.getTestVokabeln().get(rnd2).getVocabTranslation();
 					this.frame.getTestVokabeln().get(rnd2).setUsed(true);

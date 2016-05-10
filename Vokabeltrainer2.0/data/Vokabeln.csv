@@ -1,10 +1,6 @@
 countryOriginCode;countryDistinationCode;vocabOrigin;vocabTranslation;lection;tested;correct
-<<<<<<< HEAD
-de_de;en_us;Apfel1;appel1;3;189;32
-=======
-de_de;en_us;Apfel1;appel1;3;116;59
-de_de;en_en;Apfel2;appelino2;1;128;57
-de_de;en_en;ARSCH3;ASS3;2;133;57
-de_de;en_en;Apfel4;appelino4;4;124;57
-de_de;cs_go;Apfel5;appelino5;1;126;57
->>>>>>> refs/remotes/origin/master
+de_de;en_us;Apfel1;appel1;3;0;0
+de_de;en_en;Apfel2;appelino2;1;1;0
+de_de;en_en;ARSCH3;ASS3;2;1;0
+de_de;en_en;Apfel4;appelino4;4;2;0
+de_de;cs_go;Apfel5;appelino5;1;0;0
