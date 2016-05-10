@@ -42,9 +42,11 @@ public class SearchingPanel extends JPanel {
 			System.out.println("Du Hurensohn!!!!1111elf");
 		}), this));
 		frame.getButtons().add(this.getNextcorrect());
+		if (frame.getLek().size() > 0) {
+			askedVoc = frame.getCheck().vok(1, frame.getLek(), true).get(0);
+			this.setVokabel(TransparentLabel.createLabel("Suche: " + askedVoc.getVocabOrigin(), 0, 600, 200, 44, 20, this));
+		}
 
-		askedVoc = frame.getCheck().vok(1, frame.getLek(), true).get(0);
-		this.setVokabel(TransparentLabel.createLabel("Suche: " + askedVoc.getVocabOrigin(), 0, 600, 200, 44, 20, this));
 		frame.getLabels().add(this.getVokabel());
 	}
 

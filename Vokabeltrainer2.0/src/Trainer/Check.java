@@ -38,6 +38,9 @@ public class Check {
 	 * @return list of requested vocs.
 	 */
 	public ArrayList<Vokabel> vok(int n, ArrayList<Integer> lek, boolean markUsed) {
+		if (lek.size() == 0) {
+			return new ArrayList<>();
+		}
 		ArrayList<Vokabel> list = frame.getVokabeln();
 
 		ArrayList<Vokabel> returnList = new ArrayList<>();
@@ -49,6 +52,10 @@ public class Check {
 		boolean empty = false;
 		while (!empty) {
 			Vokabel v = list.get(random(list.size()));
+
+			if (!lek.contains(v.getLection())) {
+				continue;
+			}
 
 			if (returnList.contains(v)) {
 				if (returnList.size() == list.size()) {
