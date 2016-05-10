@@ -43,22 +43,22 @@ public class SearchingPanel extends JPanel {
 		}), this));
 		frame.getButtons().add(this.getNextcorrect());
 		if (frame.getLek().size() > 0) {
-			askedVoc = frame.getCheck().vok(1, frame.getLek(), true).get(0);
-			this.setVokabel(TransparentLabel.createLabel("Suche: " + askedVoc.getVocabOrigin(), 0, 600, 200, 44, 20, this));
+			this.askedVoc = frame.getCheck().vok(1, true, frame.getLek()).get(0);
+			this.setVokabel(TransparentLabel.createLabel("Suche: " + this.askedVoc.getVocabOrigin(), 0, 600, 200, 44, 20, this));
 		}
 
 		frame.getLabels().add(this.getVokabel());
 	}
 
 	public void createButtons() {
-		ArrayList<Vokabel> vocs = frame.getCheck().vok(25, frame.getLek(), false);
+		ArrayList<Vokabel> vocs = this.frame.getCheck().vok(25, false, this.frame.getLek());
 		if (vocs.size() < 25) {
 			// TODO: Verteilen
 			for (int x = 0; x < 5; x++) {
 				for (int y = 0; y < 5; y++) {
 					int random = this.zufallszahl(0, 60) - 30;
-					if ((x * 5) + y < vocs.size()) {
-						this.vocabels.add(TransparentButton.createButton(vocs.get((x * 5 + y)).getVocabTranslation(), (205 * x) + 4, (115 * y) + 4, 200, 115, 20, 0, random, this.buttonListener, vocs.get((x * 5 + y)).getVocabTranslation(), this));
+					if (((x * 5) + y) < vocs.size()) {
+						this.vocabels.add(TransparentButton.createButton(vocs.get(((x * 5) + y)).getVocabTranslation(), (205 * x) + 4, (115 * y) + 4, 200, 115, 20, 0, random, this.buttonListener, vocs.get(((x * 5) + y)).getVocabTranslation(), this));
 					}
 				}
 			}
@@ -66,8 +66,8 @@ public class SearchingPanel extends JPanel {
 			for (int x = 0; x < 5; x++) {
 				for (int y = 0; y < 5; y++) {
 					int random = this.zufallszahl(0, 60) - 30;
-					if ((x * 5) + y < vocs.size()) {
-						this.vocabels.add(TransparentButton.createButton(vocs.get((x * 5 + y)).getVocabTranslation(), (205 * x) + 4, (115 * y) + 4, 200, 115, 20, 0, random, this.buttonListener, vocs.get((x * 5 + y)).getVocabTranslation(), this));
+					if (((x * 5) + y) < vocs.size()) {
+						this.vocabels.add(TransparentButton.createButton(vocs.get(((x * 5) + y)).getVocabTranslation(), (205 * x) + 4, (115 * y) + 4, 200, 115, 20, 0, random, this.buttonListener, vocs.get(((x * 5) + y)).getVocabTranslation(), this));
 					}
 				}
 			}
@@ -117,7 +117,7 @@ public class SearchingPanel extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println(((TransparentButton) (e.getSource())).getText());
-			if (askedVoc.getVocabTranslation().equalsIgnoreCase(((TransparentButton) (e.getSource())).getText())) {
+			if (SearchingPanel.this.askedVoc.getVocabTranslation().equalsIgnoreCase(((TransparentButton) (e.getSource())).getText())) {
 				// TODO: richtig
 				System.out.println("RICHTIG!");
 				((TransparentButton) e.getSource()).setBackgroundColor(Color.GREEN);

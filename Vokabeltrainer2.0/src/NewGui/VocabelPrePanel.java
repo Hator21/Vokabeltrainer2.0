@@ -52,7 +52,7 @@ public class VocabelPrePanel extends JPanel {
 
 	public void createButton() {
 		this.setTest(TransparentButton.createButton("Prüfen", 600, 450, 250, 40, 30, 0, (e -> {
-			this.frame.getTestVokabeln().addAll(this.frame.getCheck().vok(10, this.frame.getLek(), false));
+			this.frame.getTestVokabeln().addAll(this.frame.getCheck().vok(10, false, this.frame.getLek()));
 			for (JPanel p : this.frame.getPanelList()) {
 				p.setVisible(false);
 			}

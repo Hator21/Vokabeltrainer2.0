@@ -22,7 +22,7 @@ public class LearningPanel extends JPanel {
 	private BufferedImage		image;
 	private JTextField			speech1Text, speech2Text;
 	private TransparentLabel	speech1Label, speech2Label, correct, countRight, countWrong, average;
-	private String				sprache1	= "Deutsch", sprache2 = "Englisch", vokabel = "vokabel";
+	private String				sprache1	= "Deutsch", sprache2 = "Englisch", vokabel = "";
 	private String				test		= "Überprüfen";
 	private TransparentButton	check;
 	private int					right, counts = 10;
@@ -35,10 +35,10 @@ public class LearningPanel extends JPanel {
 		try {
 			this.image = ImageIO.read(new File("img/internalLection.png"));
 		} catch (IOException ex) {}
-
+		this.vokabel = this.frame.getCheck().testvok();
 		this.setCheck(TransparentButton.createButton(this.test, 120, 320, 200, 40, 30, 0, (e -> {
 			frame.getCheck().check(this.speech2Text.getText(), frame.getVokabeln(), this.vokabel, this.right);
-			this.speech1Text.setText(frame.getCheck().vok());
+			this.speech1Text.setText(frame.getCheck().testvok());
 			this.speech2Text.setText("");
 		}), this));
 		frame.getButtons().add(this.getCheck());

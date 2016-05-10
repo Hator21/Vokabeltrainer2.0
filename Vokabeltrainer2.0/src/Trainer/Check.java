@@ -23,10 +23,10 @@ public class Check {
 	}
 
 	/**
-	 * 
-	 * What this stupid function does:
+	 *
+	 * What this function does:
 	 * Returns @param n random unsed vocs from the pool of available vocs ( @param list ) froml the selected lections ( @param lek )
-	 * 
+	 *
 	 * @param list
 	 *            - List of all vocabularies
 	 * @param n
@@ -37,11 +37,12 @@ public class Check {
 	 *            - mark the requested voc. as used
 	 * @return list of requested vocs.
 	 */
-	public ArrayList<Vokabel> vok(int n, ArrayList<Integer> lek, boolean markUsed) {
+	public ArrayList<Vokabel> vok(int n, boolean markUsed, ArrayList<Integer> lek) {
+		ArrayList<Vokabel> list = this.frame.getVokabeln();
+		System.out.println(lek);
 		if (lek.size() == 0) {
 			return new ArrayList<>();
 		}
-		ArrayList<Vokabel> list = frame.getVokabeln();
 
 		ArrayList<Vokabel> returnList = new ArrayList<>();
 
@@ -51,7 +52,7 @@ public class Check {
 
 		boolean empty = false;
 		while (!empty) {
-			Vokabel v = list.get(random(list.size()));
+			Vokabel v = list.get(this.random(list.size()));
 
 			if (!lek.contains(v.getLection())) {
 				continue;
@@ -78,7 +79,7 @@ public class Check {
 		return returnList;
 	}
 
-	public String vok() {
+	public String testvok() {
 		boolean exist = false;
 		int rnd = this.random();
 		int rnd2 = this.random(this.frame.getTestVokabeln().size());
@@ -92,6 +93,7 @@ public class Check {
 		if (exist == true) {
 			if (rnd == 0) {
 				if (this.frame.getTestVokabeln().get(rnd2).getUsed() == true) {
+					System.out.println("NO MORE");
 					rnd2 = this.random(this.frame.getTestVokabeln().size());
 				} else if (this.frame.getTestVokabeln().get(rnd2).getUsed() == false) {
 					vok = this.frame.getTestVokabeln().get(rnd2).getVocabTranslation();
@@ -99,6 +101,7 @@ public class Check {
 				}
 			} else if (rnd == 1) {
 				if (this.frame.getTestVokabeln().get(rnd2).getUsed() == true) {
+					System.out.println("NO MORE");
 					rnd2 = this.random(this.frame.getTestVokabeln().size());
 				} else if (this.frame.getTestVokabeln().get(rnd2).getUsed() == false) {
 					vok = this.frame.getTestVokabeln().get(rnd2).getVocabTranslation();

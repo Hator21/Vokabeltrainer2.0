@@ -37,9 +37,21 @@ public class LearningPrePanel extends JPanel {
 		try {
 			this.image = ImageIO.read(new File("img/internalLection.png"));
 		} catch (IOException ex) {}
+		this.createCheckboxes(frame.getBear().getLektion());
+		this.createComboBox(this.comboBoxListe);
 
 		this.setLearning(TransparentButton.createButton("Lernen", 105, 550, 150, 40, 30, 0, (e -> {
-			frame.getTestVokabeln().addAll(frame.getCheck().vok(10, frame.getLek(), false));
+			for (int i = 0; i < frame.getBear().getLektion(); i++) {
+				System.out.println(this.units.get(i).isSelected());
+				if (this.units.get(i).isSelected() == true) {
+
+					frame.getLek().add(i);
+				}
+
+			}
+			frame.getTestVokabeln().addAll(frame.getCheck().vok(10, false, frame.getLek()));
+			System.out.println(frame.getTestVokabeln());
+
 			for (JPanel p : frame.getPanelList()) {
 				p.setVisible(false);
 			}
@@ -48,8 +60,6 @@ public class LearningPrePanel extends JPanel {
 		}), this));
 		frame.getButtons().add(this.getLearning());
 
-		this.createCheckboxes(frame.getBear().getLektion());
-		this.createComboBox(this.comboBoxListe);
 	}
 
 	@Override
