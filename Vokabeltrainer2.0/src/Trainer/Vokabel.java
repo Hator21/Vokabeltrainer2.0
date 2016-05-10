@@ -9,32 +9,40 @@ package Trainer;
  */
 public class Vokabel {
 
-	private String countryOriginCode = "";
-	private String countryDistinationCode = "";
+	private String	countryOriginCode		= "";
+	private String	countryDistinationCode	= "";
 
-	private String vocabOrigin = "";
-	private String vocabTranslation = "";
+	private String	vocabOrigin				= "";
+	private String	vocabTranslation		= "";
 
-	private int lection = 0;
+	private int		lection					= 0;
 
-	private int tested = 0;
-	private int correct = 0;
+	private int		tested					= 0;
+	private int		correct					= 0;
 
-	private boolean used = false;
+	private boolean	used					= false;
 
-	public Vokabel() {
-	}
+	public Vokabel() {}
 
 	public Vokabel(String original, String translation) {
 		this.setVocabOrigin(original);
 		this.setVocabTranslation(translation);
 	}
 
+	public Vokabel(String countryOriginCode, String countryDistinationCode, String originalLanguage, String translationLanguage, int lection, int tested, int correct, boolean used) {
+		this.setCountryOriginCode(countryOriginCode);
+		this.setCountryDistinationCode(countryDistinationCode);
+		this.setVocabOrigin(originalLanguage);
+		this.setVocabTranslation(translationLanguage);
+		this.setLection(lection);
+		this.setTested(tested);
+		this.setCorrect(correct);
+		this.setUsed(used);
+	}
+
 	@Override
 	public String toString() {
-		return "[" + this.countryOriginCode + "]" + "[" + this.countryDistinationCode + "]" + "[" + this.vocabOrigin
-				+ "]" + "[" + this.vocabTranslation + "]" + "[" + this.lection + "]" + "[" + this.tested + "]" + "["
-				+ this.correct + "]";
+		return "[" + this.countryOriginCode + "]" + "[" + this.countryDistinationCode + "]" + "[" + this.vocabOrigin + "]" + "[" + this.vocabTranslation + "]" + "[" + this.lection + "]" + "[" + this.tested + "]" + "[" + this.correct + "]";
 	}
 
 	/**
@@ -141,10 +149,12 @@ public class Vokabel {
 	public void setCorrect(int correct) {
 		this.correct = correct;
 	}
-	public boolean getUsed(){
+
+	public boolean getUsed() {
 		return this.used;
 	}
-	public void setUsed(boolean used){
-		this.used=used;
+
+	public void setUsed(boolean used) {
+		this.used = used;
 	}
 }

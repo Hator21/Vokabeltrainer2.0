@@ -7,10 +7,13 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
@@ -27,6 +30,7 @@ import javax.swing.table.DefaultTableModel;
 import Components.TransparentButton;
 import Components.TransparentLabel;
 import Trainer.Language;
+import Trainer.Vokabel;
 
 @SuppressWarnings("serial")
 public class EditSPanel extends JPanel {
@@ -48,7 +52,10 @@ public class EditSPanel extends JPanel {
 	private String				prä2;
 	private addLanguage			addL;
 	private addLection			addLe;
+	private addVocabel			addVoc;
 	private ArrayList<String>	lections	= new ArrayList<String>();
+	ArrayList<String>			languages	= new ArrayList<String>();
+	private ArrayList<Vokabel>	vocabellist	= new ArrayList<Vokabel>();
 
 	public EditSPanel(MainFrame frame) {
 		this.setFrame(frame);
@@ -57,8 +64,6 @@ public class EditSPanel extends JPanel {
 		addL = new addLanguage();
 		setAddLe(new addLection());
 		add2Language();
-		lections.addAll(frame.getBear().getLektionList());
-		lections.sort(null);
 		try {
 			this.image = ImageIO.read(new File("img/Hintergrund-weiß.png"));
 		} catch (IOException ex) {}
@@ -70,13 +75,51 @@ public class EditSPanel extends JPanel {
 		vocabelPanel.setLayout(null);
 
 		setAddVocabel(TransparentButton.createButton("Vokabel anlegen", 36, 19, 248, 29, 20, 0, new Color(10, 10, 10, 20), (e -> {
-
+			String language = ((String) (languageCB.getSelectedItem()));
+			String lang1 = language.split("-")[0];
+			String lang2 = language.split("-")[1];
+			prä1 = getPräfix1(lang1);
+			prä2 = getPräfix2(lang2);
+			addVoc = new addVocabel(lang1, lang2);
+			int s = JOptionPane.showConfirmDialog(null, addVoc.getInputs(), "Vokabel anlegen", JOptionPane.PLAIN_MESSAGE);
+			if (s == JOptionPane.OK_OPTION) {
+				if (!addVoc.getAddVocabelOLTF().getText().equals("") && !addVoc.getAddVocabelDLTF().getText().equals("")) {
+					nr++;
+					int lectionNR = Integer.parseInt(lectionsCB.getSelectedItem().toString().split(" ")[1]);
+					frame.getVokabeln().add(new Vokabel(prä1, prä2, addVoc.getAddVocabelOLTF().getText(), addVoc.getAddVocabelDLTF().getText(), lectionNR, 0, 0, false));
+					loadTable();
+					for (Vokabel v : frame.getVokabeln())
+						System.out.println(v.toString());
+				}
+			}
 		}), vocabelPanel));
+
 		setDeleteVocabel(TransparentButton.createButton("Vokabel löschen", 36, 53, 248, 29, 20, 0, new Color(10, 10, 10, 20), (e -> {
-
+			int row = table.getSelectedRow();
+			frame.getVokabeln().remove(getVocabelFromTable(row));
+			loadTable();
 		}), vocabelPanel));
-		setEditVocabel(TransparentButton.createButton("Vokabel ändern", 36, 87, 248, 29, 20, 0, new Color(10, 10, 10, 20), (e -> {
 
+		setEditVocabel(TransparentButton.createButton("Vokabel ändern", 36, 87, 248, 29, 20, 0, new Color(10, 10, 10, 20), (e -> {
+			String language = ((String) (languageCB.getSelectedItem()));
+			String lang1 = language.split("-")[0];
+			String lang2 = language.split("-")[1];
+			int row = table.getSelectedRow();
+			int index = getVocabelFromTable(row);
+			Vokabel voc = frame.getVokabeln().get(index);
+			System.out.println(voc.getVocabOrigin());
+			System.err.println("->" + index);
+			addVoc = new addVocabel(lang1, lang2);
+			addVoc.getAddVocabelOLTF().setText(voc.getVocabOrigin());
+			addVoc.getAddVocabelDLTF().setText(voc.getVocabTranslation());
+			int s = JOptionPane.showConfirmDialog(null, addVoc.getInputs(), "Vokabel ändern", JOptionPane.PLAIN_MESSAGE);
+			if (s == JOptionPane.OK_OPTION) {
+				if (!addVoc.getAddVocabelOLTF().getText().equals("") && !addVoc.getAddVocabelDLTF().getText().equals("")) {
+					frame.getVokabeln().get(index).setVocabOrigin(addVoc.getAddVocabelOLTF().getText());
+					frame.getVokabeln().get(index).setVocabTranslation(addVoc.getAddVocabelDLTF().getText());
+				}
+			}
+			loadTable();
 		}), vocabelPanel));
 
 		lectionPanel = new JPanel();
@@ -90,13 +133,23 @@ public class EditSPanel extends JPanel {
 			if (s == JOptionPane.OK_OPTION) {
 				if (!addLe.getAddLanguage1TF().getText().equals("")) {
 					lectionsCB.setModel(new DefaultComboBoxModel<String>(add2Lection(addLe.getAddLanguage1TF().getText())));
-				} else
-					System.out.println("nein");
+				}
 			}
+			createLectionList();
 			loadTable();
 		}), lectionPanel));
-		setDeleteLection(TransparentButton.createButton("Lektion löschen", 36, 53, 248, 29, 20, 0, new Color(10, 10, 10, 20), (e -> {
 
+		setDeleteLection(TransparentButton.createButton("Lektion löschen", 36, 53, 248, 29, 20, 0, new Color(10, 10, 10, 20), (e -> {
+			int lection = Integer.parseInt(lectionsCB.getSelectedItem().toString().split(" ")[1]);
+			putPräfix();
+			Iterator<Vokabel> it = frame.getVokabeln().iterator();
+			while (it.hasNext()) {
+				Vokabel voc = it.next();
+				if (voc.getCountryOriginCode().equals(prä1) && voc.getCountryDistinationCode().equals(prä2) && voc.getLection() == lection)
+					it.remove();
+			}
+			createLectionList();
+			loadTable();
 		}), lectionPanel));
 
 		lectionsCB = new JComboBox<String>();
@@ -105,6 +158,11 @@ public class EditSPanel extends JPanel {
 		lectionsCB.setBounds(36, 127, 248, 29);
 		lectionPanel.add(lectionsCB);
 		lectionsCB.setModel(new DefaultComboBoxModel<String>(lections.toArray(new String[lections.size()])));
+		lectionsCB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				loadTable();
+			}
+		});
 
 		setSelectLection(TransparentLabel.createLabel("Lektion auswählen", 36, 87, 248, 29, 20, lectionPanel));
 
@@ -120,13 +178,33 @@ public class EditSPanel extends JPanel {
 				if (!addL.getAddLanguage1TF().getText().equals("") && !addL.getAddLanguage2TF().getText().equals("") && !addL.getAddPräfix1TF().getText().equals("") && !addL.getAddPräfix2TF().getText().equals("")) {
 					frame.getLanguageCombi().put(new Language(addL.getAddPräfix1TF().getText(), addL.getAddLanguage1TF().getText()), new Language(addL.getAddPräfix2TF().getText(), addL.getAddLanguage2TF().getText()));
 					languageCB.setModel(new DefaultComboBoxModel<String>(add2Language()));
-				} else
-					System.out.println("nein");
+				}
 			}
+			createLectionList();
 			loadTable();
 		}), speechPanel));
-		setDeleteSpeech(TransparentButton.createButton("Sprache löschen", 36, 53, 248, 29, 20, 0, new Color(10, 10, 10, 20), (e -> {
 
+		setDeleteSpeech(TransparentButton.createButton("Sprache löschen", 36, 53, 248, 29, 20, 0, new Color(10, 10, 10, 20), (e -> {
+			String language = languageCB.getSelectedItem().toString();
+			String lang1 = language.split("-")[0];
+			String lang2 = language.split("-")[1];
+			prä1 = getPräfix1(lang1);
+			prä2 = getPräfix2(lang2);
+			Iterator<Vokabel> it = frame.getVokabeln().iterator();
+			while (it.hasNext()) {
+				Vokabel voc = it.next();
+				if (voc.getCountryOriginCode().equals(prä1) && voc.getCountryDistinationCode().equals(prä2))
+					it.remove();
+			}
+			for (Language key : frame.getLanguageCombi().keySet()) {
+				if (key.getLanguage().equals(lang1) && frame.getLanguageCombi().get(key).getLanguage().equals(lang2)) {
+					frame.getLanguageCombi().remove(key);
+					break;
+				}
+			}
+			languageCB.removeItem(language);
+			createLectionList();
+			loadTable();
 		}), speechPanel));
 
 		languageCB = new JComboBox<String>();
@@ -135,6 +213,13 @@ public class EditSPanel extends JPanel {
 		languageCB.setBounds(36, 127, 248, 29);
 		speechPanel.add(languageCB);
 		languageCB.setModel(new DefaultComboBoxModel<String>(add2Language()));
+		languageCB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				createLectionList();
+				loadTable();
+			}
+		});
+		createLectionList();
 
 		setSelectLection(TransparentLabel.createLabel("Sprache auswählen", 36, 87, 248, 29, 20, speechPanel));
 
@@ -171,44 +256,37 @@ public class EditSPanel extends JPanel {
 
 	public void loadTable() {
 		nr = 1;
-		String language = ((String) (languageCB.getSelectedItem()));
-		String lang1 = language.split("-")[0];
-		String lang2 = language.split("-")[1];
-		System.err.println(language + "-> " + lang1 + " - " + lang2);
-		for (Language key : frame.getLanguageCombi().keySet()) {
-			System.out.println(key.getLanguage() + "-" + key.getPräfix());
-			if (key.getLanguage().equals(lang1))
-				prä1 = key.getPräfix();
-			if (frame.getLanguageCombi().get(key).getLanguage().equals(lang2))
-				prä2 = frame.getLanguageCombi().get(key).getPräfix();
-		}
-		System.err.println(prä1 + " - " + prä2);
+		int correct;
+		tableModel.setRowCount(0);
+		putPräfix();
 		if (prä1 != null && prä2 != null) {
-			System.out.println("1");
 			for (int i = 0; i < frame.getVokabeln().size(); i++) {
-				System.out.print(frame.getVokabeln().get(i).getCountryOriginCode() + " - ");
-				System.out.println(frame.getVokabeln().get(i).getCountryDistinationCode());
 				if (frame.getVokabeln().get(i).getCountryOriginCode().equals(prä1) && frame.getVokabeln().get(i).getCountryDistinationCode().equals(prä2)) {
-					if (((String) (lectionsCB.getSelectedItem())).startsWith("Lektion ")) {
-						int x = Integer.valueOf(((String) (lectionsCB.getSelectedItem())).split(" ")[1]);
-						System.err.println(x);
-						if (frame.getVokabeln().get(i).getLection() == x) {
+					if (lectionsCB.getItemCount() != 0) {
+						if (((String) (lectionsCB.getSelectedItem())).startsWith("Lektion ")) {
+							int x = Integer.valueOf(((String) (lectionsCB.getSelectedItem())).split(" ")[1]);
+							if (frame.getVokabeln().get(i).getLection() == x) {
 
-							String originalLanguage = frame.getVokabeln().get(i).getVocabOrigin();
-							String destinationLanguage = frame.getVokabeln().get(i).getVocabTranslation();
-							int learned = frame.getVokabeln().get(i).getTested();
-							int correct = frame.getVokabeln().get(i).getCorrect() / frame.getVokabeln().get(i).getTested() * 100;
+								String originalLanguage = frame.getVokabeln().get(i).getVocabOrigin();
+								String destinationLanguage = frame.getVokabeln().get(i).getVocabTranslation();
+								int learned = frame.getVokabeln().get(i).getTested();
+								if (frame.getVokabeln().get(i).getCorrect() == 0 || frame.getVokabeln().get(i).getTested() == 0) {
+									correct = 0;
+								} else {
+									double correctD = frame.getVokabeln().get(i).getCorrect() * 100 / frame.getVokabeln().get(i).getTested();
+									correct = (int) correctD;
+								}
 
-							Object[] data = {
-									nr, originalLanguage, destinationLanguage, learned, correct
-							};
-							nr++;
-							tableModel.addRow(data);
+								Object[] data = {
+										nr, originalLanguage, destinationLanguage, learned, correct
+								};
+								nr++;
+								vocabellist.add(new Vokabel(prä1, prä2, originalLanguage, destinationLanguage, x, learned, correct, frame.getVokabeln().get(i).getUsed()));
+								tableModel.addRow(data);
+							}
 						}
-					} else
-						System.err.println("nö");
-				} else
-					System.out.println("extra nö");
+					}
+				}
 			}
 		}
 	}
@@ -302,22 +380,21 @@ public class EditSPanel extends JPanel {
 	}
 
 	public String[] add2Language() {
-		ArrayList<String> languageComponents = new ArrayList<String>();
 		boolean b = false;
 		for (Language s : frame.getLanguageCombi().keySet()) {
 			Language t = frame.getLanguageCombi().get(s);
-			if (languageComponents.size() != 0) {
-				for (String st : languageComponents)
+			if (languages.size() != 0) {
+				for (String st : languages)
 					if ((s.getLanguage() + "-" + t.getLanguage()).equals(st) || (t.getLanguage() + "-" + s.getLanguage()).equals(st))
 						b = true;
 				if (b == false)
-					languageComponents.add(s.getLanguage() + "-" + t.getLanguage());
+					languages.add(s.getLanguage() + "-" + t.getLanguage());
 				b = false;
 			} else
-				languageComponents.add(s.getLanguage() + "-" + t.getLanguage());
+				languages.add(s.getLanguage() + "-" + t.getLanguage());
 		}
 
-		return (String[]) languageComponents.toArray(new String[languageComponents.size()]);
+		return (String[]) languages.toArray(new String[languages.size()]);
 	}
 
 	public String[] add2Lection(String lection) {
@@ -336,6 +413,54 @@ public class EditSPanel extends JPanel {
 
 	public void setAddLe(addLection addLe) {
 		this.addLe = addLe;
+	}
+
+	public String getPräfix1(String lang) {
+		for (Language key : frame.getLanguageCombi().keySet()) {
+			if (key.getLanguage().equals(lang))
+				prä1 = key.getPräfix();
+		}
+		return prä1;
+	}
+
+	public String getPräfix2(String lang) {
+		for (Language key : frame.getLanguageCombi().keySet()) {
+			if (frame.getLanguageCombi().get(key).getLanguage().equals(lang))
+				prä2 = frame.getLanguageCombi().get(key).getPräfix();
+		}
+		return prä2;
+	}
+
+	public void createLectionList() {
+		lections.clear();
+		putPräfix();
+		lections.addAll(frame.getBear().getLektionList(prä1, prä2));
+		lections.sort(null);
+		lectionsCB.setModel(new DefaultComboBoxModel<String>(lections.toArray(new String[lections.size()])));
+	}
+
+	public int getVocabelFromTable(int row) {
+		int index = 0;
+		int lection = Integer.parseInt(lectionsCB.getSelectedItem().toString().split(" ")[1]);
+		putPräfix();
+		String original = (String) table.getModel().getValueAt(row, 1);
+		String destination = (String) table.getModel().getValueAt(row, 2);
+		int gelernt = Integer.parseInt(table.getModel().getValueAt(row, 3).toString());
+		for (int i = 0; i < frame.getVokabeln().size(); i++) {
+			if (frame.getVokabeln().get(i).getCountryOriginCode().equals(prä1) && frame.getVokabeln().get(i).getCountryDistinationCode().equals(prä2) && frame.getVokabeln().get(i).getLection() == lection && frame.getVokabeln().get(i).getVocabOrigin().equals(original) && frame.getVokabeln().get(i).getVocabTranslation().equals(destination) && frame.getVokabeln().get(i).getTested() == gelernt) {
+				index = i;
+				break;
+			}
+		}
+		return index;
+	}
+
+	public void putPräfix() {
+		String language = languageCB.getSelectedItem().toString();
+		String lang1 = language.split("-")[0];
+		String lang2 = language.split("-")[1];
+		prä1 = getPräfix1(lang1);
+		prä2 = getPräfix2(lang2);
 	}
 
 }

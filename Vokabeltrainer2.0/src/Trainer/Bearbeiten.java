@@ -36,7 +36,7 @@ public class Bearbeiten {
 		String inland = "";
 		String ausland = "";
 
-		System.out.println("Geben sie das Deutschewort ein.");
+		System.out.println("Geben sie das deutsche Wort ein.");
 		try {
 			inland = br.readLine();
 		} catch (IOException e) {
@@ -62,14 +62,13 @@ public class Bearbeiten {
 		return z;
 	}
 
-	public ArrayList<String> getLektionList() {
+	public ArrayList<String> getLektionList(String prä1, String prä2) {
 		ArrayList<String> liste = new ArrayList<String>();
 		for (int i = 0; i < this.frame.getVokabeln().size(); i++) {
-			if (!liste.contains("Lektion " + frame.getVokabeln().get(i).getLection()))
-				liste.add("Lektion " + frame.getVokabeln().get(i).getLection());
+			if (frame.getVokabeln().get(i).getCountryOriginCode().equals(prä1) && frame.getVokabeln().get(i).getCountryDistinationCode().equals(prä2))
+				if (!liste.contains("Lektion " + frame.getVokabeln().get(i).getLection()))
+					liste.add("Lektion " + frame.getVokabeln().get(i).getLection());
 		}
-		for (String s : liste)
-			System.err.println("Lektion: " + s);
 		return liste;
 	}
 

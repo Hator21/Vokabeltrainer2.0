@@ -91,7 +91,7 @@ public class MainFrame extends JFrame {
 			this.languageCombi = (HashMap<Language, Language>) ois.readObject();
 			ois.close();
 			for (Language key : this.getLanguageCombi().keySet()) {
-				System.err.println(key.getLanguage() + " - " + key.getPräfix());
+				System.err.print(key.getLanguage() + " - " + key.getPräfix() + " -> ");
 				System.err.println(this.getLanguageCombi().get(key).getLanguage() + " - " + this.getLanguageCombi().get(key).getPräfix());
 			}
 		} catch (IOException | ClassNotFoundException e1) {
