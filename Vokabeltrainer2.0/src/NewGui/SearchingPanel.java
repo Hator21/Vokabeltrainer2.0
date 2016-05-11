@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import Components.TransparentButton;
 import Components.TransparentLabel;
 import Trainer.Vokabel;
+import utils.CoordSearching;
 
 @SuppressWarnings("serial")
 public class SearchingPanel extends JPanel {
@@ -29,6 +30,7 @@ public class SearchingPanel extends JPanel {
 	Random									random			= new Random();
 	private VokabelButtonListener			buttonListener	= new VokabelButtonListener();
 	private Vokabel							askedVoc		= null;
+	private ArrayList<CoordSearching>		coords			= new ArrayList<CoordSearching>();
 
 	public SearchingPanel(MainFrame frame) {
 		this.setFrame(frame);
@@ -37,6 +39,12 @@ public class SearchingPanel extends JPanel {
 		try {
 			this.image = ImageIO.read(new File("img/Hintergrund-weiﬂ.png"));
 		} catch (IOException ex) {}
+		for (int x = 0; x < 5; x++) {
+			for (int y = 0; y < 5; y++) {
+				this.coords.add(new CoordSearching(x, y, false));
+			}
+		}
+
 		this.setNextcorrect(TransparentButton.createButton("N‰chste", 828, 600, 200, 44, 20, 0, (e -> {
 			System.out.println("Du Hurensohn!!!!1111elf");
 		}), this));
