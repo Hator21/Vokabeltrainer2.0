@@ -37,21 +37,18 @@ public class SearchingPanel extends JPanel {
 		try {
 			this.image = ImageIO.read(new File("img/Hintergrund-weiß.png"));
 		} catch (IOException ex) {}
-		this.createButtons();
-		//		this.setNextcorrect(TransparentButton.createButton("Prüfen", 828, 600, 200, 44, 20, 0, (e -> {
-		//			System.out.println("Du Hurensohn!!!!1111elf");
-		//		}), this));
+		this.setNextcorrect(TransparentButton.createButton("Nächste", 828, 600, 200, 44, 20, 0, (e -> {
+			System.out.println("Du Hurensohn!!!!1111elf");
+		}), this));
 		frame.getButtons().add(this.getNextcorrect());
-		if (frame.getLek().size() > 0) {
-			this.askedVoc = frame.getCheck().vok(1).get(0);
-			this.setVokabel(TransparentLabel.createLabel("Suche: " + this.askedVoc.getVocabOrigin(), 0, 600, 200, 44, 20, this));
-		}
+		System.out.println("Leksize -> " + frame.getLek().size());
 
 		frame.getLabels().add(this.getVokabel());
 	}
 
 	public void createButtons() {
 		ArrayList<Vokabel> vocs = this.frame.getTestVokabeln();
+		System.out.println("vocssize-> " + vocs.size());
 		if (vocs.size() < 25) {
 			// TODO: Verteilen
 			for (int x = 0; x < 5; x++) {
@@ -125,6 +122,13 @@ public class SearchingPanel extends JPanel {
 				System.out.println("FALSCH FAK ME!");
 				((TransparentButton) e.getSource()).setBackgroundColor(Color.RED);
 			}
+		}
+	}
+
+	public void createLabel() {
+		if (this.frame.getLek().size() > 0) {
+			this.askedVoc = this.frame.getCheck().vok(1).get(0);
+			this.setVokabel(TransparentLabel.createLabel("Suche: " + this.askedVoc.getVocabOrigin(), 0, 600, 200, 44, 20, this));
 		}
 	}
 }

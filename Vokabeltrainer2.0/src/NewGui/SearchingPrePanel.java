@@ -54,6 +54,8 @@ public class SearchingPrePanel extends JPanel {
 			}
 			frame.getPanelList().get(6).setVisible(true);
 			frame.getHeadingbar().getHeadingLabelL().setText("Suchspiel");
+			frame.getSearchingPanel().createButtons();
+			frame.getSearchingPanel().createLabel();
 		}), this));
 		frame.getButtons().add(this.getLearning());
 
