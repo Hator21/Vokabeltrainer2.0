@@ -28,34 +28,34 @@ public class SpellingPanel extends JPanel {
 		try {
 			this.image = ImageIO.read(new File("img/internalLection.png"));
 		} catch (IOException ex) {}
-		createLabel();
-		createButton();
+		this.createLabel();
+		this.createButton();
 	}
 
 	public void createLabel() {
-		setVocabel(TransparentLabel.createLabel("Vokabel", 115, 300, 200, 50, 20, this));
-		setInfoLabel(TransparentLabel.createLabel("Wie wird das denn nun geschrieben?!", 10, 50, 500, 50, 30, this));
-		frame.getLabels().add(getVocabel());
-		frame.getLabels().add(getInfoLabel());
+		this.setVocabel(TransparentLabel.createLabel("Vokabel", 115, 300, 200, 50, 20, this));
+		this.setInfoLabel(TransparentLabel.createLabel("Wie wird das denn nun geschrieben?!", 10, 50, 500, 50, 30, this));
+		this.frame.getLabels().add(this.getVocabel());
+		this.frame.getLabels().add(this.getInfoLabel());
 	}
 
 	public void createButton() {
-		setVoc1(TransparentButton.createButton("Vokabell", 10, 360, 200, 50, 20, 0, new Color(10, 10, 10, 20), (e -> {
+		this.setVoc1(TransparentButton.createButton("Vokabell", 10, 360, 200, 50, 20, 0, new Color(10, 10, 10, 20), (e -> {
 
 		}), this));
-		frame.getButtons().add(getVoc1());
-		setVoc2(TransparentButton.createButton("Vukabel", 220, 360, 200, 50, 20, 0, new Color(10, 10, 10, 20), (e -> {
+		this.frame.getButtons().add(this.getVoc1());
+		this.setVoc2(TransparentButton.createButton("Vukabel", 220, 360, 200, 50, 20, 0, new Color(10, 10, 10, 20), (e -> {
 
 		}), this));
-		frame.getButtons().add(getVoc2());
-		setVoc3(TransparentButton.createButton("Vokabel", 10, 410, 200, 50, 20, 0, new Color(10, 10, 10, 20), (e -> {
+		this.frame.getButtons().add(this.getVoc2());
+		this.setVoc3(TransparentButton.createButton("Vokabel", 10, 410, 200, 50, 20, 0, new Color(10, 10, 10, 20), (e -> {
 
 		}), this));
-		frame.getButtons().add(getVoc3());
-		setVoc4(TransparentButton.createButton("Vukabell", 220, 410, 200, 50, 20, 0, new Color(10, 10, 10, 20), (e -> {
+		this.frame.getButtons().add(this.getVoc3());
+		this.setVoc4(TransparentButton.createButton("Vukabell", 220, 410, 200, 50, 20, 0, new Color(10, 10, 10, 20), (e -> {
 
 		}), this));
-		frame.getButtons().add(getVoc4());
+		this.frame.getButtons().add(this.getVoc4());
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class SpellingPanel extends JPanel {
 	}
 
 	public MainFrame getFrame() {
-		return frame;
+		return this.frame;
 	}
 
 	public void setFrame(MainFrame frame) {
@@ -77,7 +77,7 @@ public class SpellingPanel extends JPanel {
 	}
 
 	public TransparentLabel getVocabel() {
-		return vocabel;
+		return this.vocabel;
 	}
 
 	public void setVocabel(TransparentLabel vocabel) {
@@ -85,7 +85,7 @@ public class SpellingPanel extends JPanel {
 	}
 
 	public TransparentLabel getInfoLabel() {
-		return infoLabel;
+		return this.infoLabel;
 	}
 
 	public void setInfoLabel(TransparentLabel infoLabel) {
@@ -93,7 +93,7 @@ public class SpellingPanel extends JPanel {
 	}
 
 	public TransparentButton getVoc1() {
-		return voc1;
+		return this.voc1;
 	}
 
 	public void setVoc1(TransparentButton voc1) {
@@ -101,7 +101,7 @@ public class SpellingPanel extends JPanel {
 	}
 
 	public TransparentButton getVoc2() {
-		return voc2;
+		return this.voc2;
 	}
 
 	public void setVoc2(TransparentButton voc2) {
@@ -109,7 +109,7 @@ public class SpellingPanel extends JPanel {
 	}
 
 	public TransparentButton getVoc3() {
-		return voc3;
+		return this.voc3;
 	}
 
 	public void setVoc3(TransparentButton voc3) {
@@ -117,7 +117,7 @@ public class SpellingPanel extends JPanel {
 	}
 
 	public TransparentButton getVoc4() {
-		return voc4;
+		return this.voc4;
 	}
 
 	public void setVoc4(TransparentButton voc4) {

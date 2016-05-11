@@ -42,13 +42,15 @@ public class LearningPrePanel extends JPanel {
 		this.createComboBox(this.comboBoxListe);
 
 		this.setLearning(TransparentButton.createButton("Lernen", 105, 550, 150, 40, 30, 0, (e -> {
-			frame.getBear().clear(frame.getLek());
+			frame.getLek().clear();
 			for (int i = 0; i < frame.getBear().getLektion(); i++) {
 				if (this.units.get(i).isSelected() == true) {
 					frame.getLek().add(i + 1);
 				}
 			}
-			frame.getBear().clear(frame.getTestVokabeln());
+
+			frame.getTestVokabeln().clear();
+			frame.getCheck().newGame(frame.getVokabeln());
 			frame.getTestVokabeln().addAll(frame.getCheck().vok(frame.getLek().size()));
 			frame.getLearningPanel().setCounts(frame.getTestVokabeln().size());
 			frame.getLearningPanel().getSpeech1Text().setText(frame.getCheck().vok());

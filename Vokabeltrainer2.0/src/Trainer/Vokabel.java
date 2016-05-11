@@ -42,7 +42,7 @@ public class Vokabel {
 
 	@Override
 	public String toString() {
-		return "[" + this.countryOriginCode + "]" + "[" + this.countryDistinationCode + "]" + "[" + this.vocabOrigin + "]" + "[" + this.vocabTranslation + "]" + "[" + this.lection + "]" + "[" + this.tested + "]" + "[" + this.correct + "]";
+		return "[" + this.countryOriginCode + "]" + "[" + this.countryDistinationCode + "]" + "[" + this.vocabOrigin + "]" + "[" + this.vocabTranslation + "]" + "[" + this.lection + "]" + "[" + this.tested + "]" + "[" + this.correct + "]" + "[" + this.used + "]";
 	}
 
 	/**

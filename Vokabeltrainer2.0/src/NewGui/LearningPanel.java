@@ -35,14 +35,30 @@ public class LearningPanel extends JPanel {
 		try {
 			this.image = ImageIO.read(new File("img/internalLection.png"));
 		} catch (IOException ex) {}
+
 		this.setCheck(TransparentButton.createButton(this.test, 120, 320, 200, 40, 30, 0, (e -> {
-			System.out.println(this.counts);
-			if (this.counts == 0) {
-				this.speech1Text.setText("Ende");
-				this.speech2Text.setText("Ende");
-				this.speech1Text.setEditable(false);
+			if (this.getCheck().getText().equals("Neustart")) {
+				frame.getTestVokabeln().clear();
+				frame.getLek().clear();
+				frame.getCheck().newGame(frame.getVokabeln());
+				this.speech2Text.setEditable(true);
+				this.getCheck().setText("Überprüfen");
+
+				for (JPanel p : frame.getPanelList()) {
+					p.setVisible(false);
+				}
+				frame.getPanelList().get(1).setVisible(true);
+				frame.getHeadingbar().getHeadingLabelL().setText("Lektion auswählen");
+				frame.getHeadingbar().getHeadingLabelR().setText("");
+			}
+			if (this.counts == 1) {
+				this.right = frame.getCheck().check(this.speech2Text.getText(), this.speech1Text.getText(), this.right);
+				this.counts--;
+				this.speech1Text.setText("");
+				this.speech2Text.setText("");
 				this.speech2Text.setEditable(false);
-			} else {
+				this.getCheck().setText("Neustart");
+			} else if (this.counts != 0) {
 				this.right = frame.getCheck().check(this.speech2Text.getText(), this.speech1Text.getText(), this.right);
 				this.counts--;
 				this.speech1Text.setText(frame.getCheck().vok());

@@ -39,7 +39,16 @@ public class SearchingPrePanel extends JPanel {
 		} catch (IOException ex) {}
 
 		this.setLearning(TransparentButton.createButton("Lernen", 105, 550, 150, 40, 30, 0, (e -> {
-			frame.getTestVokabeln().addAll(frame.getCheck().vok(10));
+			frame.getLek().clear();
+			for (int i = 0; i < frame.getBear().getLektion(); i++) {
+				if (this.units.get(i).isSelected() == true) {
+					frame.getLek().add(i + 1);
+				}
+			}
+
+			frame.getTestVokabeln().clear();
+			frame.getCheck().newGame(frame.getVokabeln());
+			frame.getTestVokabeln().addAll(frame.getCheck().vok(frame.getLek().size()));
 			for (JPanel p : frame.getPanelList()) {
 				p.setVisible(false);
 			}

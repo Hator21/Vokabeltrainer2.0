@@ -32,6 +32,7 @@ public class VocabelPrePanel extends JPanel {
 	private String					comboBoxListe[]	= {
 			"Englisch", "Französisch"
 	};
+	private int						n				= 0;
 
 	public VocabelPrePanel(MainFrame frame) {
 
@@ -53,15 +54,22 @@ public class VocabelPrePanel extends JPanel {
 	public void createButton() {
 		this.setTest(TransparentButton.createButton("Prüfen", 600, 450, 250, 40, 30, 0, (e -> {
 			this.frame.getBear().clear(this.frame.getLek());
+			this.frame.getLek().clear();
 			for (int i = 0; i < this.frame.getBear().getLektion(); i++) {
 				if (this.units.get(i).isSelected() == true) {
 					this.frame.getLek().add(i + 1);
 				}
 			}
-			this.frame.getBear().clear(this.frame.getTestVokabeln());
-			this.frame.getTestVokabeln().addAll(this.frame.getCheck().vok(this.getCoundSlider().getValue()));
-			this.frame.getLearningPanel().setCounts(this.frame.getTestVokabeln().size());
+			this.frame.getTestVokabeln().clear();
+			this.frame.getTestVokabeln().addAll(this.frame.getCheck().vok(this.frame.getLek().size()));
+			if (this.getCoundSlider().getValue() > this.frame.getTestVokabeln().size()) {
+				this.n = this.frame.getTestVokabeln().size();
+			} else {
+				this.n = this.getCoundSlider().getValue();
+			}
+			this.frame.getVocabeltestPanel().setCounts(this.n);
 			this.frame.getVocabeltestPanel().getSpeech1Text().setText(this.frame.getCheck().vok());
+
 			for (JPanel p : this.frame.getPanelList()) {
 				p.setVisible(false);
 			}

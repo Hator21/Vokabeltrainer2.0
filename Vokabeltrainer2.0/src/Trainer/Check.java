@@ -42,25 +42,27 @@ public class Check {
 
 	public String vok() {
 		boolean exist = false;
+		boolean found = true;
 		int rnd = this.random();
 		int rnd2 = this.random(this.frame.getTestVokabeln().size());
 		String vok = "";
-		for (int y = 0; y < this.frame.getTestVokabeln().size(); y++) {}
 
 		for (int y = 0; y < this.frame.getTestVokabeln().size(); y++) {
 			if (this.frame.getTestVokabeln().get(y).getUsed() == false) {
 				exist = true;
+				y = this.frame.getTestVokabeln().size();
 			}
 		}
-		for (int i = 0; i < this.frame.getTestVokabeln().size(); i++) {
-			if (exist == true) {
+
+		if (exist == true) {
+			while (found) {
 				if (rnd == 0) {
 					if (this.frame.getTestVokabeln().get(rnd2).getUsed() == true) {
 						rnd2 = this.random(this.frame.getTestVokabeln().size());
 					} else if (this.frame.getTestVokabeln().get(rnd2).getUsed() == false) {
 						vok = this.frame.getTestVokabeln().get(rnd2).getVocabTranslation();
 						this.frame.getTestVokabeln().get(rnd2).setUsed(true);
-						i = this.frame.getTestVokabeln().size();//brake wenn Vokabel gefunden
+						found = false;//brake wenn Vokabel gefunden
 					}
 				} else if (rnd == 1) {
 					if (this.frame.getTestVokabeln().get(rnd2).getUsed() == true) {
@@ -68,14 +70,13 @@ public class Check {
 					} else if (this.frame.getTestVokabeln().get(rnd2).getUsed() == false) {
 						vok = this.frame.getTestVokabeln().get(rnd2).getVocabTranslation();
 						this.frame.getTestVokabeln().get(rnd2).setUsed(true);
-						i = this.frame.getTestVokabeln().size();//brake wenn Vokabel gefunden
+						found = false;//brake wenn Vokabel gefunden
 					}
-
 				}
-			} else if (exist == false) {
-				i = this.frame.getTestVokabeln().size();//brake wenn keine unUsedVokabel gefunden
-				return vok = "";
+
 			}
+		} else if (exist == false) {
+			return vok = "LÖL";
 		}
 
 		return vok;
@@ -83,21 +84,20 @@ public class Check {
 
 	public int check(String eingabe, String vokabel, int right) {
 		ArrayList<Vokabel> list = this.frame.getTestVokabeln();
-		String loesung = "";
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getVocabOrigin().equals(vokabel)) {
-				loesung = list.get(i).getVocabTranslation();
-			} else if (list.get(i).getVocabTranslation().equals(vokabel)) {
-				loesung = list.get(i).getVocabOrigin();
-			}
-		}
-		if (eingabe != "") {
-			if (eingabe.equals(loesung)) {
-				for (int i = 0; i < list.size(); i++) {
-					list.get(i).setCorrect(list.get(i).getCorrect() + 1);
+		if (!eingabe.equals("") && !vokabel.equals("")) {
+			for (int i = 0; i < list.size(); i++) {
+				if (list.get(i).getVocabOrigin().equals(vokabel)) {
+					if (eingabe.equals(list.get(i).getVocabTranslation())) {
+						list.get(i).setCorrect(list.get(i).getCorrect() + 1);
+						right++;
+					}
+				} else if (list.get(i).getVocabTranslation().equals(vokabel)) {
+					if (eingabe.equals(list.get(i).getVocabOrigin())) {
+						list.get(i).setCorrect(list.get(i).getCorrect() + 1);
+						right++;
+					}
 				}
-				right++;
-			} else if (!eingabe.equals(loesung)) {}
+			}
 		}
 		return right;
 	}

@@ -38,9 +38,9 @@ public class SearchingPanel extends JPanel {
 			this.image = ImageIO.read(new File("img/Hintergrund-weiß.png"));
 		} catch (IOException ex) {}
 		this.createButtons();
-		this.setNextcorrect(TransparentButton.createButton("Prüfen", 828, 600, 200, 44, 20, 0, (e -> {
-			System.out.println("Du Hurensohn!!!!1111elf");
-		}), this));
+		//		this.setNextcorrect(TransparentButton.createButton("Prüfen", 828, 600, 200, 44, 20, 0, (e -> {
+		//			System.out.println("Du Hurensohn!!!!1111elf");
+		//		}), this));
 		frame.getButtons().add(this.getNextcorrect());
 		if (frame.getLek().size() > 0) {
 			this.askedVoc = frame.getCheck().vok(1).get(0);
@@ -51,7 +51,7 @@ public class SearchingPanel extends JPanel {
 	}
 
 	public void createButtons() {
-		ArrayList<Vokabel> vocs = this.frame.getCheck().vok(25);
+		ArrayList<Vokabel> vocs = this.frame.getTestVokabeln();
 		if (vocs.size() < 25) {
 			// TODO: Verteilen
 			for (int x = 0; x < 5; x++) {

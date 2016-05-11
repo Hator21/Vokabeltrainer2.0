@@ -36,21 +36,29 @@ public class VocabeltestPanel extends JPanel {
 		} catch (IOException ex) {}
 
 		this.setNext(TransparentButton.createButton("weiter", 120, 320, 200, 40, 30, 0, (e -> {
-			if (this.counts == 0) {
-				frame.getTimer().stopTimer();
-				this.speech1Text.setText("Ende");
-				this.speech2Text.setText("Ende");
-				this.speech1Text.setEditable(false);
-				this.speech2Text.setEditable(false);
 
+			if (this.getNext().getText().equals("Neustart")) {
+				frame.getTestVokabeln().clear();
+				frame.getLek().clear();
+				frame.getCheck().newGame(frame.getVokabeln());
+				this.speech2Text.setEditable(true);
+				this.getNext().setText("Überprüfen");
+
+				for (JPanel p : frame.getPanelList()) {
+					p.setVisible(false);
+				}
+				frame.getPanelList().get(3).setVisible(true);
+				frame.getHeadingbar().getHeadingLabelL().setText("Lektion auswählen");
+				frame.getHeadingbar().getHeadingLabelR().setText("Einstellungen");
 			}
-			if (frame.getTimer().getCounterValue() == 0) {
-				frame.getTimer().stopTimer();
-				this.speech1Text.setText("Zeit ist um");
-				this.speech2Text.setText("Zeit ist um");
-				this.speech1Text.setEditable(false);
+			if (this.counts == 1) {
+				this.right = frame.getCheck().check(this.speech2Text.getText(), this.speech1Text.getText(), this.right);
+				this.counts--;
+				this.speech1Text.setText("");
+				this.speech2Text.setText("");
 				this.speech2Text.setEditable(false);
-			} else {
+				this.getNext().setText("Neustart");
+			} else if (this.counts != 0) {
 				this.right = frame.getCheck().check(this.speech2Text.getText(), this.speech1Text.getText(), this.right);
 				this.counts--;
 				this.speech1Text.setText(frame.getCheck().vok());
@@ -90,10 +98,11 @@ public class VocabeltestPanel extends JPanel {
 		this.speech2Text.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		this.speech2Text.setEditable(false);
 		this.add(this.speech2Text);
+
 	}
 
 	@Override
-	protected void paintComponent(Graphics g_) {
+	public void paintComponent(Graphics g_) {
 		Graphics2D g = (Graphics2D) g_;
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
@@ -101,27 +110,27 @@ public class VocabeltestPanel extends JPanel {
 		g.drawImage(this.image, 0, 0, null);
 	}
 
-	protected String getSprache1() {
+	public String getSprache1() {
 		return this.sprache1;
 	}
 
-	protected void setSprache1(String sprache1) {
+	public void setSprache1(String sprache1) {
 		this.sprache1 = sprache1;
 	}
 
-	protected String getSprache2() {
+	public String getSprache2() {
 		return this.sprache2;
 	}
 
-	protected void setSprache2(String sprache2) {
+	public void setSprache2(String sprache2) {
 		this.sprache2 = sprache2;
 	}
 
-	protected String getVokabel() {
+	public String getVokabel() {
 		return this.vokabel;
 	}
 
-	protected void setVokabel(String vokabel) {
+	public void setVokabel(String vokabel) {
 		this.vokabel = vokabel;
 	}
 
@@ -181,11 +190,11 @@ public class VocabeltestPanel extends JPanel {
 		this.frame = frame;
 	}
 
-	protected TransparentButton getStart() {
+	public TransparentButton getStart() {
 		return this.start;
 	}
 
-	protected void setStart(TransparentButton start) {
+	public void setStart(TransparentButton start) {
 		this.start = start;
 	}
 
