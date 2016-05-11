@@ -25,21 +25,30 @@ public class LearningPanel extends JPanel {
 	private String				sprache1	= "Deutsch", sprache2 = "Englisch", vokabel = "";
 	private String				test		= "Überprüfen";
 	private TransparentButton	check;
-	private int					right, counts = 10;
+	private int					right		= 0, counts = 10;
 
 	public LearningPanel(MainFrame frame) {
-
+		//TODO Vokabel wert stimmt nie !!!!
 		this.setFrame(frame);
 		this.setLayout(null);
 		this.setBounds(251, 75, 1028, 644);
 		try {
 			this.image = ImageIO.read(new File("img/internalLection.png"));
 		} catch (IOException ex) {}
-		this.vokabel = this.frame.getCheck().testvok();
 		this.setCheck(TransparentButton.createButton(this.test, 120, 320, 200, 40, 30, 0, (e -> {
-			frame.getCheck().check(this.speech2Text.getText(), frame.getVokabeln(), this.vokabel, this.right);
-			this.speech1Text.setText(frame.getCheck().testvok());
-			this.speech2Text.setText("");
+			System.out.println(this.counts);
+			if (this.counts == 0) {
+				this.speech1Text.setText("Ende");
+				this.speech2Text.setText("Ende");
+				this.speech1Text.setEditable(false);
+				this.speech2Text.setEditable(false);
+			} else {
+				this.right = frame.getCheck().check(this.speech2Text.getText(), this.speech1Text.getText(), this.right);
+				this.counts--;
+				this.speech1Text.setText(frame.getCheck().vok());
+				this.speech2Text.setText("");
+			}
+
 		}), this));
 		frame.getButtons().add(this.getCheck());
 
@@ -56,7 +65,7 @@ public class LearningPanel extends JPanel {
 		frame.getLabels().add(this.getCountWrong());
 		frame.getLabels().add(this.getAverage());
 
-		this.speech1Text = new JTextField(this.vokabel);
+		this.speech1Text = new JTextField();
 		this.speech1Text.setBounds(120, 200, 200, 40);
 		this.speech1Text.setOpaque(true);
 		this.speech1Text.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
@@ -182,6 +191,36 @@ public class LearningPanel extends JPanel {
 
 	public void setAverage(TransparentLabel average) {
 		this.average = average;
+	}
+
+	/**
+	 * @return the speech1Text
+	 */
+	public JTextField getSpeech1Text() {
+		return this.speech1Text;
+	}
+
+	/**
+	 * @param speech1Text
+	 *            the speech1Text to set
+	 */
+	public void setSpeech1Text(JTextField speech1Text) {
+		this.speech1Text = speech1Text;
+	}
+
+	/**
+	 * @return the speech2Text
+	 */
+	public JTextField getSpeech2Text() {
+		return this.speech2Text;
+	}
+
+	/**
+	 * @param speech2Text
+	 *            the speech2Text to set
+	 */
+	public void setSpeech2Text(JTextField speech2Text) {
+		this.speech2Text = speech2Text;
 	}
 
 }

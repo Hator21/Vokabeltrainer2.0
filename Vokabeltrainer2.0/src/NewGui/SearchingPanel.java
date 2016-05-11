@@ -43,7 +43,7 @@ public class SearchingPanel extends JPanel {
 		}), this));
 		frame.getButtons().add(this.getNextcorrect());
 		if (frame.getLek().size() > 0) {
-			this.askedVoc = frame.getCheck().vok(1, true, frame.getLek()).get(0);
+			this.askedVoc = frame.getCheck().vok(1).get(0);
 			this.setVokabel(TransparentLabel.createLabel("Suche: " + this.askedVoc.getVocabOrigin(), 0, 600, 200, 44, 20, this));
 		}
 
@@ -51,7 +51,7 @@ public class SearchingPanel extends JPanel {
 	}
 
 	public void createButtons() {
-		ArrayList<Vokabel> vocs = this.frame.getCheck().vok(25, false, this.frame.getLek());
+		ArrayList<Vokabel> vocs = this.frame.getCheck().vok(25);
 		if (vocs.size() < 25) {
 			// TODO: Verteilen
 			for (int x = 0; x < 5; x++) {

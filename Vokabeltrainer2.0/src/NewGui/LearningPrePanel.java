@@ -37,24 +37,26 @@ public class LearningPrePanel extends JPanel {
 		try {
 			this.image = ImageIO.read(new File("img/internalLection.png"));
 		} catch (IOException ex) {}
+
 		this.createCheckboxes(frame.getBear().getLektion());
 		this.createComboBox(this.comboBoxListe);
 
 		this.setLearning(TransparentButton.createButton("Lernen", 105, 550, 150, 40, 30, 0, (e -> {
+			frame.getBear().clear(frame.getLek());
 			for (int i = 0; i < frame.getBear().getLektion(); i++) {
-				System.out.println(this.units.get(i).isSelected());
 				if (this.units.get(i).isSelected() == true) {
-
-					frame.getLek().add(i);
+					frame.getLek().add(i + 1);
 				}
-
 			}
-			frame.getTestVokabeln().addAll(frame.getCheck().vok(10, false, frame.getLek()));
-			System.out.println(frame.getTestVokabeln());
+			frame.getBear().clear(frame.getTestVokabeln());
+			frame.getTestVokabeln().addAll(frame.getCheck().vok(frame.getLek().size()));
+			frame.getLearningPanel().setCounts(frame.getTestVokabeln().size());
+			frame.getLearningPanel().getSpeech1Text().setText(frame.getCheck().vok());
 
 			for (JPanel p : frame.getPanelList()) {
 				p.setVisible(false);
 			}
+
 			frame.getPanelList().get(2).setVisible(true);
 			frame.getHeadingbar().getHeadingLabelL().setText("Lernen");
 		}), this));

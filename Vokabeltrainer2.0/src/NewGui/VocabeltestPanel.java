@@ -36,23 +36,33 @@ public class VocabeltestPanel extends JPanel {
 		} catch (IOException ex) {}
 
 		this.setNext(TransparentButton.createButton("weiter", 120, 320, 200, 40, 30, 0, (e -> {
-			frame.getCheck().check(this.speech2Text.getText(), frame.getVokabeln(), this.vokabel, this.right);
-			this.speech1Text.setText(frame.getCheck().testvok());
-			this.speech2Text.setText("");
-			this.setCounts(this.getCounts() - 1);
-			System.out.println(this.getCounts());
-			if (this.getCounts() == 0) {
+			if (this.counts == 0) {
 				frame.getTimer().stopTimer();
+				this.speech1Text.setText("Ende");
+				this.speech2Text.setText("Ende");
+				this.speech1Text.setEditable(false);
 				this.speech2Text.setEditable(false);
-				this.next.setEnabled(false);
+
 			}
+			if (frame.getTimer().getCounterValue() == 0) {
+				frame.getTimer().stopTimer();
+				this.speech1Text.setText("Zeit ist um");
+				this.speech2Text.setText("Zeit ist um");
+				this.speech1Text.setEditable(false);
+				this.speech2Text.setEditable(false);
+			} else {
+				this.right = frame.getCheck().check(this.speech2Text.getText(), this.speech1Text.getText(), this.right);
+				this.counts--;
+				this.speech1Text.setText(frame.getCheck().vok());
+				this.speech2Text.setText("");
+			}
+
 		}), this));
 		frame.getButtons().add(this.getNext());
 
 		this.setStart(TransparentButton.createButton("start", 120, 140, 200, 40, 30, 0, (e -> {
 			frame.getTimer().startTimer();
 			this.getStart().setEnabled(false);
-			this.counts = 10;
 			this.speech2Text.setEditable(true);
 			this.getNext().setEnabled(true);
 		}), this));
@@ -177,6 +187,36 @@ public class VocabeltestPanel extends JPanel {
 
 	protected void setStart(TransparentButton start) {
 		this.start = start;
+	}
+
+	/**
+	 * @return the speech1Text
+	 */
+	public JTextField getSpeech1Text() {
+		return this.speech1Text;
+	}
+
+	/**
+	 * @param speech1Text
+	 *            the speech1Text to set
+	 */
+	public void setSpeech1Text(JTextField speech1Text) {
+		this.speech1Text = speech1Text;
+	}
+
+	/**
+	 * @return the speech2Text
+	 */
+	public JTextField getSpeech2Text() {
+		return this.speech2Text;
+	}
+
+	/**
+	 * @param speech2Text
+	 *            the speech2Text to set
+	 */
+	public void setSpeech2Text(JTextField speech2Text) {
+		this.speech2Text = speech2Text;
 	}
 
 }

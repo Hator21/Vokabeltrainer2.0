@@ -52,7 +52,16 @@ public class VocabelPrePanel extends JPanel {
 
 	public void createButton() {
 		this.setTest(TransparentButton.createButton("Prüfen", 600, 450, 250, 40, 30, 0, (e -> {
-			this.frame.getTestVokabeln().addAll(this.frame.getCheck().vok(10, false, this.frame.getLek()));
+			this.frame.getBear().clear(this.frame.getLek());
+			for (int i = 0; i < this.frame.getBear().getLektion(); i++) {
+				if (this.units.get(i).isSelected() == true) {
+					this.frame.getLek().add(i + 1);
+				}
+			}
+			this.frame.getBear().clear(this.frame.getTestVokabeln());
+			this.frame.getTestVokabeln().addAll(this.frame.getCheck().vok(this.getCoundSlider().getValue()));
+			this.frame.getLearningPanel().setCounts(this.frame.getTestVokabeln().size());
+			this.frame.getVocabeltestPanel().getSpeech1Text().setText(this.frame.getCheck().vok());
 			for (JPanel p : this.frame.getPanelList()) {
 				p.setVisible(false);
 			}
@@ -90,7 +99,9 @@ public class VocabelPrePanel extends JPanel {
 		this.timeSlider.setPaintLabels(true);
 		this.timeSlider.setMajorTickSpacing(10);
 		this.timeSlider.setMinorTickSpacing(2);
-		this.timeSlider.addChangeListener(e -> System.out.println(((JSlider) e.getSource()).getValue()));
+		this.timeSlider.addChangeListener(e -> {
+			return;
+		});
 		this.timeSlider.setOpaque(false);
 		this.timeSlider.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		this.add(this.timeSlider);
@@ -101,7 +112,9 @@ public class VocabelPrePanel extends JPanel {
 		this.coundSlider.setPaintLabels(true);
 		this.coundSlider.setMajorTickSpacing(10);
 		this.coundSlider.setMinorTickSpacing(2);
-		this.coundSlider.addChangeListener(e -> System.out.println(((JSlider) e.getSource()).getValue()));
+		this.coundSlider.addChangeListener(e -> {
+			return;
+		});
 		this.coundSlider.setOpaque(false);
 		this.coundSlider.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		this.add(this.coundSlider);
@@ -150,6 +163,21 @@ public class VocabelPrePanel extends JPanel {
 
 	protected void setTime(TransparentLabel time) {
 		this.time = time;
+	}
+
+	/**
+	 * @return the coundSlider
+	 */
+	public JSlider getCoundSlider() {
+		return this.coundSlider;
+	}
+
+	/**
+	 * @param coundSlider
+	 *            the coundSlider to set
+	 */
+	public void setCoundSlider(JSlider coundSlider) {
+		this.coundSlider = coundSlider;
 	}
 
 	@Override

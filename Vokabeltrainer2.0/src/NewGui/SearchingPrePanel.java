@@ -39,7 +39,7 @@ public class SearchingPrePanel extends JPanel {
 		} catch (IOException ex) {}
 
 		this.setLearning(TransparentButton.createButton("Lernen", 105, 550, 150, 40, 30, 0, (e -> {
-			frame.getTestVokabeln().addAll(frame.getCheck().vok(10, false, frame.getLek()));
+			frame.getTestVokabeln().addAll(frame.getCheck().vok(10));
 			for (JPanel p : frame.getPanelList()) {
 				p.setVisible(false);
 			}
