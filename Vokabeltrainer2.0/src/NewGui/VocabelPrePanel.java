@@ -68,7 +68,7 @@ public class VocabelPrePanel extends JPanel {
 				this.n = this.getCoundSlider().getValue();
 			}
 			this.frame.getVocabeltestPanel().setCounts(this.n);
-			this.frame.getVocabeltestPanel().getSpeech1Text().setText(this.frame.getCheck().vok());
+			this.frame.getVocabeltestPanel().getSpeech1Text().setText(this.frame.getCheck().vok(this.deengCheckBox.isSelected(), this.engdeCheckBox.isSelected()));
 
 			for (JPanel p : this.frame.getPanelList()) {
 				p.setVisible(false);
@@ -186,6 +186,36 @@ public class VocabelPrePanel extends JPanel {
 	 */
 	public void setCoundSlider(JSlider coundSlider) {
 		this.coundSlider = coundSlider;
+	}
+
+	/**
+	 * @return the deengCheckBox
+	 */
+	public JCheckBox getDeengCheckBox() {
+		return this.deengCheckBox;
+	}
+
+	/**
+	 * @param deengCheckBox
+	 *            the deengCheckBox to set
+	 */
+	public void setDeengCheckBox(JCheckBox deengCheckBox) {
+		this.deengCheckBox = deengCheckBox;
+	}
+
+	/**
+	 * @return the engdeCheckBox
+	 */
+	public JCheckBox getEngdeCheckBox() {
+		return this.engdeCheckBox;
+	}
+
+	/**
+	 * @param engdeCheckBox
+	 *            the engdeCheckBox to set
+	 */
+	public void setEngdeCheckBox(JCheckBox engdeCheckBox) {
+		this.engdeCheckBox = engdeCheckBox;
 	}
 
 	@Override

@@ -40,13 +40,22 @@ public class Check {
 		return leklist;
 	}
 
-	public String vok() {
+	public String vok(boolean d_e, boolean e_d) {
 		boolean exist = false;
 		boolean found = true;
-		int rnd = this.random();
+		int rnd = 3;
 		int rnd2 = this.random(this.frame.getTestVokabeln().size());
 		String vok = "";
+		if ((e_d && d_e) == true) {
+			rnd = this.random();
 
+		} else if (e_d == true) {
+			rnd = 0;
+		} else if (d_e == true) {
+			rnd = 1;
+		} else if ((e_d && d_e) == false) {
+			rnd = this.random();
+		}
 		for (int y = 0; y < this.frame.getTestVokabeln().size(); y++) {
 			if (this.frame.getTestVokabeln().get(y).getUsed() == false) {
 				exist = true;
@@ -68,7 +77,7 @@ public class Check {
 					if (this.frame.getTestVokabeln().get(rnd2).getUsed() == true) {
 						rnd2 = this.random(this.frame.getTestVokabeln().size());
 					} else if (this.frame.getTestVokabeln().get(rnd2).getUsed() == false) {
-						vok = this.frame.getTestVokabeln().get(rnd2).getVocabTranslation();
+						vok = this.frame.getTestVokabeln().get(rnd2).getVocabOrigin();
 						this.frame.getTestVokabeln().get(rnd2).setUsed(true);
 						found = false;//brake wenn Vokabel gefunden
 					}

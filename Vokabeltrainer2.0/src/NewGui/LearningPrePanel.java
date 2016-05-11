@@ -53,7 +53,7 @@ public class LearningPrePanel extends JPanel {
 			frame.getCheck().newGame(frame.getVokabeln());
 			frame.getTestVokabeln().addAll(frame.getCheck().vok(frame.getLek().size()));
 			frame.getLearningPanel().setCounts(frame.getTestVokabeln().size());
-			frame.getLearningPanel().getSpeech1Text().setText(frame.getCheck().vok());
+			frame.getLearningPanel().getSpeech1Text().setText(frame.getCheck().vok(true, true));
 
 			for (JPanel p : frame.getPanelList()) {
 				p.setVisible(false);

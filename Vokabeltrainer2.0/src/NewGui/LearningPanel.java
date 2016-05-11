@@ -61,7 +61,7 @@ public class LearningPanel extends JPanel {
 			} else if (this.counts != 0) {
 				this.right = frame.getCheck().check(this.speech2Text.getText(), this.speech1Text.getText(), this.right);
 				this.counts--;
-				this.speech1Text.setText(frame.getCheck().vok());
+				this.speech1Text.setText(frame.getCheck().vok(true, true));
 				this.speech2Text.setText("");
 			}
 
