@@ -452,7 +452,7 @@ public class SpellingPanel extends JPanel {
 	}
 
 	public void setButtonTexts() {
-		Vokabel v = frame.getCheck().vok(1).get(0);
+		Vokabel v =null; //frame.getCheck().vok(1).get(0);
 		System.out.println(v);
 		System.out.println(getVocabel());
 		getVocabel().setText(v.getVocabOrigin());

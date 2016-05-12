@@ -54,7 +54,7 @@ public class EditSPanel extends JPanel {
 	private addLection			addLe;
 	private addVocabel			addVoc;
 	private ArrayList<String>	lections	= new ArrayList<String>();
-	ArrayList<String>			languages	= new ArrayList<String>();
+	//ArrayList<String>			languages	= new ArrayList<String>();
 	private ArrayList<Vokabel>	vocabellist	= new ArrayList<Vokabel>();
 
 	public EditSPanel(MainFrame frame) {
@@ -63,7 +63,7 @@ public class EditSPanel extends JPanel {
 		this.setBounds(251, 75, 1028, 644);
 		addL = new addLanguage();
 		setAddLe(new addLection());
-		add2Language();
+		frame.add2Language();
 		try {
 			this.image = ImageIO.read(new File("img/Hintergrund-weiﬂ.png"));
 		} catch (IOException ex) {}
@@ -177,7 +177,7 @@ public class EditSPanel extends JPanel {
 			if (s == JOptionPane.OK_OPTION) {
 				if (!addL.getAddLanguage1TF().getText().equals("") && !addL.getAddLanguage2TF().getText().equals("") && !addL.getAddPr‰fix1TF().getText().equals("") && !addL.getAddPr‰fix2TF().getText().equals("")) {
 					frame.getLanguageCombi().put(new Language(addL.getAddPr‰fix1TF().getText(), addL.getAddLanguage1TF().getText()), new Language(addL.getAddPr‰fix2TF().getText(), addL.getAddLanguage2TF().getText()));
-					languageCB.setModel(new DefaultComboBoxModel<String>(add2Language()));
+					languageCB.setModel(new DefaultComboBoxModel<String>(frame.add2Language()));
 				}
 			}
 			createLectionList();
@@ -212,7 +212,7 @@ public class EditSPanel extends JPanel {
 		languageCB.setSelectedIndex(-1);
 		languageCB.setBounds(36, 127, 248, 29);
 		speechPanel.add(languageCB);
-		languageCB.setModel(new DefaultComboBoxModel<String>(add2Language()));
+		languageCB.setModel(new DefaultComboBoxModel<String>(frame.add2Language()));
 		languageCB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				createLectionList();
@@ -379,23 +379,23 @@ public class EditSPanel extends JPanel {
 		this.selectLection = selectLection;
 	}
 
-	public String[] add2Language() {
-		boolean b = false;
-		for (Language s : frame.getLanguageCombi().keySet()) {
-			Language t = frame.getLanguageCombi().get(s);
-			if (languages.size() != 0) {
-				for (String st : languages)
-					if ((s.getLanguage() + "-" + t.getLanguage()).equals(st) || (t.getLanguage() + "-" + s.getLanguage()).equals(st))
-						b = true;
-				if (b == false)
-					languages.add(s.getLanguage() + "-" + t.getLanguage());
-				b = false;
-			} else
-				languages.add(s.getLanguage() + "-" + t.getLanguage());
-		}
-
-		return (String[]) languages.toArray(new String[languages.size()]);
-	}
+//	public String[] add2Language() {
+//		boolean b = false;
+//		for (Language s : frame.getLanguageCombi().keySet()) {
+//			Language t = frame.getLanguageCombi().get(s);
+//			if (languages.size() != 0) {
+//				for (String st : languages)
+//					if ((s.getLanguage() + "-" + t.getLanguage()).equals(st) || (t.getLanguage() + "-" + s.getLanguage()).equals(st))
+//						b = true;
+//				if (b == false)
+//					languages.add(s.getLanguage() + "-" + t.getLanguage());
+//				b = false;
+//			} else
+//				languages.add(s.getLanguage() + "-" + t.getLanguage());
+//		}
+//
+//		return (String[]) languages.toArray(new String[languages.size()]);
+//	}
 
 	public String[] add2Lection(String lection) {
 		boolean b = false;

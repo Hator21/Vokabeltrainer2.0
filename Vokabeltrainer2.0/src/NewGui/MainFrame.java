@@ -58,6 +58,7 @@ public class MainFrame extends JFrame {
 	private HashMap<Language, Language>		languageCombi	= new HashMap<Language, Language>();
 	private ArrayList<Integer>				lek				= new ArrayList<Integer>();
 	private ArrayList<Vokabel>				testvokabeln	= new ArrayList<Vokabel>();
+	ArrayList<String>			languages	= new ArrayList<String>();
 
 	/**
 	 * Launch the application.
@@ -401,5 +402,21 @@ public class MainFrame extends JFrame {
 	public void setLanguageCombi(HashMap<Language, Language> languageCombi) {
 		this.languageCombi = languageCombi;
 	}
+	public String[] add2Language() {
+		boolean b = false;
+		for (Language s : this.getLanguageCombi().keySet()) {
+			Language t = this.getLanguageCombi().get(s);
+			if (languages.size() != 0) {
+				for (String st : languages)
+					if ((s.getLanguage() + "-" + t.getLanguage()).equals(st) || (t.getLanguage() + "-" + s.getLanguage()).equals(st))
+						b = true;
+				if (b == false)
+					languages.add(s.getLanguage() + "-" + t.getLanguage());
+				b = false;
+			} else
+				languages.add(s.getLanguage() + "-" + t.getLanguage());
+		}
 
+		return (String[]) languages.toArray(new String[languages.size()]);
+	}
 }

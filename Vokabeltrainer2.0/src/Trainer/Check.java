@@ -22,14 +22,14 @@ public class Check {
 		return rnd;
 	}
 
-	public ArrayList<Vokabel> vok(int n) {
+	public ArrayList<Vokabel> vok(int n ,String speach,String speach2) {
 		ArrayList<Vokabel> leklist = new ArrayList<Vokabel>();
 		ArrayList<Integer> lek = this.frame.getLek();
 		ArrayList<Vokabel> list = this.frame.getVokabeln();
 
 		for (int i = 0; i < list.size(); i++) {
 			for (int y = 0; y < lek.size(); y++) {
-				if (list.get(i).getLection() == lek.get(y)) {
+				if ((list.get(i).getCountryOriginCode().equals(speach2))&&(list.get(i).getCountryDistinationCode().equals(speach))&&(list.get(i).getLection() == lek.get(y))) {
 					leklist.add(list.get(i));
 				}
 			}

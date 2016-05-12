@@ -135,7 +135,7 @@ public class SearchingPanel extends JPanel {
 
 	public void createLabel() {
 		if (this.frame.getLek().size() > 0) {
-			this.askedVoc = this.frame.getCheck().vok(1).get(0);
+			//this.askedVoc = this.frame.getCheck().vok(1).get(0);
 			this.setVokabel(TransparentLabel.createLabel("Suche: " + this.askedVoc.getVocabOrigin(), 0, 600, 200, 44, 20, this));
 		}
 	}

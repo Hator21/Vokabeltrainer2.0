@@ -61,7 +61,7 @@ public class VocabelPrePanel extends JPanel {
 				}
 			}
 			this.frame.getTestVokabeln().clear();
-			this.frame.getTestVokabeln().addAll(this.frame.getCheck().vok(this.frame.getLek().size()));
+			//this.frame.getTestVokabeln().addAll(this.frame.getCheck().vok(this.frame.getLek().size()));
 			if (this.getCoundSlider().getValue() > this.frame.getTestVokabeln().size()) {
 				this.n = this.frame.getTestVokabeln().size();
 			} else {

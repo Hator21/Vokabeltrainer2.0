@@ -48,7 +48,7 @@ public class SearchingPrePanel extends JPanel {
 
 			frame.getTestVokabeln().clear();
 			frame.getCheck().newGame(frame.getVokabeln());
-			frame.getTestVokabeln().addAll(frame.getCheck().vok(frame.getLek().size()));
+			//frame.getTestVokabeln().addAll(frame.getCheck().vok(frame.getLek().size()));
 			for (JPanel p : frame.getPanelList()) {
 				p.setVisible(false);
 			}
