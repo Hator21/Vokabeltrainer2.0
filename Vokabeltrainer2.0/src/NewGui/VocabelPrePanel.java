@@ -50,7 +50,7 @@ public class VocabelPrePanel extends JPanel {
 
 	public void createButton() {
 		this.setTest(TransparentButton.createButton("Prüfen", 600, 450, 250, 40, 30, 0, (e -> {
-			this.frame.getBear().clear(this.frame.getLek());
+			this.frame.getLek().clear();
 			this.frame.getLek().clear();
 			for (int i = 0; i < this.frame.getBear().getLektion(); i++) {
 				if (this.units.get(i).isSelected() == true) {
@@ -240,6 +240,21 @@ public class VocabelPrePanel extends JPanel {
 		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g.drawImage(this.image, 0, 0, null);
+	}
+
+	/**
+	 * @return the combobox
+	 */
+	public JComboBox<String> getCombobox() {
+		return this.combobox;
+	}
+
+	/**
+	 * @param combobox
+	 *            the combobox to set
+	 */
+	public void setCombobox(JComboBox<String> combobox) {
+		this.combobox = combobox;
 	}
 
 }
