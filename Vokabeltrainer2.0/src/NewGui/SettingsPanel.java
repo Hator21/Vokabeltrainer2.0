@@ -5,8 +5,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -32,45 +30,41 @@ public class SettingsPanel extends JPanel {
 			this.image = ImageIO.read(new File("img/Settings-Hintergrund3.png"));
 		} catch (IOException ex) {}
 
-		createCheckBox();
+		this.createCheckBox();
 
 	}
 
 	public void createCheckBox() {
-		helpActiv = new JCheckBox("Aktiviere Hilfe-Funktion");
-		helpActiv.setBounds(70, 100, 500, 60);
-		helpActiv.setOpaque(false);
-		helpActiv.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
-		this.add(helpActiv);
-		helpActiv.addActionListener(new ActionListener() {
+		this.helpActiv = new JCheckBox("Aktiviere Hilfe-Funktion");
+		this.helpActiv.setBounds(70, 100, 500, 60);
+		this.helpActiv.setOpaque(false);
+		this.helpActiv.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
+		this.add(this.helpActiv);
+		this.helpActiv.addActionListener(e -> {
+			if (((JCheckBox) e.getSource()).isSelected()) {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (((JCheckBox) e.getSource()).isSelected()) {
-
-				}
 			}
 		});
 
-		borderActiv = new JCheckBox("Zeige Button- und Textgrenzen");
-		borderActiv.setBounds(70, 170, 500, 60);
-		borderActiv.setOpaque(false);
-		borderActiv.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
-		this.add(borderActiv);
-		borderActiv.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (((JCheckBox) e.getSource()).isSelected()) {
-					for (TransparentLabel t : frame.getLabels())
-						t.setColor(new Color(0, 0, 255, 255));
-					for (TransparentButton t : frame.getButtons())
-						t.setBorderColor(new Color(255, 0, 0, 255));
-				} else {
-					for (TransparentLabel t : frame.getLabels())
-						t.setColor(new Color(0, 0, 255, 0));
-					for (TransparentButton t : frame.getButtons())
-						t.setBorderColor(new Color(255, 0, 0, 0));
+		this.borderActiv = new JCheckBox("Zeige Button- und Textgrenzen");
+		this.borderActiv.setBounds(70, 170, 500, 60);
+		this.borderActiv.setOpaque(false);
+		this.borderActiv.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
+		this.add(this.borderActiv);
+		this.borderActiv.addActionListener(e -> {
+			if (((JCheckBox) e.getSource()).isSelected()) {
+				for (TransparentLabel t1 : SettingsPanel.this.frame.getLabels()) {
+					t1.setColor(new Color(0, 0, 255, 255));
+				}
+				for (TransparentButton t2 : SettingsPanel.this.frame.getButtons()) {
+					t2.setBorderColor(new Color(255, 0, 0, 255));
+				}
+			} else {
+				for (TransparentLabel t3 : SettingsPanel.this.frame.getLabels()) {
+					t3.setColor(new Color(0, 0, 255, 0));
+				}
+				for (TransparentButton t4 : SettingsPanel.this.frame.getButtons()) {
+					t4.setBorderColor(new Color(255, 0, 0, 0));
 				}
 			}
 		});
@@ -84,11 +78,11 @@ public class SettingsPanel extends JPanel {
 		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
-		g.drawImage(image, 0, 0, null);
+		g.drawImage(this.image, 0, 0, null);
 	}
 
 	public MainFrame getFrame() {
-		return frame;
+		return this.frame;
 	}
 
 	public void setFrame(MainFrame frame) {
