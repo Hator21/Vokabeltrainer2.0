@@ -30,27 +30,27 @@ public class Bearbeiten {
 		this.writer.save(getMapper(), daten, Vokabel.class, true);
 	}
 
-	//	public void Hinzufügen(ArrayList<Vokabel> vokabeln) throws Exception {
-	//		InputStreamReader isr = new InputStreamReader(System.in);
-	//		BufferedReader br = new BufferedReader(isr);
-	//		String inland = "";
-	//		String ausland = "";
+	// public void Hinzufügen(ArrayList<Vokabel> vokabeln) throws Exception {
+	// InputStreamReader isr = new InputStreamReader(System.in);
+	// BufferedReader br = new BufferedReader(isr);
+	// String inland = "";
+	// String ausland = "";
 	//
-	//		System.out.println("Geben sie das Deutschewort ein.");
-	//		try {
-	//			inland = br.readLine();
-	//		} catch (IOException e) {
-	//			return;
-	//		}
-	//		System.out.println("Geben sie das Fremdsprachenwort ein.");
-	//		try {
-	//			ausland = br.readLine();
-	//		} catch (IOException e) {
-	//			return;
-	//		}
-	//		vokabeln.add(new Vokabel(ausland, inland));
-	//		this.write(vokabeln);
-	//	}
+	// System.out.println("Geben sie das Deutschewort ein.");
+	// try {
+	// inland = br.readLine();
+	// } catch (IOException e) {
+	// return;
+	// }
+	// System.out.println("Geben sie das Fremdsprachenwort ein.");
+	// try {
+	// ausland = br.readLine();
+	// } catch (IOException e) {
+	// return;
+	// }
+	// vokabeln.add(new Vokabel(ausland, inland));
+	// this.write(vokabeln);
+	// }
 	public int getLektion() {
 		int z = 0;
 		for (int i = 0; i < this.frame.getVokabeln().size(); i++) {
@@ -69,7 +69,7 @@ public class Bearbeiten {
 	public ArrayList<String> getLektionList(String prä1, String prä2) {
 		ArrayList<String> liste = new ArrayList<String>();
 		for (int i = 0; i < this.frame.getVokabeln().size(); i++) {
-			if (this.frame.getVokabeln().get(i).getCountryOriginCode().equals(prä1) && this.frame.getVokabeln().get(i).getCountryDistinationCode().equals(prä2) && !liste.contains(this.frame.getVokabeln().get(i).getLection())) {
+			if (this.frame.getVokabeln().get(i).getCountryOriginCode().equals(prä1) && this.frame.getVokabeln().get(i).getCountryDistinationCode().equals(prä2) && !liste.contains("Lektion " + this.frame.getVokabeln().get(i).getLection())) {
 				liste.add("Lektion " + this.frame.getVokabeln().get(i).getLection());
 			}
 		}

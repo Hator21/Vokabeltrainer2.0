@@ -54,7 +54,7 @@ public class EditSPanel extends JPanel {
 	private addLection			addLe;
 	private addVocabel			addVoc;
 	private ArrayList<String>	lections	= new ArrayList<String>();
-	//ArrayList<String>			languages	= new ArrayList<String>();
+	// ArrayList<String> languages = new ArrayList<String>();
 	private ArrayList<Vokabel>	vocabellist	= new ArrayList<Vokabel>();
 
 	public EditSPanel(MainFrame frame) {
@@ -379,23 +379,23 @@ public class EditSPanel extends JPanel {
 		this.selectLection = selectLection;
 	}
 
-//	public String[] add2Language() {
-//		boolean b = false;
-//		for (Language s : frame.getLanguageCombi().keySet()) {
-//			Language t = frame.getLanguageCombi().get(s);
-//			if (languages.size() != 0) {
-//				for (String st : languages)
-//					if ((s.getLanguage() + "-" + t.getLanguage()).equals(st) || (t.getLanguage() + "-" + s.getLanguage()).equals(st))
-//						b = true;
-//				if (b == false)
-//					languages.add(s.getLanguage() + "-" + t.getLanguage());
-//				b = false;
-//			} else
-//				languages.add(s.getLanguage() + "-" + t.getLanguage());
-//		}
-//
-//		return (String[]) languages.toArray(new String[languages.size()]);
-//	}
+	// public String[] add2Language() {
+	// boolean b = false;
+	// for (Language s : frame.getLanguageCombi().keySet()) {
+	// Language t = frame.getLanguageCombi().get(s);
+	// if (languages.size() != 0) {
+	// for (String st : languages)
+	// if ((s.getLanguage() + "-" + t.getLanguage()).equals(st) || (t.getLanguage() + "-" + s.getLanguage()).equals(st))
+	// b = true;
+	// if (b == false)
+	// languages.add(s.getLanguage() + "-" + t.getLanguage());
+	// b = false;
+	// } else
+	// languages.add(s.getLanguage() + "-" + t.getLanguage());
+	// }
+	//
+	// return (String[]) languages.toArray(new String[languages.size()]);
+	// }
 
 	public String[] add2Lection(String lection) {
 		boolean b = false;
@@ -437,6 +437,7 @@ public class EditSPanel extends JPanel {
 		lections.addAll(frame.getBear().getLektionList(prä1, prä2));
 		lections.sort(null);
 		lectionsCB.setModel(new DefaultComboBoxModel<String>(lections.toArray(new String[lections.size()])));
+		System.out.println(lections);
 	}
 
 	public int getVocabelFromTable(int row) {

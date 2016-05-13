@@ -100,6 +100,19 @@ public class VocabelPrePanel extends JPanel {
 		this.combobox.setOpaque(false);
 		this.combobox.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		this.add(this.combobox);
+		this.combobox.addActionListener(arg0 -> {
+			VocabelPrePanel.this.frame.getBear().putPräfix(VocabelPrePanel.this.combobox);
+			ArrayList<Integer> list1 = VocabelPrePanel.this.frame.getBear().getLektions();
+			System.out.println("list -> " + list1);
+			for (int i = 0; i < VocabelPrePanel.this.units.size(); i++) {
+				if (list1.contains(i + 1)) {
+					VocabelPrePanel.this.units.get(i).setVisible(true);
+				} else {
+					VocabelPrePanel.this.units.get(i).setVisible(false);
+				}
+			}
+			this.repaint();
+		});
 	}
 
 	public void createSettings() {

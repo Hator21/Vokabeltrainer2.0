@@ -24,7 +24,7 @@ public class LearningPrePanel extends JPanel {
 	private TransparentButton		learning;
 	private ArrayList<JCheckBox>	units	= new ArrayList<JCheckBox>();
 	private JComboBox<String>		combobox;
-	//private String[]					comboBoxListe;
+	// private String[] comboBoxListe;
 
 	public LearningPrePanel(MainFrame frame) {
 
@@ -97,13 +97,15 @@ public class LearningPrePanel extends JPanel {
 		this.combobox.addActionListener(arg0 -> {
 			LearningPrePanel.this.frame.getBear().putPräfix(LearningPrePanel.this.combobox);
 			ArrayList<Integer> list1 = LearningPrePanel.this.frame.getBear().getLektions();
+			System.out.println("list -> " + list1);
 			for (int i = 0; i < LearningPrePanel.this.units.size(); i++) {
-				if (list1.contains(i)) {
+				if (list1.contains(i + 1)) {
 					LearningPrePanel.this.units.get(i).setVisible(true);
 				} else {
 					LearningPrePanel.this.units.get(i).setVisible(false);
 				}
 			}
+			this.repaint();
 		});
 	}
 

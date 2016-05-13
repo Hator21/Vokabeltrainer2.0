@@ -37,18 +37,29 @@ public class SpellingPrePanel extends JPanel {
 		try {
 			this.image = ImageIO.read(new File("img/internalLection.png"));
 		} catch (IOException ex) {}
+		frame.getButtons().add(this.getLearning());
+		this.createCheckboxes(frame.getBear().getLektion());
+		this.createComboBox(frame.add2Language());
 
 		this.setLearning(TransparentButton.createButton("Lernen", 105, 550, 150, 40, 30, 0, (e -> {
+			frame.getLek().clear();
+			for (int i = 0; i < frame.getBear().getLektion(); i++) {
+				if (this.units.get(i).isSelected() == true) {
+					frame.getLek().add(i + 1);
+				}
+			}
+			frame.getTestVokabeln().clear();
+			frame.getCheck().newGame(frame.getTestVokabeln());
+			frame.getTestVokabeln().addAll(frame.getCheck().vok(frame.getLek().size(), frame.getBear().getPrä1(), frame.getBear().getPrä2()));
+
 			for (JPanel p : frame.getPanelList()) {
 				p.setVisible(false);
 			}
+			frame.getSpellingPanel().setButtonTexts(frame.getBear().getPrä1(), frame.getBear().getPrä2());
 			frame.getPanelList().get(8).setVisible(true);
 			frame.getHeadingbar().getHeadingLabelL().setText("Buchstabieren");
 		}), this));
-		frame.getButtons().add(this.getLearning());
 
-		this.createCheckboxes(frame.getBear().getLektion());
-		this.createComboBox(this.comboBoxListe);
 	}
 
 	@Override

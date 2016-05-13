@@ -88,6 +88,19 @@ public class SearchingPrePanel extends JPanel {
 		this.combobox.setOpaque(false);
 		this.combobox.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		this.add(this.combobox);
+		this.combobox.addActionListener(arg0 -> {
+			SearchingPrePanel.this.frame.getBear().putPräfix(SearchingPrePanel.this.combobox);
+			ArrayList<Integer> list1 = SearchingPrePanel.this.frame.getBear().getLektions();
+			System.out.println("list -> " + list1);
+			for (int i = 0; i < SearchingPrePanel.this.units.size(); i++) {
+				if (list1.contains(i + 1)) {
+					SearchingPrePanel.this.units.get(i).setVisible(true);
+				} else {
+					SearchingPrePanel.this.units.get(i).setVisible(false);
+				}
+			}
+			this.repaint();
+		});
 	}
 
 	public MainFrame getFrame() {
