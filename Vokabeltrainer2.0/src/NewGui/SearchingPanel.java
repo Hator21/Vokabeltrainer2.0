@@ -46,17 +46,16 @@ public class SearchingPanel extends JPanel {
 		}
 
 		this.setNextcorrect(TransparentButton.createButton("Nächste", 828, 600, 200, 44, 20, 0, (e -> {
-			System.out.println("Du Hurensohn!!!!1111elf");
+			frame.getSearchingPanel().createButtons();
+			frame.getSearchingPanel().createLabel();
+
 		}), this));
 		frame.getButtons().add(this.getNextcorrect());
-		System.out.println("Leksize -> " + frame.getLek().size());
-
 		frame.getLabels().add(this.getVokabel());
 	}
 
 	public void createButtons() {
 		ArrayList<Vokabel> vocs = this.frame.getTestVokabeln();
-		System.out.println("vocssize-> " + vocs.size());
 		if (vocs.size() < 25) {
 			// TODO: Verteilen
 			for (int x = 0; x < 5; x++) {
@@ -78,6 +77,7 @@ public class SearchingPanel extends JPanel {
 			}
 		}
 		this.frame.getButtons().addAll(this.vocabels);
+
 	}
 
 	@Override
@@ -134,8 +134,8 @@ public class SearchingPanel extends JPanel {
 	}
 
 	public void createLabel() {
-		if (this.frame.getLek().size() > 0) {
-			//this.askedVoc = this.frame.getCheck().vok(1).get(0);
+		if (this.frame.getTestVokabeln().size() > 0) {
+			this.askedVoc = this.frame.getCheck().vok(1, this.frame.getBear().getPrä1(), this.frame.getBear().getPrä2()).get(this.frame.getCheck().random(this.frame.getTestVokabeln().size()));
 			this.setVokabel(TransparentLabel.createLabel("Suche: " + this.askedVoc.getVocabOrigin(), 0, 600, 200, 44, 20, this));
 		}
 	}

@@ -23,16 +23,13 @@ public class VocabelPrePanel extends JPanel {
 
 	private MainFrame				frame;
 	private BufferedImage			image;
-	private ArrayList<JCheckBox>	units			= new ArrayList<JCheckBox>();
+	private ArrayList<JCheckBox>	units	= new ArrayList<JCheckBox>();
 	private JCheckBox				deengCheckBox, engdeCheckBox;
 	private JComboBox<String>		combobox;
 	private JSlider					timeSlider, coundSlider;
 	private TransparentButton		test;
 	private TransparentLabel		countVocs, time;
-	private String					comboBoxListe[]	= {
-			"Englisch", "Französisch"
-	};
-	private int						n				= 0;
+	private int						n		= 0;
 
 	public VocabelPrePanel(MainFrame frame) {
 
@@ -45,8 +42,8 @@ public class VocabelPrePanel extends JPanel {
 		} catch (IOException ex) {}
 
 		this.createButton();
-		this.createCheckboxes(frame.getBear().getLektion());
-		this.createComboBox(this.comboBoxListe);
+		this.createCheckboxes(frame.getBear().getLektions());
+		this.createComboBox(frame.add2Language());
 		this.createSettings();
 
 	}
@@ -61,7 +58,7 @@ public class VocabelPrePanel extends JPanel {
 				}
 			}
 			this.frame.getTestVokabeln().clear();
-			//this.frame.getTestVokabeln().addAll(this.frame.getCheck().vok(this.frame.getLek().size()));
+			this.frame.getTestVokabeln().addAll(this.frame.getCheck().vok(this.frame.getLek().size(), this.frame.getBear().getPrä1(), this.frame.getBear().getPrä2()));
 			if (this.getCoundSlider().getValue() > this.frame.getTestVokabeln().size()) {
 				this.n = this.frame.getTestVokabeln().size();
 			} else {
@@ -82,10 +79,15 @@ public class VocabelPrePanel extends JPanel {
 		this.frame.getButtons().add(this.getTest());
 	}
 
-	public void createCheckboxes(int n) {
-		for (int i = 0; i < n; i++) {
+	public void createCheckboxes(ArrayList<Integer> list) {
+		for (int i = 0; i < 11; i++) {
 			this.units.add(new JCheckBox("Lektion " + (i + 1)));
 			this.units.get(i).setBounds(120, (40 * i) + 100, 200, 40);
+			if (list.contains(i + 1)) {
+				this.units.get(i).setVisible(true);
+			} else {
+				this.units.get(i).setVisible(false);
+			}
 			this.units.get(i).setOpaque(false);
 			this.units.get(i).setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 			this.add(this.units.get(i));

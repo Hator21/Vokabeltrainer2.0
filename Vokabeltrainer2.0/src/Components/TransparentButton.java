@@ -68,7 +68,7 @@ public class TransparentButton extends CustomButton {
 		this.position = new Point(0, 0);
 
 		this.setBounds(x, y, width, height);
-		this.rotation = rotation * Math.PI / 180.0;
+		this.rotation = (rotation * Math.PI) / 180.0;
 		this.correctX = true;
 	}
 
@@ -80,20 +80,20 @@ public class TransparentButton extends CustomButton {
 		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g.setFont(this.f);
 
-		g.setColor(borderColor);
+		g.setColor(this.borderColor);
 		g.drawRect(this.position.x, this.position.y, this.bounds.x - 1, this.bounds.y - 1);
 
-		g.setColor(backgroundColorcolor);
+		g.setColor(this.backgroundColorcolor);
 		g.fillRect(this.position.x + 1, this.position.y + 1, this.bounds.x - 2, this.bounds.y - 2);
 
 		int x = (this.position.x + (this.bounds.x / 2)) - (int) (g.getFontMetrics().getStringBounds(this.getText(), g).getWidth() / 2);
 		int y = ((this.position.y + (this.bounds.y / 2)) + (int) ((g.getFontMetrics().getStringBounds(this.getText(), g).getHeight()) / 2)) + ((int) g.getFontMetrics().getStringBounds(this.getText(), g).getY() / 4);// this.position.y + ((this.bounds.y * 3) / 4) + this.factor;
-		if (correctX == true) {
+		if (this.correctX == true) {
 			Font bft = g.getFont();
 			AffineTransform at = new AffineTransform();
-			at.rotate(rotation);
+			at.rotate(this.rotation);
 			g.setFont(bft.deriveFont(at));
-			y -= rotation * 180 / Math.PI;
+			y -= (this.rotation * 180) / Math.PI;
 		}
 		g.setColor(Color.BLACK);
 		g.drawString(this.getText(), x, y);
@@ -102,7 +102,6 @@ public class TransparentButton extends CustomButton {
 	public static TransparentButton createButton(String text, int x, int y, int width, int height, int fontsize, int factor, Color c, ActionListener listener, JComponent parent) {
 		TransparentButton button = new TransparentButton(text, x, y, width, height, fontsize, factor, c);
 		button.addActionListener(listener);
-		System.out.println(parent.getClass().getName());
 		parent.add(button);
 		return button;
 	}
@@ -110,7 +109,6 @@ public class TransparentButton extends CustomButton {
 	public static TransparentButton createButton(String text, int x, int y, int width, int height, int fontsize, int factor, ActionListener listener, JComponent parent) {
 		TransparentButton button = new TransparentButton(text, x, y, width, height, fontsize, factor);
 		button.addActionListener(listener);
-		System.out.println(parent.getClass().getName());
 		parent.add(button);
 		return button;
 	}
@@ -119,7 +117,6 @@ public class TransparentButton extends CustomButton {
 		TransparentButton button = new TransparentButton(text, x, y, width, height, fontsize, factor, rotation);
 		button.addActionListener(listener);
 		button.setActionCommand(actionCommand);
-		System.out.println(parent.getClass().getName());
 		parent.add(button);
 		return button;
 	}
@@ -146,7 +143,7 @@ public class TransparentButton extends CustomButton {
 	}
 
 	public double getRotation() {
-		return rotation;
+		return this.rotation;
 	}
 
 	public void setRotation(double rotation) {
@@ -154,7 +151,7 @@ public class TransparentButton extends CustomButton {
 	}
 
 	public boolean isCorrectX() {
-		return correctX;
+		return this.correctX;
 	}
 
 	public void setCorrectX(boolean correctX) {

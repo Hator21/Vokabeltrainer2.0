@@ -29,7 +29,6 @@ public class TransparentLabel extends CustomLabel {
 		this.position = new Point(0, 0);
 
 		this.setBounds(x, y, width, height);
-		System.out.println(this.getBounds());
 	}
 
 	@Override
@@ -40,10 +39,10 @@ public class TransparentLabel extends CustomLabel {
 		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g.setFont(this.f);
 
-		g.setColor(color);
+		g.setColor(this.color);
 		g.drawRect(this.position.x, this.position.y, this.bounds.x - 1, this.bounds.y - 1);
 
-		g.setColor(color2);
+		g.setColor(this.color2);
 		g.fillRect(this.position.x + 1, this.position.y + 1, this.bounds.x - 2, this.bounds.y - 2);
 
 		int x = (this.position.x + (this.bounds.x / 2)) - (int) (g.getFontMetrics().getStringBounds(this.getText(), g).getWidth() / 2);
@@ -73,7 +72,7 @@ public class TransparentLabel extends CustomLabel {
 	}
 
 	public Color getColor() {
-		return color;
+		return this.color;
 	}
 
 	public void setColor(Color color) {

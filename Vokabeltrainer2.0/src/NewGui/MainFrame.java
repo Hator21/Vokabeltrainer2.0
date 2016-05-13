@@ -58,7 +58,7 @@ public class MainFrame extends JFrame {
 	private HashMap<Language, Language>		languageCombi	= new HashMap<Language, Language>();
 	private ArrayList<Integer>				lek				= new ArrayList<Integer>();
 	private ArrayList<Vokabel>				testvokabeln	= new ArrayList<Vokabel>();
-	ArrayList<String>			languages	= new ArrayList<String>();
+	ArrayList<String>						languages		= new ArrayList<String>();
 
 	/**
 	 * Launch the application.
@@ -93,8 +93,8 @@ public class MainFrame extends JFrame {
 			this.languageCombi = (HashMap<Language, Language>) ois.readObject();
 			ois.close();
 			for (Language key : this.getLanguageCombi().keySet()) {
-				System.err.print(key.getLanguage() + " - " + key.getPräfix() + " -> ");
-				System.err.println(this.getLanguageCombi().get(key).getLanguage() + " - " + this.getLanguageCombi().get(key).getPräfix());
+				//System.err.print(key.getLanguage() + " - " + key.getPräfix() + " -> ");
+				//System.err.println(this.getLanguageCombi().get(key).getLanguage() + " - " + this.getLanguageCombi().get(key).getPräfix());
 			}
 		} catch (IOException | ClassNotFoundException e1) {
 			System.err.println(e1);
@@ -402,21 +402,26 @@ public class MainFrame extends JFrame {
 	public void setLanguageCombi(HashMap<Language, Language> languageCombi) {
 		this.languageCombi = languageCombi;
 	}
+
 	public String[] add2Language() {
 		boolean b = false;
 		for (Language s : this.getLanguageCombi().keySet()) {
 			Language t = this.getLanguageCombi().get(s);
-			if (languages.size() != 0) {
-				for (String st : languages)
-					if ((s.getLanguage() + "-" + t.getLanguage()).equals(st) || (t.getLanguage() + "-" + s.getLanguage()).equals(st))
+			if (this.languages.size() != 0) {
+				for (String st : this.languages) {
+					if ((s.getLanguage() + "-" + t.getLanguage()).equals(st) || (t.getLanguage() + "-" + s.getLanguage()).equals(st)) {
 						b = true;
-				if (b == false)
-					languages.add(s.getLanguage() + "-" + t.getLanguage());
+					}
+				}
+				if (b == false) {
+					this.languages.add(s.getLanguage() + "-" + t.getLanguage());
+				}
 				b = false;
-			} else
-				languages.add(s.getLanguage() + "-" + t.getLanguage());
+			} else {
+				this.languages.add(s.getLanguage() + "-" + t.getLanguage());
+			}
 		}
 
-		return (String[]) languages.toArray(new String[languages.size()]);
+		return this.languages.toArray(new String[this.languages.size()]);
 	}
 }

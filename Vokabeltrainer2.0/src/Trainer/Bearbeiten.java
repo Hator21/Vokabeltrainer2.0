@@ -14,7 +14,7 @@ public class Bearbeiten {
 	private static File	vocFile	= new File("data/Vokabeln.csv");
 	private CSVParser	parser;
 	private CSVWriter	writer;
-	private String prä1,prä2;
+	private String		prä1, prä2;
 
 	public Bearbeiten(MainFrame frame) {
 		this.setFrame(frame);
@@ -69,16 +69,17 @@ public class Bearbeiten {
 	public ArrayList<String> getLektionList(String prä1, String prä2) {
 		ArrayList<String> liste = new ArrayList<String>();
 		for (int i = 0; i < this.frame.getVokabeln().size(); i++) {
-			if (frame.getVokabeln().get(i).getCountryOriginCode().equals(prä1) && frame.getVokabeln().get(i).getCountryDistinationCode().equals(prä2) && !liste.contains(this.frame.getVokabeln().get(i).getLection())) {
+			if (this.frame.getVokabeln().get(i).getCountryOriginCode().equals(prä1) && this.frame.getVokabeln().get(i).getCountryDistinationCode().equals(prä2) && !liste.contains(this.frame.getVokabeln().get(i).getLection())) {
 				liste.add("Lektion " + this.frame.getVokabeln().get(i).getLection());
 			}
 		}
 		return liste;
 	}
+
 	public ArrayList<Integer> getLektions() {
 		ArrayList<Integer> liste = new ArrayList<Integer>();
 		for (int i = 0; i < this.frame.getVokabeln().size(); i++) {
-			if (frame.getVokabeln().get(i).getCountryOriginCode().equals(prä1) && frame.getVokabeln().get(i).getCountryDistinationCode().equals(prä2) && !liste.contains(this.frame.getVokabeln().get(i).getLection())) {
+			if (this.frame.getVokabeln().get(i).getCountryOriginCode().equals(this.prä1) && this.frame.getVokabeln().get(i).getCountryDistinationCode().equals(this.prä2) && !liste.contains(this.frame.getVokabeln().get(i).getLection())) {
 				liste.add(this.frame.getVokabeln().get(i).getLection());
 			}
 		}
@@ -114,33 +115,37 @@ public class Bearbeiten {
 		}
 		return mapper;
 	}
+
 	public void putPräfix(JComboBox cb) {
 		String language = cb.getSelectedItem().toString();
 		String lang1 = language.split("-")[0];
 		String lang2 = language.split("-")[1];
-		prä1 = getPräfix1(lang1);
-		prä2 = getPräfix2(lang2);
+		this.prä1 = this.getPräfix1(lang1);
+		this.prä2 = this.getPräfix2(lang2);
 	}
+
 	public String getPräfix1(String lang) {
-		for (Language key : frame.getLanguageCombi().keySet()) {
-			if (key.getLanguage().equals(lang))
-				prä1 = key.getPräfix();
+		for (Language key : this.frame.getLanguageCombi().keySet()) {
+			if (key.getLanguage().equals(lang)) {
+				this.prä1 = key.getPräfix();
+			}
 		}
-		return prä1;
+		return this.prä1;
 	}
 
 	public String getPräfix2(String lang) {
-		for (Language key : frame.getLanguageCombi().keySet()) {
-			if (frame.getLanguageCombi().get(key).getLanguage().equals(lang))
-				prä2 = frame.getLanguageCombi().get(key).getPräfix();
+		for (Language key : this.frame.getLanguageCombi().keySet()) {
+			if (this.frame.getLanguageCombi().get(key).getLanguage().equals(lang)) {
+				this.prä2 = this.frame.getLanguageCombi().get(key).getPräfix();
+			}
 		}
-		return prä2;
+		return this.prä2;
 	}
 
 	private static CSVReflectionMap mapper;
 
 	public String getPrä1() {
-		return prä1;
+		return this.prä1;
 	}
 
 	public void setPrä1(String prä1) {
@@ -148,7 +153,7 @@ public class Bearbeiten {
 	}
 
 	public String getPrä2() {
-		return prä2;
+		return this.prä2;
 	}
 
 	public void setPrä2(String prä2) {
