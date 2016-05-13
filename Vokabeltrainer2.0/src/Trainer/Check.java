@@ -71,7 +71,7 @@ public class Check {
 					} else if (this.frame.getTestVokabeln().get(rnd2).getUsed() == false) {
 						vok = this.frame.getTestVokabeln().get(rnd2).getVocabTranslation();
 						this.frame.getTestVokabeln().get(rnd2).setUsed(true);
-						found = false;//brake wenn Vokabel gefunden
+						found = false;// brake wenn Vokabel gefunden
 					}
 				} else if (rnd == 1) {
 					if (this.frame.getTestVokabeln().get(rnd2).getUsed() == true) {
@@ -79,7 +79,7 @@ public class Check {
 					} else if (this.frame.getTestVokabeln().get(rnd2).getUsed() == false) {
 						vok = this.frame.getTestVokabeln().get(rnd2).getVocabOrigin();
 						this.frame.getTestVokabeln().get(rnd2).setUsed(true);
-						found = false;//brake wenn Vokabel gefunden
+						found = false;// brake wenn Vokabel gefunden
 					}
 				}
 

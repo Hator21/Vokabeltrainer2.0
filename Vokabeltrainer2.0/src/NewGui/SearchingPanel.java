@@ -1,6 +1,7 @@
 package NewGui;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -46,8 +47,15 @@ public class SearchingPanel extends JPanel {
 		}
 
 		this.setNextcorrect(TransparentButton.createButton("Nächste", 828, 600, 200, 44, 20, 0, (e -> {
+			for (Component c : this.getComponents()) {
+				if (!((TransparentButton) (e.getSource())).equals(c))
+					this.remove(c);
+			}
+			vocabels.clear();
+			this.revalidate();
 			frame.getSearchingPanel().createButtons();
 			frame.getSearchingPanel().createLabel();
+			this.repaint();
 
 		}), this));
 		frame.getButtons().add(this.getNextcorrect());
@@ -62,7 +70,7 @@ public class SearchingPanel extends JPanel {
 				for (int y = 0; y < 5; y++) {
 					int random = this.zufallszahl(0, 60) - 30;
 					if (((x * 5) + y) < vocs.size()) {
-						this.vocabels.add(TransparentButton.createButton(vocs.get(((x * 5) + y)).getVocabTranslation(), (205 * x) + 4, (115 * y) + 4, 200, 115, 20, 0, random, this.buttonListener, vocs.get(((x * 5) + y)).getVocabTranslation(), this));
+						this.vocabels.add(TransparentButton.createButton(vocs.get(((x * 5) + y)).getVocabTranslation(), (210 * x) + 4, (115 * y) + 4, 200, 115, 20, 0, random, this.buttonListener, vocs.get(((x * 5) + y)).getVocabTranslation(), this));
 					}
 				}
 			}
@@ -77,7 +85,6 @@ public class SearchingPanel extends JPanel {
 			}
 		}
 		this.frame.getButtons().addAll(this.vocabels);
-
 	}
 
 	@Override

@@ -60,7 +60,7 @@ public class SearchingPrePanel extends JPanel {
 		frame.getButtons().add(this.getLearning());
 
 		this.createCheckboxes(frame.getBear().getLektion());
-		this.createComboBox(this.comboBoxListe);
+		this.createComboBox(frame.add2Language());
 	}
 
 	@Override
