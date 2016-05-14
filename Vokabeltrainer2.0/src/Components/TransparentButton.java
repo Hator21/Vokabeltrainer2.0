@@ -110,10 +110,10 @@ public class TransparentButton extends CustomButton {
 		return button;
 	}
 
-	public static TransparentButton createButton(String text, int x, int y, int width, int height, int fontsize, int factor, double rotation, ActionListener listener, String actionCommand, JComponent parent) {
+	public static TransparentButton createButton(String text, int x, int y, int width, int height, int fontsize, int factor, double rotation, ActionListener listener, JComponent parent) {
 		TransparentButton button = new TransparentButton(text, x, y, width, height, fontsize, factor, rotation);
 		button.addActionListener(listener);
-		button.setActionCommand(actionCommand);
+
 		parent.add(button);
 		return button;
 	}

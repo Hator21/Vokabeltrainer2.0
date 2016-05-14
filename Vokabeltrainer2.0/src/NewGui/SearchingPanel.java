@@ -48,42 +48,45 @@ public class SearchingPanel extends JPanel {
 		}
 
 		this.setNextcorrect(TransparentButton.createButton("Nächste", 828, 600, 200, 44, 20, 0, (e -> {
-			for (Component c : buttons.getComponents()) {
-				if (!((TransparentButton) (e.getSource())).equals(c))
-					buttons.remove(c);
+			for (Component c : this.getComponents()) {
+				if (!((TransparentButton) (e.getSource())).equals(c)) {
+					this.remove(c);
+				}
 			}
-			vocabels.clear();
-			buttons.revalidate();
+			this.vocabels.clear();
+			this.revalidate();
 			frame.getSearchingPanel().createButtons();
 			frame.getSearchingPanel().createLabel();
-			buttons.repaint();
+			this.repaint();
 
 		}), this));
 		frame.getButtons().add(this.getNextcorrect());
 		frame.getLabels().add(this.getVokabel());
-		createHelp();
+		this.createHelp();
 	}
 
 	public void createButtons() {
 		ArrayList<Vokabel> vocs = this.frame.getTestVokabeln();
+
 		if (vocs.size() < 25) {
 			// TODO: Verteilen
-			for (int x = 0; x < 5; x++) {
-				for (int y = 0; y < 5; y++) {
-					int random = this.zufallszahl(0, 60) - 30;
-					if (((x * 5) + y) < vocs.size()) {
-						this.vocabels.add(TransparentButton.createButton(vocs.get(((x * 5) + y)).getVocabTranslation(), (210 * x) + 4, (115 * y) + 4, 200, 115, 20, 0, random, this.buttonListener, vocs.get(((x * 5) + y)).getVocabTranslation(), this));
-					}
+			for (int a = 0; a < 5; a++) {
+				for (int b = 0; b < 5; b++) {
+					int rnd = this.zufallszahl(0, 60) - 30;
+					this.vocabels.add(TransparentButton.createButton("", (210 * a) + 4, (115 * b) + 4, 200, 115, 20, 0, rnd, this.buttonListener, this));
 				}
 			}
-		} else {
-			for (int x = 0; x < 5; x++) {
-				for (int y = 0; y < 5; y++) {
-					int random = this.zufallszahl(0, 60) - 30;
-					if (((x * 5) + y) < vocs.size()) {
-						this.vocabels.add(TransparentButton.createButton(vocs.get(((x * 5) + y)).getVocabTranslation(), (205 * x) + 4, (115 * y) + 4, 200, 115, 20, 0, random, this.buttonListener, vocs.get(((x * 5) + y)).getVocabTranslation(), this));
+			for (int i = 0; i < vocs.size(); i++) {
+				int breake = 0;
+				while (breake == 0) {
+					int rnd = this.frame.getCheck().random(this.vocabels.size());
+					if (this.vocabels.get(rnd).getText().equals("")) {
+						this.vocabels.get(rnd).setText(vocs.get(i).getVocabTranslation());
+						breake++;
 					}
+
 				}
+
 			}
 		}
 		this.frame.getButtons().addAll(this.vocabels);
@@ -131,12 +134,15 @@ public class SearchingPanel extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println(((TransparentButton) (e.getSource())).getText());
-			if (SearchingPanel.this.askedVoc.getVocabTranslation().equalsIgnoreCase(((TransparentButton) (e.getSource())).getText())) {
-				System.out.println("RICHTIG!");
-				((TransparentButton) e.getSource()).setBackgroundColor(Color.GREEN);
-			} else {
-				System.out.println("FALSCH FAK ME!");
-				((TransparentButton) e.getSource()).setBackgroundColor(Color.RED);
+			if (!((TransparentButton) (e.getSource())).getText().equals("")) {
+				if (SearchingPanel.this.askedVoc.getVocabTranslation().equalsIgnoreCase(((TransparentButton) (e.getSource())).getText())) {
+					// TODO: richtig
+
+					((TransparentButton) e.getSource()).setBackgroundColor(Color.GREEN);
+				} else {
+
+					((TransparentButton) e.getSource()).setBackgroundColor(Color.RED);
+				}
 			}
 		}
 	}
@@ -145,12 +151,12 @@ public class SearchingPanel extends JPanel {
 		if (this.frame.getTestVokabeln().size() > 0) {
 			this.askedVoc = this.frame.getCheck().vok(1, this.frame.getBear().getPrä1(), this.frame.getBear().getPrä2()).get(this.frame.getCheck().random(this.frame.getTestVokabeln().size()));
 			this.setVokabel(TransparentLabel.createLabel("Suche: " + this.askedVoc.getVocabOrigin(), 0, 600, 200, 44, 20, this));
-			frame.getLabels().add(this.getVokabel());
+			this.frame.getLabels().add(this.getVokabel());
 		}
 	}
 
 	public void createHelp() {
-		frame.getHelper().add(TransparentLabel.createLabel("1. Klicke auf die richtige Vokabel, danach auf \"Weiter\"!", 300, 600, 425, 30, 18, this));
+		this.frame.getHelper().add(TransparentLabel.createLabel("1. Klicke auf die richtige Vokabel, danach auf \"Weiter\"!", 300, 600, 425, 30, 18, this));
 	}
 
 }
