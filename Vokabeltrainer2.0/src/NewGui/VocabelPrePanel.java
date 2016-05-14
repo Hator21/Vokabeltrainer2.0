@@ -78,6 +78,11 @@ public class VocabelPrePanel extends JPanel {
 				this.frame.getVocabeltestPanel().getTimerLabel().setText("Übrige Zeit: " + String.valueOf(this.getTimeSlider().getValue() + ":00"));
 				this.frame.getPanelList().get(4).setVisible(true);
 				this.frame.getHeadingbar().getHeadingLabelL().setText("Vokabeltest");
+		}), this));
+		this.frame.getButtons().add(this.getTest());
+		frame.getButtons().add(getTest());
+
+	}
 			}
 		}), this));
 		this.frame.getButtons().add(this.getTest());
