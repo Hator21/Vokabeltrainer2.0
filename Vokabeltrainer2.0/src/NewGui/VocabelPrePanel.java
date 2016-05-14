@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 
@@ -45,11 +46,12 @@ public class VocabelPrePanel extends JPanel {
 		this.createCheckboxes(frame.getBear().getLektions());
 		this.createComboBox(frame.add2Language());
 		this.createSettings();
+		this.createHelp();
 
 	}
 
 	public void createButton() {
-		this.setTest(TransparentButton.createButton("Prüfen", 600, 450, 250, 40, 30, 0, (e -> {
+		this.setTest(TransparentButton.createButton("Prüfen", 600, 550, 250, 40, 30, 0, (e -> {
 			this.frame.getBear().clear(this.frame.getLek());
 			this.frame.getLek().clear();
 			for (int i = 0; i < this.frame.getBear().getLektion(); i++) {
@@ -57,30 +59,35 @@ public class VocabelPrePanel extends JPanel {
 					this.frame.getLek().add(i + 1);
 				}
 			}
-			this.frame.getTestVokabeln().clear();
-			this.frame.getTestVokabeln().addAll(this.frame.getCheck().vok(this.frame.getLek().size(), this.frame.getBear().getPrä1(), this.frame.getBear().getPrä2()));
-			if (this.getCoundSlider().getValue() > this.frame.getTestVokabeln().size()) {
-				this.n = this.frame.getTestVokabeln().size();
-			} else {
-				this.n = this.getCoundSlider().getValue();
-			}
-			this.frame.getVocabeltestPanel().setCounts(this.n);
-			this.frame.getVocabeltestPanel().getSpeech1Text().setText(this.frame.getCheck().vok(this.deengCheckBox.isSelected(), this.engdeCheckBox.isSelected()));
+			if (frame.getLek().size() == 0)
+				JOptionPane.showMessageDialog(frame, "Sie haben keine Lektion ausgewählt");
+			else {
+				this.frame.getTestVokabeln().clear();
+				this.frame.getTestVokabeln().addAll(this.frame.getCheck().vok(this.frame.getLek().size(), this.frame.getBear().getPrä1(), this.frame.getBear().getPrä2()));
+				if (this.getCoundSlider().getValue() > this.frame.getTestVokabeln().size()) {
+					this.n = this.frame.getTestVokabeln().size();
+				} else {
+					this.n = this.getCoundSlider().getValue();
+				}
+				this.frame.getVocabeltestPanel().setCounts(this.n);
+				this.frame.getVocabeltestPanel().getSpeech1Text().setText(this.frame.getCheck().vok(this.deengCheckBox.isSelected(), this.engdeCheckBox.isSelected()));
 
-			for (JPanel p : this.frame.getPanelList()) {
-				p.setVisible(false);
+				for (JPanel p : this.frame.getPanelList()) {
+					p.setVisible(false);
+				}
+				this.frame.getVocabeltestPanel().getTimerLabel().setText("Übrige Zeit: " + String.valueOf(this.getTimeSlider().getValue() + ":00"));
+				this.frame.getPanelList().get(4).setVisible(true);
+				this.frame.getHeadingbar().getHeadingLabelL().setText("Vokabeltest");
+				this.frame.getHeadingbar().getHeadingLabelR().setText("");
+				this.frame.getTimer().setTimer(this.timeSlider.getValue(), 0);
 			}
-			this.frame.getVocabeltestPanel().getTimerLabel().setText("Übrige Zeit: " + String.valueOf(this.getTimeSlider().getValue() + ":00"));
-			this.frame.getPanelList().get(4).setVisible(true);
-			this.frame.getHeadingbar().getHeadingLabelL().setText("Vokabeltest");
-			this.frame.getHeadingbar().getHeadingLabelR().setText("");
-			this.frame.getTimer().setTimer(this.timeSlider.getValue(), 0);
 		}), this));
 		this.frame.getButtons().add(this.getTest());
+		frame.getButtons().add(getTest());
 	}
 
 	public void createCheckboxes(ArrayList<Integer> list) {
-		for (int i = 0; i < 11; i++) {
+		for (int i = 0; i < 10; i++) {
 			this.units.add(new JCheckBox("Lektion " + (i + 1)));
 			this.units.get(i).setBounds(120, (40 * i) + 100, 200, 40);
 			if (list.contains(i + 1)) {
@@ -111,13 +118,15 @@ public class VocabelPrePanel extends JPanel {
 					VocabelPrePanel.this.units.get(i).setVisible(false);
 				}
 			}
+			deengCheckBox.setText((String) combobox.getSelectedItem());
+			engdeCheckBox.setText(((String) (combobox.getSelectedItem())).split("-")[1] + "-" + ((String) (combobox.getSelectedItem())).split("-")[0]);
 			this.repaint();
 		});
 	}
 
 	public void createSettings() {
 		this.timeSlider = new JSlider(0, 60, 15);
-		this.timeSlider.setBounds(600, 360, 250, 55);
+		this.timeSlider.setBounds(600, 460, 250, 55);
 		this.timeSlider.setPaintTicks(true);
 		this.timeSlider.setPaintLabels(true);
 		this.timeSlider.setMajorTickSpacing(10);
@@ -130,7 +139,7 @@ public class VocabelPrePanel extends JPanel {
 		this.add(this.timeSlider);
 
 		this.coundSlider = new JSlider(0, 50, 30);
-		this.coundSlider.setBounds(600, 220, 250, 55);
+		this.coundSlider.setBounds(600, 320, 250, 55);
 		this.coundSlider.setPaintTicks(true);
 		this.coundSlider.setPaintLabels(true);
 		this.coundSlider.setMajorTickSpacing(10);
@@ -142,22 +151,25 @@ public class VocabelPrePanel extends JPanel {
 		this.coundSlider.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		this.add(this.coundSlider);
 
-		this.setCountVocs(TransparentLabel.createLabel("Anzahl Vokabeln", 600, 170, 250, 40, 20, this));
+		this.setCountVocs(TransparentLabel.createLabel("Anzahl Vokabeln", 600, 270, 250, 40, 20, this));
 		this.frame.getLabels().add(this.getCountVocs());
-		this.setTime(TransparentLabel.createLabel("Zeit (min)", 600, 310, 250, 40, 20, this));
+		this.setTime(TransparentLabel.createLabel("Zeit (min)", 600, 410, 250, 40, 20, this));
 		this.frame.getLabels().add(this.getTime());
 
 		this.deengCheckBox = new JCheckBox("Deutsch-Englisch");
 		this.deengCheckBox.setOpaque(false);
 		this.deengCheckBox.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		this.deengCheckBox.setBounds(550, 100, 200, 40);
+		this.deengCheckBox.setBounds(550, 200, 200, 40);
 		this.add(this.deengCheckBox);
 
 		this.engdeCheckBox = new JCheckBox("Englisch-Deutsch");
 		this.engdeCheckBox.setOpaque(false);
 		this.engdeCheckBox.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		this.engdeCheckBox.setBounds(750, 100, 200, 40);
+		this.engdeCheckBox.setBounds(750, 200, 200, 40);
 		this.add(this.engdeCheckBox);
+
+		deengCheckBox.setText((String) combobox.getSelectedItem());
+		engdeCheckBox.setText(((String) (combobox.getSelectedItem())).split("-")[1] + "-" + ((String) (combobox.getSelectedItem())).split("-")[0]);
 	}
 
 	public TransparentButton getTest() {
@@ -242,4 +254,10 @@ public class VocabelPrePanel extends JPanel {
 		g.drawImage(this.image, 0, 0, null);
 	}
 
+	public void createHelp() {
+		frame.getHelper().add(TransparentLabel.createLabel("<- 1. Bitte wähle erst die gewünschte Sprache aus!", 290, 55, 425, 30, 18, this));
+		frame.getHelper().add(TransparentLabel.createLabel("<- 2. Danach wähle eine oder mehrere Lektionen aus!", 290, 105, 440, 30, 18, this));
+		frame.getHelper().add(TransparentLabel.createLabel("4. Zu guter letzt, klicke auf \"Prüfen\" damit es weiter geht! ->", 60, 555, 530, 30, 18, this));
+		frame.getHelper().add(TransparentLabel.createLabel("3. Nehme noch ein paar Einstellungen vor!", 540, 170, 430, 30, 18, this));
+	}
 }

@@ -43,7 +43,7 @@ public class SpellingPanel extends JPanel {
 		} catch (IOException ex) {}
 		createLabel();
 		createButton();
-		setNextButton((TransparentButton.createButton("Nächste", 115, 470, 200, 50, 20, 0, (e -> {
+		setNextButton((TransparentButton.createButton("Weiter", 115, 470, 200, 50, 20, 0, (e -> {
 			for (Component c : this.getComponents()) {
 				if (!((TransparentButton) (e.getSource())).equals(c))
 					this.remove(c);
@@ -55,6 +55,7 @@ public class SpellingPanel extends JPanel {
 			this.repaint();
 
 		}), this)));
+		frame.getButtons().add(getNextButton());
 	}
 
 	public void createLabel() {
@@ -101,6 +102,7 @@ public class SpellingPanel extends JPanel {
 			this.repaint();
 		}), this));
 		frame.getButtons().add(getVoc4());
+		createHelp();
 	}
 
 	@Override
@@ -491,5 +493,10 @@ public class SpellingPanel extends JPanel {
 
 	public void setNextButton(TransparentButton nextButton) {
 		this.nextButton = nextButton;
+	}
+
+	public void createHelp() {
+		frame.getHelper().add(TransparentLabel.createLabel("1. Klicke auf die richtig geschriebene Vokabel!", 10, 250, 400, 30, 18, this));
+		frame.getHelper().add(TransparentLabel.createLabel("2. Klicke auf \"Weiter\" für die nächste Vokabel!", 15, 530, 400, 30, 18, this));
 	}
 }

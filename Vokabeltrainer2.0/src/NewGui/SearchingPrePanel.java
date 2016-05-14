@@ -12,9 +12,11 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Components.TransparentButton;
+import Components.TransparentLabel;
 
 @SuppressWarnings("serial")
 public class SearchingPrePanel extends JPanel {
@@ -45,22 +47,37 @@ public class SearchingPrePanel extends JPanel {
 					frame.getLek().add(i + 1);
 				}
 			}
-
-			frame.getTestVokabeln().clear();
-			frame.getCheck().newGame(frame.getVokabeln());
-			frame.getTestVokabeln().addAll(frame.getCheck().vok(frame.getLek().size(), frame.getBear().getPrä1(), frame.getBear().getPrä2()));
-			for (JPanel p : frame.getPanelList()) {
-				p.setVisible(false);
+			if (frame.getLek().size() == 0)
+				JOptionPane.showMessageDialog(frame, "Sie haben keine Lektion ausgewählt");
+			else {
+				frame.getTestVokabeln().clear();
+				frame.getCheck().newGame(frame.getVokabeln());
+				frame.getTestVokabeln().addAll(frame.getCheck().vok(frame.getLek().size(), frame.getBear().getPrä1(), frame.getBear().getPrä2()));
+				for (JPanel p : frame.getPanelList()) {
+					p.setVisible(false);
+				}
+				frame.getPanelList().get(6).setVisible(true);
+				frame.getHeadingbar().getHeadingLabelL().setText("Suchspiel");
+				frame.getSearchingPanel().removeAll();
+				frame.getSearchingPanel().createButtons();
+				frame.getSearchingPanel().createLabel();
 			}
-			frame.getPanelList().get(6).setVisible(true);
-			frame.getHeadingbar().getHeadingLabelL().setText("Suchspiel");
-			frame.getSearchingPanel().createButtons();
-			frame.getSearchingPanel().createLabel();
 		}), this));
 		frame.getButtons().add(this.getLearning());
 
 		this.createCheckboxes(frame.getBear().getLektion());
 		this.createComboBox(frame.add2Language());
+		this.frame.getBear().putPräfix(this.combobox);
+		ArrayList<Integer> list1 = this.frame.getBear().getLektions();
+		System.out.println("list -> " + list1);
+		for (int i = 0; i < this.units.size(); i++) {
+			if (list1.contains(i + 1)) {
+				this.units.get(i).setVisible(true);
+			} else {
+				this.units.get(i).setVisible(false);
+			}
+		}
+		createHelp();
 	}
 
 	@Override
@@ -117,6 +134,12 @@ public class SearchingPrePanel extends JPanel {
 
 	protected void setLearning(TransparentButton learning) {
 		this.learning = learning;
+	}
+
+	public void createHelp() {
+		frame.getHelper().add(TransparentLabel.createLabel("<- 1. Bitte wähle erst die gewünschte Sprache aus!", 290, 55, 425, 30, 18, this));
+		frame.getHelper().add(TransparentLabel.createLabel("2. Danach wähle eine oder mehrere Lektionen aus!", 0, 500, 444, 30, 18, this));
+		frame.getHelper().add(TransparentLabel.createLabel("<- 3. Zu guter letzt, klicke auf \"Lernen\" damit es weiter geht!", 260, 555, 530, 30, 18, this));
 	}
 
 }

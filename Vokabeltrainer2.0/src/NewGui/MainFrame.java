@@ -53,6 +53,7 @@ public class MainFrame extends JFrame {
 
 	private ArrayList<TransparentButton>	buttons			= new ArrayList<TransparentButton>();
 	private ArrayList<TransparentLabel>		labels			= new ArrayList<TransparentLabel>();
+	private ArrayList<TransparentLabel>		helper			= new ArrayList<TransparentLabel>();
 	private ArrayList<JPanel>				panelList		= new ArrayList<JPanel>();
 	private ArrayList<Vokabel>				vokabeln		= new ArrayList<Vokabel>();
 	private HashMap<Language, Language>		languageCombi	= new HashMap<Language, Language>();
@@ -64,6 +65,7 @@ public class MainFrame extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+
 		EventQueue.invokeLater(() -> {
 			try {
 				MainFrame frame = new MainFrame();
@@ -81,6 +83,7 @@ public class MainFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainFrame() {
+
 		setInstance(this);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -93,8 +96,8 @@ public class MainFrame extends JFrame {
 			this.languageCombi = (HashMap<Language, Language>) ois.readObject();
 			ois.close();
 			for (Language key : this.getLanguageCombi().keySet()) {
-				//System.err.print(key.getLanguage() + " - " + key.getPräfix() + " -> ");
-				//System.err.println(this.getLanguageCombi().get(key).getLanguage() + " - " + this.getLanguageCombi().get(key).getPräfix());
+				// System.err.print(key.getLanguage() + " - " + key.getPräfix() + " -> ");
+				// System.err.println(this.getLanguageCombi().get(key).getLanguage() + " - " + this.getLanguageCombi().get(key).getPräfix());
 			}
 		} catch (IOException | ClassNotFoundException e1) {
 			System.err.println(e1);
@@ -423,5 +426,13 @@ public class MainFrame extends JFrame {
 		}
 
 		return this.languages.toArray(new String[this.languages.size()]);
+	}
+
+	public ArrayList<TransparentLabel> getHelper() {
+		return helper;
+	}
+
+	public void setHelper(ArrayList<TransparentLabel> helper) {
+		this.helper = helper;
 	}
 }

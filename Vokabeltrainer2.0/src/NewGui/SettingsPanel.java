@@ -42,8 +42,11 @@ public class SettingsPanel extends JPanel {
 		this.add(this.helpActiv);
 		this.helpActiv.addActionListener(e -> {
 			if (((JCheckBox) e.getSource()).isSelected()) {
-
-			}
+				for (TransparentLabel t : SettingsPanel.this.frame.getHelper())
+					t.setVisible(true);
+			} else
+				for (TransparentLabel t : SettingsPanel.this.frame.getHelper())
+					t.setVisible(false);
 		});
 
 		this.borderActiv = new JCheckBox("Zeige Button- und Textgrenzen");
@@ -54,17 +57,23 @@ public class SettingsPanel extends JPanel {
 		this.borderActiv.addActionListener(e -> {
 			if (((JCheckBox) e.getSource()).isSelected()) {
 				for (TransparentLabel t1 : SettingsPanel.this.frame.getLabels()) {
-					t1.setColor(new Color(0, 0, 255, 255));
+					if (t1 != null) {
+						t1.setColor(new Color(0, 0, 255, 255));
+						System.out.println(t1);
+					}
 				}
 				for (TransparentButton t2 : SettingsPanel.this.frame.getButtons()) {
-					t2.setBorderColor(new Color(255, 0, 0, 255));
+					if (t2 != null)
+						t2.setBorderColor(new Color(255, 0, 0, 255));
 				}
 			} else {
 				for (TransparentLabel t3 : SettingsPanel.this.frame.getLabels()) {
-					t3.setColor(new Color(0, 0, 255, 0));
+					if (t3 != null)
+						t3.setColor(new Color(0, 0, 255, 0));
 				}
 				for (TransparentButton t4 : SettingsPanel.this.frame.getButtons()) {
-					t4.setBorderColor(new Color(255, 0, 0, 0));
+					if (t4 != null)
+						t4.setBorderColor(new Color(255, 0, 0, 0));
 				}
 			}
 		});

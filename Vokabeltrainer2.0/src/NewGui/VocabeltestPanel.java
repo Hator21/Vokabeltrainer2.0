@@ -99,6 +99,7 @@ public class VocabeltestPanel extends JPanel {
 		this.speech2Text.setEditable(false);
 		this.add(this.speech2Text);
 
+		createHelp();
 	}
 
 	@Override
@@ -228,4 +229,8 @@ public class VocabeltestPanel extends JPanel {
 		this.speech2Text = speech2Text;
 	}
 
+	public void createHelp() {
+		frame.getHelper().add(TransparentLabel.createLabel("1. Drücke auf \"Start\" um den Test zu starten!", 10, 30, 425, 30, 18, this));
+		frame.getHelper().add(TransparentLabel.createLabel("2. Klicke auf \"Weiter\"!", 0, 380, 444, 30, 18, this));
+	}
 }

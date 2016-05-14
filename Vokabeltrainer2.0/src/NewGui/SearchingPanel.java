@@ -32,6 +32,7 @@ public class SearchingPanel extends JPanel {
 	private VokabelButtonListener			buttonListener	= new VokabelButtonListener();
 	private Vokabel							askedVoc		= null;
 	private ArrayList<CoordSearching>		coords			= new ArrayList<CoordSearching>();
+	private JPanel							buttons;
 
 	public SearchingPanel(MainFrame frame) {
 		this.setFrame(frame);
@@ -47,19 +48,20 @@ public class SearchingPanel extends JPanel {
 		}
 
 		this.setNextcorrect(TransparentButton.createButton("Nächste", 828, 600, 200, 44, 20, 0, (e -> {
-			for (Component c : this.getComponents()) {
+			for (Component c : buttons.getComponents()) {
 				if (!((TransparentButton) (e.getSource())).equals(c))
-					this.remove(c);
+					buttons.remove(c);
 			}
 			vocabels.clear();
-			this.revalidate();
+			buttons.revalidate();
 			frame.getSearchingPanel().createButtons();
 			frame.getSearchingPanel().createLabel();
-			this.repaint();
+			buttons.repaint();
 
 		}), this));
 		frame.getButtons().add(this.getNextcorrect());
 		frame.getLabels().add(this.getVokabel());
+		createHelp();
 	}
 
 	public void createButtons() {
@@ -144,6 +146,12 @@ public class SearchingPanel extends JPanel {
 		if (this.frame.getTestVokabeln().size() > 0) {
 			this.askedVoc = this.frame.getCheck().vok(1, this.frame.getBear().getPrä1(), this.frame.getBear().getPrä2()).get(this.frame.getCheck().random(this.frame.getTestVokabeln().size()));
 			this.setVokabel(TransparentLabel.createLabel("Suche: " + this.askedVoc.getVocabOrigin(), 0, 600, 200, 44, 20, this));
+			frame.getLabels().add(this.getVokabel());
 		}
 	}
+
+	public void createHelp() {
+		frame.getHelper().add(TransparentLabel.createLabel("1. Klicke auf die richtige Vokabel, danach auf \"Weiter\"!", 300, 600, 425, 30, 18, this));
+	}
+
 }
