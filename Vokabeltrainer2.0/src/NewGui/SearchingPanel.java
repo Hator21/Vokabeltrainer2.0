@@ -132,7 +132,6 @@ public class SearchingPanel extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println(((TransparentButton) (e.getSource())).getText());
 			if (SearchingPanel.this.askedVoc.getVocabTranslation().equalsIgnoreCase(((TransparentButton) (e.getSource())).getText())) {
-				// TODO: richtig
 				System.out.println("RICHTIG!");
 				((TransparentButton) e.getSource()).setBackgroundColor(Color.GREEN);
 			} else {

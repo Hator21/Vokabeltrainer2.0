@@ -180,6 +180,8 @@ public class MainFrame extends JFrame {
 		this.infoPanel.setVisible(false);
 		this.getContentPane().add(this.infoPanel);
 		this.getContentPane().setBackground(Color.RED);
+		for (TransparentLabel t : this.getHelper())
+			t.setVisible(false);
 	}
 
 	public Bearbeiten getBear() {

@@ -52,7 +52,7 @@ public class VocabelPrePanel extends JPanel {
 
 	public void createButton() {
 		this.setTest(TransparentButton.createButton("Prüfen", 600, 550, 250, 40, 30, 0, (e -> {
-			this.frame.getBear().clear(this.frame.getLek());
+			this.frame.getLek().clear();
 			this.frame.getLek().clear();
 			for (int i = 0; i < this.frame.getBear().getLektion(); i++) {
 				if (this.units.get(i).isSelected() == true) {
@@ -78,12 +78,11 @@ public class VocabelPrePanel extends JPanel {
 				this.frame.getVocabeltestPanel().getTimerLabel().setText("Übrige Zeit: " + String.valueOf(this.getTimeSlider().getValue() + ":00"));
 				this.frame.getPanelList().get(4).setVisible(true);
 				this.frame.getHeadingbar().getHeadingLabelL().setText("Vokabeltest");
-				this.frame.getHeadingbar().getHeadingLabelR().setText("");
-				this.frame.getTimer().setTimer(this.timeSlider.getValue(), 0);
 			}
 		}), this));
 		this.frame.getButtons().add(this.getTest());
 		frame.getButtons().add(getTest());
+
 	}
 
 	public void createCheckboxes(ArrayList<Integer> list) {
@@ -254,10 +253,26 @@ public class VocabelPrePanel extends JPanel {
 		g.drawImage(this.image, 0, 0, null);
 	}
 
+	/**
+	 * @return the combobox
+	 */
+	public JComboBox<String> getCombobox() {
+		return this.combobox;
+	}
+
+	/**
+	 * @param combobox
+	 *            the combobox to set
+	 */
+	public void setCombobox(JComboBox<String> combobox) {
+		this.combobox = combobox;
+	}
+
 	public void createHelp() {
 		frame.getHelper().add(TransparentLabel.createLabel("<- 1. Bitte wähle erst die gewünschte Sprache aus!", 290, 55, 425, 30, 18, this));
 		frame.getHelper().add(TransparentLabel.createLabel("<- 2. Danach wähle eine oder mehrere Lektionen aus!", 290, 105, 440, 30, 18, this));
 		frame.getHelper().add(TransparentLabel.createLabel("4. Zu guter letzt, klicke auf \"Prüfen\" damit es weiter geht! ->", 60, 555, 530, 30, 18, this));
 		frame.getHelper().add(TransparentLabel.createLabel("3. Nehme noch ein paar Einstellungen vor!", 540, 170, 430, 30, 18, this));
 	}
+
 }

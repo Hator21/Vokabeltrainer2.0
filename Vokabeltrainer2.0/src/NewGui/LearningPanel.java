@@ -272,7 +272,7 @@ public class LearningPanel extends JPanel {
 	public void createHelp() {
 		frame.getHelper().add(TransparentLabel.createLabel("1. Gib die geforderte Vokabel ein!", 30, 150, 350, 30, 18, this));
 		frame.getHelper().add(TransparentLabel.createLabel("2. Klicke auf \"Überprüfen\"!", 70, 370, 300, 30, 18, this));
-		frame.getHelper().add(TransparentLabel.createLabel("4. Hier siehst du deine Statistik!", 85, 500, 400, 30, 18, this));
+		frame.getHelper().add(TransparentLabel.createLabel("3. Hier siehst du deine Statistik!", 50, 500, 400, 30, 18, this));
 	}
 
 }
