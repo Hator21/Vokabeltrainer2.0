@@ -48,10 +48,16 @@ public class LearningPrePanel extends JPanel {
 					frame.getLek().add(i + 1);
 				}
 			}
-			if (frame.getLek().size() == 0)
+			if (frame.getLek().size() == 0) {
 				JOptionPane.showMessageDialog(frame, "Sie haben keine Lektion ausgewählt");
-			else {
+			} else {
 				frame.getTestVokabeln().clear();
+				frame.getLearningPanel().setRight(0);
+				frame.getLearningPanel().setBright(0);
+				frame.getLearningPanel().setWrong(0);
+				frame.getLearningPanel().getCountRight().setText("Richtige: 0");
+				frame.getLearningPanel().getCountWrong().setText("Falsche: 0");
+
 				frame.getCheck().newGame(frame.getVokabeln());
 				frame.getTestVokabeln().addAll(frame.getCheck().vok(frame.getLek().size(), frame.getBear().getPrä1(), frame.getBear().getPrä2()));
 				frame.getLearningPanel().setCounts(frame.getTestVokabeln().size());
@@ -67,7 +73,7 @@ public class LearningPrePanel extends JPanel {
 		}), this));
 		frame.getButtons().add(this.getLearning());
 
-		createHelp();
+		this.createHelp();
 
 	}
 
@@ -133,9 +139,9 @@ public class LearningPrePanel extends JPanel {
 	}
 
 	public void createHelp() {
-		frame.getHelper().add(TransparentLabel.createLabel("<- 1. Bitte wähle erst die gewünschte Sprache aus!", 290, 55, 425, 30, 18, this));
-		frame.getHelper().add(TransparentLabel.createLabel("2. Danach wähle eine oder mehrere Lektionen aus!", 0, 500, 444, 30, 18, this));
-		frame.getHelper().add(TransparentLabel.createLabel("<- 3. Zu guter letzt, klicke auf \"Lernen\" damit es weiter geht!", 260, 555, 530, 30, 18, this));
+		this.frame.getHelper().add(TransparentLabel.createLabel("<- 1. Bitte wähle erst die gewünschte Sprache aus!", 290, 55, 425, 30, 18, this));
+		this.frame.getHelper().add(TransparentLabel.createLabel("2. Danach wähle eine oder mehrere Lektionen aus!", 0, 500, 444, 30, 18, this));
+		this.frame.getHelper().add(TransparentLabel.createLabel("<- 3. Zu guter letzt, klicke auf \"Lernen\" damit es weiter geht!", 260, 555, 530, 30, 18, this));
 	}
 
 }

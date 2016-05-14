@@ -18,14 +18,14 @@ public class Statistik {
 	private CSVParser				parser;
 	private CSVWriter				writer;
 
-	public ArrayList<Vokabel> getdata() throws Exception {
+	public ArrayList<StatHelper> getdata() throws Exception {
 		this.parser = new CSVParser(data);
-		return this.parser.parse(getMapper(), Vokabel.class, true);
+		return this.parser.parse(getMapper(), StatHelper.class, true);
 	}
 
-	public void write(ArrayList<Vokabel> daten) throws Exception {
+	public void write(ArrayList<StatHelper> daten) throws Exception {
 		this.writer = new CSVWriter(data);
-		this.writer.save(getMapper(), daten, Vokabel.class, true);
+		this.writer.save(getMapper(), daten, StatHelper.class, true);
 	}
 
 	public void NoteTest() {

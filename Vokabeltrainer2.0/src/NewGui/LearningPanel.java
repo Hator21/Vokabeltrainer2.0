@@ -30,7 +30,7 @@ public class LearningPanel extends JPanel {
 	private ImageIcon			right_wrong;
 
 	public LearningPanel(MainFrame frame) {
-		right_wrong = new ImageIcon(getClass().getResource("/right.png"));
+		this.right_wrong = new ImageIcon(this.getClass().getResource("/right.png"));
 		this.setFrame(frame);
 		this.setLayout(null);
 		this.setBounds(251, 75, 1028, 644);
@@ -54,45 +54,47 @@ public class LearningPanel extends JPanel {
 				frame.getHeadingbar().getHeadingLabelR().setText("");
 			}
 			if (this.counts == 1) {
-				this.bright = right;
+				this.bright = this.right;
 				this.right = frame.getCheck().check(this.speech2Text.getText(), this.speech1Text.getText(), this.right);
-				if (right > bright) {
-					getCorrect().setImage("img/right.png");
-					getCountRight().setText("Richtige: " + right);
+				if (this.right > this.bright) {
+					this.getCorrect().setImage("img/right.png");
+					this.getCountRight().setText("Richtige: " + this.right);
 				} else {
-					wrong++;
-					getCorrect().setImage("img/wrong.png");
-					getCountWrong().setText("Falsche: " + wrong);
+					this.wrong++;
+					this.getCorrect().setImage("img/wrong.png");
+					this.getCountWrong().setText("Falsche: " + this.wrong);
 				}
-				if (right != 0)
-					getAverage().setText("Durchschnitt: " + (wrong + right) * 100 / right + "%");
-				else
-					getAverage().setText("Durchschnitt: 0%");
+				if (this.right != 0) {
+					this.getAverage().setText("Durchschnitt: " + (((this.wrong + this.right) * 100) / this.right) + "%");
+				} else {
+					this.getAverage().setText("Durchschnitt: 0%");
+				}
 				this.counts--;
 				this.speech1Text.setText("");
 				this.speech2Text.setText("");
 				this.speech2Text.setEditable(false);
 				this.getCheck().setText("Neustart");
 			} else if (this.counts != 0) {
-				this.bright = right;
+				this.bright = this.right;
 				this.right = frame.getCheck().check(this.speech2Text.getText(), this.speech1Text.getText(), this.right);
-				if (right > bright) {
-					getCorrect().setImage("img/right.png");
-					getCountRight().setText("Richtige: " + right);
+				if (this.right > this.bright) {
+					this.getCorrect().setImage("img/right.png");
+					this.getCountRight().setText("Richtige: " + this.right);
 				} else {
-					wrong++;
-					getCorrect().setImage("img/wrong.png");
-					getCountWrong().setText("Falsche: " + wrong);
+					this.wrong++;
+					this.getCorrect().setImage("img/wrong.png");
+					this.getCountWrong().setText("Falsche: " + this.wrong);
 				}
-				if (right != 0)
-					getAverage().setText("Durchschnitt: " + right * 100 / (wrong + right) + "%");
-				else
-					getAverage().setText("Durchschnitt: 0%");
+				if (this.right != 0) {
+					this.getAverage().setText("Durchschnitt: " + ((this.right * 100) / (this.wrong + this.right)) + "%");
+				} else {
+					this.getAverage().setText("Durchschnitt: 0%");
+				}
 				this.counts--;
 				this.speech1Text.setText(frame.getCheck().vok(true, true));
 				this.speech2Text.setText("");
 			}
-			repaint();
+			this.repaint();
 
 		}), this));
 		frame.getButtons().add(this.getCheck());
@@ -123,7 +125,37 @@ public class LearningPanel extends JPanel {
 		this.speech2Text.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		this.speech2Text.setEditable(true);
 		this.add(this.speech2Text);
-		createHelp();
+		this.createHelp();
+	}
+
+	/**
+	 * @return the bright
+	 */
+	public int getBright() {
+		return this.bright;
+	}
+
+	/**
+	 * @param bright
+	 *            the bright to set
+	 */
+	public void setBright(int bright) {
+		this.bright = bright;
+	}
+
+	/**
+	 * @return the wrong
+	 */
+	public int getWrong() {
+		return this.wrong;
+	}
+
+	/**
+	 * @param wrong
+	 *            the wrong to set
+	 */
+	public void setWrong(int wrong) {
+		this.wrong = wrong;
 	}
 
 	@Override
@@ -270,9 +302,9 @@ public class LearningPanel extends JPanel {
 	}
 
 	public void createHelp() {
-		frame.getHelper().add(TransparentLabel.createLabel("1. Gib die geforderte Vokabel ein!", 30, 150, 350, 30, 18, this));
-		frame.getHelper().add(TransparentLabel.createLabel("2. Klicke auf \"Überprüfen\"!", 70, 370, 300, 30, 18, this));
-		frame.getHelper().add(TransparentLabel.createLabel("3. Hier siehst du deine Statistik!", 50, 500, 400, 30, 18, this));
+		this.frame.getHelper().add(TransparentLabel.createLabel("1. Gib die geforderte Vokabel ein!", 30, 150, 350, 30, 18, this));
+		this.frame.getHelper().add(TransparentLabel.createLabel("2. Klicke auf \"Überprüfen\"!", 70, 370, 300, 30, 18, this));
+		this.frame.getHelper().add(TransparentLabel.createLabel("3. Hier siehst du deine Statistik!", 50, 500, 400, 30, 18, this));
 	}
 
 }

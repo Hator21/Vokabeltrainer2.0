@@ -12,16 +12,62 @@ public class Check {
 		this.setFrame(frame);
 	}
 
+	/**
+	 * Gets a random number from 0 to max
+	 * 
+	 * @param max
+	 * @return random number
+	 */
 	public int random(int max) {
 		int rnd = (int) ((Math.random()) * max);
 		return rnd;
 	}
 
+	/**
+	 * Gets a random number from 0 to 2
+	 * 
+	 * @param max
+	 * @return random number
+	 */
 	public int random() {
 		int rnd = (int) ((Math.random()) * 2);
 		return rnd;
 	}
 
+	/**
+	 * gets max 25 Vocables as a List
+	 * 
+	 * @param n
+	 * @param speach
+	 * @param speach2
+	 * @return list of max 25 Vocables
+	 */
+	public ArrayList<Vokabel> vok1(int n, String speach, String speach2) {
+		ArrayList<Vokabel> leklist = new ArrayList<Vokabel>();
+		ArrayList<Integer> lek = this.frame.getLek();
+		ArrayList<Vokabel> list = this.frame.getVokabeln();
+
+		for (int i = 0; i < list.size(); i++) {
+			for (int y = 0; y < lek.size(); y++) {
+				if (leklist.size() < 25) {
+					if (list.get(i).getCountryOriginCode().equals(speach) && list.get(i).getCountryDistinationCode().equals(speach2) && (list.get(i).getLection() == lek.get(y))) {
+						leklist.add(list.get(i));
+					}
+				}
+			}
+		}
+
+		return leklist;
+
+	}
+	/**
+	 * gets  Vocables as a List
+	 * 
+	 * @param n
+	 * @param speach
+	 * @param speach2
+	 * @return list of Vocables
+	 */
 	public ArrayList<Vokabel> vok(int n, String speach, String speach2) {
 		ArrayList<Vokabel> leklist = new ArrayList<Vokabel>();
 		ArrayList<Integer> lek = this.frame.getLek();
@@ -41,6 +87,12 @@ public class Check {
 
 	}
 
+	/**
+	 * gets only one Speach Vocable for the test
+	 * @param d_e
+	 * @param e_d
+	 * @return Vocable <String>
+	 */
 	public String vok(boolean d_e, boolean e_d) {
 		boolean exist = false;
 		boolean found = true;
@@ -91,7 +143,14 @@ public class Check {
 
 		return vok;
 	}
-
+/** 
+ * Equals the Check Vocable with the right in the list 
+ * and if (match) right ++
+ * @param eingabe
+ * @param vokabel
+ * @param right
+ * @return right
+ */
 	public int check(String eingabe, String vokabel, int right) {
 		ArrayList<Vokabel> list = this.frame.getTestVokabeln();
 		if (!eingabe.equals("") && !vokabel.equals("")) {
@@ -111,7 +170,10 @@ public class Check {
 		}
 		return right;
 	}
-
+/**
+ * set all Vocables to Unused 
+ * @param list
+ */
 	public void newGame(ArrayList<Vokabel> list) {
 		for (int i = 0; i < list.size(); i++) {
 			list.get(i).setUsed(false);

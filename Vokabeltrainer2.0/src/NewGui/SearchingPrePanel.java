@@ -52,7 +52,7 @@ public class SearchingPrePanel extends JPanel {
 			else {
 				frame.getTestVokabeln().clear();
 				frame.getCheck().newGame(frame.getVokabeln());
-				frame.getTestVokabeln().addAll(frame.getCheck().vok(frame.getLek().size(), frame.getBear().getPrä1(), frame.getBear().getPrä2()));
+				frame.getTestVokabeln().addAll(frame.getCheck().vok1(frame.getLek().size(), frame.getBear().getPrä1(), frame.getBear().getPrä2()));
 				for (JPanel p : frame.getPanelList()) {
 					p.setVisible(false);
 				}
