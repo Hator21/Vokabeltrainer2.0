@@ -12,9 +12,11 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Components.TransparentButton;
+import Components.TransparentLabel;
 
 @SuppressWarnings("serial")
 public class LearningPrePanel extends JPanel {
@@ -46,21 +48,26 @@ public class LearningPrePanel extends JPanel {
 					frame.getLek().add(i + 1);
 				}
 			}
+			if (frame.getLek().size() == 0)
+				JOptionPane.showMessageDialog(frame, "Sie haben keine Lektion ausgewählt");
+			else {
+				frame.getTestVokabeln().clear();
+				frame.getCheck().newGame(frame.getVokabeln());
+				frame.getTestVokabeln().addAll(frame.getCheck().vok(frame.getLek().size(), frame.getBear().getPrä1(), frame.getBear().getPrä2()));
+				frame.getLearningPanel().setCounts(frame.getTestVokabeln().size());
+				frame.getLearningPanel().getSpeech1Text().setText(frame.getCheck().vok(true, true));
 
-			frame.getTestVokabeln().clear();
-			frame.getCheck().newGame(frame.getVokabeln());
-			frame.getTestVokabeln().addAll(frame.getCheck().vok(frame.getLek().size(), frame.getBear().getPrä1(), frame.getBear().getPrä2()));
-			frame.getLearningPanel().setCounts(frame.getTestVokabeln().size());
-			frame.getLearningPanel().getSpeech1Text().setText(frame.getCheck().vok(true, true));
+				for (JPanel p : frame.getPanelList()) {
+					p.setVisible(false);
+				}
 
-			for (JPanel p : frame.getPanelList()) {
-				p.setVisible(false);
+				frame.getPanelList().get(2).setVisible(true);
+				frame.getHeadingbar().getHeadingLabelL().setText("Lernen");
 			}
-
-			frame.getPanelList().get(2).setVisible(true);
-			frame.getHeadingbar().getHeadingLabelL().setText("Lernen");
 		}), this));
 		frame.getButtons().add(this.getLearning());
+
+		createHelp();
 
 	}
 
@@ -74,7 +81,7 @@ public class LearningPrePanel extends JPanel {
 	}
 
 	public void createCheckboxes(ArrayList<Integer> list) {
-		for (int i = 0; i < 11; i++) {
+		for (int i = 0; i < 10; i++) {
 			this.units.add(new JCheckBox("Lektion " + (i + 1)));
 			this.units.get(i).setBounds(120, (40 * i) + 100, 200, 40);
 			if (list.contains(i + 1)) {
@@ -123,6 +130,12 @@ public class LearningPrePanel extends JPanel {
 
 	protected void setLearning(TransparentButton learning) {
 		this.learning = learning;
+	}
+
+	public void createHelp() {
+		frame.getHelper().add(TransparentLabel.createLabel("<- 1. Bitte wähle erst die gewünschte Sprache aus!", 290, 55, 425, 30, 18, this));
+		frame.getHelper().add(TransparentLabel.createLabel("2. Danach wähle eine oder mehrere Lektionen aus!", 0, 500, 444, 30, 18, this));
+		frame.getHelper().add(TransparentLabel.createLabel("<- 3. Zu guter letzt, klicke auf \"Lernen\" damit es weiter geht!", 260, 555, 530, 30, 18, this));
 	}
 
 }

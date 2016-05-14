@@ -53,6 +53,7 @@ public class MainFrame extends JFrame {
 
 	private ArrayList<TransparentButton>	buttons			= new ArrayList<TransparentButton>();
 	private ArrayList<TransparentLabel>		labels			= new ArrayList<TransparentLabel>();
+	private ArrayList<TransparentLabel>		helper			= new ArrayList<TransparentLabel>();
 	private ArrayList<JPanel>				panelList		= new ArrayList<JPanel>();
 	private ArrayList<Vokabel>				vokabeln		= new ArrayList<Vokabel>();
 	private HashMap<Language, Language>		languageCombi	= new HashMap<Language, Language>();
@@ -95,8 +96,8 @@ public class MainFrame extends JFrame {
 			this.languageCombi = (HashMap<Language, Language>) ois.readObject();
 			ois.close();
 			for (Language key : this.getLanguageCombi().keySet()) {
-				//System.err.print(key.getLanguage() + " - " + key.getPräfix() + " -> ");
-				//System.err.println(this.getLanguageCombi().get(key).getLanguage() + " - " + this.getLanguageCombi().get(key).getPräfix());
+				// System.err.print(key.getLanguage() + " - " + key.getPräfix() + " -> ");
+				// System.err.println(this.getLanguageCombi().get(key).getLanguage() + " - " + this.getLanguageCombi().get(key).getPräfix());
 			}
 		} catch (IOException | ClassNotFoundException e1) {
 			System.err.println(e1);
@@ -179,6 +180,8 @@ public class MainFrame extends JFrame {
 		this.infoPanel.setVisible(false);
 		this.getContentPane().add(this.infoPanel);
 		this.getContentPane().setBackground(Color.RED);
+		for (TransparentLabel t : this.getHelper())
+			t.setVisible(false);
 	}
 
 	public Bearbeiten getBear() {
@@ -425,5 +428,13 @@ public class MainFrame extends JFrame {
 		}
 
 		return this.languages.toArray(new String[this.languages.size()]);
+	}
+
+	public ArrayList<TransparentLabel> getHelper() {
+		return helper;
+	}
+
+	public void setHelper(ArrayList<TransparentLabel> helper) {
+		this.helper = helper;
 	}
 }

@@ -11,24 +11,21 @@ import java.awt.geom.AffineTransform;
 
 import javax.swing.JComponent;
 
-import NewGui.MainFrame;
-
 @SuppressWarnings("serial")
 public class TransparentButton extends CustomButton {
 
 	// private String text;
-	private MainFrame	frame;
-	private int			factor;
-	private int			fontsize;
-	private double		rotation				= 0;
-	private boolean		correctX				= true;
+	private int		factor;
+	private int		fontsize;
+	private double	rotation				= 0;
+	private boolean	correctX				= true;
 
-	private Point		bounds;
-	private Point		position;
-	private Font		f;
+	private Point	bounds;
+	private Point	position;
+	private Font	f;
 
-	Color				borderColor				= new Color(255, 0, 0, 0);
-	Color				backgroundColorcolor	= new Color(0, 0, 0, 0);
+	Color			borderColor				= new Color(255, 0, 0, 0);
+	Color			backgroundColorcolor	= new Color(0, 0, 0, 0);
 
 	public TransparentButton(String text, int x, int y, int width, int height, int fontsize, int factor) {
 		this.setText(text);
