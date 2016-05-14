@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 
@@ -78,16 +79,10 @@ public class VocabelPrePanel extends JPanel {
 				this.frame.getVocabeltestPanel().getTimerLabel().setText("Übrige Zeit: " + String.valueOf(this.getTimeSlider().getValue() + ":00"));
 				this.frame.getPanelList().get(4).setVisible(true);
 				this.frame.getHeadingbar().getHeadingLabelL().setText("Vokabeltest");
-		}), this));
-		this.frame.getButtons().add(this.getTest());
-		frame.getButtons().add(getTest());
-
-	}
 			}
 		}), this));
 		this.frame.getButtons().add(this.getTest());
 		frame.getButtons().add(getTest());
-
 	}
 
 	public void createCheckboxes(ArrayList<Integer> list) {
@@ -272,6 +267,7 @@ public class VocabelPrePanel extends JPanel {
 	public void setCombobox(JComboBox<String> combobox) {
 		this.combobox = combobox;
 	}
+
 	public void createHelp() {
 		frame.getHelper().add(TransparentLabel.createLabel("<- 1. Bitte wähle erst die gewünschte Sprache aus!", 290, 55, 425, 30, 18, this));
 		frame.getHelper().add(TransparentLabel.createLabel("<- 2. Danach wähle eine oder mehrere Lektionen aus!", 290, 105, 440, 30, 18, this));
