@@ -29,15 +29,16 @@ public class Check {
 
 		for (int i = 0; i < list.size(); i++) {
 			for (int y = 0; y < lek.size(); y++) {
-				if (list.get(i).getCountryOriginCode().equals(speach) && list.get(i).getCountryDistinationCode().equals(speach2) && (list.get(i).getLection() == lek.get(y))) {
-					leklist.add(list.get(i));
+				if (leklist.size() < 25) {
+					if (list.get(i).getCountryOriginCode().equals(speach) && list.get(i).getCountryDistinationCode().equals(speach2) && (list.get(i).getLection() == lek.get(y))) {
+						leklist.add(list.get(i));
+					}
 				}
 			}
 		}
-		if (n > leklist.size()) {
-			return leklist;
-		}
+
 		return leklist;
+
 	}
 
 	public String vok(boolean d_e, boolean e_d) {

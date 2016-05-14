@@ -55,6 +55,7 @@ public class SearchingPanel extends JPanel {
 			}
 			this.vocabels.clear();
 			this.revalidate();
+
 			frame.getSearchingPanel().createButtons();
 			frame.getSearchingPanel().createLabel();
 			this.repaint();
@@ -68,7 +69,7 @@ public class SearchingPanel extends JPanel {
 	public void createButtons() {
 		ArrayList<Vokabel> vocs = this.frame.getTestVokabeln();
 
-		if (vocs.size() < 25) {
+		if (vocs.size() < 26) {
 			// TODO: Verteilen
 			for (int a = 0; a < 5; a++) {
 				for (int b = 0; b < 5; b++) {
