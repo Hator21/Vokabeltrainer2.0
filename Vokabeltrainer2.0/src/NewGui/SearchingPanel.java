@@ -46,7 +46,13 @@ public class SearchingPanel extends JPanel {
 				this.coords.add(new CoordSearching(x, y, false));
 			}
 		}
+		createNextButton();
+		frame.getButtons().add(this.getNextcorrect());
+		frame.getLabels().add(this.getVokabel());
+		this.createHelp();
+	}
 
+	public void createNextButton() {
 		this.setNextcorrect(TransparentButton.createButton("Nächste", 828, 600, 200, 44, 20, 0, (e -> {
 			for (Component c : this.getComponents()) {
 				if (!((TransparentButton) (e.getSource())).equals(c)) {
@@ -61,9 +67,6 @@ public class SearchingPanel extends JPanel {
 			this.repaint();
 
 		}), this));
-		frame.getButtons().add(this.getNextcorrect());
-		frame.getLabels().add(this.getVokabel());
-		this.createHelp();
 	}
 
 	public void createButtons() {

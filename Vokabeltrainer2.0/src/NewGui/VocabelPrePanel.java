@@ -53,8 +53,6 @@ public class VocabelPrePanel extends JPanel {
 	public void createButton() {
 		this.setTest(TransparentButton.createButton("Prüfen", 600, 550, 250, 40, 30, 0, (e -> {
 			this.frame.getLek().clear();
-			this.frame.getLek().clear();
-			this.frame.getLek().clear();
 			for (int i = 0; i < this.frame.getBear().getLektion(); i++) {
 				if (this.units.get(i).isSelected() == true) {
 					this.frame.getLek().add(i + 1);
@@ -64,6 +62,7 @@ public class VocabelPrePanel extends JPanel {
 				JOptionPane.showMessageDialog(frame, "Sie haben keine Lektion ausgewählt");
 			else {
 				this.frame.getTestVokabeln().clear();
+				frame.getLearningPanel().setRight(0);
 				this.frame.getTestVokabeln().addAll(this.frame.getCheck().vok(this.frame.getLek().size(), this.frame.getBear().getPrä1(), this.frame.getBear().getPrä2()));
 				if (this.getCoundSlider().getValue() > this.frame.getTestVokabeln().size()) {
 					this.n = this.frame.getTestVokabeln().size();
@@ -79,6 +78,9 @@ public class VocabelPrePanel extends JPanel {
 				this.frame.getVocabeltestPanel().getTimerLabel().setText("Übrige Zeit: " + String.valueOf(this.getTimeSlider().getValue() + ":00"));
 				this.frame.getPanelList().get(4).setVisible(true);
 				this.frame.getHeadingbar().getHeadingLabelL().setText("Vokabeltest");
+				this.frame.getVocabeltestPanel().getStart().setEnabled(true);
+				this.frame.getVocabeltestPanel().getNext().setEnabled(false);
+				this.frame.getTimer().setStopper(false);
 			}
 		}), this));
 		this.frame.getButtons().add(this.getTest());

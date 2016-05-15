@@ -30,7 +30,7 @@ public class InfoPanel extends JPanel {
 
 	public void createLabel() {
 		setBuildName(TransparentLabel.createLabel("Vokabeltrainer v2", 100, 100, 200, 50, 20, this));
-		setBuildID(TransparentLabel.createLabel("Build id: 20160506-0062 ", 100, 150, 270, 50, 20, this));
+		setBuildID(TransparentLabel.createLabel("Build id: 20160515-0115", 100, 150, 270, 50, 20, this));
 		setCopyright(TransparentLabel.createLabel("Copyright (c) by Jonas Lampe, Alexander Sochart", 100, 200, 500, 50, 20, this));
 		frame.getLabels().add(getBuildName());
 		frame.getLabels().add(getBuildID());

@@ -30,7 +30,6 @@ public class LearningPanel extends JPanel {
 	private ImageIcon			right_wrong;
 
 	public LearningPanel(MainFrame frame) {
-		this.right_wrong = new ImageIcon(this.getClass().getResource("/right.png"));
 		this.setFrame(frame);
 		this.setLayout(null);
 		this.setBounds(251, 75, 1028, 644);

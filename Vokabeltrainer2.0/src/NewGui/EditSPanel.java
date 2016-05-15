@@ -85,6 +85,8 @@ public class EditSPanel extends JPanel {
 				if (!this.addVoc.getAddVocabelOLTF().getText().equals("") && !this.addVoc.getAddVocabelDLTF().getText().equals("")) {
 					this.nr++;
 					int lectionNR = Integer.parseInt(this.lectionsCB.getSelectedItem().toString().split(" ")[1]);
+					addVoc.getAddVocabelOLTF().setText(addVoc.getAddVocabelOLTF().getText().replaceAll(";", ""));
+					addVoc.getAddVocabelDLTF().setText(addVoc.getAddVocabelDLTF().getText().replaceAll(";", ""));
 					frame.getVokabeln().add(new Vokabel(this.prä1, this.prä2, this.addVoc.getAddVocabelOLTF().getText(), this.addVoc.getAddVocabelDLTF().getText(), lectionNR, 0, 0, false));
 					this.loadTable();
 					for (Vokabel v : frame.getVokabeln()) {
@@ -138,7 +140,9 @@ public class EditSPanel extends JPanel {
 			int s = JOptionPane.showConfirmDialog(null, this.addLe.getInputs(), "Lektion anlegen", JOptionPane.PLAIN_MESSAGE);
 			if (s == JOptionPane.OK_OPTION) {
 				if (!this.addLe.getAddLanguage1TF().getText().equals("")) {
-					this.lectionsCB.setModel(new DefaultComboBoxModel<String>(this.add2Lection(this.addLe.getAddLanguage1TF().getText())));
+					String text = isLektionOk(this.addLe.getAddLanguage1TF().getText());
+					if (text != null)
+						this.lectionsCB.setModel(new DefaultComboBoxModel<String>(this.add2Lection(text)));
 				}
 			}
 			this.loadTable();
@@ -178,6 +182,14 @@ public class EditSPanel extends JPanel {
 			int s = JOptionPane.showConfirmDialog(null, this.addL.getInputs(), "Sprache anlegen", JOptionPane.PLAIN_MESSAGE);
 			if (s == JOptionPane.OK_OPTION) {
 				if (!this.addL.getAddLanguage1TF().getText().equals("") && !this.addL.getAddLanguage2TF().getText().equals("") && !this.addL.getAddPräfix1TF().getText().equals("") && !this.addL.getAddPräfix2TF().getText().equals("")) {
+					addL.getAddLanguage1TF().setText(addL.getAddLanguage1TF().getText().replaceAll("\\s+", ""));
+					addL.getAddLanguage2TF().setText(addL.getAddLanguage2TF().getText().replaceAll("\\s+", ""));
+					addL.getAddPräfix1TF().setText(addL.getAddPräfix1TF().getText().replaceAll("\\s+", ""));
+					addL.getAddPräfix2TF().setText(addL.getAddPräfix2TF().getText().replaceAll("\\s+", ""));
+					addL.getAddLanguage1TF().setText(addL.getAddLanguage1TF().getText().replaceAll(";", ""));
+					addL.getAddLanguage2TF().setText(addL.getAddLanguage2TF().getText().replaceAll(";", ""));
+					addL.getAddPräfix1TF().setText(addL.getAddPräfix1TF().getText().replaceAll(";", ""));
+					addL.getAddPräfix2TF().setText(addL.getAddPräfix2TF().getText().replaceAll(";", ""));
 					frame.getLanguageCombi().put(new Language(this.addL.getAddPräfix1TF().getText(), this.addL.getAddLanguage1TF().getText()), new Language(this.addL.getAddPräfix2TF().getText(), this.addL.getAddLanguage2TF().getText()));
 					this.languageCB.setModel(new DefaultComboBoxModel<String>(frame.add2Language()));
 				}
@@ -804,6 +816,25 @@ public class EditSPanel extends JPanel {
 	 */
 	public void setVocabellist(ArrayList<Vokabel> vocabellist) {
 		this.vocabellist = vocabellist;
+	}
+
+	public String isLektionOk(String text) {
+		int lection = 0;
+		if (text.split(" ")[0].equals("Lektion")) {
+			try {
+				lection = Integer.parseInt(text.split(" ")[1]);
+				if (lection < 1 || lection > 10)
+					throw new NumberFormatException();
+			} catch (NumberFormatException nfe) {
+				JOptionPane.showMessageDialog(frame, "Bitte gib eine gültige Lektion ein! Form: Lektion x (0<x<11)");
+				return null;
+			}
+		} else {
+			JOptionPane.showMessageDialog(frame, "Bitte gib eine gültige Lektion ein! Form: Lektion x (0<x<11)");
+			return null;
+		}
+		return "Lektion " + lection;
+
 	}
 
 }

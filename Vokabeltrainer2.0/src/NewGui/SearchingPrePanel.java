@@ -61,6 +61,7 @@ public class SearchingPrePanel extends JPanel {
 				frame.getSearchingPanel().removeAll();
 				frame.getSearchingPanel().createButtons();
 				frame.getSearchingPanel().createLabel();
+				frame.getSearchingPanel().createNextButton();
 			}
 		}), this));
 		frame.getButtons().add(this.getLearning());

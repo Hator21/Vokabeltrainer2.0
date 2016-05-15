@@ -26,9 +26,9 @@ public class Statistik {
 	 *
 	 * @throws Exception
 	 */
-	public ArrayList<StatHelper> getdata() throws Exception {
+	public ArrayList<StatHelper> getData() throws Exception {
 		this.parser = new CSVParser(data);
-		return this.parser.parse(getMapper(), StatHelper.class, true);
+		return this.parser.parseStats(getMapper(), StatHelper.class, true);
 	}
 
 	/**
@@ -44,7 +44,7 @@ public class Statistik {
 	/**
 	 * returns the note of the test
 	 */
-	public void NoteTest() {
+	public String getNote() {
 		int right = this.frame.getVocabeltestPanel().getRight();
 		String note = "";
 		String date;
@@ -106,7 +106,7 @@ public class Statistik {
 		if ((right >= 0) && (right < 25)) {
 			note = "6";
 		}
-
+		return note;
 	}
 
 	/**
@@ -120,34 +120,37 @@ public class Statistik {
 		return date;
 	}
 
-	/**
-	 * 
-	 * @return int right vocabels
-	 */
-	public int getRight() {
-		int right = this.frame.getVocabeltestPanel().getRight();
-		return right;
+	public String getRight() {
+		return frame.getVocabeltestPanel().getRight() + "";
 	}
 
-	/**
-	 * 
-	 * @return int wrong vocabels
-	 */
-	public int getWrong() {
-		int wrong = this.frame.getVocabeltestPanel().getCounts() - this.frame.getVocabeltestPanel().getRight();
-		return wrong;
+	public String getWrong() {
+		return (frame.getVocabelPrePanel().getCoundSlider().getValue() - frame.getVocabeltestPanel().getRight()) + "";
+	}
+
+	public String getLanguage() {
+		return frame.getVocabelPrePanel().getCombobox().getSelectedItem().toString();
 	}
 
 	static CSVReflectionMap getMapper() {
 		if (mapper == null) {
 			mapper = new CSVReflectionMap();
 			mapper.setField(0, "date");
-			mapper.setField(1, "right");
-			mapper.setField(2, "wrong");
-			mapper.setField(3, "note");
+			mapper.setField(1, "sprache");
+			mapper.setField(2, "right");
+			mapper.setField(3, "wrong");
+			mapper.setField(4, "note");
 
 		}
 		return mapper;
+	}
+
+	public void retDateForTable() {
+		stat.add(new StatHelper(getDate(), getLanguage(), getRight(), getWrong(), getNote()));
+		Object[] data = new Object[] {
+				getDate(), getLanguage(), getRight(), getWrong(), getNote()
+		};
+		frame.getStatisticsPanel().getTableModel().addRow(data);
 	}
 
 	public MainFrame getFrame() {
@@ -157,4 +160,20 @@ public class Statistik {
 	public void setFrame(MainFrame frame) {
 		this.frame = frame;
 	}
+
+	/**
+	 * @return the stat
+	 */
+	public ArrayList<StatHelper> getStat() {
+		return stat;
+	}
+
+	/**
+	 * @param stat
+	 *            the stat to set
+	 */
+	public void setStat(ArrayList<StatHelper> stat) {
+		this.stat = stat;
+	}
+
 }

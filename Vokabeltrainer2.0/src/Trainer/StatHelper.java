@@ -2,15 +2,17 @@ package Trainer;
 
 public class StatHelper {
 	private String	date;
-	private int		right;
-	private int		wrong;
+	private String	right;
+	private String	wrong;
 	private String	note;
+	private String	sprache;
 
-	private StatHelper(String date, int right, int wrong, String note) {
+	public StatHelper(String date, String sprache, String right, String wrong, String note) {
 		this.setDate(date);
+		this.setSprache(sprache);
+		this.setNote(note);
 		this.setRight(right);
 		this.setWrong(wrong);
-		this.setNote(note);
 
 	}
 
@@ -32,38 +34,56 @@ public class StatHelper {
 	/**
 	 * @return the right
 	 */
-	public int getRight() {
-		return this.right;
+	public String getRight() {
+		return right;
 	}
 
 	/**
 	 * @param right
 	 *            the right to set
 	 */
-	public void setRight(int right) {
+	public void setRight(String right) {
 		this.right = right;
 	}
 
 	/**
+	 * @param note
+	 *            the note to set
 	 * @return the wrong
 	 */
-	public int getWrong() {
+	public String getWrong() {
 		return this.wrong;
 	}
 
 	/**
 	 * @param wrong
 	 *            the wrong to set
+	 * @return the sprache
 	 */
-	public void setWrong(int wrong) {
+	public void setWrong(String wrong) {
 		this.wrong = wrong;
+	}
+
+	/**
+	 * @return the sprache
+	 */
+	public String getSprache() {
+		return sprache;
+	}
+
+	/**
+	 * @param sprache
+	 *            the sprache to set
+	 */
+	public void setSprache(String sprache) {
+		this.sprache = sprache;
 	}
 
 	/**
 	 * @return the note
 	 */
 	public String getNote() {
-		return this.note;
+		return note;
 	}
 
 	/**

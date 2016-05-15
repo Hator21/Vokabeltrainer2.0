@@ -20,6 +20,8 @@ import Components.TransparentLabel;
 import Trainer.Bearbeiten;
 import Trainer.Check;
 import Trainer.Language;
+import Trainer.StatHelper;
+import Trainer.Statistik;
 import Trainer.Vokabel;
 
 @SuppressWarnings("serial")
@@ -48,6 +50,7 @@ public class MainFrame extends JFrame {
 
 	private Bearbeiten						bear;
 	private Check							check;
+	private Statistik						stats;
 
 	private TimerLabel						timer;
 
@@ -105,6 +108,7 @@ public class MainFrame extends JFrame {
 
 		this.setBear(new Bearbeiten(this));
 		this.setCheck(new Check(this));
+		this.setStats(new Statistik(this));
 		this.setTimer(new TimerLabel(this, 15, 0));
 		try {
 			this.setVokabeln(this.getBear().getdata());
@@ -181,6 +185,18 @@ public class MainFrame extends JFrame {
 		this.getContentPane().setBackground(Color.RED);
 		for (TransparentLabel t : this.getHelper()) {
 			t.setVisible(false);
+		}
+		try {
+			Object[] data;
+			this.getStats().setStat(this.getStats().getData());
+			for (StatHelper s : this.getStats().getStat()) {
+				data = new Object[] {
+						s.getDate(), s.getSprache(), s.getRight(), s.getWrong(), s.getNote()
+				};
+				this.getStatisticsPanel().getTableModel().addRow(data);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -437,4 +453,20 @@ public class MainFrame extends JFrame {
 	public void setHelper(ArrayList<TransparentLabel> helper) {
 		this.helper = helper;
 	}
+
+	/**
+	 * @return the stats
+	 */
+	public Statistik getStats() {
+		return stats;
+	}
+
+	/**
+	 * @param stats
+	 *            the stats to set
+	 */
+	public void setStats(Statistik stats) {
+		this.stats = stats;
+	}
+
 }

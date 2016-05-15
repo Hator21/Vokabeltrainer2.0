@@ -60,8 +60,9 @@ public class Check {
 		return leklist;
 
 	}
+
 	/**
-	 * gets  Vocables as a List
+	 * gets Vocables as a List
 	 * 
 	 * @param n
 	 * @param speach
@@ -75,12 +76,13 @@ public class Check {
 
 		for (int i = 0; i < list.size(); i++) {
 			for (int y = 0; y < lek.size(); y++) {
-				if (leklist.size() < 25) {
-					if (list.get(i).getCountryOriginCode().equals(speach) && list.get(i).getCountryDistinationCode().equals(speach2) && (list.get(i).getLection() == lek.get(y))) {
-						leklist.add(list.get(i));
-					}
+				if (list.get(i).getCountryOriginCode().equals(speach) && list.get(i).getCountryDistinationCode().equals(speach2) && (list.get(i).getLection() == lek.get(y))) {
+					leklist.add(list.get(i));
 				}
 			}
+		}
+		if (n > leklist.size()) {
+			return leklist;
 		}
 
 		return leklist;
@@ -89,6 +91,7 @@ public class Check {
 
 	/**
 	 * gets only one Speach Vocable for the test
+	 * 
 	 * @param d_e
 	 * @param e_d
 	 * @return Vocable <String>
@@ -143,14 +146,16 @@ public class Check {
 
 		return vok;
 	}
-/** 
- * Equals the Check Vocable with the right in the list 
- * and if (match) right ++
- * @param eingabe
- * @param vokabel
- * @param right
- * @return right
- */
+
+	/**
+	 * Equals the Check Vocable with the right in the list
+	 * and if (match) right ++
+	 * 
+	 * @param eingabe
+	 * @param vokabel
+	 * @param right
+	 * @return right
+	 */
 	public int check(String eingabe, String vokabel, int right) {
 		ArrayList<Vokabel> list = this.frame.getTestVokabeln();
 		if (!eingabe.equals("") && !vokabel.equals("")) {
@@ -170,10 +175,12 @@ public class Check {
 		}
 		return right;
 	}
-/**
- * set all Vocables to Unused 
- * @param list
- */
+
+	/**
+	 * set all Vocables to Unused
+	 * 
+	 * @param list
+	 */
 	public void newGame(ArrayList<Vokabel> list) {
 		for (int i = 0; i < list.size(); i++) {
 			list.get(i).setUsed(false);

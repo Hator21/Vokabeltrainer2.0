@@ -77,6 +77,11 @@ public class TitleBar extends JPanel {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
+			try {
+				frame.getStats().write(frame.getStats().getStat());
+			} catch (Exception exc) {
+				exc.printStackTrace();
+			}
 
 			System.exit(1);
 		}), this));

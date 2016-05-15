@@ -212,6 +212,8 @@ public class TransparentLabel extends CustomLabel {
 	 * @param path
 	 */
 	public void setImage(String path) {
+		if (path == null)
+			path = "img/CorrectImage.png";
 		try {
 			this.image = ImageIO.read(new File(path));
 		} catch (IOException ex) {}
