@@ -76,15 +76,13 @@ public class MainFrame extends JFrame {
 				frame.setLocation((int) ((d.getWidth() - frame.getWidth()) / 2), (int) ((d.getHeight() - frame.getHeight()) / 2));
 				frame.setUndecorated(true);
 				frame.setVisible(true);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			} catch (Exception e) {}
 		});
 	}
 
 	/**
 	 * Create the frame.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public MainFrame() throws Exception {

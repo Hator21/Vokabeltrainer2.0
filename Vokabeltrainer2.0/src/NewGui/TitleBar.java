@@ -28,7 +28,7 @@ public class TitleBar extends JPanel {
 
 	/**
 	 * create the frame
-	 * 
+	 *
 	 * @param frame
 	 */
 	public TitleBar(final MainFrame frame) {
@@ -79,14 +79,10 @@ public class TitleBar extends JPanel {
 				ObjectOutputStream oos = new ObjectOutputStream(fos);
 				oos.writeObject(frame.getLanguageCombi());
 				oos.close();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+			} catch (IOException e1) {}
 			try {
 				frame.getStats().write(frame.getStats().getStat());
-			} catch (Exception exc) {
-				exc.printStackTrace();
-			}
+			} catch (Exception exc) {}
 
 			System.exit(1);
 		}), this));

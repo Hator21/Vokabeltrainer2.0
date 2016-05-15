@@ -29,7 +29,7 @@ public class MenuPanel extends JPanel {
 
 	/**
 	 * create the frame
-	 * 
+	 *
 	 * @param frame
 	 */
 	public MenuPanel(MainFrame frame) {
@@ -140,7 +140,7 @@ public class MenuPanel extends JPanel {
 		this.setExit(TransparentButton.createButton("Beenden", 0, 627, 250, 60, 30, 0, (e -> {
 			frame.getBear().Close();
 			try {
-				FileOutputStream fos = new FileOutputStream("data/data.txt");
+				FileOutputStream fos = new FileOutputStream("data.txt");
 				ObjectOutputStream oos = new ObjectOutputStream(fos);
 				oos.writeObject(frame.getLanguageCombi());
 				oos.close();

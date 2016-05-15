@@ -31,7 +31,7 @@ public class LearningPanel extends JPanel {
 
 	/**
 	 * crate the frame
-	 * 
+	 *
 	 * @param frame
 	 */
 	public LearningPanel(MainFrame frame) {
@@ -103,8 +103,6 @@ public class LearningPanel extends JPanel {
 		}), this));
 		frame.getButtons().add(this.getCheck());
 
-		this.setSpeech1Label(TransparentLabel.createLabel("Deutsch", 20, 200, 100, 40, 20, this));
-		this.setSpeech2Label(TransparentLabel.createLabel("Englisch", 20, 260, 100, 40, 20, this));
 		this.setCorrect(TransparentLabel.createLabel("hallo", 320, 260, 40, 40, 20, true, this));
 		this.setCountRight(TransparentLabel.createLabel("Richtige: 0", 50, 550, 120, 40, 20, this));
 		this.setCountWrong(TransparentLabel.createLabel("Falsche: 0", 170, 550, 120, 40, 20, this));

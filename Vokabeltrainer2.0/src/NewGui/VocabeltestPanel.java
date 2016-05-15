@@ -82,10 +82,6 @@ public class VocabeltestPanel extends JPanel {
 		frame.getButtons().add(this.getStart());
 		this.getStart().setEnabled(true);
 
-		this.setSpeech1Label(TransparentLabel.createLabel(this.sprache1, 20, 200, 100, 40, 20, this));
-		frame.getLabels().add(this.getSpeech1Label());
-		this.setSpeech2Label(TransparentLabel.createLabel(this.sprache2, 20, 260, 100, 40, 20, this));
-		frame.getLabels().add(this.getSpeech2Label());
 		this.setTimerLabel(TransparentLabel.createLabel("Übrige Zeit: " + String.valueOf(frame.getVocabelPrePanel().getTimeSlider().getValue()) + ":00", 120, 80, 200, 40, 20, this));
 		frame.getLabels().add(this.getTimerLabel());
 
@@ -330,7 +326,7 @@ public class VocabeltestPanel extends JPanel {
 
 	/**
 	 * sets the help text if option ist selected
-	 * 
+	 *
 	 */
 	public void createHelp() {
 		this.frame.getHelper().add(TransparentLabel.createLabel("1. Drücke auf \"Start\" um den Test zu starten!", 10, 30, 425, 30, 18, this));
