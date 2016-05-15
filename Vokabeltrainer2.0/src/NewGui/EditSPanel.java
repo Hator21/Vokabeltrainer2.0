@@ -54,7 +54,6 @@ public class EditSPanel extends JPanel {
 	private addLection			addLe;
 	private addVocabel			addVoc;
 	private ArrayList<String>	lections	= new ArrayList<String>();
-	// ArrayList<String> languages = new ArrayList<String>();
 	private ArrayList<Vokabel>	vocabellist	= new ArrayList<Vokabel>();
 
 	public EditSPanel(MainFrame frame) {
@@ -307,112 +306,6 @@ public class EditSPanel extends JPanel {
 		}
 	}
 
-	public MainFrame getFrame() {
-		return this.frame;
-	}
-
-	public void setFrame(MainFrame frame) {
-		this.frame = frame;
-	}
-
-	public TransparentButton getAddSpeech() {
-		return this.addSpeech;
-	}
-
-	public void setAddSpeech(TransparentButton addSpeech) {
-		this.addSpeech = addSpeech;
-	}
-
-	public TransparentButton getDeleteSpeech() {
-		return this.deleteSpeech;
-	}
-
-	public void setDeleteSpeech(TransparentButton deleteSpeech) {
-		this.deleteSpeech = deleteSpeech;
-	}
-
-	public TransparentButton getAddLection() {
-		return this.addLection;
-	}
-
-	public void setAddLection(TransparentButton addLection) {
-		this.addLection = addLection;
-	}
-
-	public TransparentButton getDeleteLection() {
-		return this.deleteLection;
-	}
-
-	public void setDeleteLection(TransparentButton deleteLection) {
-		this.deleteLection = deleteLection;
-	}
-
-	public TransparentButton getAddVocabel() {
-		return this.addVocabel;
-	}
-
-	public void setAddVocabel(TransparentButton addVocabel) {
-		this.addVocabel = addVocabel;
-	}
-
-	public TransparentButton getDeleteVocabel() {
-		return this.deleteVocabel;
-	}
-
-	public void setDeleteVocabel(TransparentButton deleteVocabel) {
-		this.deleteVocabel = deleteVocabel;
-	}
-
-	public TransparentButton getEditVocabel() {
-		return this.editVocabel;
-	}
-
-	public void setEditVocabel(TransparentButton editVocabel) {
-		this.editVocabel = editVocabel;
-	}
-
-	public String[] getColumnNames() {
-		return this.columnNames;
-	}
-
-	public void setColumnNames(String[] columnNames) {
-		this.columnNames = columnNames;
-	}
-
-	public TransparentLabel getSelectSpeech() {
-		return this.selectSpeech;
-	}
-
-	public void setSelectSpeech(TransparentLabel selectSpeech) {
-		this.selectSpeech = selectSpeech;
-	}
-
-	public TransparentLabel getSelectLection() {
-		return this.selectLection;
-	}
-
-	public void setSelectLection(TransparentLabel selectLection) {
-		this.selectLection = selectLection;
-	}
-
-	// public String[] add2Language() {
-	// boolean b = false;
-	// for (Language s : frame.getLanguageCombi().keySet()) {
-	// Language t = frame.getLanguageCombi().get(s);
-	// if (languages.size() != 0) {
-	// for (String st : languages)
-	// if ((s.getLanguage() + "-" + t.getLanguage()).equals(st) || (t.getLanguage() + "-" + s.getLanguage()).equals(st))
-	// b = true;
-	// if (b == false)
-	// languages.add(s.getLanguage() + "-" + t.getLanguage());
-	// b = false;
-	// } else
-	// languages.add(s.getLanguage() + "-" + t.getLanguage());
-	// }
-	//
-	// return (String[]) languages.toArray(new String[languages.size()]);
-	// }
-
 	public String[] add2Lection(String lection) {
 		System.out.println("Lections before");
 		System.out.println(this.lections.toString());
@@ -432,14 +325,6 @@ public class EditSPanel extends JPanel {
 		System.out.println("Lections array");
 		System.out.println(Arrays.asList(arr).toString());
 		return arr;
-	}
-
-	public addLection getAddLe() {
-		return this.addLe;
-	}
-
-	public void setAddLe(addLection addLe) {
-		this.addLe = addLe;
 	}
 
 	public String getPräfix1(String lang) {
@@ -491,6 +376,434 @@ public class EditSPanel extends JPanel {
 		String lang2 = language.split("-")[1];
 		this.prä1 = this.getPräfix1(lang1);
 		this.prä2 = this.getPräfix2(lang2);
+	}
+
+	public MainFrame getFrame() {
+		return this.frame;
+	}
+
+	public void setFrame(MainFrame frame) {
+		this.frame = frame;
+	}
+
+	/**
+	 * @return the image
+	 */
+	public BufferedImage getImage() {
+		return this.image;
+	}
+
+	/**
+	 * @param image
+	 *            the image to set
+	 */
+	public void setImage(BufferedImage image) {
+		this.image = image;
+	}
+
+	/**
+	 * @return the table
+	 */
+	public JTable getTable() {
+		return this.table;
+	}
+
+	/**
+	 * @param table
+	 *            the table to set
+	 */
+	public void setTable(JTable table) {
+		this.table = table;
+	}
+
+	/**
+	 * @return the tableModel
+	 */
+	public DefaultTableModel getTableModel() {
+		return this.tableModel;
+	}
+
+	/**
+	 * @param tableModel
+	 *            the tableModel to set
+	 */
+	public void setTableModel(DefaultTableModel tableModel) {
+		this.tableModel = tableModel;
+	}
+
+	/**
+	 * @return the nr
+	 */
+	public int getNr() {
+		return this.nr;
+	}
+
+	/**
+	 * @param nr
+	 *            the nr to set
+	 */
+	public void setNr(int nr) {
+		this.nr = nr;
+	}
+
+	/**
+	 * @return the addSpeech
+	 */
+	public TransparentButton getAddSpeech() {
+		return this.addSpeech;
+	}
+
+	/**
+	 * @param addSpeech
+	 *            the addSpeech to set
+	 */
+	public void setAddSpeech(TransparentButton addSpeech) {
+		this.addSpeech = addSpeech;
+	}
+
+	/**
+	 * @return the deleteSpeech
+	 */
+	public TransparentButton getDeleteSpeech() {
+		return this.deleteSpeech;
+	}
+
+	/**
+	 * @param deleteSpeech
+	 *            the deleteSpeech to set
+	 */
+	public void setDeleteSpeech(TransparentButton deleteSpeech) {
+		this.deleteSpeech = deleteSpeech;
+	}
+
+	/**
+	 * @return the addLection
+	 */
+	public TransparentButton getAddLection() {
+		return this.addLection;
+	}
+
+	/**
+	 * @param addLection
+	 *            the addLection to set
+	 */
+	public void setAddLection(TransparentButton addLection) {
+		this.addLection = addLection;
+	}
+
+	/**
+	 * @return the deleteLection
+	 */
+	public TransparentButton getDeleteLection() {
+		return this.deleteLection;
+	}
+
+	/**
+	 * @param deleteLection
+	 *            the deleteLection to set
+	 */
+	public void setDeleteLection(TransparentButton deleteLection) {
+		this.deleteLection = deleteLection;
+	}
+
+	/**
+	 * @return the addVocabel
+	 */
+	public TransparentButton getAddVocabel() {
+		return this.addVocabel;
+	}
+
+	/**
+	 * @param addVocabel
+	 *            the addVocabel to set
+	 */
+	public void setAddVocabel(TransparentButton addVocabel) {
+		this.addVocabel = addVocabel;
+	}
+
+	/**
+	 * @return the deleteVocabel
+	 */
+	public TransparentButton getDeleteVocabel() {
+		return this.deleteVocabel;
+	}
+
+	/**
+	 * @param deleteVocabel
+	 *            the deleteVocabel to set
+	 */
+	public void setDeleteVocabel(TransparentButton deleteVocabel) {
+		this.deleteVocabel = deleteVocabel;
+	}
+
+	/**
+	 * @return the editVocabel
+	 */
+	public TransparentButton getEditVocabel() {
+		return this.editVocabel;
+	}
+
+	/**
+	 * @param editVocabel
+	 *            the editVocabel to set
+	 */
+	public void setEditVocabel(TransparentButton editVocabel) {
+		this.editVocabel = editVocabel;
+	}
+
+	/**
+	 * @return the selectSpeech
+	 */
+	public TransparentLabel getSelectSpeech() {
+		return this.selectSpeech;
+	}
+
+	/**
+	 * @param selectSpeech
+	 *            the selectSpeech to set
+	 */
+	public void setSelectSpeech(TransparentLabel selectSpeech) {
+		this.selectSpeech = selectSpeech;
+	}
+
+	/**
+	 * @return the selectLection
+	 */
+	public TransparentLabel getSelectLection() {
+		return this.selectLection;
+	}
+
+	/**
+	 * @param selectLection
+	 *            the selectLection to set
+	 */
+	public void setSelectLection(TransparentLabel selectLection) {
+		this.selectLection = selectLection;
+	}
+
+	/**
+	 * @return the lectionsCB
+	 */
+	public JComboBox<String> getLectionsCB() {
+		return this.lectionsCB;
+	}
+
+	/**
+	 * @param lectionsCB
+	 *            the lectionsCB to set
+	 */
+	public void setLectionsCB(JComboBox<String> lectionsCB) {
+		this.lectionsCB = lectionsCB;
+	}
+
+	/**
+	 * @return the languageCB
+	 */
+	public JComboBox<String> getLanguageCB() {
+		return this.languageCB;
+	}
+
+	/**
+	 * @param languageCB
+	 *            the languageCB to set
+	 */
+	public void setLanguageCB(JComboBox<String> languageCB) {
+		this.languageCB = languageCB;
+	}
+
+	/**
+	 * @return the vocabellistPanel
+	 */
+	public JPanel getVocabellistPanel() {
+		return this.vocabellistPanel;
+	}
+
+	/**
+	 * @param vocabellistPanel
+	 *            the vocabellistPanel to set
+	 */
+	public void setVocabellistPanel(JPanel vocabellistPanel) {
+		this.vocabellistPanel = vocabellistPanel;
+	}
+
+	/**
+	 * @return the vocabelPanel
+	 */
+	public JPanel getVocabelPanel() {
+		return this.vocabelPanel;
+	}
+
+	/**
+	 * @param vocabelPanel
+	 *            the vocabelPanel to set
+	 */
+	public void setVocabelPanel(JPanel vocabelPanel) {
+		this.vocabelPanel = vocabelPanel;
+	}
+
+	/**
+	 * @return the speechPanel
+	 */
+	public JPanel getSpeechPanel() {
+		return this.speechPanel;
+	}
+
+	/**
+	 * @param speechPanel
+	 *            the speechPanel to set
+	 */
+	public void setSpeechPanel(JPanel speechPanel) {
+		this.speechPanel = speechPanel;
+	}
+
+	/**
+	 * @return the lectionPanel
+	 */
+	public JPanel getLectionPanel() {
+		return this.lectionPanel;
+	}
+
+	/**
+	 * @param lectionPanel
+	 *            the lectionPanel to set
+	 */
+	public void setLectionPanel(JPanel lectionPanel) {
+		this.lectionPanel = lectionPanel;
+	}
+
+	/**
+	 * @return the scrollPane
+	 */
+	public JScrollPane getScrollPane() {
+		return this.scrollPane;
+	}
+
+	/**
+	 * @param scrollPane
+	 *            the scrollPane to set
+	 */
+	public void setScrollPane(JScrollPane scrollPane) {
+		this.scrollPane = scrollPane;
+	}
+
+	/**
+	 * @return the columnNames
+	 */
+	public String[] getColumnNames() {
+		return this.columnNames;
+	}
+
+	/**
+	 * @param columnNames
+	 *            the columnNames to set
+	 */
+	public void setColumnNames(String[] columnNames) {
+		this.columnNames = columnNames;
+	}
+
+	/**
+	 * @return the prä1
+	 */
+	public String getPrä1() {
+		return this.prä1;
+	}
+
+	/**
+	 * @param prä1
+	 *            the prä1 to set
+	 */
+	public void setPrä1(String prä1) {
+		this.prä1 = prä1;
+	}
+
+	/**
+	 * @return the prä2
+	 */
+	public String getPrä2() {
+		return this.prä2;
+	}
+
+	/**
+	 * @param prä2
+	 *            the prä2 to set
+	 */
+	public void setPrä2(String prä2) {
+		this.prä2 = prä2;
+	}
+
+	/**
+	 * @return the addL
+	 */
+	public addLanguage getAddL() {
+		return this.addL;
+	}
+
+	/**
+	 * @param addL
+	 *            the addL to set
+	 */
+	public void setAddL(addLanguage addL) {
+		this.addL = addL;
+	}
+
+	/**
+	 * @return the addLe
+	 */
+	public addLection getAddLe() {
+		return this.addLe;
+	}
+
+	/**
+	 * @param addLe
+	 *            the addLe to set
+	 */
+	public void setAddLe(addLection addLe) {
+		this.addLe = addLe;
+	}
+
+	/**
+	 * @return the addVoc
+	 */
+	public addVocabel getAddVoc() {
+		return this.addVoc;
+	}
+
+	/**
+	 * @param addVoc
+	 *            the addVoc to set
+	 */
+	public void setAddVoc(addVocabel addVoc) {
+		this.addVoc = addVoc;
+	}
+
+	/**
+	 * @return the lections
+	 */
+	public ArrayList<String> getLections() {
+		return this.lections;
+	}
+
+	/**
+	 * @param lections
+	 *            the lections to set
+	 */
+	public void setLections(ArrayList<String> lections) {
+		this.lections = lections;
+	}
+
+	/**
+	 * @return the vocabellist
+	 */
+	public ArrayList<Vokabel> getVocabellist() {
+		return this.vocabellist;
+	}
+
+	/**
+	 * @param vocabellist
+	 *            the vocabellist to set
+	 */
+	public void setVocabellist(ArrayList<Vokabel> vocabellist) {
+		this.vocabellist = vocabellist;
 	}
 
 }

@@ -19,6 +19,9 @@ public class TimerLabel {
 
 	}
 
+	/**
+	 * starts the timer for the vocable test and end it if 0
+	 */
 	public void startTimer() {
 		TimerLabel.timer = new Timer(1000, e -> {
 			TimerLabel.counterValue--;
@@ -42,6 +45,11 @@ public class TimerLabel {
 		timer.start();
 	}
 
+	/**
+	 * Painting the remaining time
+	 * 
+	 * @param time
+	 */
 	public void printTimer(int time) {
 		String s;
 		if (time > 60) {
@@ -60,18 +68,36 @@ public class TimerLabel {
 		this.frame.getVocabeltestPanel().getTimerLabel().setText("Übrige Zeit: " + String.valueOf(s));
 	}
 
+	/**
+	 * Stops the timer
+	 */
 	public void stopTimer() {
 		this.setStopper(true);
 	}
 
+	/**
+	 * sets the timer on starttimeMin:starttimeSec
+	 * 
+	 * @param starttimeMin
+	 * @param starttimeSec
+	 */
 	public void setTimer(int starttimeMin, int starttimeSec) {
 		counterValue = (starttimeMin * 60) + starttimeSec;
 	}
 
+	/**
+	 * 
+	 * @return is timer stoped?<boolean>
+	 */
 	public boolean isStopper() {
 		return this.stopper;
 	}
 
+	/**
+	 * sets the timmer to stoped or not
+	 * 
+	 * @param stopper
+	 */
 	public void setStopper(boolean stopper) {
 		this.stopper = stopper;
 	}

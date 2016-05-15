@@ -1,8 +1,11 @@
 package Trainer;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import NewGui.MainFrame;
 
@@ -18,16 +21,29 @@ public class Statistik {
 	private CSVParser				parser;
 	private CSVWriter				writer;
 
+	/**
+	 * get Statistiks from data/Statistik.csv
+	 *
+	 * @throws Exception
+	 */
 	public ArrayList<StatHelper> getdata() throws Exception {
 		this.parser = new CSVParser(data);
 		return this.parser.parse(getMapper(), StatHelper.class, true);
 	}
 
+	/**
+	 * write Statistiks to data/Statistik.csv
+	 *
+	 * @throws Exception
+	 */
 	public void write(ArrayList<StatHelper> daten) throws Exception {
 		this.writer = new CSVWriter(data);
 		this.writer.save(getMapper(), daten, StatHelper.class, true);
 	}
 
+	/**
+	 * returns the note of the test
+	 */
 	public void NoteTest() {
 		int right = this.frame.getVocabeltestPanel().getRight();
 		String note = "";
@@ -93,12 +109,41 @@ public class Statistik {
 
 	}
 
+	/**
+	 * 
+	 * @return currend date
+	 */
+	public String getDate() {
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		Date data = new Date();
+		String date = dateFormat.format(data);
+		return date;
+	}
+
+	/**
+	 * 
+	 * @return int right vocabels
+	 */
+	public int getRight() {
+		int right = this.frame.getVocabeltestPanel().getRight();
+		return right;
+	}
+
+	/**
+	 * 
+	 * @return int wrong vocabels
+	 */
+	public int getWrong() {
+		int wrong = this.frame.getVocabeltestPanel().getCounts() - this.frame.getVocabeltestPanel().getRight();
+		return wrong;
+	}
+
 	static CSVReflectionMap getMapper() {
 		if (mapper == null) {
 			mapper = new CSVReflectionMap();
 			mapper.setField(0, "date");
-			mapper.setField(1, "voktest");
-			mapper.setField(2, "lections");
+			mapper.setField(1, "right");
+			mapper.setField(2, "wrong");
 			mapper.setField(3, "note");
 
 		}

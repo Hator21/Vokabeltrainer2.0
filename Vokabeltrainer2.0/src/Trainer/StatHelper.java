@@ -2,61 +2,61 @@ package Trainer;
 
 public class StatHelper {
 	private String	date;
-	private String	voktest;
-	private String	lektions;
+	private int		right;
+	private int		wrong;
 	private String	note;
 
-	private StatHelper(String date, String voktest, String lektions, String note) {
-		this.setData(date);
-		this.setLektions(lektions);
-		this.setVoktest(voktest);
+	private StatHelper(String date, int right, int wrong, String note) {
+		this.setDate(date);
+		this.setRight(right);
+		this.setWrong(wrong);
 		this.setNote(note);
 
 	}
 
 	/**
-	 * @return the data
+	 * @return the date
 	 */
-	public String getData() {
+	public String getDate() {
 		return this.date;
 	}
 
 	/**
-	 * @param data
-	 *            the data to set
+	 * @param date
+	 *            the date to set
 	 */
-	public void setData(String date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
 	/**
-	 * @return the voktest
+	 * @return the right
 	 */
-	public String getVoktest() {
-		return this.voktest;
+	public int getRight() {
+		return this.right;
 	}
 
 	/**
-	 * @param voktest
-	 *            the voktest to set
+	 * @param right
+	 *            the right to set
 	 */
-	public void setVoktest(String voktest) {
-		this.voktest = voktest;
+	public void setRight(int right) {
+		this.right = right;
 	}
 
 	/**
-	 * @return the lektions
+	 * @return the wrong
 	 */
-	public String getLektions() {
-		return this.lektions;
+	public int getWrong() {
+		return this.wrong;
 	}
 
 	/**
-	 * @param lektions
-	 *            the lektions to set
+	 * @param wrong
+	 *            the wrong to set
 	 */
-	public void setLektions(String lektions) {
-		this.lektions = lektions;
+	public void setWrong(int wrong) {
+		this.wrong = wrong;
 	}
 
 	/**

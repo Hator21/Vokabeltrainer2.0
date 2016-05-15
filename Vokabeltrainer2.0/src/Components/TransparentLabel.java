@@ -25,6 +25,16 @@ public class TransparentLabel extends CustomLabel {
 	boolean					opaque	= false;
 	private BufferedImage	image	= null;
 
+	/**
+	 * Constructor of the TransperentLabel
+	 *
+	 * @param text
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param fontsize
+	 */
 	public TransparentLabel(String text, int x, int y, int width, int height, int fontsize) {
 		this.setText(text);
 		this.setFontsize(fontsize);
@@ -37,6 +47,17 @@ public class TransparentLabel extends CustomLabel {
 		this.setBounds(x, y, width, height);
 	}
 
+	/**
+	 * Constructor of the TransperentLabel with opaque settings
+	 *
+	 * @param text
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param fontsize
+	 * @param opaque
+	 */
 	public TransparentLabel(String text, int x, int y, int width, int height, int fontsize, boolean opaque) {
 		this.setText(text);
 		this.setFontsize(fontsize);
@@ -51,15 +72,23 @@ public class TransparentLabel extends CustomLabel {
 		this.setBounds(x, y, width, height);
 	}
 
+	/**
+	 * painting the Label
+	 */
 	@Override
 	public void paintComponent(Graphics g_) {
-		System.out.println(this.getText() + " -> " + opaque);
-		if (opaque == false)
-			render(g_);
-		else
-			renderOpaque(g_);
+		if (this.opaque == false) {
+			this.render(g_);
+		} else {
+			this.renderOpaque(g_);
+		}
 	}
 
+	/**
+	 * render settings for opaque labels
+	 * 
+	 * @param g_
+	 */
 	public void renderOpaque(Graphics g_) {
 		if (this.image != null) {
 			Graphics2D g = (Graphics2D) g_;
@@ -71,6 +100,11 @@ public class TransparentLabel extends CustomLabel {
 		}
 	}
 
+	/**
+	 * render settings for labels
+	 * 
+	 * @param g_
+	 */
 	public void render(Graphics g_) {
 		Graphics2D g = (Graphics2D) g_;
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -91,40 +125,92 @@ public class TransparentLabel extends CustomLabel {
 		g.drawString(this.getText(), x, y);
 	}
 
+	/**
+	 * crate the standard label
+	 * 
+	 * @param text
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param fontsize
+	 * @param parent
+	 * @return
+	 */
+
 	public static TransparentLabel createLabel(String text, int x, int y, int width, int height, int fontsize, JComponent parent) {
 		TransparentLabel label = new TransparentLabel(text, x, y, width, height, fontsize);
 		parent.add(label);
 		return label;
 	}
 
+	/**
+	 * create the opaque label
+	 * 
+	 * @param text
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param fontsize
+	 * @param opaque
+	 * @param parent
+	 * @return
+	 */
 	public static TransparentLabel createLabel(String text, int x, int y, int width, int height, int fontsize, boolean opaque, JComponent parent) {
 		TransparentLabel label = new TransparentLabel(text, x, y, width, height, fontsize, opaque);
 		parent.add(label);
 		return label;
 	}
 
+	/**
+	 * return the Text of the Label
+	 */
 	@Override
 	public String toString() {
 		return this.getText();
 	}
 
+	/**
+	 * 
+	 * @return the frontsize of the label
+	 */
 	public int getFontsize() {
 		return this.fontsize;
 	}
 
+	/**
+	 * sets the frontsize of the label
+	 * 
+	 * @param fontsize
+	 */
 	public void setFontsize(int fontsize) {
 		this.fontsize = fontsize;
 	}
 
+	/**
+	 * 
+	 * @return label color
+	 */
 	public Color getColor() {
 		return this.color;
 	}
 
+	/**
+	 * sets the color and repaint
+	 * 
+	 * @param color
+	 */
 	public void setColor(Color color) {
 		this.color = color;
 		this.repaint();
 	}
 
+	/**
+	 * set the image of the label
+	 * 
+	 * @param path
+	 */
 	public void setImage(String path) {
 		try {
 			this.image = ImageIO.read(new File(path));

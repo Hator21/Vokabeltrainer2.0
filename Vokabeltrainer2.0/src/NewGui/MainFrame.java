@@ -105,7 +105,6 @@ public class MainFrame extends JFrame {
 
 		this.setBear(new Bearbeiten(this));
 		this.setCheck(new Check(this));
-		// this.setRun(new Run(this, this.getCheck()));
 		this.setTimer(new TimerLabel(this, 15, 0));
 		try {
 			this.setVokabeln(this.getBear().getdata());
@@ -180,8 +179,9 @@ public class MainFrame extends JFrame {
 		this.infoPanel.setVisible(false);
 		this.getContentPane().add(this.infoPanel);
 		this.getContentPane().setBackground(Color.RED);
-		for (TransparentLabel t : this.getHelper())
+		for (TransparentLabel t : this.getHelper()) {
 			t.setVisible(false);
+		}
 	}
 
 	public Bearbeiten getBear() {
@@ -431,7 +431,7 @@ public class MainFrame extends JFrame {
 	}
 
 	public ArrayList<TransparentLabel> getHelper() {
-		return helper;
+		return this.helper;
 	}
 
 	public void setHelper(ArrayList<TransparentLabel> helper) {

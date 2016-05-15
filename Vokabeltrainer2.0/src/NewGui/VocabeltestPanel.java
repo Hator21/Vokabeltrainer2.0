@@ -26,6 +26,11 @@ public class VocabeltestPanel extends JPanel {
 	private TransparentButton	start, next;
 	private int					right, counts = 10;
 
+	/**
+	 * creats the pannel
+	 * 
+	 * @param frame
+	 */
 	public VocabeltestPanel(MainFrame frame) {
 
 		this.setFrame(frame);
@@ -102,6 +107,9 @@ public class VocabeltestPanel extends JPanel {
 		this.createHelp();
 	}
 
+	/**
+	 * paint Component
+	 */
 	@Override
 	public void paintComponent(Graphics g_) {
 		Graphics2D g = (Graphics2D) g_;

@@ -27,6 +27,17 @@ public class TransparentButton extends CustomButton {
 	Color			borderColor				= new Color(255, 0, 0, 0);
 	Color			backgroundColorcolor	= new Color(0, 0, 0, 0);
 
+	/**
+	 * the constructor of the standard TransperentButton
+	 * 
+	 * @param text
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param fontsize
+	 * @param factor
+	 */
 	public TransparentButton(String text, int x, int y, int width, int height, int fontsize, int factor) {
 		this.setText(text);
 		this.setFontsize(fontsize);
@@ -40,6 +51,18 @@ public class TransparentButton extends CustomButton {
 		this.setBounds(x, y, width, height);
 	}
 
+	/**
+	 * the constructor of the colored TrasperentButton
+	 * 
+	 * @param text
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param fontsize
+	 * @param factor
+	 * @param c
+	 */
 	public TransparentButton(String text, int x, int y, int width, int height, int fontsize, int factor, Color c) {
 		this.setText(text);
 		this.setFontsize(fontsize);
@@ -54,6 +77,18 @@ public class TransparentButton extends CustomButton {
 		this.setBounds(x, y, width, height);
 	}
 
+	/**
+	 * the constructor of a TransperentButton with rotatet text
+	 * 
+	 * @param text
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param fontsize
+	 * @param factor
+	 * @param rotation
+	 */
 	public TransparentButton(String text, int x, int y, int width, int height, int fontsize, int factor, double rotation) {
 		this.setText(text);
 		this.setFontsize(fontsize);
@@ -69,6 +104,9 @@ public class TransparentButton extends CustomButton {
 		this.correctX = true;
 	}
 
+	/**
+	 * render method of the button
+	 */
 	@Override
 	public void render(Graphics g_) {
 		Graphics2D g = (Graphics2D) g_;
@@ -96,6 +134,21 @@ public class TransparentButton extends CustomButton {
 		g.drawString(this.getText(), x, y);
 	}
 
+	/**
+	 * crate the stadard TransperentButton
+	 * 
+	 * @param text
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param fontsize
+	 * @param factor
+	 * @param c
+	 * @param listener
+	 * @param parent
+	 * @return
+	 */
 	public static TransparentButton createButton(String text, int x, int y, int width, int height, int fontsize, int factor, Color c, ActionListener listener, JComponent parent) {
 		TransparentButton button = new TransparentButton(text, x, y, width, height, fontsize, factor, c);
 		button.addActionListener(listener);
@@ -103,6 +156,20 @@ public class TransparentButton extends CustomButton {
 		return button;
 	}
 
+	/**
+	 * create the colored TransperentButton
+	 * 
+	 * @param text
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param fontsize
+	 * @param factor
+	 * @param listener
+	 * @param parent
+	 * @return
+	 */
 	public static TransparentButton createButton(String text, int x, int y, int width, int height, int fontsize, int factor, ActionListener listener, JComponent parent) {
 		TransparentButton button = new TransparentButton(text, x, y, width, height, fontsize, factor);
 		button.addActionListener(listener);
@@ -110,6 +177,21 @@ public class TransparentButton extends CustomButton {
 		return button;
 	}
 
+	/**
+	 * create the TransperentButton with rotated text
+	 * 
+	 * @param text
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param fontsize
+	 * @param factor
+	 * @param rotation
+	 * @param listener
+	 * @param parent
+	 * @return
+	 */
 	public static TransparentButton createButton(String text, int x, int y, int width, int height, int fontsize, int factor, double rotation, ActionListener listener, JComponent parent) {
 		TransparentButton button = new TransparentButton(text, x, y, width, height, fontsize, factor, rotation);
 		button.addActionListener(listener);
