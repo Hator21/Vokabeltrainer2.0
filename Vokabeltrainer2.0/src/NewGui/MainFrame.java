@@ -94,7 +94,7 @@ public class MainFrame extends JFrame {
 
 		FileInputStream fis;
 		try {
-			fis = new FileInputStream("data/data.txt");
+			fis = new FileInputStream("data.txt");
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			this.languageCombi = (HashMap<Language, Language>) ois.readObject();
 			ois.close();
