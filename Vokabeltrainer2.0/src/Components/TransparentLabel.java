@@ -86,7 +86,7 @@ public class TransparentLabel extends CustomLabel {
 
 	/**
 	 * render settings for opaque labels
-	 * 
+	 *
 	 * @param g_
 	 */
 	public void renderOpaque(Graphics g_) {
@@ -96,13 +96,12 @@ public class TransparentLabel extends CustomLabel {
 			g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 			g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 			g.drawImage(this.image, 0, 0, 40, 40, null);
-			System.out.println("angekommen");
 		}
 	}
 
 	/**
 	 * render settings for labels
-	 * 
+	 *
 	 * @param g_
 	 */
 	public void render(Graphics g_) {
@@ -127,7 +126,7 @@ public class TransparentLabel extends CustomLabel {
 
 	/**
 	 * crate the standard label
-	 * 
+	 *
 	 * @param text
 	 * @param x
 	 * @param y
@@ -146,7 +145,7 @@ public class TransparentLabel extends CustomLabel {
 
 	/**
 	 * create the opaque label
-	 * 
+	 *
 	 * @param text
 	 * @param x
 	 * @param y
@@ -172,7 +171,7 @@ public class TransparentLabel extends CustomLabel {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return the frontsize of the label
 	 */
 	public int getFontsize() {
@@ -181,7 +180,7 @@ public class TransparentLabel extends CustomLabel {
 
 	/**
 	 * sets the frontsize of the label
-	 * 
+	 *
 	 * @param fontsize
 	 */
 	public void setFontsize(int fontsize) {
@@ -189,7 +188,7 @@ public class TransparentLabel extends CustomLabel {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return label color
 	 */
 	public Color getColor() {
@@ -198,7 +197,7 @@ public class TransparentLabel extends CustomLabel {
 
 	/**
 	 * sets the color and repaint
-	 * 
+	 *
 	 * @param color
 	 */
 	public void setColor(Color color) {
@@ -208,12 +207,13 @@ public class TransparentLabel extends CustomLabel {
 
 	/**
 	 * set the image of the label
-	 * 
+	 *
 	 * @param path
 	 */
 	public void setImage(String path) {
-		if (path == null)
+		if (path == null) {
 			path = "img/CorrectImage.png";
+		}
 		try {
 			this.image = ImageIO.read(new File(path));
 		} catch (IOException ex) {}

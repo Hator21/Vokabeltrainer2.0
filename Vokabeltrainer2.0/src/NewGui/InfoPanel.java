@@ -18,6 +18,11 @@ public class InfoPanel extends JPanel {
 	private BufferedImage		image;
 	private TransparentLabel	buildName, buildID, copyright;
 
+	/**
+	 * sets the frame
+	 * 
+	 * @param frame
+	 */
 	public InfoPanel(MainFrame frame) {
 		this.setFrame(frame);
 		this.setLayout(null);
@@ -25,18 +30,24 @@ public class InfoPanel extends JPanel {
 		try {
 			this.image = ImageIO.read(new File("img/Hintergrund-weiﬂ.png"));
 		} catch (IOException ex) {}
-		createLabel();
+		this.createLabel();
 	}
 
+	/**
+	 * create Label
+	 */
 	public void createLabel() {
-		setBuildName(TransparentLabel.createLabel("Vokabeltrainer v2", 100, 100, 200, 50, 20, this));
-		setBuildID(TransparentLabel.createLabel("Build id: 20160515-0115", 100, 150, 270, 50, 20, this));
-		setCopyright(TransparentLabel.createLabel("Copyright (c) by Jonas Lampe, Alexander Sochart", 100, 200, 500, 50, 20, this));
-		frame.getLabels().add(getBuildName());
-		frame.getLabels().add(getBuildID());
-		frame.getLabels().add(getCopyright());
+		this.setBuildName(TransparentLabel.createLabel("Vokabeltrainer v2", 100, 100, 200, 50, 20, this));
+		this.setBuildID(TransparentLabel.createLabel("Build id: 20160515-0120", 100, 150, 270, 50, 20, this));
+		this.setCopyright(TransparentLabel.createLabel("Copyright (c) by Jonas Lampe, Alexander Sochart", 100, 200, 500, 50, 20, this));
+		this.frame.getLabels().add(this.getBuildName());
+		this.frame.getLabels().add(this.getBuildID());
+		this.frame.getLabels().add(this.getCopyright());
 	}
 
+	/**
+	 * renders the graphics object
+	 */
 	@Override
 	public void paintComponent(Graphics g_) {
 		super.paintComponent(g_);
@@ -48,34 +59,71 @@ public class InfoPanel extends JPanel {
 	}
 
 	public MainFrame getFrame() {
-		return frame;
+		return this.frame;
 	}
 
 	public void setFrame(MainFrame frame) {
 		this.frame = frame;
 	}
 
-	public TransparentLabel getBuildName() {
-		return buildName;
+	/**
+	 * @return the image
+	 */
+	public BufferedImage getImage() {
+		return this.image;
 	}
 
+	/**
+	 * @param image
+	 *            the image to set
+	 */
+	public void setImage(BufferedImage image) {
+		this.image = image;
+	}
+
+	/**
+	 * @return the buildName
+	 */
+	public TransparentLabel getBuildName() {
+		return this.buildName;
+	}
+
+	/**
+	 * @param buildName
+	 *            the buildName to set
+	 */
 	public void setBuildName(TransparentLabel buildName) {
 		this.buildName = buildName;
 	}
 
+	/**
+	 * @return the buildID
+	 */
 	public TransparentLabel getBuildID() {
-		return buildID;
+		return this.buildID;
 	}
 
+	/**
+	 * @param buildID
+	 *            the buildID to set
+	 */
 	public void setBuildID(TransparentLabel buildID) {
 		this.buildID = buildID;
 	}
 
+	/**
+	 * @return the copyright
+	 */
 	public TransparentLabel getCopyright() {
-		return copyright;
+		return this.copyright;
 	}
 
+	/**
+	 * @param copyright
+	 *            the copyright to set
+	 */
 	public void setCopyright(TransparentLabel copyright) {
 		this.copyright = copyright;
 	}
+
 }

@@ -34,6 +34,11 @@ public class SearchingPanel extends JPanel {
 	private ArrayList<CoordSearching>		coords			= new ArrayList<CoordSearching>();
 	private JPanel							buttons;
 
+	/**
+	 * creates the frame
+	 *
+	 * @param frame
+	 */
 	public SearchingPanel(MainFrame frame) {
 		this.setFrame(frame);
 		this.setLayout(null);
@@ -46,12 +51,15 @@ public class SearchingPanel extends JPanel {
 				this.coords.add(new CoordSearching(x, y, false));
 			}
 		}
-		createNextButton();
+		this.createNextButton();
 		frame.getButtons().add(this.getNextcorrect());
 		frame.getLabels().add(this.getVokabel());
 		this.createHelp();
 	}
 
+	/**
+	 * create the next button
+	 */
 	public void createNextButton() {
 		this.setNextcorrect(TransparentButton.createButton("Nächste", 828, 600, 200, 44, 20, 0, (e -> {
 			for (Component c : this.getComponents()) {
@@ -62,13 +70,16 @@ public class SearchingPanel extends JPanel {
 			this.vocabels.clear();
 			this.revalidate();
 
-			frame.getSearchingPanel().createButtons();
-			frame.getSearchingPanel().createLabel();
+			this.frame.getSearchingPanel().createButtons();
+			this.frame.getSearchingPanel().createLabel();
 			this.repaint();
 
 		}), this));
 	}
 
+	/**
+	 * create buttons for the vocabels
+	 */
 	public void createButtons() {
 		ArrayList<Vokabel> vocs = this.frame.getTestVokabeln();
 
@@ -96,6 +107,9 @@ public class SearchingPanel extends JPanel {
 		this.frame.getButtons().addAll(this.vocabels);
 	}
 
+	/**
+	 * renders the graphics object
+	 */
 	@Override
 	public void paintComponent(Graphics g_) {
 		super.paintComponent(g_);
@@ -114,30 +128,26 @@ public class SearchingPanel extends JPanel {
 		this.frame = frame;
 	}
 
+	/**
+	 * gets a random number in range min max
+	 *
+	 * @param min
+	 * @param max
+	 * @return
+	 */
 	public int zufallszahl(int min, int max) {
 		return this.random.nextInt((max - min) + 1) + min;
 	}
 
-	public TransparentButton getNextcorrect() {
-		return this.nextcorrect;
-	}
-
-	public void setNextcorrect(TransparentButton nextcorrect) {
-		this.nextcorrect = nextcorrect;
-	}
-
-	public TransparentLabel getVokabel() {
-		return this.vokabel;
-	}
-
-	public void setVokabel(TransparentLabel vokabel) {
-		this.vokabel = vokabel;
-	}
-
+	/**
+	 * generates the button listener
+	 * 
+	 * @author Alexander
+	 *
+	 */
 	private class VokabelButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.println(((TransparentButton) (e.getSource())).getText());
 			if (!((TransparentButton) (e.getSource())).getText().equals("")) {
 				if (SearchingPanel.this.askedVoc.getVocabTranslation().equalsIgnoreCase(((TransparentButton) (e.getSource())).getText())) {
 					// TODO: richtig
@@ -161,6 +171,141 @@ public class SearchingPanel extends JPanel {
 
 	public void createHelp() {
 		this.frame.getHelper().add(TransparentLabel.createLabel("1. Klicke auf die richtige Vokabel, danach auf \"Weiter\"!", 300, 600, 425, 30, 18, this));
+	}
+
+	/**
+	 * @return the image
+	 */
+	public BufferedImage getImage() {
+		return this.image;
+	}
+
+	/**
+	 * @param image
+	 *            the image to set
+	 */
+	public void setImage(BufferedImage image) {
+		this.image = image;
+	}
+
+	/**
+	 * @return the nextcorrect
+	 */
+	public TransparentButton getNextcorrect() {
+		return this.nextcorrect;
+	}
+
+	/**
+	 * @param nextcorrect
+	 *            the nextcorrect to set
+	 */
+	public void setNextcorrect(TransparentButton nextcorrect) {
+		this.nextcorrect = nextcorrect;
+	}
+
+	/**
+	 * @return the vokabel
+	 */
+	public TransparentLabel getVokabel() {
+		return this.vokabel;
+	}
+
+	/**
+	 * @param vokabel
+	 *            the vokabel to set
+	 */
+	public void setVokabel(TransparentLabel vokabel) {
+		this.vokabel = vokabel;
+	}
+
+	/**
+	 * @return the vocabels
+	 */
+	public ArrayList<TransparentButton> getVocabels() {
+		return this.vocabels;
+	}
+
+	/**
+	 * @param vocabels
+	 *            the vocabels to set
+	 */
+	public void setVocabels(ArrayList<TransparentButton> vocabels) {
+		this.vocabels = vocabels;
+	}
+
+	/**
+	 * @return the random
+	 */
+	public Random getRandom() {
+		return this.random;
+	}
+
+	/**
+	 * @param random
+	 *            the random to set
+	 */
+	public void setRandom(Random random) {
+		this.random = random;
+	}
+
+	/**
+	 * @return the buttonListener
+	 */
+	public VokabelButtonListener getButtonListener() {
+		return this.buttonListener;
+	}
+
+	/**
+	 * @param buttonListener
+	 *            the buttonListener to set
+	 */
+	public void setButtonListener(VokabelButtonListener buttonListener) {
+		this.buttonListener = buttonListener;
+	}
+
+	/**
+	 * @return the askedVoc
+	 */
+	public Vokabel getAskedVoc() {
+		return this.askedVoc;
+	}
+
+	/**
+	 * @param askedVoc
+	 *            the askedVoc to set
+	 */
+	public void setAskedVoc(Vokabel askedVoc) {
+		this.askedVoc = askedVoc;
+	}
+
+	/**
+	 * @return the coords
+	 */
+	public ArrayList<CoordSearching> getCoords() {
+		return this.coords;
+	}
+
+	/**
+	 * @param coords
+	 *            the coords to set
+	 */
+	public void setCoords(ArrayList<CoordSearching> coords) {
+		this.coords = coords;
+	}
+
+	/**
+	 * @return the buttons
+	 */
+	public JPanel getButtons() {
+		return this.buttons;
+	}
+
+	/**
+	 * @param buttons
+	 *            the buttons to set
+	 */
+	public void setButtons(JPanel buttons) {
+		this.buttons = buttons;
 	}
 
 }

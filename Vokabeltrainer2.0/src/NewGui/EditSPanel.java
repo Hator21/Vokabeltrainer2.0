@@ -11,7 +11,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 
 import javax.imageio.ImageIO;
@@ -56,6 +55,11 @@ public class EditSPanel extends JPanel {
 	private ArrayList<String>	lections	= new ArrayList<String>();
 	private ArrayList<Vokabel>	vocabellist	= new ArrayList<Vokabel>();
 
+	/**
+	 * Create the frame
+	 *
+	 * @param frame
+	 */
 	public EditSPanel(MainFrame frame) {
 		this.setFrame(frame);
 		this.setLayout(null);
@@ -85,13 +89,11 @@ public class EditSPanel extends JPanel {
 				if (!this.addVoc.getAddVocabelOLTF().getText().equals("") && !this.addVoc.getAddVocabelDLTF().getText().equals("")) {
 					this.nr++;
 					int lectionNR = Integer.parseInt(this.lectionsCB.getSelectedItem().toString().split(" ")[1]);
-					addVoc.getAddVocabelOLTF().setText(addVoc.getAddVocabelOLTF().getText().replaceAll(";", ""));
-					addVoc.getAddVocabelDLTF().setText(addVoc.getAddVocabelDLTF().getText().replaceAll(";", ""));
+					this.addVoc.getAddVocabelOLTF().setText(this.addVoc.getAddVocabelOLTF().getText().replaceAll(";", ""));
+					this.addVoc.getAddVocabelDLTF().setText(this.addVoc.getAddVocabelDLTF().getText().replaceAll(";", ""));
 					frame.getVokabeln().add(new Vokabel(this.prä1, this.prä2, this.addVoc.getAddVocabelOLTF().getText(), this.addVoc.getAddVocabelDLTF().getText(), lectionNR, 0, 0, false));
 					this.loadTable();
-					for (Vokabel v : frame.getVokabeln()) {
-						System.out.println(v.toString());
-					}
+					for (Vokabel v : frame.getVokabeln()) {}
 				}
 			}
 		}), this.vocabelPanel));
@@ -115,8 +117,6 @@ public class EditSPanel extends JPanel {
 			int row = this.table.getSelectedRow();
 			int index = this.getVocabelFromTable(row);
 			Vokabel voc = frame.getVokabeln().get(index);
-			System.out.println(voc.getVocabOrigin());
-			System.err.println("->" + index);
 			this.addVoc = new addVocabel(lang1, lang2);
 			this.addVoc.getAddVocabelOLTF().setText(voc.getVocabOrigin());
 			this.addVoc.getAddVocabelDLTF().setText(voc.getVocabTranslation());
@@ -140,9 +140,10 @@ public class EditSPanel extends JPanel {
 			int s = JOptionPane.showConfirmDialog(null, this.addLe.getInputs(), "Lektion anlegen", JOptionPane.PLAIN_MESSAGE);
 			if (s == JOptionPane.OK_OPTION) {
 				if (!this.addLe.getAddLanguage1TF().getText().equals("")) {
-					String text = isLektionOk(this.addLe.getAddLanguage1TF().getText());
-					if (text != null)
+					String text = this.isLektionOk(this.addLe.getAddLanguage1TF().getText());
+					if (text != null) {
 						this.lectionsCB.setModel(new DefaultComboBoxModel<String>(this.add2Lection(text)));
+					}
 				}
 			}
 			this.loadTable();
@@ -182,14 +183,14 @@ public class EditSPanel extends JPanel {
 			int s = JOptionPane.showConfirmDialog(null, this.addL.getInputs(), "Sprache anlegen", JOptionPane.PLAIN_MESSAGE);
 			if (s == JOptionPane.OK_OPTION) {
 				if (!this.addL.getAddLanguage1TF().getText().equals("") && !this.addL.getAddLanguage2TF().getText().equals("") && !this.addL.getAddPräfix1TF().getText().equals("") && !this.addL.getAddPräfix2TF().getText().equals("")) {
-					addL.getAddLanguage1TF().setText(addL.getAddLanguage1TF().getText().replaceAll("\\s+", ""));
-					addL.getAddLanguage2TF().setText(addL.getAddLanguage2TF().getText().replaceAll("\\s+", ""));
-					addL.getAddPräfix1TF().setText(addL.getAddPräfix1TF().getText().replaceAll("\\s+", ""));
-					addL.getAddPräfix2TF().setText(addL.getAddPräfix2TF().getText().replaceAll("\\s+", ""));
-					addL.getAddLanguage1TF().setText(addL.getAddLanguage1TF().getText().replaceAll(";", ""));
-					addL.getAddLanguage2TF().setText(addL.getAddLanguage2TF().getText().replaceAll(";", ""));
-					addL.getAddPräfix1TF().setText(addL.getAddPräfix1TF().getText().replaceAll(";", ""));
-					addL.getAddPräfix2TF().setText(addL.getAddPräfix2TF().getText().replaceAll(";", ""));
+					this.addL.getAddLanguage1TF().setText(this.addL.getAddLanguage1TF().getText().replaceAll("\\s+", ""));
+					this.addL.getAddLanguage2TF().setText(this.addL.getAddLanguage2TF().getText().replaceAll("\\s+", ""));
+					this.addL.getAddPräfix1TF().setText(this.addL.getAddPräfix1TF().getText().replaceAll("\\s+", ""));
+					this.addL.getAddPräfix2TF().setText(this.addL.getAddPräfix2TF().getText().replaceAll("\\s+", ""));
+					this.addL.getAddLanguage1TF().setText(this.addL.getAddLanguage1TF().getText().replaceAll(";", ""));
+					this.addL.getAddLanguage2TF().setText(this.addL.getAddLanguage2TF().getText().replaceAll(";", ""));
+					this.addL.getAddPräfix1TF().setText(this.addL.getAddPräfix1TF().getText().replaceAll(";", ""));
+					this.addL.getAddPräfix2TF().setText(this.addL.getAddPräfix2TF().getText().replaceAll(";", ""));
 					frame.getLanguageCombi().put(new Language(this.addL.getAddPräfix1TF().getText(), this.addL.getAddLanguage1TF().getText()), new Language(this.addL.getAddPräfix2TF().getText(), this.addL.getAddLanguage2TF().getText()));
 					this.languageCB.setModel(new DefaultComboBoxModel<String>(frame.add2Language()));
 				}
@@ -259,11 +260,19 @@ public class EditSPanel extends JPanel {
 	}
 
 	private static class CustomTableModel extends DefaultTableModel {
-
+		/**
+		 * loads super constructor
+		 *
+		 * @param a
+		 * @param b
+		 */
 		public CustomTableModel(String[] a, int b) {
 			super(a, b);
 		}
 
+		/**
+		 * sets the CellEditable to false
+		 */
 		@Override
 		public boolean isCellEditable(int row, int column) {
 			return false;
@@ -271,6 +280,9 @@ public class EditSPanel extends JPanel {
 
 	}
 
+	/**
+	 * rendering the graphics
+	 */
 	@Override
 	public void paintComponent(Graphics g_) {
 		super.paintComponent(g_);
@@ -281,6 +293,9 @@ public class EditSPanel extends JPanel {
 		g.drawImage(this.image, 0, 0, null);
 	}
 
+	/**
+	 * load Tabel in the Speach edit pannel
+	 */
 	public void loadTable() {
 		this.nr = 1;
 		int correct;
@@ -318,9 +333,13 @@ public class EditSPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * add a lection to the lection list
+	 *
+	 * @param lection
+	 * @return String [] arr
+	 */
 	public String[] add2Lection(String lection) {
-		System.out.println("Lections before");
-		System.out.println(this.lections.toString());
 		boolean b = false;
 		for (String s : this.lections) {
 			if (lection.equals(s)) {
@@ -332,13 +351,15 @@ public class EditSPanel extends JPanel {
 		}
 		String[] arr = new String[this.lections.size()];
 		arr = this.lections.toArray(arr);
-		System.out.println("Lections after");
-		System.out.println(this.lections.toString());
-		System.out.println("Lections array");
-		System.out.println(Arrays.asList(arr).toString());
 		return arr;
 	}
 
+	/**
+	 * sets prä1 to key.getPräfix if key.getLanguage().equals(lang)
+	 * 
+	 * @param lang
+	 * @return prä1
+	 */
 	public String getPräfix1(String lang) {
 		for (Language key : this.frame.getLanguageCombi().keySet()) {
 			if (key.getLanguage().equals(lang)) {
@@ -348,6 +369,12 @@ public class EditSPanel extends JPanel {
 		return this.prä1;
 	}
 
+	/**
+	 * sets prä2 to key.getPräfix if key.getLanguage().equals(lang)
+	 * 
+	 * @param lang
+	 * @return prä2
+	 */
 	public String getPräfix2(String lang) {
 		for (Language key : this.frame.getLanguageCombi().keySet()) {
 			if (this.frame.getLanguageCombi().get(key).getLanguage().equals(lang)) {
@@ -357,15 +384,23 @@ public class EditSPanel extends JPanel {
 		return this.prä2;
 	}
 
+	/**
+	 * crate a LectionList
+	 */
 	public void createLectionList() {
 		this.lections.clear();
 		this.putPräfix();
 		this.lections.addAll(this.frame.getBear().getLektionList(this.prä1, this.prä2));
 		this.lections.sort(null);
 		this.lectionsCB.setModel(new DefaultComboBoxModel<String>(this.lections.toArray(new String[this.lections.size()])));
-		//System.out.println(this.lections);
 	}
 
+	/**
+	 * takes the selected vocable from table and return the index of it
+	 * 
+	 * @param row
+	 * @return index
+	 */
 	public int getVocabelFromTable(int row) {
 		int index = 0;
 		int lection = Integer.parseInt(this.lectionsCB.getSelectedItem().toString().split(" ")[1]);
@@ -382,6 +417,9 @@ public class EditSPanel extends JPanel {
 		return index;
 	}
 
+	/**
+	 * sets prä1 and prä2 to the selectet item in the combobox
+	 */
 	public void putPräfix() {
 		String language = this.languageCB.getSelectedItem().toString();
 		String lang1 = language.split("-")[0];
@@ -811,26 +849,34 @@ public class EditSPanel extends JPanel {
 	}
 
 	/**
+	 * set vocablelist
+	 * 
 	 * @param vocabellist
-	 *            the vocabellist to set
 	 */
 	public void setVocabellist(ArrayList<Vokabel> vocabellist) {
 		this.vocabellist = vocabellist;
 	}
 
+	/**
+	 * Checks the Lection input if its not ok pops a dialog
+	 * 
+	 * @param text
+	 * @return
+	 */
 	public String isLektionOk(String text) {
 		int lection = 0;
 		if (text.split(" ")[0].equals("Lektion")) {
 			try {
 				lection = Integer.parseInt(text.split(" ")[1]);
-				if (lection < 1 || lection > 10)
+				if ((lection < 1) || (lection > 10)) {
 					throw new NumberFormatException();
+				}
 			} catch (NumberFormatException nfe) {
-				JOptionPane.showMessageDialog(frame, "Bitte gib eine gültige Lektion ein! Form: Lektion x (0<x<11)");
+				JOptionPane.showMessageDialog(this.frame, "Bitte gib eine gültige Lektion ein! Form: Lektion x (0<x<11)");
 				return null;
 			}
 		} else {
-			JOptionPane.showMessageDialog(frame, "Bitte gib eine gültige Lektion ein! Form: Lektion x (0<x<11)");
+			JOptionPane.showMessageDialog(this.frame, "Bitte gib eine gültige Lektion ein! Form: Lektion x (0<x<11)");
 			return null;
 		}
 		return "Lektion " + lection;

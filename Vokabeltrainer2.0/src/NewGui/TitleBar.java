@@ -26,6 +26,11 @@ public class TitleBar extends JPanel {
 	private Point				initialClick;
 	private TransparentButton	close, minimize, mainmenu;
 
+	/**
+	 * create the frame
+	 * 
+	 * @param frame
+	 */
 	public TitleBar(final MainFrame frame) {
 		this.setFrame(frame);
 		this.setLayout(null);
@@ -59,15 +64,15 @@ public class TitleBar extends JPanel {
 			}
 		});
 
-		setMainmenu(TransparentButton.createButton("Vokabeltrainer 2.0", 50, 0, 200, 30, 20, 0, (e -> {
+		this.setMainmenu(TransparentButton.createButton("Vokabeltrainer 2.0", 50, 0, 200, 30, 20, 0, (e -> {
 			for (JPanel p : frame.getPanelList()) {
 				p.setVisible(false);
 			}
 			frame.getPanelList().get(0).setVisible(true);
 		}), this));
-		frame.getButtons().add(getMainmenu());
+		frame.getButtons().add(this.getMainmenu());
 
-		setClose(TransparentButton.createButton("X", 1248, 0, 30, 30, 17, 8, (e -> {
+		this.setClose(TransparentButton.createButton("X", 1248, 0, 30, 30, 17, 8, (e -> {
 			frame.getBear().Close();
 			try {
 				FileOutputStream fos = new FileOutputStream("data.txt");
@@ -85,14 +90,17 @@ public class TitleBar extends JPanel {
 
 			System.exit(1);
 		}), this));
-		frame.getButtons().add(getClose());
+		frame.getButtons().add(this.getClose());
 
-		setMinimize(TransparentButton.createButton("_", 1218, 0, 30, 30, 17, 5, (e -> {
+		this.setMinimize(TransparentButton.createButton("_", 1218, 0, 30, 30, 17, 5, (e -> {
 			frame.setState(Frame.ICONIFIED);
 		}), this));
-		frame.getButtons().add(getMinimize());
+		frame.getButtons().add(this.getMinimize());
 	}
 
+	/**
+	 * render graphics object
+	 */
 	@Override
 	public void paintComponent(Graphics g_) {
 		super.paintComponent(g_);
@@ -105,34 +113,101 @@ public class TitleBar extends JPanel {
 	}
 
 	public MainFrame getFrame() {
-		return frame;
+		return this.frame;
 	}
 
 	public void setFrame(MainFrame frame) {
 		this.frame = frame;
 	}
 
-	public TransparentButton getClose() {
-		return close;
+	/**
+	 * @return the image
+	 */
+	public BufferedImage getImage() {
+		return this.image;
 	}
 
+	/**
+	 * @param image
+	 *            the image to set
+	 */
+	public void setImage(BufferedImage image) {
+		this.image = image;
+	}
+
+	/**
+	 * @return the icon
+	 */
+	public BufferedImage getIcon() {
+		return this.icon;
+	}
+
+	/**
+	 * @param icon
+	 *            the icon to set
+	 */
+	public void setIcon(BufferedImage icon) {
+		this.icon = icon;
+	}
+
+	/**
+	 * @return the initialClick
+	 */
+	public Point getInitialClick() {
+		return this.initialClick;
+	}
+
+	/**
+	 * @param initialClick
+	 *            the initialClick to set
+	 */
+	public void setInitialClick(Point initialClick) {
+		this.initialClick = initialClick;
+	}
+
+	/**
+	 * @return the close
+	 */
+	public TransparentButton getClose() {
+		return this.close;
+	}
+
+	/**
+	 * @param close
+	 *            the close to set
+	 */
 	public void setClose(TransparentButton close) {
 		this.close = close;
 	}
 
+	/**
+	 * @return the minimize
+	 */
 	public TransparentButton getMinimize() {
-		return minimize;
+		return this.minimize;
 	}
 
+	/**
+	 * @param minimize
+	 *            the minimize to set
+	 */
 	public void setMinimize(TransparentButton minimize) {
 		this.minimize = minimize;
 	}
 
+	/**
+	 * @return the mainmenu
+	 */
 	public TransparentButton getMainmenu() {
-		return mainmenu;
+		return this.mainmenu;
 	}
 
+	/**
+	 * @param mainmenu
+	 *            the mainmenu to set
+	 */
 	public void setMainmenu(TransparentButton mainmenu) {
 		this.mainmenu = mainmenu;
 	}
+
 }

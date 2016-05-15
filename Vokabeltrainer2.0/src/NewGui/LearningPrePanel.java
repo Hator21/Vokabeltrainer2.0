@@ -26,8 +26,12 @@ public class LearningPrePanel extends JPanel {
 	private TransparentButton		learning;
 	private ArrayList<JCheckBox>	units	= new ArrayList<JCheckBox>();
 	private JComboBox<String>		combobox;
-	// private String[] comboBoxListe;
 
+	/**
+	 * create the frame
+	 * 
+	 * @param frame
+	 */
 	public LearningPrePanel(MainFrame frame) {
 
 		this.setFrame(frame);
@@ -48,9 +52,9 @@ public class LearningPrePanel extends JPanel {
 					frame.getLek().add(i + 1);
 				}
 			}
-			if (frame.getLek().size() == 0)
+			if (frame.getLek().size() == 0) {
 				JOptionPane.showMessageDialog(frame, "Sie haben keine Lektion ausgewählt");
-			else {
+			} else {
 				frame.getTestVokabeln().clear();
 				frame.getLearningPanel().setRight(0);
 				frame.getLearningPanel().setBright(0);
@@ -75,10 +79,13 @@ public class LearningPrePanel extends JPanel {
 		}), this));
 		frame.getButtons().add(this.getLearning());
 
-		createHelp();
+		this.createHelp();
 
 	}
 
+	/**
+	 * renders the graphics object
+	 */
 	@Override
 	protected void paintComponent(Graphics g_) {
 		Graphics2D g = (Graphics2D) g_;
@@ -88,6 +95,11 @@ public class LearningPrePanel extends JPanel {
 		g.drawImage(this.image, 0, 0, null);
 	}
 
+	/**
+	 * create checkboxes for the lable select
+	 * 
+	 * @param list
+	 */
 	public void createCheckboxes(ArrayList<Integer> list) {
 		for (int i = 0; i < 10; i++) {
 			this.units.add(new JCheckBox("Lektion " + (i + 1)));
@@ -103,6 +115,11 @@ public class LearningPrePanel extends JPanel {
 		}
 	}
 
+	/**
+	 * create the combobox to select the speach
+	 * 
+	 * @param list
+	 */
 	public void createComboBox(String[] list) {
 		this.combobox = new JComboBox<String>(list);
 		this.combobox.setBounds(80, 50, 200, 40);
@@ -112,7 +129,6 @@ public class LearningPrePanel extends JPanel {
 		this.combobox.addActionListener(arg0 -> {
 			LearningPrePanel.this.frame.getBear().putPräfix(LearningPrePanel.this.combobox);
 			ArrayList<Integer> list1 = LearningPrePanel.this.frame.getBear().getLektions();
-			System.out.println("list -> " + list1);
 			for (int i = 0; i < LearningPrePanel.this.units.size(); i++) {
 				if (list1.contains(i + 1)) {
 					LearningPrePanel.this.units.get(i).setVisible(true);
@@ -132,18 +148,73 @@ public class LearningPrePanel extends JPanel {
 		this.frame = frame;
 	}
 
-	protected TransparentButton getLearning() {
+	/**
+	 * sets the help text if option is used
+	 */
+	public void createHelp() {
+		this.frame.getHelper().add(TransparentLabel.createLabel("<- 1. Bitte wähle erst die gewünschte Sprache aus!", 290, 55, 425, 30, 18, this));
+		this.frame.getHelper().add(TransparentLabel.createLabel("2. Danach wähle eine oder mehrere Lektionen aus!", 0, 500, 444, 30, 18, this));
+		this.frame.getHelper().add(TransparentLabel.createLabel("<- 3. Zu guter letzt, klicke auf \"Lernen\" damit es weiter geht!", 260, 555, 530, 30, 18, this));
+	}
+
+	/**
+	 * @return the image
+	 */
+	public BufferedImage getImage() {
+		return this.image;
+	}
+
+	/**
+	 * @param image
+	 *            the image to set
+	 */
+	public void setImage(BufferedImage image) {
+		this.image = image;
+	}
+
+	/**
+	 * @return the learning
+	 */
+	public TransparentButton getLearning() {
 		return this.learning;
 	}
 
-	protected void setLearning(TransparentButton learning) {
+	/**
+	 * @param learning
+	 *            the learning to set
+	 */
+	public void setLearning(TransparentButton learning) {
 		this.learning = learning;
 	}
 
-	public void createHelp() {
-		frame.getHelper().add(TransparentLabel.createLabel("<- 1. Bitte wähle erst die gewünschte Sprache aus!", 290, 55, 425, 30, 18, this));
-		frame.getHelper().add(TransparentLabel.createLabel("2. Danach wähle eine oder mehrere Lektionen aus!", 0, 500, 444, 30, 18, this));
-		frame.getHelper().add(TransparentLabel.createLabel("<- 3. Zu guter letzt, klicke auf \"Lernen\" damit es weiter geht!", 260, 555, 530, 30, 18, this));
+	/**
+	 * @return the units
+	 */
+	public ArrayList<JCheckBox> getUnits() {
+		return this.units;
+	}
+
+	/**
+	 * @param units
+	 *            the units to set
+	 */
+	public void setUnits(ArrayList<JCheckBox> units) {
+		this.units = units;
+	}
+
+	/**
+	 * @return the combobox
+	 */
+	public JComboBox<String> getCombobox() {
+		return this.combobox;
+	}
+
+	/**
+	 * @param combobox
+	 *            the combobox to set
+	 */
+	public void setCombobox(JComboBox<String> combobox) {
+		this.combobox = combobox;
 	}
 
 }

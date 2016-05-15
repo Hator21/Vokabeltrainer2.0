@@ -32,6 +32,11 @@ public class VocabelPrePanel extends JPanel {
 	private TransparentLabel		countVocs, time;
 	private int						n		= 0;
 
+	/**
+	 * create the frame
+	 * 
+	 * @param frame
+	 */
 	public VocabelPrePanel(MainFrame frame) {
 
 		this.frame = frame;
@@ -50,6 +55,9 @@ public class VocabelPrePanel extends JPanel {
 
 	}
 
+	/**
+	 * create the button Prüfen
+	 */
 	public void createButton() {
 		this.setTest(TransparentButton.createButton("Prüfen", 600, 550, 250, 40, 30, 0, (e -> {
 			this.frame.getLek().clear();
@@ -58,11 +66,11 @@ public class VocabelPrePanel extends JPanel {
 					this.frame.getLek().add(i + 1);
 				}
 			}
-			if (frame.getLek().size() == 0)
-				JOptionPane.showMessageDialog(frame, "Sie haben keine Lektion ausgewählt");
-			else {
+			if (this.frame.getLek().size() == 0) {
+				JOptionPane.showMessageDialog(this.frame, "Sie haben keine Lektion ausgewählt");
+			} else {
 				this.frame.getTestVokabeln().clear();
-				frame.getLearningPanel().setRight(0);
+				this.frame.getLearningPanel().setRight(0);
 				this.frame.getTestVokabeln().addAll(this.frame.getCheck().vok(this.frame.getLek().size(), this.frame.getBear().getPrä1(), this.frame.getBear().getPrä2()));
 				if (this.getCoundSlider().getValue() > this.frame.getTestVokabeln().size()) {
 					this.n = this.frame.getTestVokabeln().size();
@@ -84,9 +92,14 @@ public class VocabelPrePanel extends JPanel {
 			}
 		}), this));
 		this.frame.getButtons().add(this.getTest());
-		frame.getButtons().add(getTest());
+		this.frame.getButtons().add(this.getTest());
 	}
 
+	/**
+	 * creat the ceckboxes fpr the lections
+	 * 
+	 * @param list
+	 */
 	public void createCheckboxes(ArrayList<Integer> list) {
 		for (int i = 0; i < 10; i++) {
 			this.units.add(new JCheckBox("Lektion " + (i + 1)));
@@ -102,6 +115,11 @@ public class VocabelPrePanel extends JPanel {
 		}
 	}
 
+	/**
+	 * create the combobox for the speach
+	 * 
+	 * @param list
+	 */
 	public void createComboBox(String[] list) {
 		this.combobox = new JComboBox<String>(list);
 		this.combobox.setBounds(80, 50, 200, 40);
@@ -111,7 +129,6 @@ public class VocabelPrePanel extends JPanel {
 		this.combobox.addActionListener(arg0 -> {
 			VocabelPrePanel.this.frame.getBear().putPräfix(VocabelPrePanel.this.combobox);
 			ArrayList<Integer> list1 = VocabelPrePanel.this.frame.getBear().getLektions();
-			System.out.println("list -> " + list1);
 			for (int i = 0; i < VocabelPrePanel.this.units.size(); i++) {
 				if (list1.contains(i + 1)) {
 					VocabelPrePanel.this.units.get(i).setVisible(true);
@@ -119,12 +136,15 @@ public class VocabelPrePanel extends JPanel {
 					VocabelPrePanel.this.units.get(i).setVisible(false);
 				}
 			}
-			deengCheckBox.setText((String) combobox.getSelectedItem());
-			engdeCheckBox.setText(((String) (combobox.getSelectedItem())).split("-")[1] + "-" + ((String) (combobox.getSelectedItem())).split("-")[0]);
+			this.deengCheckBox.setText((String) this.combobox.getSelectedItem());
+			this.engdeCheckBox.setText(((String) (this.combobox.getSelectedItem())).split("-")[1] + "-" + ((String) (this.combobox.getSelectedItem())).split("-")[0]);
 			this.repaint();
 		});
 	}
 
+	/**
+	 * creates the time slider and the cound slider and two checkboxes for the speach convert
+	 */
 	public void createSettings() {
 		this.timeSlider = new JSlider(0, 60, 15);
 		this.timeSlider.setBounds(600, 460, 250, 55);
@@ -169,36 +189,128 @@ public class VocabelPrePanel extends JPanel {
 		this.engdeCheckBox.setBounds(750, 200, 200, 40);
 		this.add(this.engdeCheckBox);
 
-		deengCheckBox.setText((String) combobox.getSelectedItem());
-		engdeCheckBox.setText(((String) (combobox.getSelectedItem())).split("-")[1] + "-" + ((String) (combobox.getSelectedItem())).split("-")[0]);
+		this.deengCheckBox.setText((String) this.combobox.getSelectedItem());
+		this.engdeCheckBox.setText(((String) (this.combobox.getSelectedItem())).split("-")[1] + "-" + ((String) (this.combobox.getSelectedItem())).split("-")[0]);
 	}
 
+	/**
+	 * @return the frame
+	 */
+	public MainFrame getFrame() {
+		return this.frame;
+	}
+
+	/**
+	 * @param frame
+	 *            the frame to set
+	 */
+	public void setFrame(MainFrame frame) {
+		this.frame = frame;
+	}
+
+	/**
+	 * @return the image
+	 */
+	public BufferedImage getImage() {
+		return this.image;
+	}
+
+	/**
+	 * @param image
+	 *            the image to set
+	 */
+	public void setImage(BufferedImage image) {
+		this.image = image;
+	}
+
+	/**
+	 * @return the units
+	 */
+	public ArrayList<JCheckBox> getUnits() {
+		return this.units;
+	}
+
+	/**
+	 * @param units
+	 *            the units to set
+	 */
+	public void setUnits(ArrayList<JCheckBox> units) {
+		this.units = units;
+	}
+
+	/**
+	 * @return the timeSlider
+	 */
+	public JSlider getTimeSlider() {
+		return this.timeSlider;
+	}
+
+	/**
+	 * @param timeSlider
+	 *            the timeSlider to set
+	 */
+	public void setTimeSlider(JSlider timeSlider) {
+		this.timeSlider = timeSlider;
+	}
+
+	/**
+	 * @return the test
+	 */
 	public TransparentButton getTest() {
 		return this.test;
 	}
 
+	/**
+	 * @param test
+	 *            the test to set
+	 */
 	public void setTest(TransparentButton test) {
 		this.test = test;
 	}
 
-	protected JSlider getTimeSlider() {
-		return this.timeSlider;
-	}
-
-	protected TransparentLabel getCountVocs() {
+	/**
+	 * @return the countVocs
+	 */
+	public TransparentLabel getCountVocs() {
 		return this.countVocs;
 	}
 
-	protected void setCountVocs(TransparentLabel countVocs) {
+	/**
+	 * @param countVocs
+	 *            the countVocs to set
+	 */
+	public void setCountVocs(TransparentLabel countVocs) {
 		this.countVocs = countVocs;
 	}
 
-	protected TransparentLabel getTime() {
+	/**
+	 * @return the time
+	 */
+	public TransparentLabel getTime() {
 		return this.time;
 	}
 
-	protected void setTime(TransparentLabel time) {
+	/**
+	 * @param time
+	 *            the time to set
+	 */
+	public void setTime(TransparentLabel time) {
 		this.time = time;
+	}
+
+	/**
+	 * @return the n
+	 */
+	public int getN() {
+		return this.n;
+	}
+
+	/**
+	 * @param n
+	 *            the n to set
+	 */
+	public void setN(int n) {
+		this.n = n;
 	}
 
 	/**
@@ -246,6 +358,9 @@ public class VocabelPrePanel extends JPanel {
 		this.engdeCheckBox = engdeCheckBox;
 	}
 
+	/**
+	 * render graphics objects
+	 */
 	@Override
 	protected void paintComponent(Graphics g_) {
 		Graphics2D g = (Graphics2D) g_;
@@ -270,10 +385,13 @@ public class VocabelPrePanel extends JPanel {
 		this.combobox = combobox;
 	}
 
+	/**
+	 * creats the help text if option is selected
+	 */
 	public void createHelp() {
-		frame.getHelper().add(TransparentLabel.createLabel("<- 1. Bitte wähle erst die gewünschte Sprache aus!", 290, 55, 425, 30, 18, this));
-		frame.getHelper().add(TransparentLabel.createLabel("<- 2. Danach wähle eine oder mehrere Lektionen aus!", 290, 105, 440, 30, 18, this));
-		frame.getHelper().add(TransparentLabel.createLabel("4. Zu guter letzt, klicke auf \"Prüfen\" damit es weiter geht! ->", 60, 555, 530, 30, 18, this));
-		frame.getHelper().add(TransparentLabel.createLabel("3. Nehme noch ein paar Einstellungen vor!", 540, 170, 430, 30, 18, this));
+		this.frame.getHelper().add(TransparentLabel.createLabel("<- 1. Bitte wähle erst die gewünschte Sprache aus!", 290, 55, 425, 30, 18, this));
+		this.frame.getHelper().add(TransparentLabel.createLabel("<- 2. Danach wähle eine oder mehrere Lektionen aus!", 290, 105, 440, 30, 18, this));
+		this.frame.getHelper().add(TransparentLabel.createLabel("4. Zu guter letzt, klicke auf \"Prüfen\" damit es weiter geht! ->", 60, 555, 530, 30, 18, this));
+		this.frame.getHelper().add(TransparentLabel.createLabel("3. Nehme noch ein paar Einstellungen vor!", 540, 170, 430, 30, 18, this));
 	}
 }

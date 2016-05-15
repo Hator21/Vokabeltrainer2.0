@@ -75,7 +75,7 @@ public class Bearbeiten {
 
 	/**
 	 * get al List of all Lections
-	 * 
+	 *
 	 * @return list of Integers
 	 */
 	public ArrayList<Integer> getLektions() {
@@ -124,7 +124,7 @@ public class Bearbeiten {
 	/**
 	 * gets the präfixes of the selectet languages
 	 * and set it to prä1 and prä2
-	 * 
+	 *
 	 * @param cb->
 	 *            Combobox
 	 */
@@ -138,7 +138,7 @@ public class Bearbeiten {
 
 	/**
 	 * get prä1
-	 * 
+	 *
 	 * @param lang
 	 * @return prä1 <String>
 	 */
@@ -153,7 +153,7 @@ public class Bearbeiten {
 
 	/**
 	 * get prä12
-	 * 
+	 *
 	 * @param lang
 	 * @return prä2 <String>
 	 */
@@ -168,20 +168,117 @@ public class Bearbeiten {
 
 	private static CSVReflectionMap mapper;
 
+	/**
+	 * @return the aus
+	 */
+	public String getAus() {
+		return this.aus;
+	}
+
+	/**
+	 * @param aus
+	 *            the aus to set
+	 */
+	public void setAus(String aus) {
+		this.aus = aus;
+	}
+
+	/**
+	 * @return the in
+	 */
+	public String getIn() {
+		return this.in;
+	}
+
+	/**
+	 * @param in
+	 *            the in to set
+	 */
+	public void setIn(String in) {
+		this.in = in;
+	}
+
+	/**
+	 * @return the vocFile
+	 */
+	public static File getVocFile() {
+		return vocFile;
+	}
+
+	/**
+	 * @param vocFile
+	 *            the vocFile to set
+	 */
+	public static void setVocFile(File vocFile) {
+		Bearbeiten.vocFile = vocFile;
+	}
+
+	/**
+	 * @return the parser
+	 */
+	public CSVParser getParser() {
+		return this.parser;
+	}
+
+	/**
+	 * @param parser
+	 *            the parser to set
+	 */
+	public void setParser(CSVParser parser) {
+		this.parser = parser;
+	}
+
+	/**
+	 * @return the writer
+	 */
+	public CSVWriter getWriter() {
+		return this.writer;
+	}
+
+	/**
+	 * @param writer
+	 *            the writer to set
+	 */
+	public void setWriter(CSVWriter writer) {
+		this.writer = writer;
+	}
+
+	/**
+	 * @return the prä1
+	 */
 	public String getPrä1() {
 		return this.prä1;
 	}
 
+	/**
+	 * @param prä1
+	 *            the prä1 to set
+	 */
 	public void setPrä1(String prä1) {
 		this.prä1 = prä1;
 	}
 
+	/**
+	 * @return the prä2
+	 */
 	public String getPrä2() {
 		return this.prä2;
 	}
 
+	/**
+	 * @param prä2
+	 *            the prä2 to set
+	 */
 	public void setPrä2(String prä2) {
 		this.prä2 = prä2;
+	}
+
+	/**
+	 * @param mapper
+	 *            the mapper to set
+	 */
+	public static void setMapper(CSVReflectionMap mapper) {
+		Bearbeiten.mapper = mapper;
 	}
 
 }

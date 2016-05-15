@@ -11,27 +11,49 @@ public class CoordSearching {
 		this.setUsed(used);
 	}
 
-	public boolean isUsed() {
-		return this.used;
-	}
-
-	public void setUsed(boolean used) {
-		this.used = used;
-	}
-
-	public int getY() {
-		return this.y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
-
+	/**
+	 * @return the x
+	 */
 	public int getX() {
 		return this.x;
 	}
 
+	/**
+	 * @param x
+	 *            the x to set
+	 */
 	public void setX(int x) {
 		this.x = x;
 	}
+
+	/**
+	 * @return the y
+	 */
+	public int getY() {
+		return this.y;
+	}
+
+	/**
+	 * @param y
+	 *            the y to set
+	 */
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	/**
+	 * @return the used
+	 */
+	public boolean isUsed() {
+		return this.used;
+	}
+
+	/**
+	 * @param used
+	 *            the used to set
+	 */
+	public void setUsed(boolean used) {
+		this.used = used;
+	}
+
 }

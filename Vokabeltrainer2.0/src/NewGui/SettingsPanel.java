@@ -22,6 +22,11 @@ public class SettingsPanel extends JPanel {
 	private BufferedImage	image;
 	private JCheckBox		helpActiv, borderActiv;
 
+	/**
+	 * create the frame
+	 *
+	 * @param frame
+	 */
 	public SettingsPanel(MainFrame frame) {
 		this.setFrame(frame);
 		this.setLayout(null);
@@ -34,6 +39,9 @@ public class SettingsPanel extends JPanel {
 
 	}
 
+	/**
+	 * create buttons for the vocabels
+	 */
 	public void createCheckBox() {
 		this.helpActiv = new JCheckBox("Aktiviere Hilfe-Funktion");
 		this.helpActiv.setBounds(70, 100, 500, 60);
@@ -42,11 +50,14 @@ public class SettingsPanel extends JPanel {
 		this.add(this.helpActiv);
 		this.helpActiv.addActionListener(e -> {
 			if (((JCheckBox) e.getSource()).isSelected()) {
-				for (TransparentLabel t : SettingsPanel.this.frame.getHelper())
+				for (TransparentLabel t : SettingsPanel.this.frame.getHelper()) {
 					t.setVisible(true);
-			} else
-				for (TransparentLabel t : SettingsPanel.this.frame.getHelper())
+				}
+			} else {
+				for (TransparentLabel t : SettingsPanel.this.frame.getHelper()) {
 					t.setVisible(false);
+				}
+			}
 		});
 
 		this.borderActiv = new JCheckBox("Zeige Button- und Textgrenzen");
@@ -59,26 +70,31 @@ public class SettingsPanel extends JPanel {
 				for (TransparentLabel t1 : SettingsPanel.this.frame.getLabels()) {
 					if (t1 != null) {
 						t1.setColor(new Color(0, 0, 255, 255));
-						System.out.println(t1);
 					}
 				}
 				for (TransparentButton t2 : SettingsPanel.this.frame.getButtons()) {
-					if (t2 != null)
+					if (t2 != null) {
 						t2.setBorderColor(new Color(255, 0, 0, 255));
+					}
 				}
 			} else {
 				for (TransparentLabel t3 : SettingsPanel.this.frame.getLabels()) {
-					if (t3 != null)
+					if (t3 != null) {
 						t3.setColor(new Color(0, 0, 255, 0));
+					}
 				}
 				for (TransparentButton t4 : SettingsPanel.this.frame.getButtons()) {
-					if (t4 != null)
+					if (t4 != null) {
 						t4.setBorderColor(new Color(255, 0, 0, 0));
+					}
 				}
 			}
 		});
 	}
 
+	/**
+	 * renders the graphics object
+	 */
 	@Override
 	public void paintComponent(Graphics g_) {
 		super.paintComponent(g_);

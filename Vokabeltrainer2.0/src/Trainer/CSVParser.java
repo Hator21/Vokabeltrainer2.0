@@ -26,6 +26,15 @@ public class CSVParser {
 		this.file = f;
 	}
 
+	/**
+	 * parse the daten to a list
+	 * 
+	 * @param mapper
+	 * @param c
+	 * @param skipFirstLine
+	 * @return
+	 * @throws Exception
+	 */
 	public <T> ArrayList<T> parse(CSVReflectionMap mapper, Class<T> c, boolean skipFirstLine) throws Exception {
 		this.lines = new ArrayList<>();
 		BufferedReader reader = new BufferedReader(new FileReader(this.file));

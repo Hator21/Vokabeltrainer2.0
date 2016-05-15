@@ -12,19 +12,34 @@ public class Language implements Serializable {
 		this.setLanguage(language);
 	}
 
+	/**
+	 * @return the präfix
+	 */
 	public String getPräfix() {
-		return präfix;
+		return this.präfix;
 	}
 
+	/**
+	 * @param präfix
+	 *            the präfix to set
+	 */
 	public void setPräfix(String präfix) {
 		this.präfix = präfix;
 	}
 
+	/**
+	 * @return the language
+	 */
 	public String getLanguage() {
-		return language;
+		return this.language;
 	}
 
+	/**
+	 * @param language
+	 *            the language to set
+	 */
 	public void setLanguage(String language) {
 		this.language = language;
 	}
+
 }

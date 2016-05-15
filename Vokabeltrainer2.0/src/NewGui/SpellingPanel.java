@@ -35,6 +35,11 @@ public class SpellingPanel extends JPanel {
 	Vokabel						v			= null;
 	private TransparentButton	nextButton;
 
+	/**
+	 * creates the frame
+	 * 
+	 * @param frame
+	 */
 	public SpellingPanel(MainFrame frame) {
 		this.setFrame(frame);
 		this.setLayout(null);
@@ -42,70 +47,80 @@ public class SpellingPanel extends JPanel {
 		try {
 			this.image = ImageIO.read(new File("img/internalLection.png"));
 		} catch (IOException ex) {}
-		createLabel();
-		createButton();
-		setNextButton((TransparentButton.createButton("Weiter", 115, 470, 200, 50, 20, 0, (e -> {
+		this.createLabel();
+		this.createButton();
+		this.setNextButton((TransparentButton.createButton("Weiter", 115, 470, 200, 50, 20, 0, (e -> {
 			for (Component c : this.getComponents()) {
-				if (!((TransparentButton) (e.getSource())).equals(c))
+				if (!((TransparentButton) (e.getSource())).equals(c)) {
 					this.remove(c);
+				}
 			}
 			this.revalidate();
-			createButton();
-			createLabel();
-			setButtonTexts(prä1, prä2);
+			this.createButton();
+			this.createLabel();
+			this.setButtonTexts(this.prä1, this.prä2);
 			this.repaint();
 
 		}), this)));
-		frame.getButtons().add(getNextButton());
-		createHelp();
+		frame.getButtons().add(this.getNextButton());
+		this.createHelp();
 	}
 
+	/**
+	 * create label Vokabel
+	 */
 	public void createLabel() {
-		setVocabel(TransparentLabel.createLabel("Vokabel", 115, 300, 200, 50, 20, this));
-		setInfoLabel(TransparentLabel.createLabel("Wie wird das denn nun geschrieben?!", 10, 50, 500, 50, 30, this));
-		frame.getLabels().add(getVocabel());
-		frame.getLabels().add(getInfoLabel());
+		this.setVocabel(TransparentLabel.createLabel("Vokabel", 115, 300, 200, 50, 20, this));
+		this.setInfoLabel(TransparentLabel.createLabel("Wie wird das denn nun geschrieben?!", 10, 50, 500, 50, 30, this));
+		this.frame.getLabels().add(this.getVocabel());
+		this.frame.getLabels().add(this.getInfoLabel());
 	}
 
+	/**
+	 * reate button vocable
+	 */
 	public void createButton() {
-		setVoc1(TransparentButton.createButton("Vokabell", 10, 360, 200, 50, 20, 0, new Color(10, 10, 10, 20), (e -> {
-			System.out.println("Voc1");
-			if (getVoc1().getText().equalsIgnoreCase(v.getVocabTranslation()))
-				getVoc1().setBackgroundColor(Color.GREEN);
-			else
-				getVoc1().setBackgroundColor(Color.RED);
+		this.setVoc1(TransparentButton.createButton("Vokabell", 10, 360, 200, 50, 20, 0, new Color(10, 10, 10, 20), (e -> {
+			if (this.getVoc1().getText().equalsIgnoreCase(this.v.getVocabTranslation())) {
+				this.getVoc1().setBackgroundColor(Color.GREEN);
+			} else {
+				this.getVoc1().setBackgroundColor(Color.RED);
+			}
 			this.repaint();
 		}), this));
-		frame.getButtons().add(getVoc1());
-		setVoc2(TransparentButton.createButton("Vukabel", 220, 360, 200, 50, 20, 0, new Color(10, 10, 10, 20), (e -> {
-			System.out.println("Voc2");
-			if (getVoc2().getText().equalsIgnoreCase(v.getVocabTranslation()))
-				getVoc2().setBackgroundColor(Color.GREEN);
-			else
-				getVoc2().setBackgroundColor(Color.RED);
+		this.frame.getButtons().add(this.getVoc1());
+		this.setVoc2(TransparentButton.createButton("Vukabel", 220, 360, 200, 50, 20, 0, new Color(10, 10, 10, 20), (e -> {
+			if (this.getVoc2().getText().equalsIgnoreCase(this.v.getVocabTranslation())) {
+				this.getVoc2().setBackgroundColor(Color.GREEN);
+			} else {
+				this.getVoc2().setBackgroundColor(Color.RED);
+			}
 			this.repaint();
 		}), this));
-		frame.getButtons().add(getVoc2());
-		setVoc3(TransparentButton.createButton("Vokabel", 10, 410, 200, 50, 20, 0, new Color(10, 10, 10, 20), (e -> {
-			System.out.println("Voc3");
-			if (getVoc3().getText().equalsIgnoreCase(v.getVocabTranslation()))
-				getVoc3().setBackgroundColor(Color.GREEN);
-			else
-				getVoc3().setBackgroundColor(Color.RED);
+		this.frame.getButtons().add(this.getVoc2());
+		this.setVoc3(TransparentButton.createButton("Vokabel", 10, 410, 200, 50, 20, 0, new Color(10, 10, 10, 20), (e -> {
+			if (this.getVoc3().getText().equalsIgnoreCase(this.v.getVocabTranslation())) {
+				this.getVoc3().setBackgroundColor(Color.GREEN);
+			} else {
+				this.getVoc3().setBackgroundColor(Color.RED);
+			}
 			this.repaint();
 		}), this));
-		frame.getButtons().add(getVoc3());
-		setVoc4(TransparentButton.createButton("Vukabell", 220, 410, 200, 50, 20, 0, new Color(10, 10, 10, 20), (e -> {
-			System.out.println("Voc4");
-			if (getVoc4().getText().equalsIgnoreCase(v.getVocabTranslation()))
-				getVoc4().setBackgroundColor(Color.GREEN);
-			else
-				getVoc4().setBackgroundColor(Color.RED);
+		this.frame.getButtons().add(this.getVoc3());
+		this.setVoc4(TransparentButton.createButton("Vukabell", 220, 410, 200, 50, 20, 0, new Color(10, 10, 10, 20), (e -> {
+			if (this.getVoc4().getText().equalsIgnoreCase(this.v.getVocabTranslation())) {
+				this.getVoc4().setBackgroundColor(Color.GREEN);
+			} else {
+				this.getVoc4().setBackgroundColor(Color.RED);
+			}
 			this.repaint();
 		}), this));
-		frame.getButtons().add(getVoc4());
+		this.frame.getButtons().add(this.getVoc4());
 	}
 
+	/**
+	 * redners graphics object
+	 */
 	@Override
 	public void paintComponent(Graphics g_) {
 		super.paintComponent(g_);
@@ -117,61 +132,19 @@ public class SpellingPanel extends JPanel {
 	}
 
 	public MainFrame getFrame() {
-		return frame;
+		return this.frame;
 	}
 
 	public void setFrame(MainFrame frame) {
 		this.frame = frame;
 	}
 
-	public TransparentLabel getVocabel() {
-		return vocabel;
-	}
-
-	public void setVocabel(TransparentLabel vocabel) {
-		this.vocabel = vocabel;
-	}
-
-	public TransparentLabel getInfoLabel() {
-		return infoLabel;
-	}
-
-	public void setInfoLabel(TransparentLabel infoLabel) {
-		this.infoLabel = infoLabel;
-	}
-
-	public TransparentButton getVoc1() {
-		return voc1;
-	}
-
-	public void setVoc1(TransparentButton voc1) {
-		this.voc1 = voc1;
-	}
-
-	public TransparentButton getVoc2() {
-		return voc2;
-	}
-
-	public void setVoc2(TransparentButton voc2) {
-		this.voc2 = voc2;
-	}
-
-	public TransparentButton getVoc3() {
-		return voc3;
-	}
-
-	public void setVoc3(TransparentButton voc3) {
-		this.voc3 = voc3;
-	}
-
-	public TransparentButton getVoc4() {
-		return voc4;
-	}
-
-	public void setVoc4(TransparentButton voc4) {
-		this.voc4 = voc4;
-	}
-
+	/**
+	 * changing vocables
+	 * 
+	 * @param vocabel
+	 * @return
+	 */
 	public String generateVocabel(String vocabel) {
 		String voc = vocabel;
 		voc = voc.toLowerCase();
@@ -182,27 +155,30 @@ public class SpellingPanel extends JPanel {
 		int index = 0;
 		int number = 0;
 		List<Character> chars = voc.chars().mapToObj(e -> (char) e).collect(Collectors.toList());
-		ArrayList<Point> numbers = retNumberOfUsefullManipulation(chars);
-		for (Point p1 : numbers)
+		ArrayList<Point> numbers = this.retNumberOfUsefullManipulation(chars);
+		for (Point p1 : numbers) {
 			System.out.println(numbers.indexOf(p1) + "-> " + p1.getX());
-		System.out.println("A -> " + a);
-		a = 0;
-		while (a < numbers.size()) {
-			p = numbers.get(a);
-			if (usedIndex.size() > 0) {
-				for (int i : usedIndex)
-					if (p.getX() == i)
+		}
+		System.out.println("A -> " + this.a);
+		this.a = 0;
+		while (this.a < numbers.size()) {
+			p = numbers.get(this.a);
+			if (this.usedIndex.size() > 0) {
+				for (int i : this.usedIndex) {
+					if (p.getX() == i) {
 						b = true;
+					}
+				}
 			}
 			if (!b) {
 				index = (int) p.getY();
 				number = (int) p.getX();
 				break;
 			}
-			a++;
+			this.a++;
 			b = false;
 		}
-		usedIndex.add(number);
+		this.usedIndex.add(number);
 		System.out.println("Nummmer: " + number);
 		switch (number) {
 			case 1:
@@ -323,26 +299,31 @@ public class SpellingPanel extends JPanel {
 		int index = 0;
 		if (chars.contains('a')) {
 			index = chars.indexOf('a');
-			if (index < chars.size() - 1)
+			if (index < (chars.size() - 1)) {
 				if (chars.get(index + 1) == 'y') {
 					numbers.add(new Point(1, index)); // ay->ei
-				} else
+				} else {
 					numbers.add(new Point(34, index));
+				}
+			}
 		}
 		if (chars.contains('b')) {
 			index = chars.indexOf('b');
-			if (index < chars.size() - 1 && index > 0) {
-				if (chars.get(index - 1) != 'b' || chars.get(index + 1) != 'b')
+			if ((index < (chars.size() - 1)) && (index > 0)) {
+				if ((chars.get(index - 1) != 'b') || (chars.get(index + 1) != 'b')) {
 					numbers.add(new Point(2, index)); // b->p
+				}
 			}
 		}
 		if (chars.contains('c')) {
 			index = chars.indexOf('c');
-			if (index < chars.size() - 1 && index > 0) {
-				if (chars.get(index - 1) == 's' && chars.get(index + 1) == 'h')
+			if ((index < (chars.size() - 1)) && (index > 0)) {
+				if ((chars.get(index - 1) == 's') && (chars.get(index + 1) == 'h')) {
 					numbers.add(new Point(3, index));// c->remove
-				if (chars.get(index - 1) != 's' && chars.get(index + 1) != 'h')
+				}
+				if ((chars.get(index - 1) != 's') && (chars.get(index + 1) != 'h')) {
 					numbers.add(new Point(4, index)); // c->k
+				}
 			}
 
 		}
@@ -352,23 +333,24 @@ public class SpellingPanel extends JPanel {
 		}
 		if (chars.contains('e')) {
 			index = chars.indexOf('e');
-			if (index < chars.size() - 1) {
+			if (index < (chars.size() - 1)) {
 				if (chars.get(index + 1) == 'i') {
 					numbers.add(new Point(6, index)); // ei->ay
 					numbers.add(new Point(7, index)); // ei->a
 				}
 			}
 			if (index > 0) {
-				if (chars.get(index - 1) == 'i')
+				if (chars.get(index - 1) == 'i') {
 					numbers.add(new Point(8, index - 1)); // ie->y
-				else
+				} else {
 					numbers.add(new Point(33, index)); // e -> a
+				}
 			}
 		}
 		if (chars.contains('f')) {
 			index = chars.indexOf('f');
-			if (index < chars.size() - 1 && index > 0) {
-				if (chars.get(index - 1) != 'f' || chars.get(index + 1) != 'f') {
+			if ((index < (chars.size() - 1)) && (index > 0)) {
+				if ((chars.get(index - 1) != 'f') || (chars.get(index + 1) != 'f')) {
 					numbers.add(new Point(9, index)); // f->v
 					numbers.add(new Point(10, index)); // f->ff
 				}
@@ -381,15 +363,17 @@ public class SpellingPanel extends JPanel {
 		if (chars.contains('h')) {
 			index = chars.indexOf('e');
 			if (index > 1) {
-				if (chars.get(index - 1) != 'c' && chars.get(index - 2) != 's')
+				if ((chars.get(index - 1) != 'c') && (chars.get(index - 2) != 's')) {
 					numbers.add(new Point(12, index)); // remove h
+				}
 			}
 		}
 		if (chars.contains('i')) {
 			index = chars.indexOf('i');
-			if (index < chars.size() - 1 && index > 0) {
-				if (chars.get(index + 1) != 'e' && chars.get(index - 1) != 'e')
+			if ((index < (chars.size() - 1)) && (index > 0)) {
+				if ((chars.get(index + 1) != 'e') && (chars.get(index - 1) != 'e')) {
 					numbers.add(new Point(13, index)); // i->y
+				}
 			}
 		}
 		if (chars.contains('j')) {
@@ -398,19 +382,21 @@ public class SpellingPanel extends JPanel {
 		}
 		if (chars.contains('k')) {
 			index = chars.indexOf('k');
-			if (index < chars.size() - 1) {
-				if (chars.get(index + 1) == 'u')
+			if (index < (chars.size() - 1)) {
+				if (chars.get(index + 1) == 'u') {
 					numbers.add(new Point(15, index)); // ku -> qu
-				else
+				} else {
 					numbers.add(new Point(16, index)); // k -> c
+				}
 			}
 		}
 		if (chars.contains('l')) {
 			index = chars.indexOf('l');
-			if (chars.get(index - 1) != 'l' || chars.get(index + 1) != 'l')
+			if ((chars.get(index - 1) != 'l') || (chars.get(index + 1) != 'l')) {
 				numbers.add(new Point(17, index)); // l->ll
-			else if (chars.get(index + 1) == 'l')
+			} else if (chars.get(index + 1) == 'l') {
 				numbers.add(new Point(18, index)); // ll->l
+			}
 		}
 		if (chars.contains('m')) {
 			index = chars.indexOf('m');
@@ -437,9 +423,10 @@ public class SpellingPanel extends JPanel {
 		}
 		if (chars.contains('s')) {
 			index = chars.indexOf('s');
-			if (index < chars.size() - 1 && index > 1) {
-				if (chars.get(index + 1) != 'c' && chars.get(index + 2) != 'h' || chars.get(index + 1) != 'h')
+			if ((index < (chars.size() - 1)) && (index > 1)) {
+				if (((chars.get(index + 1) != 'c') && (chars.get(index + 2) != 'h')) || (chars.get(index + 1) != 'h')) {
 					numbers.add(new Point(25, index));
+				}
 			}
 			numbers.add(new Point(25, index));// s->z
 		}
@@ -473,30 +460,36 @@ public class SpellingPanel extends JPanel {
 		return numbers;
 	}
 
+	/**
+	 * set the button texts
+	 * 
+	 * @param prä1
+	 * @param prä2
+	 */
 	public void setButtonTexts(String prä1, String prä2) {
 		this.prä1 = prä1;
 		this.prä2 = prä2;
-		if (frame.getTestVokabeln().size() != 0) {
-			int rnd2 = zufallszahl(0, this.frame.getTestVokabeln().size() - 1);
-			v = frame.getTestVokabeln().get(rnd2);
-			frame.getTestVokabeln().remove(v);
-			System.out.println(v);
-			System.out.println(getVocabel());
-			getVocabel().setText(v.getVocabOrigin());
-			if (v.getVocabTranslation().length() < 3) {
-				int randomButton = zufallszahl(1, 2);
+		if (this.frame.getTestVokabeln().size() != 0) {
+			int rnd2 = this.zufallszahl(0, this.frame.getTestVokabeln().size() - 1);
+			this.v = this.frame.getTestVokabeln().get(rnd2);
+			this.frame.getTestVokabeln().remove(this.v);
+			System.out.println(this.v);
+			System.out.println(this.getVocabel());
+			this.getVocabel().setText(this.v.getVocabOrigin());
+			if (this.v.getVocabTranslation().length() < 3) {
+				int randomButton = this.zufallszahl(1, 2);
 				System.out.println("Button: " + randomButton);
-				getVoc3().setVisible(false);
-				getVoc4().setVisible(false);
+				this.getVoc3().setVisible(false);
+				this.getVoc4().setVisible(false);
 				switch (randomButton) {
 					case 1:
-						getVoc1().setText(v.getVocabTranslation());
-						getVoc2().setText(generateVocabel(v.getVocabTranslation()));
+						this.getVoc1().setText(this.v.getVocabTranslation());
+						this.getVoc2().setText(this.generateVocabel(this.v.getVocabTranslation()));
 
 						break;
 					case 2:
-						getVoc1().setText(generateVocabel(v.getVocabTranslation()));
-						getVoc2().setText(v.getVocabTranslation());
+						this.getVoc1().setText(this.generateVocabel(this.v.getVocabTranslation()));
+						this.getVoc2().setText(this.v.getVocabTranslation());
 
 						break;
 					default:
@@ -505,26 +498,26 @@ public class SpellingPanel extends JPanel {
 
 				}
 			}
-			if (v.getVocabTranslation().length() < 5 && v.getVocabTranslation().length() >= 3) {
-				int randomButton = zufallszahl(1, 3);
+			if ((this.v.getVocabTranslation().length() < 5) && (this.v.getVocabTranslation().length() >= 3)) {
+				int randomButton = this.zufallszahl(1, 3);
 				System.out.println("Button: " + randomButton);
-				getVoc3().setVisible(true);
-				getVoc4().setVisible(false);
+				this.getVoc3().setVisible(true);
+				this.getVoc4().setVisible(false);
 				switch (randomButton) {
 					case 1:
-						getVoc1().setText(v.getVocabTranslation());
-						getVoc2().setText(generateVocabel(v.getVocabTranslation()));
-						getVoc3().setText(generateVocabel(v.getVocabTranslation()));
+						this.getVoc1().setText(this.v.getVocabTranslation());
+						this.getVoc2().setText(this.generateVocabel(this.v.getVocabTranslation()));
+						this.getVoc3().setText(this.generateVocabel(this.v.getVocabTranslation()));
 						break;
 					case 2:
-						getVoc1().setText(generateVocabel(v.getVocabTranslation()));
-						getVoc2().setText(v.getVocabTranslation());
-						getVoc3().setText(generateVocabel(v.getVocabTranslation()));
+						this.getVoc1().setText(this.generateVocabel(this.v.getVocabTranslation()));
+						this.getVoc2().setText(this.v.getVocabTranslation());
+						this.getVoc3().setText(this.generateVocabel(this.v.getVocabTranslation()));
 						break;
 					case 3:
-						getVoc1().setText(generateVocabel(v.getVocabTranslation()));
-						getVoc2().setText(generateVocabel(v.getVocabTranslation()));
-						getVoc3().setText(v.getVocabTranslation());
+						this.getVoc1().setText(this.generateVocabel(this.v.getVocabTranslation()));
+						this.getVoc2().setText(this.generateVocabel(this.v.getVocabTranslation()));
+						this.getVoc3().setText(this.v.getVocabTranslation());
 						break;
 					default:
 						System.out.println("fail");
@@ -532,35 +525,35 @@ public class SpellingPanel extends JPanel {
 
 				}
 			}
-			if (v.getVocabTranslation().length() >= 5) {
-				int randomButton = zufallszahl(1, 4);
+			if (this.v.getVocabTranslation().length() >= 5) {
+				int randomButton = this.zufallszahl(1, 4);
 				System.out.println("Button: " + randomButton);
-				getVoc3().setVisible(true);
-				getVoc4().setVisible(true);
+				this.getVoc3().setVisible(true);
+				this.getVoc4().setVisible(true);
 				switch (randomButton) {
 					case 1:
-						getVoc1().setText(v.getVocabTranslation());
-						getVoc2().setText(generateVocabel(v.getVocabTranslation()));
-						getVoc3().setText(generateVocabel(v.getVocabTranslation()));
-						getVoc4().setText(generateVocabel(v.getVocabTranslation()));
+						this.getVoc1().setText(this.v.getVocabTranslation());
+						this.getVoc2().setText(this.generateVocabel(this.v.getVocabTranslation()));
+						this.getVoc3().setText(this.generateVocabel(this.v.getVocabTranslation()));
+						this.getVoc4().setText(this.generateVocabel(this.v.getVocabTranslation()));
 						break;
 					case 2:
-						getVoc1().setText(generateVocabel(v.getVocabTranslation()));
-						getVoc2().setText(v.getVocabTranslation());
-						getVoc3().setText(generateVocabel(v.getVocabTranslation()));
-						getVoc4().setText(generateVocabel(v.getVocabTranslation()));
+						this.getVoc1().setText(this.generateVocabel(this.v.getVocabTranslation()));
+						this.getVoc2().setText(this.v.getVocabTranslation());
+						this.getVoc3().setText(this.generateVocabel(this.v.getVocabTranslation()));
+						this.getVoc4().setText(this.generateVocabel(this.v.getVocabTranslation()));
 						break;
 					case 3:
-						getVoc1().setText(generateVocabel(v.getVocabTranslation()));
-						getVoc2().setText(generateVocabel(v.getVocabTranslation()));
-						getVoc3().setText(v.getVocabTranslation());
-						getVoc4().setText(generateVocabel(v.getVocabTranslation()));
+						this.getVoc1().setText(this.generateVocabel(this.v.getVocabTranslation()));
+						this.getVoc2().setText(this.generateVocabel(this.v.getVocabTranslation()));
+						this.getVoc3().setText(this.v.getVocabTranslation());
+						this.getVoc4().setText(this.generateVocabel(this.v.getVocabTranslation()));
 						break;
 					case 4:
-						getVoc1().setText(generateVocabel(v.getVocabTranslation()));
-						getVoc2().setText(generateVocabel(v.getVocabTranslation()));
-						getVoc3().setText(generateVocabel(v.getVocabTranslation()));
-						getVoc4().setText(v.getVocabTranslation());
+						this.getVoc1().setText(this.generateVocabel(this.v.getVocabTranslation()));
+						this.getVoc2().setText(this.generateVocabel(this.v.getVocabTranslation()));
+						this.getVoc3().setText(this.generateVocabel(this.v.getVocabTranslation()));
+						this.getVoc4().setText(this.v.getVocabTranslation());
 						break;
 					default:
 						System.out.println("fail");
@@ -569,28 +562,234 @@ public class SpellingPanel extends JPanel {
 				}
 			}
 			System.out.println("readyToClick");
-			a = 0;
-			usedIndex.clear();
+			this.a = 0;
+			this.usedIndex.clear();
 		} else {
-			JOptionPane.showMessageDialog(frame, "Alle Vokabeln getestet!");
-			for (JPanel p : frame.getPanelList()) {
+			JOptionPane.showMessageDialog(this.frame, "Alle Vokabeln getestet!");
+			for (JPanel p : this.frame.getPanelList()) {
 				p.setVisible(false);
 			}
-			frame.getPanelList().get(0).setVisible(true);
+			this.frame.getPanelList().get(0).setVisible(true);
 		}
 
 	}
 
-	public TransparentButton getNextButton() {
-		return nextButton;
+	/*
+	 * sets the help test if option is selected
+	 */
+	public void createHelp() {
+		this.frame.getHelper().add(TransparentLabel.createLabel("1. Klicke auf die richtig geschriebene Vokabel!", 10, 250, 400, 30, 18, this));
+		this.frame.getHelper().add(TransparentLabel.createLabel("2. Klicke auf \"Weiter\" für die nächste Vokabel!", 15, 530, 400, 30, 18, this));
 	}
 
+	/**
+	 * @return the image
+	 */
+	public BufferedImage getImage() {
+		return this.image;
+	}
+
+	/**
+	 * @param image
+	 *            the image to set
+	 */
+	public void setImage(BufferedImage image) {
+		this.image = image;
+	}
+
+	/**
+	 * @return the vocabel
+	 */
+	public TransparentLabel getVocabel() {
+		return this.vocabel;
+	}
+
+	/**
+	 * @param vocabel
+	 *            the vocabel to set
+	 */
+	public void setVocabel(TransparentLabel vocabel) {
+		this.vocabel = vocabel;
+	}
+
+	/**
+	 * @return the infoLabel
+	 */
+	public TransparentLabel getInfoLabel() {
+		return this.infoLabel;
+	}
+
+	/**
+	 * @param infoLabel
+	 *            the infoLabel to set
+	 */
+	public void setInfoLabel(TransparentLabel infoLabel) {
+		this.infoLabel = infoLabel;
+	}
+
+	/**
+	 * @return the voc1
+	 */
+	public TransparentButton getVoc1() {
+		return this.voc1;
+	}
+
+	/**
+	 * @param voc1
+	 *            the voc1 to set
+	 */
+	public void setVoc1(TransparentButton voc1) {
+		this.voc1 = voc1;
+	}
+
+	/**
+	 * @return the voc2
+	 */
+	public TransparentButton getVoc2() {
+		return this.voc2;
+	}
+
+	/**
+	 * @param voc2
+	 *            the voc2 to set
+	 */
+	public void setVoc2(TransparentButton voc2) {
+		this.voc2 = voc2;
+	}
+
+	/**
+	 * @return the voc3
+	 */
+	public TransparentButton getVoc3() {
+		return this.voc3;
+	}
+
+	/**
+	 * @param voc3
+	 *            the voc3 to set
+	 */
+	public void setVoc3(TransparentButton voc3) {
+		this.voc3 = voc3;
+	}
+
+	/**
+	 * @return the voc4
+	 */
+	public TransparentButton getVoc4() {
+		return this.voc4;
+	}
+
+	/**
+	 * @param voc4
+	 *            the voc4 to set
+	 */
+	public void setVoc4(TransparentButton voc4) {
+		this.voc4 = voc4;
+	}
+
+	/**
+	 * @return the random
+	 */
+	public Random getRandom() {
+		return this.random;
+	}
+
+	/**
+	 * @param random
+	 *            the random to set
+	 */
+	public void setRandom(Random random) {
+		this.random = random;
+	}
+
+	/**
+	 * @return the prä1
+	 */
+	public String getPrä1() {
+		return this.prä1;
+	}
+
+	/**
+	 * @param prä1
+	 *            the prä1 to set
+	 */
+	public void setPrä1(String prä1) {
+		this.prä1 = prä1;
+	}
+
+	/**
+	 * @return the prä2
+	 */
+	public String getPrä2() {
+		return this.prä2;
+	}
+
+	/**
+	 * @param prä2
+	 *            the prä2 to set
+	 */
+	public void setPrä2(String prä2) {
+		this.prä2 = prä2;
+	}
+
+	/**
+	 * @return the usedIndex
+	 */
+	public ArrayList<Integer> getUsedIndex() {
+		return this.usedIndex;
+	}
+
+	/**
+	 * @param usedIndex
+	 *            the usedIndex to set
+	 */
+	public void setUsedIndex(ArrayList<Integer> usedIndex) {
+		this.usedIndex = usedIndex;
+	}
+
+	/**
+	 * @return the a
+	 */
+	public int getA() {
+		return this.a;
+	}
+
+	/**
+	 * @param a
+	 *            the a to set
+	 */
+	public void setA(int a) {
+		this.a = a;
+	}
+
+	/**
+	 * @return the v
+	 */
+	public Vokabel getV() {
+		return this.v;
+	}
+
+	/**
+	 * @param v
+	 *            the v to set
+	 */
+	public void setV(Vokabel v) {
+		this.v = v;
+	}
+
+	/**
+	 * @return the nextButton
+	 */
+	public TransparentButton getNextButton() {
+		return this.nextButton;
+	}
+
+	/**
+	 * @param nextButton
+	 *            the nextButton to set
+	 */
 	public void setNextButton(TransparentButton nextButton) {
 		this.nextButton = nextButton;
 	}
 
-	public void createHelp() {
-		frame.getHelper().add(TransparentLabel.createLabel("1. Klicke auf die richtig geschriebene Vokabel!", 10, 250, 400, 30, 18, this));
-		frame.getHelper().add(TransparentLabel.createLabel("2. Klicke auf \"Weiter\" für die nächste Vokabel!", 15, 530, 400, 30, 18, this));
-	}
 }

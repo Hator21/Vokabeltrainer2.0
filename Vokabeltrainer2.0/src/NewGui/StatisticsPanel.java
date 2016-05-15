@@ -30,6 +30,11 @@ public class StatisticsPanel extends JPanel {
 	};
 	private JPanel				tablePanel;
 
+	/**
+	 * creates the frame
+	 * 
+	 * @param frame
+	 */
 	public StatisticsPanel(MainFrame frame) {
 		this.setFrame(frame);
 		this.setLayout(null);
@@ -60,11 +65,19 @@ public class StatisticsPanel extends JPanel {
 	}
 
 	public static class CustomTableModel extends DefaultTableModel {
-
+		/**
+		 * set super constructor
+		 * 
+		 * @param a
+		 * @param b
+		 */
 		public CustomTableModel(String[] a, int b) {
 			super(a, b);
 		}
 
+		/**
+		 * set cell editable to false
+		 */
 		@Override
 		public boolean isCellEditable(int row, int column) {
 			return false;
@@ -72,6 +85,9 @@ public class StatisticsPanel extends JPanel {
 
 	}
 
+	/**
+	 * render graphics object
+	 */
 	@Override
 	public void paintComponent(Graphics g_) {
 		super.paintComponent(g_);
@@ -83,7 +99,7 @@ public class StatisticsPanel extends JPanel {
 	}
 
 	public MainFrame getFrame() {
-		return frame;
+		return this.frame;
 	}
 
 	public void setFrame(MainFrame frame) {
@@ -94,7 +110,7 @@ public class StatisticsPanel extends JPanel {
 	 * @return the table
 	 */
 	public JTable getTable() {
-		return table;
+		return this.table;
 	}
 
 	/**
@@ -109,7 +125,7 @@ public class StatisticsPanel extends JPanel {
 	 * @return the tableModel
 	 */
 	public CustomTableModel getTableModel() {
-		return tableModel;
+		return this.tableModel;
 	}
 
 	/**

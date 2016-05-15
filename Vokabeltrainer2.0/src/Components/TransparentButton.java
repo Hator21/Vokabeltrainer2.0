@@ -29,7 +29,7 @@ public class TransparentButton extends CustomButton {
 
 	/**
 	 * the constructor of the standard TransperentButton
-	 * 
+	 *
 	 * @param text
 	 * @param x
 	 * @param y
@@ -53,7 +53,7 @@ public class TransparentButton extends CustomButton {
 
 	/**
 	 * the constructor of the colored TrasperentButton
-	 * 
+	 *
 	 * @param text
 	 * @param x
 	 * @param y
@@ -79,7 +79,7 @@ public class TransparentButton extends CustomButton {
 
 	/**
 	 * the constructor of a TransperentButton with rotatet text
-	 * 
+	 *
 	 * @param text
 	 * @param x
 	 * @param y
@@ -136,7 +136,7 @@ public class TransparentButton extends CustomButton {
 
 	/**
 	 * crate the stadard TransperentButton
-	 * 
+	 *
 	 * @param text
 	 * @param x
 	 * @param y
@@ -158,7 +158,7 @@ public class TransparentButton extends CustomButton {
 
 	/**
 	 * create the colored TransperentButton
-	 * 
+	 *
 	 * @param text
 	 * @param x
 	 * @param y
@@ -179,7 +179,7 @@ public class TransparentButton extends CustomButton {
 
 	/**
 	 * create the TransperentButton with rotated text
-	 * 
+	 *
 	 * @param text
 	 * @param x
 	 * @param y
@@ -205,43 +205,89 @@ public class TransparentButton extends CustomButton {
 		return this.getText();
 	}
 
+	/**
+	 * 
+	 * @return frontsize
+	 */
 	protected int getFontsize() {
 		return this.fontsize;
 	}
 
+	/**
+	 * set frontsize
+	 * 
+	 * @param fontsize
+	 */
 	protected void setFontsize(int fontsize) {
 		this.fontsize = fontsize;
 	}
 
+	/**
+	 * 
+	 * @return factor
+	 */
 	protected int getFactor() {
 		return this.factor;
 	}
 
+	/**
+	 * sets factor
+	 * 
+	 * @param factor
+	 */
 	protected void setFactor(int factor) {
 		this.factor = factor;
 	}
 
+	/**
+	 * 
+	 * @return rotation
+	 */
 	public double getRotation() {
 		return this.rotation;
 	}
 
+	/**
+	 * sets rotation
+	 * 
+	 * @param rotation
+	 */
 	public void setRotation(double rotation) {
 		this.rotation = rotation;
 	}
 
+	/**
+	 * 
+	 * @return correctX
+	 */
 	public boolean isCorrectX() {
 		return this.correctX;
 	}
 
+	/**
+	 * sets correctX
+	 * 
+	 * @param correctX
+	 */
 	public void setCorrectX(boolean correctX) {
 		this.correctX = correctX;
 	}
 
+	/**
+	 * sets backgroundcolor
+	 * 
+	 * @param c
+	 */
 	public void setBackgroundColor(Color c) {
 		this.backgroundColorcolor = c;
 		this.repaint();
 	}
 
+	/**
+	 * sets borderColor
+	 * 
+	 * @param c
+	 */
 	public void setBorderColor(Color c) {
 		this.borderColor = c;
 		this.repaint();

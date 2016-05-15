@@ -30,21 +30,7 @@ public class TimerLabel {
 			TimerLabel.this.printTimer(counterValue);
 
 			if ((TimerLabel.counterValue == 0) || (TimerLabel.this.stopper == true)) {
-				frame.getVocabeltestPanel().getNext().doClick();
-				// this.frame.getVocabeltestPanel().setRight(this.frame.getCheck().check(this.frame.getVocabeltestPanel().getSpeech2Text().getText(), this.frame.getVocabeltestPanel().getSpeech1Text().getText(), this.frame.getVocabeltestPanel().getRight()));
-				// this.frame.getVocabeltestPanel().setRight(this.frame.getVocabeltestPanel().getRight() - this.frame.getVocabeltestPanel().getCounts());
-				// TimerLabel.this.frame.getVocabeltestPanel().setCounts(0);
-				// TimerLabel.this.frame.getVocabeltestPanel().getSpeech1Text().setText("");
-				// TimerLabel.this.frame.getVocabeltestPanel().getSpeech2Text().setText("");
-				// TimerLabel.this.frame.getVocabeltestPanel().getSpeech2Text().setEditable(false);
-				// frame.getStats().retDateForTable();
-				// for (JPanel p : frame.getPanelList()) {
-				// p.setVisible(false);
-				// }
-				// frame.getPanelList().get(11).setVisible(true);
-				// frame.getHeadingbar().getHeadingLabelL().setText("Statistik");
-				// frame.getHeadingbar().getHeadingLabelR().setText("");
-				System.out.println("Counterdown ausgelaufen!");
+				this.frame.getVocabeltestPanel().getNext().doClick();
 				TimerLabel.timer.stop();
 			}
 		});
@@ -53,7 +39,7 @@ public class TimerLabel {
 
 	/**
 	 * Painting the remaining time
-	 * 
+	 *
 	 * @param time
 	 */
 	public void printTimer(int time) {
@@ -65,7 +51,6 @@ public class TimerLabel {
 			min = 0;
 			sec = time;
 		}
-		System.out.println("min: " + min + " sec: " + sec);
 		if ((min < 10) && (sec < 10)) {
 			s = "0" + String.valueOf(min) + ":0" + String.valueOf(sec);
 		} else if (min < 10) {
@@ -82,13 +67,12 @@ public class TimerLabel {
 	 * Stops the timer
 	 */
 	public void stopTimer() {
-		System.out.println("stopTimer");
 		this.setStopper(true);
 	}
 
 	/**
 	 * sets the timer on starttimeMin:starttimeSec
-	 * 
+	 *
 	 * @param starttimeMin
 	 * @param starttimeSec
 	 */
@@ -97,7 +81,7 @@ public class TimerLabel {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return is timer stoped?<boolean>
 	 */
 	public boolean isStopper() {
@@ -106,14 +90,16 @@ public class TimerLabel {
 
 	/**
 	 * sets the timmer to stoped or not
-	 * 
+	 *
 	 * @param stopper
 	 */
 	public void setStopper(boolean stopper) {
-		System.out.println("setStopperw	");
 		this.stopper = stopper;
 	}
 
+	/**
+	 * @return conterValue
+	 */
 	public static int getCounterValue() {
 		return counterValue;
 	}

@@ -29,7 +29,7 @@ public class VocabeltestPanel extends JPanel {
 
 	/**
 	 * creats the pannel
-	 * 
+	 *
 	 * @param frame
 	 */
 	public VocabeltestPanel(MainFrame frame) {
@@ -44,7 +44,7 @@ public class VocabeltestPanel extends JPanel {
 		this.setNext(TransparentButton.createButton("weiter", 120, 320, 200, 40, 30, 0, (e -> {
 
 			frame.getTimer();
-			if (this.counts == 1 || TimerLabel.getCounterValue() == 0) {
+			if ((this.counts == 1) || (TimerLabel.getCounterValue() == 0)) {
 				this.right = frame.getCheck().check(this.speech2Text.getText(), this.speech1Text.getText(), this.right);
 				this.counts--;
 				this.speech1Text.setText("");
@@ -118,92 +118,34 @@ public class VocabeltestPanel extends JPanel {
 		g.drawImage(this.image, 0, 0, null);
 	}
 
-	public String getSprache1() {
-		return this.sprache1;
-	}
-
-	public void setSprache1(String sprache1) {
-		this.sprache1 = sprache1;
-	}
-
-	public String getSprache2() {
-		return this.sprache2;
-	}
-
-	public void setSprache2(String sprache2) {
-		this.sprache2 = sprache2;
-	}
-
-	public String getVokabel() {
-		return this.vokabel;
-	}
-
-	public void setVokabel(String vokabel) {
-		this.vokabel = vokabel;
-	}
-
-	public void setCounts(int counts) {
-		this.counts = counts;
-	}
-
-	public int getCounts() {
-		return this.counts;
-	}
-
-	public void setRight(int right) {
-		this.right = right;
-	}
-
-	public int getRight() {
-		return this.right;
-	}
-
-	public TransparentButton getNext() {
-		return this.next;
-	}
-
-	public void setNext(TransparentButton next) {
-		this.next = next;
-	}
-
-	public TransparentLabel getTimerLabel() {
-		return this.timerLabel;
-	}
-
-	public void setTimerLabel(TransparentLabel timerLabel) {
-		this.timerLabel = timerLabel;
-	}
-
-	public TransparentLabel getSpeech1Label() {
-		return this.speech1Label;
-	}
-
-	public void setSpeech1Label(TransparentLabel speech1Label) {
-		this.speech1Label = speech1Label;
-	}
-
-	public TransparentLabel getSpeech2Label() {
-		return this.speech2Label;
-	}
-
-	public void setSpeech2Label(TransparentLabel speech2Label) {
-		this.speech2Label = speech2Label;
-	}
-
+	/**
+	 * @return the frame
+	 */
 	public MainFrame getFrame() {
 		return this.frame;
 	}
 
+	/**
+	 * @param frame
+	 *            the frame to set
+	 */
 	public void setFrame(MainFrame frame) {
 		this.frame = frame;
 	}
 
-	public TransparentButton getStart() {
-		return this.start;
+	/**
+	 * @return the image
+	 */
+	public BufferedImage getImage() {
+		return this.image;
 	}
 
-	public void setStart(TransparentButton start) {
-		this.start = start;
+	/**
+	 * @param image
+	 *            the image to set
+	 */
+	public void setImage(BufferedImage image) {
+		this.image = image;
 	}
 
 	/**
@@ -236,6 +178,160 @@ public class VocabeltestPanel extends JPanel {
 		this.speech2Text = speech2Text;
 	}
 
+	/**
+	 * @return the speech1Label
+	 */
+	public TransparentLabel getSpeech1Label() {
+		return this.speech1Label;
+	}
+
+	/**
+	 * @param speech1Label
+	 *            the speech1Label to set
+	 */
+	public void setSpeech1Label(TransparentLabel speech1Label) {
+		this.speech1Label = speech1Label;
+	}
+
+	/**
+	 * @return the speech2Label
+	 */
+	public TransparentLabel getSpeech2Label() {
+		return this.speech2Label;
+	}
+
+	/**
+	 * @param speech2Label
+	 *            the speech2Label to set
+	 */
+	public void setSpeech2Label(TransparentLabel speech2Label) {
+		this.speech2Label = speech2Label;
+	}
+
+	/**
+	 * @return the timerLabel
+	 */
+	public TransparentLabel getTimerLabel() {
+		return this.timerLabel;
+	}
+
+	/**
+	 * @param timerLabel
+	 *            the timerLabel to set
+	 */
+	public void setTimerLabel(TransparentLabel timerLabel) {
+		this.timerLabel = timerLabel;
+	}
+
+	/**
+	 * @return the sprache1
+	 */
+	public String getSprache1() {
+		return this.sprache1;
+	}
+
+	/**
+	 * @param sprache1
+	 *            the sprache1 to set
+	 */
+	public void setSprache1(String sprache1) {
+		this.sprache1 = sprache1;
+	}
+
+	/**
+	 * @return the sprache2
+	 */
+	public String getSprache2() {
+		return this.sprache2;
+	}
+
+	/**
+	 * @param sprache2
+	 *            the sprache2 to set
+	 */
+	public void setSprache2(String sprache2) {
+		this.sprache2 = sprache2;
+	}
+
+	/**
+	 * @return the vokabel
+	 */
+	public String getVokabel() {
+		return this.vokabel;
+	}
+
+	/**
+	 * @param vokabel
+	 *            the vokabel to set
+	 */
+	public void setVokabel(String vokabel) {
+		this.vokabel = vokabel;
+	}
+
+	/**
+	 * @return the start
+	 */
+	public TransparentButton getStart() {
+		return this.start;
+	}
+
+	/**
+	 * @param start
+	 *            the start to set
+	 */
+	public void setStart(TransparentButton start) {
+		this.start = start;
+	}
+
+	/**
+	 * @return the next
+	 */
+	public TransparentButton getNext() {
+		return this.next;
+	}
+
+	/**
+	 * @param next
+	 *            the next to set
+	 */
+	public void setNext(TransparentButton next) {
+		this.next = next;
+	}
+
+	/**
+	 * @return the right
+	 */
+	public int getRight() {
+		return this.right;
+	}
+
+	/**
+	 * @param right
+	 *            the right to set
+	 */
+	public void setRight(int right) {
+		this.right = right;
+	}
+
+	/**
+	 * @return the counts
+	 */
+	public int getCounts() {
+		return this.counts;
+	}
+
+	/**
+	 * @param counts
+	 *            the counts to set
+	 */
+	public void setCounts(int counts) {
+		this.counts = counts;
+	}
+
+	/**
+	 * sets the help text if option ist selected
+	 * 
+	 */
 	public void createHelp() {
 		this.frame.getHelper().add(TransparentLabel.createLabel("1. Drücke auf \"Start\" um den Test zu starten!", 10, 30, 425, 30, 18, this));
 		this.frame.getHelper().add(TransparentLabel.createLabel("2. Klicke auf \"Weiter\"!", 0, 380, 444, 30, 18, this));

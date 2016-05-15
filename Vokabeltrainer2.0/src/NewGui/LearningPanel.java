@@ -29,6 +29,11 @@ public class LearningPanel extends JPanel {
 	private int					right		= 0, bright = 0, wrong = 0, counts = 10;
 	private ImageIcon			right_wrong;
 
+	/**
+	 * crate the frame
+	 * 
+	 * @param frame
+	 */
 	public LearningPanel(MainFrame frame) {
 		this.setFrame(frame);
 		this.setLayout(null);
@@ -157,6 +162,9 @@ public class LearningPanel extends JPanel {
 		this.wrong = wrong;
 	}
 
+	/**
+	 * renders the graphics object
+	 */
 	@Override
 	protected void paintComponent(Graphics g_) {
 		Graphics2D g = (Graphics2D) g_;
@@ -166,108 +174,244 @@ public class LearningPanel extends JPanel {
 		g.drawImage(this.image, 0, 0, null);
 	}
 
-	protected String getSprache1() {
-		return this.sprache1;
-	}
-
-	protected void setSprache1(String sprache1) {
-		this.sprache1 = sprache1;
-	}
-
-	protected String getSprache2() {
-		return this.sprache2;
-	}
-
-	protected void setSprache2(String sprache2) {
-		this.sprache2 = sprache2;
-	}
-
-	protected String getVokabel() {
-		return this.vokabel;
-	}
-
-	protected void setVokabel(String vokabel) {
-		this.vokabel = vokabel;
-	}
-
-	public void setCounts(int counts) {
-		this.counts = counts;
-	}
-
-	public int getCounts() {
-		return this.counts;
-	}
-
-	public void setRight(int right) {
-		this.right = right;
-	}
-
-	public int getRight() {
-		return this.right;
-	}
-
-	protected TransparentButton getCheck() {
-		return this.check;
-	}
-
-	protected void setCheck(TransparentButton check) {
-		this.check = check;
-	}
-
+	/**
+	 * @return the frame
+	 */
 	public MainFrame getFrame() {
 		return this.frame;
 	}
 
+	/**
+	 * @param frame
+	 *            the frame to set
+	 */
 	public void setFrame(MainFrame frame) {
 		this.frame = frame;
 	}
 
-	public TransparentLabel getSpeech2Label() {
-		return this.speech2Label;
+	/**
+	 * @return the image
+	 */
+	public BufferedImage getImage() {
+		return this.image;
 	}
 
-	public void setSpeech2Label(TransparentLabel speech2Label) {
-		this.speech2Label = speech2Label;
+	/**
+	 * @param image
+	 *            the image to set
+	 */
+	public void setImage(BufferedImage image) {
+		this.image = image;
 	}
 
+	/**
+	 * @return the speech1Label
+	 */
 	public TransparentLabel getSpeech1Label() {
 		return this.speech1Label;
 	}
 
+	/**
+	 * @param speech1Label
+	 *            the speech1Label to set
+	 */
 	public void setSpeech1Label(TransparentLabel speech1Label) {
 		this.speech1Label = speech1Label;
 	}
 
+	/**
+	 * @return the speech2Label
+	 */
+	public TransparentLabel getSpeech2Label() {
+		return this.speech2Label;
+	}
+
+	/**
+	 * @param speech2Label
+	 *            the speech2Label to set
+	 */
+	public void setSpeech2Label(TransparentLabel speech2Label) {
+		this.speech2Label = speech2Label;
+	}
+
+	/**
+	 * @return the correct
+	 */
 	public TransparentLabel getCorrect() {
 		return this.correct;
 	}
 
+	/**
+	 * @param correct
+	 *            the correct to set
+	 */
 	public void setCorrect(TransparentLabel correct) {
 		this.correct = correct;
 	}
 
+	/**
+	 * @return the countRight
+	 */
 	public TransparentLabel getCountRight() {
 		return this.countRight;
 	}
 
+	/**
+	 * @param countRight
+	 *            the countRight to set
+	 */
 	public void setCountRight(TransparentLabel countRight) {
 		this.countRight = countRight;
 	}
 
+	/**
+	 * @return the countWrong
+	 */
 	public TransparentLabel getCountWrong() {
 		return this.countWrong;
 	}
 
+	/**
+	 * @param countWrong
+	 *            the countWrong to set
+	 */
 	public void setCountWrong(TransparentLabel countWrong) {
 		this.countWrong = countWrong;
 	}
 
+	/**
+	 * @return the average
+	 */
 	public TransparentLabel getAverage() {
 		return this.average;
 	}
 
+	/**
+	 * @param average
+	 *            the average to set
+	 */
 	public void setAverage(TransparentLabel average) {
 		this.average = average;
+	}
+
+	/**
+	 * @return the sprache1
+	 */
+	public String getSprache1() {
+		return this.sprache1;
+	}
+
+	/**
+	 * @param sprache1
+	 *            the sprache1 to set
+	 */
+	public void setSprache1(String sprache1) {
+		this.sprache1 = sprache1;
+	}
+
+	/**
+	 * @return the sprache2
+	 */
+	public String getSprache2() {
+		return this.sprache2;
+	}
+
+	/**
+	 * @param sprache2
+	 *            the sprache2 to set
+	 */
+	public void setSprache2(String sprache2) {
+		this.sprache2 = sprache2;
+	}
+
+	/**
+	 * @return the vokabel
+	 */
+	public String getVokabel() {
+		return this.vokabel;
+	}
+
+	/**
+	 * @param vokabel
+	 *            the vokabel to set
+	 */
+	public void setVokabel(String vokabel) {
+		this.vokabel = vokabel;
+	}
+
+	/**
+	 * @return the test
+	 */
+	public String getTest() {
+		return this.test;
+	}
+
+	/**
+	 * @param test
+	 *            the test to set
+	 */
+	public void setTest(String test) {
+		this.test = test;
+	}
+
+	/**
+	 * @return the check
+	 */
+	public TransparentButton getCheck() {
+		return this.check;
+	}
+
+	/**
+	 * @param check
+	 *            the check to set
+	 */
+	public void setCheck(TransparentButton check) {
+		this.check = check;
+	}
+
+	/**
+	 * @return the right
+	 */
+	public int getRight() {
+		return this.right;
+	}
+
+	/**
+	 * @param right
+	 *            the right to set
+	 */
+	public void setRight(int right) {
+		this.right = right;
+	}
+
+	/**
+	 * @return the counts
+	 */
+	public int getCounts() {
+		return this.counts;
+	}
+
+	/**
+	 * @param counts
+	 *            the counts to set
+	 */
+	public void setCounts(int counts) {
+		this.counts = counts;
+	}
+
+	/**
+	 * @return the right_wrong
+	 */
+	public ImageIcon getRight_wrong() {
+		return this.right_wrong;
+	}
+
+	/**
+	 * @param right_wrong
+	 *            the right_wrong to set
+	 */
+	public void setRight_wrong(ImageIcon right_wrong) {
+		this.right_wrong = right_wrong;
 	}
 
 	/**

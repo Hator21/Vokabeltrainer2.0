@@ -27,6 +27,11 @@ public class MenuPanel extends JPanel {
 	private TransparentButton	lection, vocabeltest, searching, spelling, editS, settings, statistics, help, info, exit;
 	private TransparentLabel	learn;
 
+	/**
+	 * create the frame
+	 * 
+	 * @param frame
+	 */
 	public MenuPanel(MainFrame frame) {
 
 		this.setFrame(frame);
@@ -37,10 +42,10 @@ public class MenuPanel extends JPanel {
 			this.image = ImageIO.read(new File("img/menu.png"));
 		} catch (IOException ex) {}
 
-		setLearn(TransparentLabel.createLabel("Lernen", 0, 0, 250, 44, 30, this));
-		frame.getLabels().add(getLearn());
+		this.setLearn(TransparentLabel.createLabel("Lernen", 0, 0, 250, 44, 30, this));
+		frame.getLabels().add(this.getLearn());
 
-		setLection(TransparentButton.createButton("Lektionen", 0, 45, 250, 45, 20, 0, (e -> {
+		this.setLection(TransparentButton.createButton("Lektionen", 0, 45, 250, 45, 20, 0, (e -> {
 			for (JPanel p : frame.getPanelList()) {
 				p.setVisible(false);
 			}
@@ -48,9 +53,9 @@ public class MenuPanel extends JPanel {
 			frame.getHeadingbar().getHeadingLabelL().setText("Lektion auswählen");
 			frame.getHeadingbar().getHeadingLabelR().setText("");
 		}), this));
-		frame.getButtons().add(getLection());
+		frame.getButtons().add(this.getLection());
 
-		setVocabeltest(TransparentButton.createButton("Vokabeltest", 0, 90, 250, 45, 20, 0, (e -> {
+		this.setVocabeltest(TransparentButton.createButton("Vokabeltest", 0, 90, 250, 45, 20, 0, (e -> {
 			for (JPanel p : frame.getPanelList()) {
 				p.setVisible(false);
 			}
@@ -58,9 +63,9 @@ public class MenuPanel extends JPanel {
 			frame.getHeadingbar().getHeadingLabelL().setText("Lektion auswählen");
 			frame.getHeadingbar().getHeadingLabelR().setText("Einstellungen");
 		}), this));
-		frame.getButtons().add(getVocabeltest());
+		frame.getButtons().add(this.getVocabeltest());
 
-		setSearching(TransparentButton.createButton("Suchspiel", 0, 135, 250, 45, 20, 0, (e -> {
+		this.setSearching(TransparentButton.createButton("Suchspiel", 0, 135, 250, 45, 20, 0, (e -> {
 			for (JPanel p : frame.getPanelList()) {
 				p.setVisible(false);
 			}
@@ -68,9 +73,9 @@ public class MenuPanel extends JPanel {
 			frame.getHeadingbar().getHeadingLabelL().setText("Lektion auswählen");
 			frame.getHeadingbar().getHeadingLabelR().setText("");
 		}), this));
-		frame.getButtons().add(getSearching());
+		frame.getButtons().add(this.getSearching());
 
-		setSpelling(TransparentButton.createButton("Buchstabieren", 0, 180, 250, 45, 20, 0, (e -> {
+		this.setSpelling(TransparentButton.createButton("Buchstabieren", 0, 180, 250, 45, 20, 0, (e -> {
 			for (JPanel p : frame.getPanelList()) {
 				p.setVisible(false);
 			}
@@ -78,9 +83,9 @@ public class MenuPanel extends JPanel {
 			frame.getHeadingbar().getHeadingLabelL().setText("Lektion auswählen");
 			frame.getHeadingbar().getHeadingLabelR().setText("");
 		}), this));
-		frame.getButtons().add(getSpelling());
+		frame.getButtons().add(this.getSpelling());
 
-		setEditS(TransparentButton.createButton("Sprache Verwalten", 0, 229, 250, 45, 20, 0, (e -> {
+		this.setEditS(TransparentButton.createButton("Sprache Verwalten", 0, 229, 250, 45, 20, 0, (e -> {
 			for (JPanel p : frame.getPanelList()) {
 				p.setVisible(false);
 			}
@@ -90,9 +95,9 @@ public class MenuPanel extends JPanel {
 			frame.getEditSPanel().createLectionList();
 			frame.getEditSPanel().loadTable();
 		}), this));
-		frame.getButtons().add(getEditS());
+		frame.getButtons().add(this.getEditS());
 
-		setSettings(TransparentButton.createButton("Einstellungen", 0, 274, 250, 45, 20, 0, (e -> {
+		this.setSettings(TransparentButton.createButton("Einstellungen", 0, 274, 250, 45, 20, 0, (e -> {
 			for (JPanel p : frame.getPanelList()) {
 				p.setVisible(false);
 			}
@@ -100,9 +105,9 @@ public class MenuPanel extends JPanel {
 			frame.getHeadingbar().getHeadingLabelL().setText("Einstellungen");
 			frame.getHeadingbar().getHeadingLabelR().setText("");
 		}), this));
-		frame.getButtons().add(getSettings());
+		frame.getButtons().add(this.getSettings());
 
-		setStatistics(TransparentButton.createButton("Statistiken", 0, 319, 250, 45, 20, 0, (e -> {
+		this.setStatistics(TransparentButton.createButton("Statistiken", 0, 319, 250, 45, 20, 0, (e -> {
 			for (JPanel p : frame.getPanelList()) {
 				p.setVisible(false);
 			}
@@ -110,9 +115,9 @@ public class MenuPanel extends JPanel {
 			frame.getHeadingbar().getHeadingLabelL().setText("Statistiken");
 			frame.getHeadingbar().getHeadingLabelR().setText("");
 		}), this));
-		frame.getButtons().add(getStatistics());
+		frame.getButtons().add(this.getStatistics());
 
-		setHelp(TransparentButton.createButton("Hilfe", 0, 364, 250, 45, 20, 0, (e -> {
+		this.setHelp(TransparentButton.createButton("Hilfe", 0, 364, 250, 45, 20, 0, (e -> {
 			for (JPanel p : frame.getPanelList()) {
 				p.setVisible(false);
 			}
@@ -120,9 +125,9 @@ public class MenuPanel extends JPanel {
 			frame.getHeadingbar().getHeadingLabelL().setText("Hilfe");
 			frame.getHeadingbar().getHeadingLabelR().setText("");
 		}), this));
-		frame.getButtons().add(getHelp());
+		frame.getButtons().add(this.getHelp());
 
-		setInfo(TransparentButton.createButton("Info", 0, 409, 250, 45, 20, 0, (e -> {
+		this.setInfo(TransparentButton.createButton("Info", 0, 409, 250, 45, 20, 0, (e -> {
 			for (JPanel p : frame.getPanelList()) {
 				p.setVisible(false);
 			}
@@ -130,9 +135,9 @@ public class MenuPanel extends JPanel {
 			frame.getHeadingbar().getHeadingLabelL().setText("Info");
 			frame.getHeadingbar().getHeadingLabelR().setText("");
 		}), this));
-		frame.getButtons().add(getInfo());
+		frame.getButtons().add(this.getInfo());
 
-		setExit(TransparentButton.createButton("Beenden", 0, 627, 250, 60, 30, 0, (e -> {
+		this.setExit(TransparentButton.createButton("Beenden", 0, 627, 250, 60, 30, 0, (e -> {
 			frame.getBear().Close();
 			try {
 				FileOutputStream fos = new FileOutputStream("data/data.txt");
@@ -150,97 +155,12 @@ public class MenuPanel extends JPanel {
 			}
 			System.exit(1);
 		}), this));
-		frame.getButtons().add(getExit());
+		frame.getButtons().add(this.getExit());
 	}
 
-	public TransparentButton getLection() {
-		return lection;
-	}
-
-	public void setLection(TransparentButton lection) {
-		this.lection = lection;
-	}
-
-	public TransparentButton getVocabeltest() {
-		return vocabeltest;
-	}
-
-	public void setVocabeltest(TransparentButton vocabeltest) {
-		this.vocabeltest = vocabeltest;
-	}
-
-	public TransparentButton getSearching() {
-		return searching;
-	}
-
-	public void setSearching(TransparentButton searching) {
-		this.searching = searching;
-	}
-
-	public TransparentButton getSpelling() {
-		return spelling;
-	}
-
-	public void setSpelling(TransparentButton spelling) {
-		this.spelling = spelling;
-	}
-
-	public TransparentButton getEditS() {
-		return editS;
-	}
-
-	public void setEditS(TransparentButton editS) {
-		this.editS = editS;
-	}
-
-	public TransparentButton getSettings() {
-		return settings;
-	}
-
-	public void setSettings(TransparentButton settings) {
-		this.settings = settings;
-	}
-
-	public TransparentButton getStatistics() {
-		return statistics;
-	}
-
-	public void setStatistics(TransparentButton statistics) {
-		this.statistics = statistics;
-	}
-
-	public TransparentButton getHelp() {
-		return help;
-	}
-
-	public void setHelp(TransparentButton help) {
-		this.help = help;
-	}
-
-	public TransparentButton getInfo() {
-		return info;
-	}
-
-	public void setInfo(TransparentButton info) {
-		this.info = info;
-	}
-
-	public TransparentButton getExit() {
-		return exit;
-	}
-
-	public void setExit(TransparentButton exit) {
-		this.exit = exit;
-	}
-
-	public TransparentLabel getLearn() {
-		return learn;
-	}
-
-	public void setLearn(TransparentLabel learn) {
-		this.learn = learn;
-	}
-
+	/**
+	 * renders the graphics object
+	 */
 	@Override
 	protected void paintComponent(Graphics g_) {
 		super.paintComponent(g_);
@@ -253,10 +173,221 @@ public class MenuPanel extends JPanel {
 	}
 
 	public MainFrame getFrame() {
-		return frame;
+		return this.frame;
 	}
 
 	public void setFrame(MainFrame frame) {
 		this.frame = frame;
 	}
+
+	/**
+	 * @return the image
+	 */
+	public BufferedImage getImage() {
+		return this.image;
+	}
+
+	/**
+	 * @param image
+	 *            the image to set
+	 */
+	public void setImage(BufferedImage image) {
+		this.image = image;
+	}
+
+	/**
+	 * @return the isr
+	 */
+	public InputStreamReader getIsr() {
+		return this.isr;
+	}
+
+	/**
+	 * @param isr
+	 *            the isr to set
+	 */
+	public void setIsr(InputStreamReader isr) {
+		this.isr = isr;
+	}
+
+	/**
+	 * @return the br
+	 */
+	public BufferedReader getBr() {
+		return this.br;
+	}
+
+	/**
+	 * @param br
+	 *            the br to set
+	 */
+	public void setBr(BufferedReader br) {
+		this.br = br;
+	}
+
+	/**
+	 * @return the lection
+	 */
+	public TransparentButton getLection() {
+		return this.lection;
+	}
+
+	/**
+	 * @param lection
+	 *            the lection to set
+	 */
+	public void setLection(TransparentButton lection) {
+		this.lection = lection;
+	}
+
+	/**
+	 * @return the vocabeltest
+	 */
+	public TransparentButton getVocabeltest() {
+		return this.vocabeltest;
+	}
+
+	/**
+	 * @param vocabeltest
+	 *            the vocabeltest to set
+	 */
+	public void setVocabeltest(TransparentButton vocabeltest) {
+		this.vocabeltest = vocabeltest;
+	}
+
+	/**
+	 * @return the searching
+	 */
+	public TransparentButton getSearching() {
+		return this.searching;
+	}
+
+	/**
+	 * @param searching
+	 *            the searching to set
+	 */
+	public void setSearching(TransparentButton searching) {
+		this.searching = searching;
+	}
+
+	/**
+	 * @return the spelling
+	 */
+	public TransparentButton getSpelling() {
+		return this.spelling;
+	}
+
+	/**
+	 * @param spelling
+	 *            the spelling to set
+	 */
+	public void setSpelling(TransparentButton spelling) {
+		this.spelling = spelling;
+	}
+
+	/**
+	 * @return the editS
+	 */
+	public TransparentButton getEditS() {
+		return this.editS;
+	}
+
+	/**
+	 * @param editS
+	 *            the editS to set
+	 */
+	public void setEditS(TransparentButton editS) {
+		this.editS = editS;
+	}
+
+	/**
+	 * @return the settings
+	 */
+	public TransparentButton getSettings() {
+		return this.settings;
+	}
+
+	/**
+	 * @param settings
+	 *            the settings to set
+	 */
+	public void setSettings(TransparentButton settings) {
+		this.settings = settings;
+	}
+
+	/**
+	 * @return the statistics
+	 */
+	public TransparentButton getStatistics() {
+		return this.statistics;
+	}
+
+	/**
+	 * @param statistics
+	 *            the statistics to set
+	 */
+	public void setStatistics(TransparentButton statistics) {
+		this.statistics = statistics;
+	}
+
+	/**
+	 * @return the help
+	 */
+	public TransparentButton getHelp() {
+		return this.help;
+	}
+
+	/**
+	 * @param help
+	 *            the help to set
+	 */
+	public void setHelp(TransparentButton help) {
+		this.help = help;
+	}
+
+	/**
+	 * @return the info
+	 */
+	public TransparentButton getInfo() {
+		return this.info;
+	}
+
+	/**
+	 * @param info
+	 *            the info to set
+	 */
+	public void setInfo(TransparentButton info) {
+		this.info = info;
+	}
+
+	/**
+	 * @return the exit
+	 */
+	public TransparentButton getExit() {
+		return this.exit;
+	}
+
+	/**
+	 * @param exit
+	 *            the exit to set
+	 */
+	public void setExit(TransparentButton exit) {
+		this.exit = exit;
+	}
+
+	/**
+	 * @return the learn
+	 */
+	public TransparentLabel getLearn() {
+		return this.learn;
+	}
+
+	/**
+	 * @param learn
+	 *            the learn to set
+	 */
+	public void setLearn(TransparentLabel learn) {
+		this.learn = learn;
+	}
+
 }

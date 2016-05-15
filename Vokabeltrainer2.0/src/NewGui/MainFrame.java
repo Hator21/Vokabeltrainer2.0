@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -84,8 +84,10 @@ public class MainFrame extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * 
+	 * @throws Exception
 	 */
-	public MainFrame() {
+	public MainFrame() throws Exception {
 
 		setInstance(this);
 		this.setResizable(false);
@@ -98,13 +100,7 @@ public class MainFrame extends JFrame {
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			this.languageCombi = (HashMap<Language, Language>) ois.readObject();
 			ois.close();
-			for (Language key : this.getLanguageCombi().keySet()) {
-				// System.err.print(key.getLanguage() + " - " + key.getPräfix() + " -> ");
-				// System.err.println(this.getLanguageCombi().get(key).getLanguage() + " - " + this.getLanguageCombi().get(key).getPräfix());
-			}
-		} catch (IOException | ClassNotFoundException e1) {
-			System.err.println(e1);
-		}
+		} catch (FileNotFoundException e) {}
 
 		this.setBear(new Bearbeiten(this));
 		this.setCheck(new Check(this));
@@ -112,9 +108,7 @@ public class MainFrame extends JFrame {
 		this.setTimer(new TimerLabel(this, 15, 0));
 		try {
 			this.setVokabeln(this.getBear().getdata());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		} catch (FileNotFoundException e) {}
 
 		this.contentPane = new JPanel();
 		this.titlebar = new TitleBar(this);
@@ -195,9 +189,7 @@ public class MainFrame extends JFrame {
 				};
 				this.getStatisticsPanel().getTableModel().addRow(data);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		} catch (FileNotFoundException e) {}
 	}
 
 	public Bearbeiten getBear() {
@@ -458,7 +450,7 @@ public class MainFrame extends JFrame {
 	 * @return the stats
 	 */
 	public Statistik getStats() {
-		return stats;
+		return this.stats;
 	}
 
 	/**

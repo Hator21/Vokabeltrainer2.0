@@ -30,6 +30,11 @@ public class SpellingPrePanel extends JPanel {
 			"Englisch", "Französisch"
 	};
 
+	/**
+	 * creates the frame
+	 * 
+	 * @param frame
+	 */
 	public SpellingPrePanel(MainFrame frame) {
 
 		this.setFrame(frame);
@@ -45,7 +50,6 @@ public class SpellingPrePanel extends JPanel {
 		this.createComboBox(frame.add2Language());
 		this.frame.getBear().putPräfix(this.combobox);
 		ArrayList<Integer> list1 = this.frame.getBear().getLektions();
-		System.out.println("list -> " + list1);
 		for (int i = 0; i < this.units.size(); i++) {
 			if (list1.contains(i + 1)) {
 				this.units.get(i).setVisible(true);
@@ -61,9 +65,9 @@ public class SpellingPrePanel extends JPanel {
 					frame.getLek().add(i + 1);
 				}
 			}
-			if (frame.getLek().size() == 0)
+			if (frame.getLek().size() == 0) {
 				JOptionPane.showMessageDialog(frame, "Sie haben keine Lektion ausgewählt");
-			else {
+			} else {
 				frame.getTestVokabeln().clear();
 				frame.getCheck().newGame(frame.getTestVokabeln());
 				frame.getTestVokabeln().addAll(frame.getCheck().vok(frame.getLek().size(), frame.getBear().getPrä1(), frame.getBear().getPrä2()));
@@ -76,9 +80,12 @@ public class SpellingPrePanel extends JPanel {
 				frame.getHeadingbar().getHeadingLabelL().setText("Buchstabieren");
 			}
 		}), this));
-		createHelp();
+		this.createHelp();
 	}
 
+	/**
+	 * renders graphic object
+	 */
 	@Override
 	protected void paintComponent(Graphics g_) {
 		Graphics2D g = (Graphics2D) g_;
@@ -88,6 +95,11 @@ public class SpellingPrePanel extends JPanel {
 		g.drawImage(this.image, 0, 0, null);
 	}
 
+	/**
+	 * create checkbox for lecton select
+	 * 
+	 * @param n
+	 */
 	public void createCheckboxes(int n) {
 		for (int i = 0; i < n; i++) {
 			this.units.add(new JCheckBox("Lektion " + (i + 1)));
@@ -98,6 +110,11 @@ public class SpellingPrePanel extends JPanel {
 		}
 	}
 
+	/**
+	 * create combobox for the speac
+	 * 
+	 * @param list
+	 */
 	public void createComboBox(String[] list) {
 		this.combobox = new JComboBox<String>(list);
 		this.combobox.setBounds(80, 50, 200, 40);
@@ -107,7 +124,6 @@ public class SpellingPrePanel extends JPanel {
 		this.combobox.addActionListener(arg0 -> {
 			SpellingPrePanel.this.frame.getBear().putPräfix(SpellingPrePanel.this.combobox);
 			ArrayList<Integer> list1 = SpellingPrePanel.this.frame.getBear().getLektions();
-			System.out.println("list -> " + list1);
 			for (int i = 0; i < SpellingPrePanel.this.units.size(); i++) {
 				if (list1.contains(i + 1)) {
 					SpellingPrePanel.this.units.get(i).setVisible(true);
@@ -127,17 +143,103 @@ public class SpellingPrePanel extends JPanel {
 		this.frame = frame;
 	}
 
-	protected TransparentButton getLearning() {
+	/*
+	 * sets the help test if option is selected
+	 */
+	public void createHelp() {
+		this.frame.getHelper().add(TransparentLabel.createLabel("<- 1. Bitte wähle erst die gewünschte Sprache aus!", 290, 55, 425, 30, 18, this));
+		this.frame.getHelper().add(TransparentLabel.createLabel("2. Danach wähle eine oder mehrere Lektionen aus!", 0, 500, 444, 30, 18, this));
+		this.frame.getHelper().add(TransparentLabel.createLabel("<- 3. Zu guter letzt, klicke auf \"Lernen\" damit es weiter geht!", 260, 555, 530, 30, 18, this));
+	}
+
+	/**
+	 * @return the image
+	 */
+	public BufferedImage getImage() {
+		return this.image;
+	}
+
+	/**
+	 * @param image
+	 *            the image to set
+	 */
+	public void setImage(BufferedImage image) {
+		this.image = image;
+	}
+
+	/**
+	 * @return the n
+	 */
+	public int getN() {
+		return this.n;
+	}
+
+	/**
+	 * @param n
+	 *            the n to set
+	 */
+	public void setN(int n) {
+		this.n = n;
+	}
+
+	/**
+	 * @return the learning
+	 */
+	public TransparentButton getLearning() {
 		return this.learning;
 	}
 
-	protected void setLearning(TransparentButton learning) {
+	/**
+	 * @param learning
+	 *            the learning to set
+	 */
+	public void setLearning(TransparentButton learning) {
 		this.learning = learning;
 	}
 
-	public void createHelp() {
-		frame.getHelper().add(TransparentLabel.createLabel("<- 1. Bitte wähle erst die gewünschte Sprache aus!", 290, 55, 425, 30, 18, this));
-		frame.getHelper().add(TransparentLabel.createLabel("2. Danach wähle eine oder mehrere Lektionen aus!", 0, 500, 444, 30, 18, this));
-		frame.getHelper().add(TransparentLabel.createLabel("<- 3. Zu guter letzt, klicke auf \"Lernen\" damit es weiter geht!", 260, 555, 530, 30, 18, this));
+	/**
+	 * @return the units
+	 */
+	public ArrayList<JCheckBox> getUnits() {
+		return this.units;
 	}
+
+	/**
+	 * @param units
+	 *            the units to set
+	 */
+	public void setUnits(ArrayList<JCheckBox> units) {
+		this.units = units;
+	}
+
+	/**
+	 * @return the combobox
+	 */
+	public JComboBox<String> getCombobox() {
+		return this.combobox;
+	}
+
+	/**
+	 * @param combobox
+	 *            the combobox to set
+	 */
+	public void setCombobox(JComboBox<String> combobox) {
+		this.combobox = combobox;
+	}
+
+	/**
+	 * @return the comboBoxListe
+	 */
+	public String[] getComboBoxListe() {
+		return this.comboBoxListe;
+	}
+
+	/**
+	 * @param comboBoxListe
+	 *            the comboBoxListe to set
+	 */
+	public void setComboBoxListe(String[] comboBoxListe) {
+		this.comboBoxListe = comboBoxListe;
+	}
+
 }

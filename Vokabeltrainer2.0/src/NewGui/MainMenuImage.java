@@ -15,6 +15,11 @@ public class MainMenuImage extends JPanel {
 	private MainFrame		frame;
 	private BufferedImage	image;
 
+	/**
+	 * creats the frame
+	 * 
+	 * @param frame
+	 */
 	public MainMenuImage(MainFrame frame) {
 		this.setFrame(frame);
 		this.setLayout(null);
@@ -24,6 +29,9 @@ public class MainMenuImage extends JPanel {
 		} catch (IOException ex) {}
 	}
 
+	/**
+	 * renders the graphics object
+	 */
 	@Override
 	public void paintComponent(Graphics g_) {
 		super.paintComponent(g_);
@@ -35,7 +43,7 @@ public class MainMenuImage extends JPanel {
 	}
 
 	public MainFrame getFrame() {
-		return frame;
+		return this.frame;
 	}
 
 	public void setFrame(MainFrame frame) {

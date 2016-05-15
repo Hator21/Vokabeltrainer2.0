@@ -19,6 +19,11 @@ public class HeadingBar extends JPanel {
 	private BufferedImage		image;
 	private TransparentLabel	headingLabelL, headingLabelR;
 
+	/**
+	 * crate the frame
+	 * 
+	 * @param frame
+	 */
 	public HeadingBar(MainFrame frame) {
 		this.setFrame(frame);
 		this.setLayout(null);
@@ -26,12 +31,15 @@ public class HeadingBar extends JPanel {
 		try {
 			this.image = ImageIO.read(new File("img/HeadingBar.png"));
 		} catch (IOException ex) {}
-		headingLabelL = TransparentLabel.createLabel("Hauptmenü", 0, 0, 250, 44, 30, this);
-		headingLabelR = TransparentLabel.createLabel("", 514, 0, 250, 44, 30, this);
-		frame.getLabels().add(getHeadingLabelL());
-		frame.getLabels().add(getHeadingLabelR());
+		this.headingLabelL = TransparentLabel.createLabel("Hauptmenü", 0, 0, 250, 44, 30, this);
+		this.headingLabelR = TransparentLabel.createLabel("", 514, 0, 250, 44, 30, this);
+		frame.getLabels().add(this.getHeadingLabelL());
+		frame.getLabels().add(this.getHeadingLabelR());
 	}
 
+	/**
+	 * render the grapics object
+	 */
 	@Override
 	public void paintComponent(Graphics g_) {
 		super.paintComponent(g_);
@@ -42,28 +50,64 @@ public class HeadingBar extends JPanel {
 		g.drawImage(this.image, 0, 0, null);
 	}
 
-	public TransparentLabel getHeadingLabelL() {
-		return headingLabelL;
+	/**
+	 * @return the frame
+	 */
+	public MainFrame getFrame() {
+		return this.frame;
 	}
 
-	public void setHeadingPanelL(TransparentLabel headingLabelL) {
+	/**
+	 * @param frame
+	 *            the frame to set
+	 */
+	public void setFrame(MainFrame frame) {
+		this.frame = frame;
+	}
+
+	/**
+	 * @return the image
+	 */
+	public BufferedImage getImage() {
+		return this.image;
+	}
+
+	/**
+	 * @param image
+	 *            the image to set
+	 */
+	public void setImage(BufferedImage image) {
+		this.image = image;
+	}
+
+	/**
+	 * @return the headingLabelL
+	 */
+	public TransparentLabel getHeadingLabelL() {
+		return this.headingLabelL;
+	}
+
+	/**
+	 * @param headingLabelL
+	 *            the headingLabelL to set
+	 */
+	public void setHeadingLabelL(TransparentLabel headingLabelL) {
 		this.headingLabelL = headingLabelL;
 	}
 
+	/**
+	 * @return the headingLabelR
+	 */
 	public TransparentLabel getHeadingLabelR() {
-		return headingLabelR;
+		return this.headingLabelR;
 	}
 
-	public void setHeadingPanelR(TransparentLabel headingLabelR) {
+	/**
+	 * @param headingLabelR
+	 *            the headingLabelR to set
+	 */
+	public void setHeadingLabelR(TransparentLabel headingLabelR) {
 		this.headingLabelR = headingLabelR;
-	}
-
-	public MainFrame getFrame() {
-		return frame;
-	}
-
-	public void setFrame(MainFrame frame) {
-		this.frame = frame;
 	}
 
 }
