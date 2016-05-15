@@ -16,7 +16,7 @@ public class Statistik {
 
 	private static CSVReflectionMap	mapper;
 	private MainFrame				frame;
-	private static File				data	= new File("data/Statistik.csv");
+	private static File				data	= new File("Statistik.csv");
 	ArrayList<StatHelper>			stat	= new ArrayList<>();
 	private CSVParser				parser;
 	private CSVWriter				writer;
@@ -28,7 +28,7 @@ public class Statistik {
 	 */
 	public ArrayList<StatHelper> getData() throws Exception {
 		this.parser = new CSVParser(data);
-		return this.parser.parseStats(getMapper(), StatHelper.class, true);
+		return this.parser.parse(getMapper(), StatHelper.class, true);
 	}
 
 	/**

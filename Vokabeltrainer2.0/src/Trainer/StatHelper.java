@@ -7,6 +7,10 @@ public class StatHelper {
 	private String	note;
 	private String	sprache;
 
+	public StatHelper() {
+		this("", "", "", "", "");
+	}
+
 	public StatHelper(String date, String sprache, String right, String wrong, String note) {
 		this.setDate(date);
 		this.setSprache(sprache);

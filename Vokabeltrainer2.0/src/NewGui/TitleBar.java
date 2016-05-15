@@ -70,7 +70,7 @@ public class TitleBar extends JPanel {
 		setClose(TransparentButton.createButton("X", 1248, 0, 30, 30, 17, 8, (e -> {
 			frame.getBear().Close();
 			try {
-				FileOutputStream fos = new FileOutputStream("data/data.txt");
+				FileOutputStream fos = new FileOutputStream("data.txt");
 				ObjectOutputStream oos = new ObjectOutputStream(fos);
 				oos.writeObject(frame.getLanguageCombi());
 				oos.close();

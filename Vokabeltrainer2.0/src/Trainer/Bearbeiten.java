@@ -11,7 +11,7 @@ public class Bearbeiten {
 	private String		aus, in;
 	private MainFrame	frame;
 
-	private static File	vocFile	= new File("data/Vokabeln.csv");
+	private static File	vocFile	= new File("Vokabeln.csv");
 	private CSVParser	parser;
 	private CSVWriter	writer;
 	private String		prä1, prä2;
