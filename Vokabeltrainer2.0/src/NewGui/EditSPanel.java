@@ -56,6 +56,11 @@ public class EditSPanel extends JPanel {
 	private ArrayList<String>	lections	= new ArrayList<String>();
 	private ArrayList<Vokabel>	vocabellist	= new ArrayList<Vokabel>();
 
+	/**
+	 * create the frame of the SpeachEdit Pannel
+	 *
+	 * @param frame
+	 */
 	public EditSPanel(MainFrame frame) {
 		this.setFrame(frame);
 		this.setLayout(null);
@@ -246,12 +251,25 @@ public class EditSPanel extends JPanel {
 		this.vocabellistPanel.add(this.scrollPane);
 	}
 
+	/**
+	 * 
+	 * Set the settings for the tabel
+	 *
+	 */
 	private static class CustomTableModel extends DefaultTableModel {
-
+		/**
+		 * the constructor of the tabel
+		 * 
+		 * @param a
+		 * @param b
+		 */
 		public CustomTableModel(String[] a, int b) {
 			super(a, b);
 		}
 
+		/**
+		 * sets all Cell Editables to false
+		 */
 		@Override
 		public boolean isCellEditable(int row, int column) {
 			return false;
@@ -259,6 +277,9 @@ public class EditSPanel extends JPanel {
 
 	}
 
+	/**
+	 * painting setings for
+	 */
 	@Override
 	public void paintComponent(Graphics g_) {
 		super.paintComponent(g_);

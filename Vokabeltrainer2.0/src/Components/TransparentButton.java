@@ -29,7 +29,7 @@ public class TransparentButton extends CustomButton {
 
 	/**
 	 * the constructor of the standard TransperentButton
-	 * 
+	 *
 	 * @param text
 	 * @param x
 	 * @param y
@@ -53,7 +53,7 @@ public class TransparentButton extends CustomButton {
 
 	/**
 	 * the constructor of the colored TrasperentButton
-	 * 
+	 *
 	 * @param text
 	 * @param x
 	 * @param y
@@ -79,7 +79,7 @@ public class TransparentButton extends CustomButton {
 
 	/**
 	 * the constructor of a TransperentButton with rotatet text
-	 * 
+	 *
 	 * @param text
 	 * @param x
 	 * @param y
@@ -105,6 +105,7 @@ public class TransparentButton extends CustomButton {
 	}
 
 	/**
+	 *
 	 * render method of the button
 	 */
 	@Override
@@ -136,7 +137,7 @@ public class TransparentButton extends CustomButton {
 
 	/**
 	 * crate the stadard TransperentButton
-	 * 
+	 *
 	 * @param text
 	 * @param x
 	 * @param y
@@ -158,7 +159,7 @@ public class TransparentButton extends CustomButton {
 
 	/**
 	 * create the colored TransperentButton
-	 * 
+	 *
 	 * @param text
 	 * @param x
 	 * @param y
@@ -179,7 +180,7 @@ public class TransparentButton extends CustomButton {
 
 	/**
 	 * create the TransperentButton with rotated text
-	 * 
+	 *
 	 * @param text
 	 * @param x
 	 * @param y
