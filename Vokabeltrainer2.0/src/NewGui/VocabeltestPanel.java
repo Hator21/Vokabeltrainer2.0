@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Components.TimerLabel;
 import Components.TransparentButton;
 import Components.TransparentLabel;
 
@@ -37,27 +38,24 @@ public class VocabeltestPanel extends JPanel {
 
 		this.setNext(TransparentButton.createButton("weiter", 120, 320, 200, 40, 30, 0, (e -> {
 
-			if (this.getNext().getText().equals("Neustart")) {
-				frame.getTestVokabeln().clear();
-				frame.getLek().clear();
-				frame.getCheck().newGame(frame.getVokabeln());
-				this.speech2Text.setEditable(true);
-				this.getNext().setText("Überprüfen");
-
-				for (JPanel p : frame.getPanelList()) {
-					p.setVisible(false);
-				}
-				frame.getPanelList().get(3).setVisible(true);
-				frame.getHeadingbar().getHeadingLabelL().setText("Lektion auswählen");
-				frame.getHeadingbar().getHeadingLabelR().setText("Einstellungen");
-			}
-			if (this.counts == 1) {
+			frame.getTimer();
+			if (this.counts == 1 || TimerLabel.getCounterValue() == 0) {
 				this.right = frame.getCheck().check(this.speech2Text.getText(), this.speech1Text.getText(), this.right);
 				this.counts--;
 				this.speech1Text.setText("");
 				this.speech2Text.setText("");
 				this.speech2Text.setEditable(false);
-				this.getNext().setText("Neustart");
+				frame.getTestVokabeln().clear();
+				frame.getLek().clear();
+				frame.getTimer().stopTimer();
+				frame.getCheck().newGame(frame.getVokabeln());
+				frame.getStats().retDateForTable();
+				for (JPanel p : frame.getPanelList()) {
+					p.setVisible(false);
+				}
+				frame.getPanelList().get(11).setVisible(true);
+				frame.getHeadingbar().getHeadingLabelL().setText("Statistik");
+				frame.getHeadingbar().getHeadingLabelR().setText("");
 			} else if (this.counts != 0) {
 				this.right = frame.getCheck().check(this.speech2Text.getText(), this.speech1Text.getText(), this.right);
 				this.counts--;
@@ -69,6 +67,7 @@ public class VocabeltestPanel extends JPanel {
 		frame.getButtons().add(this.getNext());
 
 		this.setStart(TransparentButton.createButton("start", 120, 140, 200, 40, 30, 0, (e -> {
+			frame.getTimer().setTimer(frame.getVocabelPrePanel().getTimeSlider().getValue(), 0);
 			frame.getTimer().startTimer();
 			this.getStart().setEnabled(false);
 			this.speech2Text.setEditable(true);

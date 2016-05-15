@@ -53,9 +53,10 @@ public class LearningPrePanel extends JPanel {
 			else {
 				frame.getTestVokabeln().clear();
 				frame.getLearningPanel().setRight(0);
-				frame.getLearningPanel().getCountRight().setText("Richtige: " + 0);
 				frame.getLearningPanel().setBright(0);
-				frame.getLearningPanel().getCountWrong().setText("Falsche: " + 0);
+				frame.getLearningPanel().setWrong(0);
+				frame.getLearningPanel().getCountRight().setText("Richtige: 0");
+				frame.getLearningPanel().getCountWrong().setText("Falsche: 0");
 				frame.getLearningPanel().getAverage().setText("Durchschnitt: 0%");
 				frame.getLearningPanel().getCorrect().setImage(null);
 				frame.getCheck().newGame(frame.getVokabeln());

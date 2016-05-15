@@ -26,7 +26,7 @@ public class StatisticsPanel extends JPanel {
 	private CustomTableModel	tableModel;
 	private JScrollPane			scrollPane;
 	private String[]			columnNames	= {
-			"Datum", "Richtig", "Falsch", "Note"
+			"Datum", "Sprache", "Richtig", "Falsch", "Note"
 	};
 	private JPanel				tablePanel;
 
@@ -51,9 +51,10 @@ public class StatisticsPanel extends JPanel {
 		this.table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		this.table.getColumnModel().getColumn(0).setPreferredWidth(200);
-		this.table.getColumnModel().getColumn(1).setPreferredWidth(350);
-		this.table.getColumnModel().getColumn(2).setPreferredWidth(350);
-		this.table.getColumnModel().getColumn(3).setPreferredWidth(117);
+		this.table.getColumnModel().getColumn(1).setPreferredWidth(300);
+		this.table.getColumnModel().getColumn(2).setPreferredWidth(200);
+		this.table.getColumnModel().getColumn(3).setPreferredWidth(200);
+		this.table.getColumnModel().getColumn(4).setPreferredWidth(117);
 		this.scrollPane = new JScrollPane(this.table);
 		this.tablePanel.add(this.scrollPane);
 	}

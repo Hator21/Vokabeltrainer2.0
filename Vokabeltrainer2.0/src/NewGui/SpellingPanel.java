@@ -15,6 +15,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Components.TransparentButton;
@@ -183,22 +184,26 @@ public class SpellingPanel extends JPanel {
 		List<Character> chars = voc.chars().mapToObj(e -> (char) e).collect(Collectors.toList());
 		ArrayList<Point> numbers = retNumberOfUsefullManipulation(chars);
 		for (Point p1 : numbers)
-			System.out.println("-> " + p1.getX());
+			System.out.println(numbers.indexOf(p1) + "-> " + p1.getX());
+		System.out.println("A -> " + a);
+		a = 0;
 		while (a < numbers.size()) {
 			p = numbers.get(a);
-			if (usedIndex.size() > 0)
+			if (usedIndex.size() > 0) {
 				for (int i : usedIndex)
 					if (p.getX() == i)
 						b = true;
-			if (b == false) {
+			}
+			if (!b) {
 				index = (int) p.getY();
 				number = (int) p.getX();
 				break;
 			}
 			a++;
+			b = false;
 		}
-		System.out.println("here");
 		usedIndex.add(number);
+		System.out.println("Nummmer: " + number);
 		switch (number) {
 			case 1:
 				chars.set(index, 'e');
@@ -359,7 +364,6 @@ public class SpellingPanel extends JPanel {
 				else
 					numbers.add(new Point(33, index)); // e -> a
 			}
-			numbers.add(new Point(35, index));
 		}
 		if (chars.contains('f')) {
 			index = chars.indexOf('f');
@@ -472,96 +476,109 @@ public class SpellingPanel extends JPanel {
 	public void setButtonTexts(String prä1, String prä2) {
 		this.prä1 = prä1;
 		this.prä2 = prä2;
-		int rnd2 = zufallszahl(0, this.frame.getTestVokabeln().size() - 1);
-		v = frame.getTestVokabeln().get(rnd2);
-		System.out.println(v);
-		System.out.println(getVocabel());
-		getVocabel().setText(v.getVocabOrigin());
-		if (v.getVocabTranslation().length() < 3) {
-			int randomButton = zufallszahl(1, 2);
-			getVoc3().setVisible(false);
-			getVoc4().setVisible(false);
-			switch (randomButton) {
-				case 1:
-					getVoc1().setText(v.getVocabTranslation());
-					getVoc2().setText(generateVocabel(v.getVocabTranslation()));
+		if (frame.getTestVokabeln().size() != 0) {
+			int rnd2 = zufallszahl(0, this.frame.getTestVokabeln().size() - 1);
+			v = frame.getTestVokabeln().get(rnd2);
+			frame.getTestVokabeln().remove(v);
+			System.out.println(v);
+			System.out.println(getVocabel());
+			getVocabel().setText(v.getVocabOrigin());
+			if (v.getVocabTranslation().length() < 3) {
+				int randomButton = zufallszahl(1, 2);
+				System.out.println("Button: " + randomButton);
+				getVoc3().setVisible(false);
+				getVoc4().setVisible(false);
+				switch (randomButton) {
+					case 1:
+						getVoc1().setText(v.getVocabTranslation());
+						getVoc2().setText(generateVocabel(v.getVocabTranslation()));
 
-					break;
-				case 2:
-					getVoc1().setText(generateVocabel(v.getVocabTranslation()));
-					getVoc2().setText(v.getVocabTranslation());
+						break;
+					case 2:
+						getVoc1().setText(generateVocabel(v.getVocabTranslation()));
+						getVoc2().setText(v.getVocabTranslation());
 
-					break;
-				default:
-					System.out.println("fail");
-					break;
+						break;
+					default:
+						System.out.println("fail");
+						break;
 
+				}
 			}
-		}
-		if (v.getVocabTranslation().length() < 5 && v.getVocabTranslation().length() >= 3) {
-			int randomButton = zufallszahl(1, 3);
-			getVoc3().setVisible(true);
-			getVoc4().setVisible(false);
-			switch (randomButton) {
-				case 1:
-					getVoc1().setText(v.getVocabTranslation());
-					getVoc2().setText(generateVocabel(v.getVocabTranslation()));
-					getVoc3().setText(generateVocabel(v.getVocabTranslation()));
-					break;
-				case 2:
-					getVoc1().setText(generateVocabel(v.getVocabTranslation()));
-					getVoc2().setText(v.getVocabTranslation());
-					getVoc3().setText(generateVocabel(v.getVocabTranslation()));
-					break;
-				case 3:
-					getVoc1().setText(generateVocabel(v.getVocabTranslation()));
-					getVoc2().setText(generateVocabel(v.getVocabTranslation()));
-					getVoc3().setText(v.getVocabTranslation());
-					break;
-				default:
-					System.out.println("fail");
-					break;
+			if (v.getVocabTranslation().length() < 5 && v.getVocabTranslation().length() >= 3) {
+				int randomButton = zufallszahl(1, 3);
+				System.out.println("Button: " + randomButton);
+				getVoc3().setVisible(true);
+				getVoc4().setVisible(false);
+				switch (randomButton) {
+					case 1:
+						getVoc1().setText(v.getVocabTranslation());
+						getVoc2().setText(generateVocabel(v.getVocabTranslation()));
+						getVoc3().setText(generateVocabel(v.getVocabTranslation()));
+						break;
+					case 2:
+						getVoc1().setText(generateVocabel(v.getVocabTranslation()));
+						getVoc2().setText(v.getVocabTranslation());
+						getVoc3().setText(generateVocabel(v.getVocabTranslation()));
+						break;
+					case 3:
+						getVoc1().setText(generateVocabel(v.getVocabTranslation()));
+						getVoc2().setText(generateVocabel(v.getVocabTranslation()));
+						getVoc3().setText(v.getVocabTranslation());
+						break;
+					default:
+						System.out.println("fail");
+						break;
 
+				}
 			}
-		}
-		if (v.getVocabTranslation().length() >= 5) {
-			int randomButton = zufallszahl(1, 4);
-			getVoc3().setVisible(true);
-			getVoc4().setVisible(true);
-			switch (randomButton) {
-				case 1:
-					getVoc1().setText(v.getVocabTranslation());
-					getVoc2().setText(generateVocabel(v.getVocabTranslation()));
-					getVoc3().setText(generateVocabel(v.getVocabTranslation()));
-					getVoc4().setText(generateVocabel(v.getVocabTranslation()));
-					break;
-				case 2:
-					getVoc1().setText(generateVocabel(v.getVocabTranslation()));
-					getVoc2().setText(v.getVocabTranslation());
-					getVoc3().setText(generateVocabel(v.getVocabTranslation()));
-					getVoc4().setText(generateVocabel(v.getVocabTranslation()));
-					break;
-				case 3:
-					getVoc1().setText(generateVocabel(v.getVocabTranslation()));
-					getVoc2().setText(generateVocabel(v.getVocabTranslation()));
-					getVoc3().setText(v.getVocabTranslation());
-					getVoc4().setText(generateVocabel(v.getVocabTranslation()));
-					break;
-				case 4:
-					getVoc1().setText(generateVocabel(v.getVocabTranslation()));
-					getVoc2().setText(generateVocabel(v.getVocabTranslation()));
-					getVoc3().setText(generateVocabel(v.getVocabTranslation()));
-					getVoc4().setText(v.getVocabTranslation());
-					break;
-				default:
-					System.out.println("fail");
-					break;
+			if (v.getVocabTranslation().length() >= 5) {
+				int randomButton = zufallszahl(1, 4);
+				System.out.println("Button: " + randomButton);
+				getVoc3().setVisible(true);
+				getVoc4().setVisible(true);
+				switch (randomButton) {
+					case 1:
+						getVoc1().setText(v.getVocabTranslation());
+						getVoc2().setText(generateVocabel(v.getVocabTranslation()));
+						getVoc3().setText(generateVocabel(v.getVocabTranslation()));
+						getVoc4().setText(generateVocabel(v.getVocabTranslation()));
+						break;
+					case 2:
+						getVoc1().setText(generateVocabel(v.getVocabTranslation()));
+						getVoc2().setText(v.getVocabTranslation());
+						getVoc3().setText(generateVocabel(v.getVocabTranslation()));
+						getVoc4().setText(generateVocabel(v.getVocabTranslation()));
+						break;
+					case 3:
+						getVoc1().setText(generateVocabel(v.getVocabTranslation()));
+						getVoc2().setText(generateVocabel(v.getVocabTranslation()));
+						getVoc3().setText(v.getVocabTranslation());
+						getVoc4().setText(generateVocabel(v.getVocabTranslation()));
+						break;
+					case 4:
+						getVoc1().setText(generateVocabel(v.getVocabTranslation()));
+						getVoc2().setText(generateVocabel(v.getVocabTranslation()));
+						getVoc3().setText(generateVocabel(v.getVocabTranslation()));
+						getVoc4().setText(v.getVocabTranslation());
+						break;
+					default:
+						System.out.println("fail");
+						break;
 
+				}
 			}
+			System.out.println("readyToClick");
+			a = 0;
+			usedIndex.clear();
+		} else {
+			JOptionPane.showMessageDialog(frame, "Alle Vokabeln getestet!");
+			for (JPanel p : frame.getPanelList()) {
+				p.setVisible(false);
+			}
+			frame.getPanelList().get(0).setVisible(true);
 		}
-		System.out.println("readyToClick");
-		a = 0;
-		usedIndex.clear();
+
 	}
 
 	public TransparentButton getNextButton() {

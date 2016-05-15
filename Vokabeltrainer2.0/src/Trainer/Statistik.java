@@ -23,7 +23,7 @@ public class Statistik {
 
 	public ArrayList<StatHelper> getData() throws Exception {
 		this.parser = new CSVParser(data);
-		return this.parser.parse(getMapper(), StatHelper.class, true);
+		return this.parser.parseStats(getMapper(), StatHelper.class, true);
 	}
 
 	public void write(ArrayList<StatHelper> daten) throws Exception {

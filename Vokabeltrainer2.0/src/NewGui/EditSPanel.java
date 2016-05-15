@@ -86,6 +86,8 @@ public class EditSPanel extends JPanel {
 				if (!this.addVoc.getAddVocabelOLTF().getText().equals("") && !this.addVoc.getAddVocabelDLTF().getText().equals("")) {
 					this.nr++;
 					int lectionNR = Integer.parseInt(this.lectionsCB.getSelectedItem().toString().split(" ")[1]);
+					addVoc.getAddVocabelOLTF().setText(addVoc.getAddVocabelOLTF().getText().replaceAll(";", ""));
+					addVoc.getAddVocabelDLTF().setText(addVoc.getAddVocabelDLTF().getText().replaceAll(";", ""));
 					frame.getVokabeln().add(new Vokabel(this.prä1, this.prä2, this.addVoc.getAddVocabelOLTF().getText(), this.addVoc.getAddVocabelDLTF().getText(), lectionNR, 0, 0, false));
 					this.loadTable();
 					for (Vokabel v : frame.getVokabeln()) {
@@ -185,6 +187,10 @@ public class EditSPanel extends JPanel {
 					addL.getAddLanguage2TF().setText(addL.getAddLanguage2TF().getText().replaceAll("\\s+", ""));
 					addL.getAddPräfix1TF().setText(addL.getAddPräfix1TF().getText().replaceAll("\\s+", ""));
 					addL.getAddPräfix2TF().setText(addL.getAddPräfix2TF().getText().replaceAll("\\s+", ""));
+					addL.getAddLanguage1TF().setText(addL.getAddLanguage1TF().getText().replaceAll(";", ""));
+					addL.getAddLanguage2TF().setText(addL.getAddLanguage2TF().getText().replaceAll(";", ""));
+					addL.getAddPräfix1TF().setText(addL.getAddPräfix1TF().getText().replaceAll(";", ""));
+					addL.getAddPräfix2TF().setText(addL.getAddPräfix2TF().getText().replaceAll(";", ""));
 					frame.getLanguageCombi().put(new Language(this.addL.getAddPräfix1TF().getText(), this.addL.getAddLanguage1TF().getText()), new Language(this.addL.getAddPräfix2TF().getText(), this.addL.getAddLanguage2TF().getText()));
 					this.languageCB.setModel(new DefaultComboBoxModel<String>(frame.add2Language()));
 				}
