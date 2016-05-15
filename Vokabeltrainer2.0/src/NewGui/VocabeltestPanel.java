@@ -81,7 +81,10 @@ public class VocabeltestPanel extends JPanel {
 
 		frame.getButtons().add(this.getStart());
 		this.getStart().setEnabled(true);
-
+		this.setSpeech1Label(TransparentLabel.createLabel("Vokabel", 20, 200, 100, 40, 20, this));
+		frame.getLabels().add(this.getSpeech1Label());
+		this.setSpeech2Label(TransparentLabel.createLabel("Übersetzung", 20, 260, 100, 40, 20, this));
+		frame.getLabels().add(this.getSpeech2Label());
 		this.setTimerLabel(TransparentLabel.createLabel("Übrige Zeit: " + String.valueOf(frame.getVocabelPrePanel().getTimeSlider().getValue()) + ":00", 120, 80, 200, 40, 20, this));
 		frame.getLabels().add(this.getTimerLabel());
 
