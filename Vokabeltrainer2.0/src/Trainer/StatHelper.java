@@ -2,22 +2,24 @@ package Trainer;
 
 public class StatHelper {
 	private String	date;
-	private String	voktest;
-	private String	lektions;
+	private String	right;
+	private String	wrong;
 	private String	note;
+	private String	sprache;
 
-	private StatHelper(String date, String voktest, String lektions, String note) {
-		this.setData(date);
-		this.setLektions(lektions);
-		this.setVoktest(voktest);
+	public StatHelper(String date, String sprache, String right, String wrong, String note) {
+		this.setDate(date);
+		this.setSprache(sprache);
 		this.setNote(note);
+		this.setRight(right);
+		this.setWrong(wrong);
 
 	}
 
 	/**
 	 * @return the data
 	 */
-	public String getData() {
+	public String getDate() {
 		return this.date;
 	}
 
@@ -25,45 +27,38 @@ public class StatHelper {
 	 * @param data
 	 *            the data to set
 	 */
-	public void setData(String date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
 	/**
-	 * @return the voktest
+	 * @return the right
 	 */
-	public String getVoktest() {
-		return this.voktest;
+	public String getRight() {
+		return right;
 	}
 
 	/**
-	 * @param voktest
-	 *            the voktest to set
+	 * @param right
+	 *            the right to set
 	 */
-	public void setVoktest(String voktest) {
-		this.voktest = voktest;
+	public void setRight(String right) {
+		this.right = right;
 	}
 
 	/**
-	 * @return the lektions
+	 * @return the wrong
 	 */
-	public String getLektions() {
-		return this.lektions;
+	public String getWrong() {
+		return wrong;
 	}
 
 	/**
-	 * @param lektions
-	 *            the lektions to set
+	 * @param wrong
+	 *            the wrong to set
 	 */
-	public void setLektions(String lektions) {
-		this.lektions = lektions;
-	}
-
-	/**
-	 * @return the note
-	 */
-	public String getNote() {
-		return this.note;
+	public void setWrong(String wrong) {
+		this.wrong = wrong;
 	}
 
 	/**
@@ -72,6 +67,28 @@ public class StatHelper {
 	 */
 	public void setNote(String note) {
 		this.note = note;
+	}
+
+	/**
+	 * @return the sprache
+	 */
+	public String getSprache() {
+		return sprache;
+	}
+
+	/**
+	 * @param sprache
+	 *            the sprache to set
+	 */
+	public void setSprache(String sprache) {
+		this.sprache = sprache;
+	}
+
+	/**
+	 * @return the note
+	 */
+	public String getNote() {
+		return note;
 	}
 
 }

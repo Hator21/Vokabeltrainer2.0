@@ -56,6 +56,7 @@ public class SpellingPanel extends JPanel {
 
 		}), this)));
 		frame.getButtons().add(getNextButton());
+		createHelp();
 	}
 
 	public void createLabel() {
@@ -102,7 +103,6 @@ public class SpellingPanel extends JPanel {
 			this.repaint();
 		}), this));
 		frame.getButtons().add(getVoc4());
-		createHelp();
 	}
 
 	@Override
@@ -173,16 +173,18 @@ public class SpellingPanel extends JPanel {
 
 	public String generateVocabel(String vocabel) {
 		String voc = vocabel;
+		voc = voc.toLowerCase();
+		voc = voc.replaceAll("\\s+", "");
+		System.err.println(voc);
 		boolean b = false;
 		Point p = null;
 		int index = 0;
 		int number = 0;
-		int rnd = 0;
 		List<Character> chars = voc.chars().mapToObj(e -> (char) e).collect(Collectors.toList());
 		ArrayList<Point> numbers = retNumberOfUsefullManipulation(chars);
 		for (Point p1 : numbers)
 			System.out.println("-> " + p1.getX());
-		while (true) {
+		while (a < numbers.size()) {
 			p = numbers.get(a);
 			if (usedIndex.size() > 0)
 				for (int i : usedIndex)
@@ -193,9 +195,9 @@ public class SpellingPanel extends JPanel {
 				number = (int) p.getX();
 				break;
 			}
+			a++;
 		}
 		System.out.println("here");
-		a++;
 		usedIndex.add(number);
 		switch (number) {
 			case 1:
@@ -299,7 +301,9 @@ public class SpellingPanel extends JPanel {
 			case 33:
 				chars.set(index, 'a');
 				break;
-
+			case 34:
+				chars.set(index, 'e');
+				break;
 		}
 		System.out.println("down");
 		return chars.stream().map(e -> e.toString()).reduce((acc, e) -> acc + e).get();
@@ -314,21 +318,27 @@ public class SpellingPanel extends JPanel {
 		int index = 0;
 		if (chars.contains('a')) {
 			index = chars.indexOf('a');
-			if (chars.get(index + 1) == 'y') {
-				numbers.add(new Point(1, index)); // ay->ei
-			}
+			if (index < chars.size() - 1)
+				if (chars.get(index + 1) == 'y') {
+					numbers.add(new Point(1, index)); // ay->ei
+				} else
+					numbers.add(new Point(34, index));
 		}
 		if (chars.contains('b')) {
 			index = chars.indexOf('b');
-			if (chars.get(index - 1) != 'b' || chars.get(index + 1) != 'b')
-				numbers.add(new Point(2, index)); // b->p
+			if (index < chars.size() - 1 && index > 0) {
+				if (chars.get(index - 1) != 'b' || chars.get(index + 1) != 'b')
+					numbers.add(new Point(2, index)); // b->p
+			}
 		}
 		if (chars.contains('c')) {
 			index = chars.indexOf('c');
-			if (chars.get(index - 1) == 's' && chars.get(index + 1) == 'h')
-				numbers.add(new Point(3, index));// c->remove
-			if (chars.get(index - 1) != 's' && chars.get(index + 1) != 'h')
-				numbers.add(new Point(4, index)); // c->k
+			if (index < chars.size() - 1 && index > 0) {
+				if (chars.get(index - 1) == 's' && chars.get(index + 1) == 'h')
+					numbers.add(new Point(3, index));// c->remove
+				if (chars.get(index - 1) != 's' && chars.get(index + 1) != 'h')
+					numbers.add(new Point(4, index)); // c->k
+			}
 
 		}
 		if (chars.contains('d')) {
@@ -337,19 +347,27 @@ public class SpellingPanel extends JPanel {
 		}
 		if (chars.contains('e')) {
 			index = chars.indexOf('e');
-			if (chars.get(index + 1) == 'i') {
-				numbers.add(new Point(6, index)); // ei->ay
-				numbers.add(new Point(7, index)); // ei->a
-			} else if (chars.get(index - 1) == 'i')
-				numbers.add(new Point(8, index - 1)); // ie->y
-			else
-				numbers.add(new Point(33, index)); // e -> a
+			if (index < chars.size() - 1) {
+				if (chars.get(index + 1) == 'i') {
+					numbers.add(new Point(6, index)); // ei->ay
+					numbers.add(new Point(7, index)); // ei->a
+				}
+			}
+			if (index > 0) {
+				if (chars.get(index - 1) == 'i')
+					numbers.add(new Point(8, index - 1)); // ie->y
+				else
+					numbers.add(new Point(33, index)); // e -> a
+			}
+			numbers.add(new Point(35, index));
 		}
 		if (chars.contains('f')) {
 			index = chars.indexOf('f');
-			if (chars.get(index - 1) != 'f' || chars.get(index + 1) != 'f') {
-				numbers.add(new Point(9, index)); // f->v
-				numbers.add(new Point(10, index)); // f->ff
+			if (index < chars.size() - 1 && index > 0) {
+				if (chars.get(index - 1) != 'f' || chars.get(index + 1) != 'f') {
+					numbers.add(new Point(9, index)); // f->v
+					numbers.add(new Point(10, index)); // f->ff
+				}
 			}
 		}
 		if (chars.contains('g')) {
@@ -358,13 +376,17 @@ public class SpellingPanel extends JPanel {
 		}
 		if (chars.contains('h')) {
 			index = chars.indexOf('e');
-			if (chars.get(index - 1) != 'c' && chars.get(index - 2) != 's' && index != 0)
-				numbers.add(new Point(12, index)); // remove h
+			if (index > 1) {
+				if (chars.get(index - 1) != 'c' && chars.get(index - 2) != 's')
+					numbers.add(new Point(12, index)); // remove h
+			}
 		}
 		if (chars.contains('i')) {
 			index = chars.indexOf('i');
-			if (chars.get(index + 1) != 'e' && chars.get(index - 1) != 'e')
-				numbers.add(new Point(13, index)); // i->y
+			if (index < chars.size() - 1 && index > 0) {
+				if (chars.get(index + 1) != 'e' && chars.get(index - 1) != 'e')
+					numbers.add(new Point(13, index)); // i->y
+			}
 		}
 		if (chars.contains('j')) {
 			index = chars.indexOf('j');
@@ -372,10 +394,12 @@ public class SpellingPanel extends JPanel {
 		}
 		if (chars.contains('k')) {
 			index = chars.indexOf('k');
-			if (chars.get(index + 1) == 'u')
-				numbers.add(new Point(15, index)); // ku -> qu
-			else
-				numbers.add(new Point(16, index)); // k -> c
+			if (index < chars.size() - 1) {
+				if (chars.get(index + 1) == 'u')
+					numbers.add(new Point(15, index)); // ku -> qu
+				else
+					numbers.add(new Point(16, index)); // k -> c
+			}
 		}
 		if (chars.contains('l')) {
 			index = chars.indexOf('l');
@@ -409,9 +433,11 @@ public class SpellingPanel extends JPanel {
 		}
 		if (chars.contains('s')) {
 			index = chars.indexOf('s');
-			if (chars.get(index + 1) != 'c' && chars.get(index + 1) != 'h')
-				if (chars.get(index + 1) != 'h')
-					numbers.add(new Point(25, index)); // s->z
+			if (index < chars.size() - 1 && index > 1) {
+				if (chars.get(index + 1) != 'c' && chars.get(index + 2) != 'h' || chars.get(index + 1) != 'h')
+					numbers.add(new Point(25, index));
+			}
+			numbers.add(new Point(25, index));// s->z
 		}
 		if (chars.contains('t')) {
 			index = chars.indexOf('t');
@@ -451,36 +477,87 @@ public class SpellingPanel extends JPanel {
 		System.out.println(v);
 		System.out.println(getVocabel());
 		getVocabel().setText(v.getVocabOrigin());
-		int randomButton = zufallszahl(1, 4);
-		switch (randomButton) {
-			case 1:
-				getVoc1().setText(v.getVocabTranslation());
-				getVoc2().setText(generateVocabel(v.getVocabTranslation()));
-				getVoc3().setText(generateVocabel(v.getVocabTranslation()));
-				getVoc4().setText(generateVocabel(v.getVocabTranslation()));
-				break;
-			case 2:
-				getVoc1().setText(generateVocabel(v.getVocabTranslation()));
-				getVoc2().setText(v.getVocabTranslation());
-				getVoc3().setText(generateVocabel(v.getVocabTranslation()));
-				getVoc4().setText(generateVocabel(v.getVocabTranslation()));
-				break;
-			case 3:
-				getVoc1().setText(generateVocabel(v.getVocabTranslation()));
-				getVoc2().setText(generateVocabel(v.getVocabTranslation()));
-				getVoc3().setText(v.getVocabTranslation());
-				getVoc4().setText(generateVocabel(v.getVocabTranslation()));
-				break;
-			case 4:
-				getVoc1().setText(generateVocabel(v.getVocabTranslation()));
-				getVoc2().setText(generateVocabel(v.getVocabTranslation()));
-				getVoc3().setText(generateVocabel(v.getVocabTranslation()));
-				getVoc4().setText(v.getVocabTranslation());
-				break;
-			default:
-				System.out.println("fail");
-				break;
+		if (v.getVocabTranslation().length() < 3) {
+			int randomButton = zufallszahl(1, 2);
+			getVoc3().setVisible(false);
+			getVoc4().setVisible(false);
+			switch (randomButton) {
+				case 1:
+					getVoc1().setText(v.getVocabTranslation());
+					getVoc2().setText(generateVocabel(v.getVocabTranslation()));
 
+					break;
+				case 2:
+					getVoc1().setText(generateVocabel(v.getVocabTranslation()));
+					getVoc2().setText(v.getVocabTranslation());
+
+					break;
+				default:
+					System.out.println("fail");
+					break;
+
+			}
+		}
+		if (v.getVocabTranslation().length() < 5 && v.getVocabTranslation().length() >= 3) {
+			int randomButton = zufallszahl(1, 3);
+			getVoc3().setVisible(true);
+			getVoc4().setVisible(false);
+			switch (randomButton) {
+				case 1:
+					getVoc1().setText(v.getVocabTranslation());
+					getVoc2().setText(generateVocabel(v.getVocabTranslation()));
+					getVoc3().setText(generateVocabel(v.getVocabTranslation()));
+					break;
+				case 2:
+					getVoc1().setText(generateVocabel(v.getVocabTranslation()));
+					getVoc2().setText(v.getVocabTranslation());
+					getVoc3().setText(generateVocabel(v.getVocabTranslation()));
+					break;
+				case 3:
+					getVoc1().setText(generateVocabel(v.getVocabTranslation()));
+					getVoc2().setText(generateVocabel(v.getVocabTranslation()));
+					getVoc3().setText(v.getVocabTranslation());
+					break;
+				default:
+					System.out.println("fail");
+					break;
+
+			}
+		}
+		if (v.getVocabTranslation().length() >= 5) {
+			int randomButton = zufallszahl(1, 4);
+			getVoc3().setVisible(true);
+			getVoc4().setVisible(true);
+			switch (randomButton) {
+				case 1:
+					getVoc1().setText(v.getVocabTranslation());
+					getVoc2().setText(generateVocabel(v.getVocabTranslation()));
+					getVoc3().setText(generateVocabel(v.getVocabTranslation()));
+					getVoc4().setText(generateVocabel(v.getVocabTranslation()));
+					break;
+				case 2:
+					getVoc1().setText(generateVocabel(v.getVocabTranslation()));
+					getVoc2().setText(v.getVocabTranslation());
+					getVoc3().setText(generateVocabel(v.getVocabTranslation()));
+					getVoc4().setText(generateVocabel(v.getVocabTranslation()));
+					break;
+				case 3:
+					getVoc1().setText(generateVocabel(v.getVocabTranslation()));
+					getVoc2().setText(generateVocabel(v.getVocabTranslation()));
+					getVoc3().setText(v.getVocabTranslation());
+					getVoc4().setText(generateVocabel(v.getVocabTranslation()));
+					break;
+				case 4:
+					getVoc1().setText(generateVocabel(v.getVocabTranslation()));
+					getVoc2().setText(generateVocabel(v.getVocabTranslation()));
+					getVoc3().setText(generateVocabel(v.getVocabTranslation()));
+					getVoc4().setText(v.getVocabTranslation());
+					break;
+				default:
+					System.out.println("fail");
+					break;
+
+			}
 		}
 		System.out.println("readyToClick");
 		a = 0;

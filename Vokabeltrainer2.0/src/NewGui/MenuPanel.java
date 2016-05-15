@@ -87,6 +87,8 @@ public class MenuPanel extends JPanel {
 			frame.getPanelList().get(9).setVisible(true);
 			frame.getHeadingbar().getHeadingLabelL().setText("Verwalten");
 			frame.getHeadingbar().getHeadingLabelR().setText("");
+			frame.getEditSPanel().createLectionList();
+			frame.getEditSPanel().loadTable();
 		}), this));
 		frame.getButtons().add(getEditS());
 
@@ -140,6 +142,11 @@ public class MenuPanel extends JPanel {
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
+			}
+			try {
+				frame.getStats().write(frame.getStats().getStat());
+			} catch (Exception exc) {
+				exc.printStackTrace();
 			}
 			System.exit(1);
 		}), this));

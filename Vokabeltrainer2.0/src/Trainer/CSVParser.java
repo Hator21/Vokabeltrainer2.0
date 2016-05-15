@@ -4,9 +4,13 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.ClassUtils;
 
 /**
  *
@@ -43,6 +47,47 @@ public class CSVParser {
 			}
 			String[] values = line.split(";");
 			T instance = c.newInstance();
+			for (int i = 0; i < values.length; i++) {
+				if (mapper.getFieldNameByIndex(i) == null) {
+					throw new Exception("Undeclared field: " + i);
+				}
+				try {
+					Field f = instance.getClass().getDeclaredField(mapper.getFieldNameByIndex(i));
+					boolean acc = Modifier.isPrivate(f.getModifiers());
+					f.setAccessible(true);
+					f.set(instance, this.convertFieldValueToObject(f.getType(), values[i]));
+					f.setAccessible(!acc);
+				} catch (NoSuchFieldException | SecurityException e) {
+					e.printStackTrace();
+				}
+			}
+			instances.add(instance);
+		}
+		return instances;
+	}
+
+	public <T> ArrayList<T> parseStats(CSVReflectionMap mapper, Class<T> c, boolean skipFirstLine) throws Exception {
+		this.lines = new ArrayList<>();
+		BufferedReader reader = new BufferedReader(new FileReader(this.file));
+		String line1 = "";
+		while ((line1 = reader.readLine()) != null) {
+			this.lines.add(line1);
+		}
+		reader.close();
+		ArrayList<T> instances = new ArrayList<>();
+		boolean skipped = false;
+		for (String line : this.lines) {
+			if (!skipped && skipFirstLine) {
+				skipped = true;
+				continue;
+			}
+			String[] values = line.split(";");
+			final Constructor<T> constr = (Constructor<T>) c.getConstructors()[0];
+			final List<Object> params = new ArrayList<Object>();
+			for (Class<?> pType : constr.getParameterTypes()) {
+				params.add((pType.isPrimitive()) ? ClassUtils.primitiveToWrapper(pType).newInstance() : null);
+			}
+			final T instance = constr.newInstance(params.toArray());
 			for (int i = 0; i < values.length; i++) {
 				if (mapper.getFieldNameByIndex(i) == null) {
 					throw new Exception("Undeclared field: " + i);
